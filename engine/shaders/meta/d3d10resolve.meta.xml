@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#" deprecated="XENON,PS3,PC,DURANGO,ORBIS">
+    <packInterpolators value="0" />
+    
+    <samplerstate sampler="SrcSampler" state="ColorPointClamp" />
+
+    <define name="MULTISAMPLE0" platform="PC,DURANGO,ORBIS" />
+    <define name="MULTISAMPLE2" platform="PC,DURANGO,ORBIS" />
+    <define name="MULTISAMPLE4" platform="PC,DURANGO,ORBIS" />
+    <define name="MULTISAMPLE8" platform="PC,DURANGO,ORBIS" />
+    <define name="MULTISAMPLE16" platform="PC,DURANGO,ORBIS" />
+    <define name="DEPTH" platform="PC,DURANGO,ORBIS" />
+    <define name="FROMFLOATTEXTURE" platform="PC,DURANGO,ORBIS" />
+
+    <domain>
+        <options>
+            <option>MULTISAMPLE2</option>
+            <option>MULTISAMPLE4</option>
+            <option>MULTISAMPLE8</option>
+            <option>MULTISAMPLE16</option>
+            
+            <option>MULTISAMPLE0,DEPTH</option>
+            <option>MULTISAMPLE2,DEPTH</option>
+            <option>MULTISAMPLE4,DEPTH</option>
+            <option>MULTISAMPLE8,DEPTH</option>
+            <option>MULTISAMPLE16,DEPTH</option>
+            <option>MULTISAMPLE0,DEPTH,FROMFLOATTEXTURE</option>
+            <option>MULTISAMPLE2,DEPTH,FROMFLOATTEXTURE</option>
+            <option>MULTISAMPLE4,DEPTH,FROMFLOATTEXTURE</option>
+            <option>MULTISAMPLE8,DEPTH,FROMFLOATTEXTURE</option>
+            <option>MULTISAMPLE16,DEPTH,FROMFLOATTEXTURE</option>
+        </options>
+    </domain>
+</metashader>

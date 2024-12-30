@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <samplerstate sampler="DiffuseTexture1" state="ColorWrap" />
+    <samplerstate sampler="NormalTexture1" state="NormalWrap" />
+
+    <define name="PARABOLOID_REFLECTION" />
+    <define name="NORMALMAP" />
+    <define name="AMBIENT" />
+    <define name="SUN" />
+    <define name="UNLIT" />
+
+    <domain>
+        <options>
+            <option>AMBIENT</option>
+            <option>AMBIENT,SUN</option>
+        </options>
+        
+        <options>
+            <option></option>
+            <option>NORMALMAP</option>
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option></option>
+            <option>UNLIT</option>
+        </options>
+        
+        <options>
+            <option></option>
+            <option>PARABOLOID_REFLECTION</option>
+        </options>
+    </domain>
+</metashader>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <samplerstate sampler="DiffuseTexture1" state="" />
+    <samplerstate sampler="NormalTexture1" state="NormalWrap" />
+    <samplerstate sampler="DisplacementTexture" state="ColorPointTransparentBorder" />
+    <samplerstate sampler="VegetationLeafNoiseTexture"  state="ColorWrap" />
+
+    <define name="ALPHA_TEST" />
+
+    <define name="VEGETATION_ANIM" />
+    <define name="VEGETATION_ANIM_LEAF" platform="PC,DURANGO,ORBIS" />
+    <define name="REDUCE_STRETCHING" />
+    <define name="GBUFFER" />
+    <define name="INSTANCING" />
+    <define name="DIFFUSE_MAP_BASE" />
+    <define name="NORMALMAP" />
+    <define name="PARABOLOID_REFLECTION" />
+    <define name="USE_DISPLACEMENT_TEXTURE" />
+    <define name="LAST_DISPLACEMENT_SPHERE_INDEX" max_value="3" />
+    <define name="USE_GLOBAL_WIND" />
+
+    <xi:include href="Includes/ShadowAndDepthDefines.xml" />
+
+    <options name="vertex">
+        <option></option>
+        <option>INSTANCING</option>
+    </options>
+
+    <!-- GBuffer -->
+    <domain>
+        <options>
+            <option></option>
+            <option>ALPHA_TEST</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>DIFFUSE_MAP_BASE</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>NORMALMAP</option>
+        </options>
+
+        <!-- Wind animation material option -->
+        <options>
+            <option></option>
+            <option>VEGETATION_ANIM</option>
+            <option>VEGETATION_ANIM,VEGETATION_ANIM_LEAF</option>
+            <option>VEGETATION_ANIM,USE_GLOBAL_WIND</option>
+            <option>VEGETATION_ANIM,VEGETATION_ANIM_LEAF,USE_GLOBAL_WIND</option>
+        </options>
+
+        <!-- Vegetation displacement material options -->
+        <options>
+            <option></option>
+            <option>USE_DISPLACEMENT_TEXTURE</option>
+            <option>USE_DISPLACEMENT_TEXTURE,REDUCE_STRETCHING</option>
+            <option>LAST_DISPLACEMENT_SPHERE_INDEX</option>
+            <option>LAST_DISPLACEMENT_SPHERE_INDEX,REDUCE_STRETCHING</option>
+            <option>LAST_DISPLACEMENT_SPHERE_INDEX,USE_DISPLACEMENT_TEXTURE</option>
+            <option>LAST_DISPLACEMENT_SPHERE_INDEX,USE_DISPLACEMENT_TEXTURE,REDUCE_STRETCHING</option>
+        </options>
+
+        <options ref="vertex" />
+
+        <options>
+            <option>GBUFFER</option>
+        </options>
+    </domain>
+
+    <!-- Shadow and depth -->
+    <domain>
+        <options>
+            <option></option>
+            <option>ALPHA_TEST</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>DIFFUSE_MAP_BASE</option>
+        </options>
+
+        <!-- Wind animation material option -->
+        <options>
+            <option></option>
+            <option>VEGETATION_ANIM</option>
+            <option>VEGETATION_ANIM,VEGETATION_ANIM_LEAF</option>
+            <option>VEGETATION_ANIM,USE_GLOBAL_WIND</option>
+            <option>VEGETATION_ANIM,VEGETATION_ANIM_LEAF,USE_GLOBAL_WIND</option>
+        </options>
+
+        <!-- Vegetation displacement material options -->
+        <options>
+            <option></option>
+            <option>USE_DISPLACEMENT_TEXTURE</option>
+            <option>USE_DISPLACEMENT_TEXTURE,REDUCE_STRETCHING</option>
+            <option>LAST_DISPLACEMENT_SPHERE_INDEX</option>
+            <option>LAST_DISPLACEMENT_SPHERE_INDEX,REDUCE_STRETCHING</option>
+            <option>LAST_DISPLACEMENT_SPHERE_INDEX,USE_DISPLACEMENT_TEXTURE</option>
+            <option>LAST_DISPLACEMENT_SPHERE_INDEX,USE_DISPLACEMENT_TEXTURE,REDUCE_STRETCHING</option>
+        </options>
+
+        <options ref="shadowanddepth" />
+        <options ref="vertex" />
+    </domain>
+
+    <!-- Reflection -->
+    <domain>
+        <options>
+            <option></option>
+            <option>ALPHA_TEST</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>DIFFUSE_MAP_BASE</option>
+        </options>
+
+        <options>
+            <option>PARABOLOID_REFLECTION</option>
+        </options>
+       
+        <options ref="vertex" />
+    </domain>
+
+</metashader>

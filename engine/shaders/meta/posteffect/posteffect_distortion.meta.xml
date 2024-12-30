@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="SceneSampler" state="ColorPointClamp" />
+    <samplerstate sampler="DistortionSampler" state="ColorBlackTransparentBorder" />
+
+    <define name="LAST_POSTFX" />
+    <define name="DECODE_SCENECOLOR" platform="XENON" />
+
+    <domain>
+        <options>
+            <option></option>
+            <option>LAST_POSTFX</option>
+        </options>
+
+        <options>
+          <option></option>
+          <option>DECODE_SCENECOLOR</option>
+        </options>
+    </domain>
+</metashader>

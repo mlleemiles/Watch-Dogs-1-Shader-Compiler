@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <samplerstate sampler="RainTexture"   state="ColorWrap" />
+    <samplerstate sampler="RandomTexture" state="ColorPointWrap" />
+    <samplerstate sampler="Atan2Texture"  state="ColorClamp" />
+
+
+    <define name="RAIN_OCCLUDER"/>
+    <define name="RAIN_AMBIENT"/>
+    <define name="RAIN_SPOTLIGHT"/>
+    <define name="RAIN_OMNILIGHT"/>
+    <define name="RAIN_SUNLIGHT"/>
+    <define name="RAIN_DEBUG"/>
+    <define name="RAIN_USE_QUADRATIC_ATTENUATION"/>
+    
+    <domain>
+        
+        <options>
+            <option>RAIN_AMBIENT</option>
+            <option>RAIN_AMBIENT,RAIN_OCCLUDER</option>
+            
+            <option>RAIN_OCCLUDER,RAIN_SPOTLIGHT</option>
+            <option>RAIN_OCCLUDER,RAIN_OMNILIGHT</option>
+
+            <option>RAIN_SPOTLIGHT</option>
+            <option>RAIN_OMNILIGHT</option>
+            
+            <option>RAIN_AMBIENT,RAIN_SUNLIGHT</option>
+            <option>RAIN_AMBIENT,RAIN_SUNLIGHT,RAIN_OCCLUDER</option>
+        </options>
+        
+        <options>
+            <option></option>
+            <option>RAIN_DEBUG</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>RAIN_USE_QUADRATIC_ATTENUATION</option>
+        </options>
+        
+    </domain>
+
+</metashader>
+ 

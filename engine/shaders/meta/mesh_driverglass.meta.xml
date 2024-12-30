@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <samplerstate sampler="DiffuseTexture1" state="" />
+    <samplerstate sampler="ReflectionTexture" state="ColorWrap" />
+    <samplerstate sampler="ParaboloidReflectionTexture" state="ColorClamp" />
+    <samplerstate sampler="SpecularTexture1" state="ColorWrap" />
+    <samplerstate sampler="NormalTexture1" state="NormalWrap" />
+    
+    <!-- GI ambient lighting stuff -->
+    <samplerstate sampler="VolumeTextureR"          state="ColorClamp" />
+    <samplerstate sampler="VolumeTextureG"          state="ColorClamp" />
+    <samplerstate sampler="VolumeTextureB"          state="ColorClamp" />
+    <samplerstate sampler="FloorCeilingTexture"     state="ColorClamp2D" />
+    
+    <define name="SKINNING" />
+    <define name="INSTANCING" />
+    <define name="INSTANCING_POS_ROT_Z_TRANSFORM" />
+
+    <define name="DIFFUSETEXTURE" />
+    <define name="USE_DIFFUSE_AS_ALPHA" />
+
+    <define name="DAMAGE_STATES" />
+
+    <define name="REFLECTION_STATIC" />
+    <define name="REFLECTION_AFFECTED_BY_DAYLIGHT" /> <!-- Multiplies the static reflection by the (outdoor) default ambient colour of the GI -->
+    <define name="REFLECTION_STATIC_TRANSITION" />
+
+    <define name="SAMPLE_SHADOW" />
+    <define name="RECEIVE_SINGLE_CASCADE" />
+    
+    <define name="DAMAGE_LAST_SPHERE_INDEX" max_value="0" />
+    <define name="DAMAGE_LAST_PLANE_INDEX" max_value="1" />
+
+    <define name="SPECULARMAP" />
+    <define name="NORMALMAP" />
+
+    <xi:include href="Includes/LightingOptions.xml" />
+    <xi:include href="Includes/ShadowAndDepthDefines.xml" />
+
+    <options name="vertex">
+        <option></option>
+        <option>SKINNING</option>
+        <option>INSTANCING</option>
+        <option>INSTANCING,INSTANCING_POS_ROT_Z_TRANSFORM</option>
+    </options>
+
+    <domain>
+        <options>
+            <option></option>
+            <option>DIFFUSETEXTURE</option>
+            <option>DIFFUSETEXTURE,USE_DIFFUSE_AS_ALPHA</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SPECULARMAP</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>NORMALMAP</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>DAMAGE_STATES</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>DAMAGE_LAST_SPHERE_INDEX</option>
+            <option>DAMAGE_LAST_PLANE_INDEX</option>
+            <option>DAMAGE_LAST_SPHERE_INDEX,DAMAGE_LAST_PLANE_INDEX</option>
+        </options>
+        
+        <options>
+            <option></option>
+            <option>REFLECTION_STATIC</option>
+            <option>REFLECTION_STATIC,REFLECTION_STATIC_TRANSITION</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>REFLECTION_AFFECTED_BY_DAYLIGHT</option>
+        </options>
+
+        <options ref="lighting" />
+
+        <xi:include href="Includes/ReceiveShadowsOptions.xml" />
+
+        <options ref="vertex" />
+
+        <!-- for PICKING only -->
+        <options>
+            <option></option>
+            <option platform="EDITOR">DEPTH</option>
+        </options>
+    </domain>
+
+
+    <xi:include href="Includes/ShadowExclusions.xml" />
+    <xi:include href="Includes/SingleCascadeExclusions.xml" />
+    <xi:include href="Includes/ForwardRenderingExclusions.xml" />
+    
+    <exclusion>
+        <any>INSTANCING</any>
+        <any>DAMAGE_LAST_SPHERE_INDEX,DAMAGE_LAST_PLANE_INDEX</any>
+    </exclusion>
+
+    <exclusion>
+        <any>NORMALMAP</any>
+        <any>DAMAGE_LAST_SPHERE_INDEX,DAMAGE_LAST_PLANE_INDEX</any>
+    </exclusion>
+    
+</metashader>

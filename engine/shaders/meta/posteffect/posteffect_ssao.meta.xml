@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="NormalSampler" state="NormalClampTransparentBorder" />
+    <samplerstate sampler="DiffuseSampler" state="ColorClamp" />
+    <samplerstate sampler="AccessibilitySampler" state="ColorClamp" />
+    <samplerstate sampler="RandomNormalSampler" state="ColorPointWrap2D" />
+    <samplerstate sampler="RandTexture" state="ColorPointWrap2D" />
+    <samplerstate sampler="SamplingPattern" state="ColorPointWrap2D" />
+    <samplerstate sampler="DepthSampler" state="DepthSampler" />
+
+    <define name="QUALITY_LEVEL" max_value="2" />
+    <define name="BLIT_PASS" />
+    <define name="BLIT_PASS_BLENDED" />
+    <define name="BLIT_PASS_FOG" />
+    <define name="BLIT_PASS_APPLY_OCCLUSION" />
+    <define name="ORTHO_CAMERA" />
+    <define name="ACCESSIBILITY_PASS" />
+    <define name="ENCODE_DEPTH" />
+
+    <define name="ALCHEMY" />
+    <define name="OSIRIS" />
+    <define name="HBAO" platform="PC,DURANGO,ORBIS" />
+    <define name="TOYSTORY" />
+
+    <define name="DECODE_SCENECOLOR" platform="XENON" />
+
+    <domain>
+        <options>
+            <option>ACCESSIBILITY_PASS, QUALITY_LEVEL, OSIRIS</option>
+            <option>ACCESSIBILITY_PASS, QUALITY_LEVEL, ALCHEMY</option>
+            <option>ACCESSIBILITY_PASS, QUALITY_LEVEL, HBAO</option>
+            <option>ACCESSIBILITY_PASS, TOYSTORY</option>
+            <option>ACCESSIBILITY_PASS, ENCODE_DEPTH, TOYSTORY</option>
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option>BLIT_PASS,</option>
+            <option>BLIT_PASS,BLIT_PASS_BLENDED</option>
+            <option>BLIT_PASS,DECODE_SCENECOLOR</option>
+        </options>
+
+        <options>
+            <option>BLIT_PASS_APPLY_OCCLUSION</option>
+            <option>BLIT_PASS_APPLY_OCCLUSION,BLIT_PASS_FOG</option>
+            <option>BLIT_PASS_APPLY_OCCLUSION,BLIT_PASS_FOG,ORTHO_CAMERA</option>
+            <option>BLIT_PASS_FOG</option>
+            <option>BLIT_PASS_FOG,ORTHO_CAMERA</option>
+        </options>
+    </domain>
+</metashader>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+  <samplerstate sampler="PreProbesTextureV8"           state="ColorPointClamp2D" />
+  <samplerstate sampler="PreProbesTextureR8"           state="ColorPointClamp2D" />
+  <samplerstate sampler="ProbesTextureV8"              state="ColorPointClamp2D" />
+  <samplerstate sampler="ProbesTextureR8"              state="ColorPointClamp2D" />
+  <samplerstate sampler="ProbesTextureV"               state="ColorPointClamp2D" />
+  <samplerstate sampler="ProbesTextureR"               state="ColorPointClamp2D" />
+  <samplerstate sampler="FloorCeilingTexture"          state="ColorPointClamp2D" />
+  <samplerstate sampler="FloorCeilingTextureDebug"     state="ColorPointClamp2D" />
+  <samplerstate sampler="BigProbeVolumeTextureUpperColor"   state="ColorPointClamp2D" />
+  <samplerstate sampler="BigProbeVolumeTextureLowerColor"   state="ColorPointClamp2D" />
+  <samplerstate sampler="BigProbeVolumeTextureFloorCeiling" state="ColorPointClamp2D" />
+  
+  <!-- This must remain WRAP. -->
+  <samplerstate sampler="LongRangeShadowVolumeTexture" state="LongRangeShadowSampler" />
+
+  <define name="SUNSHADOW"/>
+  <define name="ONE_BLACKOUT" />
+  <define name="TWO_BLACKOUTS" />
+  <define name="THREE_BLACKOUTS" />
+  <define name="FOUR_BLACKOUTS" />
+  <define name="RESTORE_EDRAM_SINGLE" platform="XENON" />
+  <define name="RESTORE_EDRAM_FULL" platform="XENON" />
+  <define name="DEFAULT_COLOR" platform="XENON" />
+    
+  <domain deprecated="ORBIS,DURANGO">
+    <options>
+      <option></option>
+      <option>RESTORE_EDRAM_SINGLE</option>
+      <option>RESTORE_EDRAM_FULL</option>
+      <option>ONE_BLACKOUT</option>
+      <option>TWO_BLACKOUTS</option>
+      <option>THREE_BLACKOUTS</option>
+      <option>FOUR_BLACKOUTS</option>
+      <option>SUNSHADOW</option>
+      <option>SUNSHADOW,ONE_BLACKOUT</option>
+      <option>SUNSHADOW,TWO_BLACKOUTS</option>
+      <option>SUNSHADOW,THREE_BLACKOUTS</option>
+      <option>SUNSHADOW,FOUR_BLACKOUTS</option>
+      <option>DEFAULT_COLOR</option>
+    </options>
+  </domain>
+</metashader>

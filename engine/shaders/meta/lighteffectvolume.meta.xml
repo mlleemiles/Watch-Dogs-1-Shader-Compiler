@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="BeamDepthsTexture"   state="ColorClamp" />
+    <samplerstate sampler="BeamDepthsTexturePoint"   state="ColorPointClamp" />
+    <samplerstate sampler="LightProjectedTexture"    state="ColorClamp" />
+    <samplerstate sampler="BeamTexture"         state="ColorClamp" />
+    <samplerstate sampler="BeamLightingTexture" state="ColorClamp" />
+    <samplerstate sampler="BeamGatherTexture"   state="ColorClamp" />
+    <samplerstate sampler="LightShadowTexture"  state="ShadowSampler" />
+    <samplerstate sampler="ShadowRealSampler"  state="ShadowRealSamplerBlackBorder" />
+    <samplerstate sampler="VolumeTexture"       state="ColorClamp" />
+    <samplerstate sampler="AmbientTexture" state="ColorClamp" />
+    <samplerstate sampler="LightingEnvironmentTexture" state="ColorClamp" />
+
+    <define name="LIGHTEFFECTVOLUMEPASS_DEPTHS" />
+    <define name="LIGHTEFFECTVOLUMEPASS_BEAM" />
+    <define name="LIGHTEFFECTVOLUMEPASS_GATHER" />
+    <define name="LIGHTEFFECTVOLUMEPASS_LIGHTING" />
+    <define name="LIGHTEFFECTVOLUMEPASS_APPLY" />
+
+    <define name="USE_PROJECTED_TEXTURE" />
+    <define name="USE_SHADOWMAP" />
+    <define name="USE_VOLUME_TEXTURE" />
+    <define name="USE_FLUID_BOX" />
+    <define name="OCCLUDE_RAY_MARCH" />
+    <define name="USE_LIGHTING_ENVIRONMENT_TEXTURE" />
+    <define name="NEAR_CLIPPED_SPOT" />
+    <define name="GATHER_CONE_EDGE_FADE" /><!-- The Gather pass will apply an edge fade to the conical beam -->
+
+    <domain>
+        <options>
+            <option>LIGHTEFFECTVOLUMEPASS_DEPTHS</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>USE_PROJECTED_TEXTURE</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>USE_FLUID_BOX</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>NEAR_CLIPPED_SPOT</option>
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option>LIGHTEFFECTVOLUMEPASS_BEAM</option>
+        </options>
+        
+        <options>
+            <option></option>
+            <option>USE_SHADOWMAP</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>USE_PROJECTED_TEXTURE</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>USE_VOLUME_TEXTURE</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>USE_FLUID_BOX, USE_VOLUME_TEXTURE</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>OCCLUDE_RAY_MARCH</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>NEAR_CLIPPED_SPOT</option>
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option>LIGHTEFFECTVOLUMEPASS_GATHER</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>NEAR_CLIPPED_SPOT</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>GATHER_CONE_EDGE_FADE</option>
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option>LIGHTEFFECTVOLUMEPASS_LIGHTING</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>USE_LIGHTING_ENVIRONMENT_TEXTURE</option>
+        </options>  
+    </domain>
+
+    <domain>
+        <options>
+            <option>LIGHTEFFECTVOLUMEPASS_APPLY</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>USE_SHADOWMAP</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>USE_PROJECTED_TEXTURE</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>USE_VOLUME_TEXTURE</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>USE_FLUID_BOX</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>OCCLUDE_RAY_MARCH</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>NEAR_CLIPPED_SPOT</option>
+        </options>
+    </domain>
+
+</metashader>

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+
+    <samplerstate sampler="colorSamplerBilinear" state="ColorClamp" />
+    <samplerstate sampler="colorSampler1" state="ColorPointClamp" />
+    <samplerstate sampler="colorSampler2" state="ColorPointClamp" />
+    <samplerstate sampler="depthSampler" state="DepthSampler" />
+    <samplerstate sampler="dofSampler" state="ColorPointClamp" />
+
+    <samplerstate sampler="cocBufferSampler1" state="ColorPointClamp" />
+    <samplerstate sampler="colorBufferSampler1" state="ColorPointClamp" />
+    <samplerstate sampler="colorBufferSampler2" state="ColorPointClamp" />
+
+    <define name="SEPARABLE_DOF_FILTER" />
+    <define name="FILLHEIGHT" />
+    <define name="FINAL_BLENDING" />
+    <define name="COLOR_COC" />
+    <define name="VIEW_DOF" />
+    <define name="BIG_COC" />
+    
+    <define name="DOWNSCALE" />
+    <define name="DOWNSCALE_4" />
+    <define name="GATHER_CS" />
+    <define name="GATHER_PS" />
+    <define name="FAST_VERSION" />
+    
+    <domain>
+		<options>
+            <option>SEPARABLE_DOF_FILTER</option>
+            <option>SEPARABLE_DOF_FILTER,FILLHEIGHT</option>
+            <option>FINAL_BLENDING</option>
+            <option>FINAL_BLENDING,VIEW_DOF</option>
+            <option>FINAL_BLENDING,FAST_VERSION</option>
+            <option>FINAL_BLENDING,VIEW_DOF,FAST_VERSION</option>
+            <option>COLOR_COC</option>
+            
+            <option>DOWNSCALE</option>
+            <option>DOWNSCALE,DOWNSCALE_4</option>
+
+            <option>GATHER_CS</option>
+            <option>GATHER_PS</option>
+            
+        </options>
+        <options>
+            <option></option>
+            <option>BIG_COC</option>
+        </options>
+	</domain>
+	
+</metashader>
+

@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <samplerstate sampler="DiffuseTexture1" state="ColorWrapAniso" />
+    <samplerstate sampler="SpecularTexture1" state="ColorWrapAniso" />
+    <samplerstate sampler="DamageTexture1" state="ColorWrapAniso" />
+    <samplerstate sampler="RaindropSplashesTexture" state="RaindropSplashes" />
+    <samplerstate sampler="DecalTexture" state="ColorWrapAniso" />
+    
+    <define name="SKINNING" />
+
+    <define name="ALPHA_TEST" />
+    <define name="ALPHA_TO_COVERAGE" />
+
+    <define name="SPECULARMAP" />
+    <define name="DECALMAP" />
+
+    <define name="GBUFFER" />
+    <define name="GBUFFER_VELOCITY" platform="NEXTGEN"/>
+    <define name="GBUFFER_WITH_POSTFXMASK" platform="XENON,PS3" />
+
+    <define name="SAMPLE_SHADOW" />
+    <define name="RECEIVE_SINGLE_CASCADE" />
+    <define name="DAMAGE_LAST_SPHERE_INDEX" max_value="0" />
+    <define name="DAMAGE_LAST_PLANE_INDEX" max_value="1" />
+
+    <define name="HAS_RAINDROP_RIPPLE" />
+    
+    <!-- No support for DAMAGE -->
+    <define name="MESH_HIGHLIGHT_SUPPORTED" />
+    
+    <xi:include href="Includes/LightingOptions.xml" />
+    <xi:include href="Includes/ShadowAndDepthDefines.xml" />
+
+    <options name="vertex">
+        <option>SKINNING</option>
+    </options>
+
+    <domain>
+        <options>
+            <option></option>
+            <option>ALPHA_TEST</option>
+            <option>ALPHA_TO_COVERAGE</option>
+        </options>
+
+        <options ref="shadowanddepth" />
+
+        <options>
+            <option></option>
+            <option>DAMAGE_LAST_SPHERE_INDEX</option>
+            <option>DAMAGE_LAST_PLANE_INDEX</option>
+            <option>DAMAGE_LAST_SPHERE_INDEX,DAMAGE_LAST_PLANE_INDEX</option>
+        </options>
+
+        <options ref="vertex" />
+    </domain>
+
+    <domain>
+        <options>
+            <option></option>
+            <option>ALPHA_TEST</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SPECULARMAP</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>DECALMAP</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>HAS_RAINDROP_RIPPLE</option>
+        </options>
+
+        <options>
+            <option></option>
+			      <option>DAMAGE_LAST_SPHERE_INDEX</option>
+            <option>DAMAGE_LAST_PLANE_INDEX</option>
+            <option>DAMAGE_LAST_SPHERE_INDEX,DAMAGE_LAST_PLANE_INDEX</option>
+        </options>
+
+        <options>
+            <option>GBUFFER</option>
+            <option>GBUFFER,GBUFFER_WITH_POSTFXMASK</option>
+            <option>GBUFFER,GBUFFER_VELOCITY</option>
+        </options>
+
+        <options ref="vertex" />
+    </domain>
+
+    <xi:include href="Includes/ShadowExclusions.xml" />
+    <xi:include href="Includes/SingleCascadeExclusions.xml" />
+
+</metashader>

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="DiffuseSampler" state="ColorClamp2D" />
+    <samplerstate sampler="SrcSampler" state="ColorPointClamp2D" />
+    <samplerstate sampler="TextureSampler" state="ColorClamp" />
+    <samplerstate sampler="MaskSampler" state="ColorClamp" />
+
+	<define name="COLORIZE" />
+    <define name="DOWNSAMPLE" />
+    <define name="BLIT" />
+    <define name="MASK" />
+    <define name="SRCLERP" />
+    <define name="LAST_POSTFX" />
+    <define name="PARABOLOID_REFLECTION" />
+    <define name="PARABOLOID_REFLECTION_BLUR" />
+
+    <domain>
+        <options>
+            <option>                     </option>
+            <option>DOWNSAMPLE           </option>
+            <option>DOWNSAMPLE, MASK     </option>
+            <option>DOWNSAMPLE, COLORIZE </option>
+            <option>BLIT                 </option>
+            <option>BLIT, MASK           </option>
+            <option>BLIT, SRCLERP        </option>
+            <option>BLIT, LAST_POSTFX    </option>
+            <option>BLIT, MASK, LAST_POSTFX</option>
+            <option>BLIT, SRCLERP, LAST_POSTFX</option>
+            <option>COLORIZE             </option>
+            <option>PARABOLOID_REFLECTION</option>
+            <option>PARABOLOID_REFLECTION,PARABOLOID_REFLECTION_BLUR</option>
+        </options>
+    </domain>
+</metashader>

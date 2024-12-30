@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <samplerstate sampler="DiffuseSampler0" state="" />
+    <samplerstate sampler="VolumeTexture" state="ColorClamp" />
+    <samplerstate sampler="CRSampler" state="" />
+    <samplerstate sampler="CBSampler" state="" />
+    <samplerstate sampler="ASampler" state="" />
+    <samplerstate sampler="SecondTexture" state="" />
+    <samplerstate sampler="LineTexture" state="ColorClamp2D" />
+    <samplerstate sampler="NoiseTexture" state="ColorPointWrap2D" />
+    <samplerstate sampler="PostFxMaskTexture" state="ColorClamp2D" />
+
+    <define name="PROJECT" />
+    <define name="TEXTURED" />
+    <define name="ALPHATEXTURED" />
+    <define name="SECOND_TEXTURE" />
+    <define name="SECOND_TEXTURE_UVTRANSFORM" />
+    <define name="SECOND_TEXTURE_MUL_RGB" />
+    <define name="DESATURATE" />
+    <define name="BINK" />
+    <define name="BINK_ALPHA" />
+    <define name="VALIDATEFLOATTEXTURE" platform="PC"/>
+    <define name="KILLOUTSIDE" />
+    <define name="COLORMULTIPLIER" />
+    <define name="COLORADD" />
+    <define name="RECEIVE_SINGLE_CASCADE" />
+    <define name="THICK_LINE" />
+    <define name="THICK_LINE_ADDITIVE" />
+
+    <define name="MANUAL_SRGB" />
+    
+    <define name="POSTFXMASK_CLIP" />
+
+    <define name="AMBIENT" />
+    <define name="SUN" />
+    <define name="OMNI" />
+    <define name="DIRECTIONAL" />
+    <define name="SPOT" />
+    <define name="SAMPLE_SHADOW" />
+    <define name="POST_PROJ_PIXEL_POSITION" />
+    <define name="SKIDMARKS" />
+    <define name="SKIDMARKS_NODEFERRED" />  
+    <define name="INVERSETEXTURE" />
+
+    <define name="VOLUME_TEXTURE" />
+
+    <!-- FireUi Specific defines-->
+    <define name="FIREUI" />
+    <define name="FIREUI_COLORED" />
+    <define name="FIREUI_TEXTURED" />
+    <define name="UVTRANSFORM" />
+    <define name="REMOVE_EXPOSURE_SCALE" />
+    <define name="USE_GREEN_AS_ALPHA" />
+    <define name="BLIT_OFFSCREEN" />
+
+    <xi:include href="Includes/ShadowAndDepthDefines.xml" />
+
+    <!-- 2D variations -->
+    <domain>
+        <options>
+            <option></option>
+            <option>TEXTURED</option>
+            <option>TEXTURED,VALIDATEFLOATTEXTURE</option>
+            <option>ALPHATEXTURED</option>
+            <option>TEXTURED,ALPHATEXTURED</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>INVERSETEXTURE</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>MANUAL_SRGB</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>DESATURATE</option>
+            <option>BINK</option>
+            <option>BINK,BINK_ALPHA</option>
+            <option>THICK_LINE</option>
+            <option>THICK_LINE,THICK_LINE_ADDITIVE</option>
+        </options>
+    </domain>
+
+    <!-- 2D variations for volume debug -->
+    <domain>
+        <options>
+            <option>TEXTURED,VOLUME_TEXTURE</option>
+        </options>
+    </domain>
+
+    <!-- 2D variations with SECOND_TEXTURE -->
+    <domain>
+        <options>
+            <option>TEXTURED,SECOND_TEXTURE</option>
+            <option>TEXTURED,SECOND_TEXTURE,INVERSETEXTURE</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SECOND_TEXTURE_UVTRANSFORM</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SECOND_TEXTURE_MUL_RGB</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>MANUAL_SRGB</option>
+        </options>
+    </domain>
+
+    <!-- 3D variations -->
+    <domain>
+        <options>
+            <option></option>
+            <option>THICK_LINE</option>
+            <option>THICK_LINE,THICK_LINE_ADDITIVE</option>
+            <option>DIRECTIONAL</option>
+            <option>AMBIENT,SUN</option>
+            <option>AMBIENT,DIRECTIONAL</option>
+        </options>
+
+        <xi:include href="Includes/ReceiveShadowsOptions.xml" />
+
+        <options>
+            <option>PROJECT</option>
+            <option>PROJECT,TEXTURED</option>
+            <option>PROJECT,TEXTURED,ALPHATEXTURED</option>
+            <option>PROJECT,TEXTURED,KILLOUTSIDE</option>
+            <option>PROJECT,TEXTURED,POST_PROJ_PIXEL_POSITION</option>
+            <option>PROJECT,SKIDMARKS</option>
+            <option>PROJECT,SKIDMARKS,TEXTURED</option>
+            <option>PROJECT,SKIDMARKS,SKIDMARKS_NODEFERRED</option>
+            <option>PROJECT,SKIDMARKS,TEXTURED,SKIDMARKS_NODEFERRED</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>MANUAL_SRGB</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>INVERSETEXTURE</option>
+        </options>
+    </domain>
+
+    <!-- 3D variations with SECOND_TEXTURE -->
+    <domain>
+        <options>
+            <option>PROJECT</option>
+        </options>
+        
+        <options>
+            <option>TEXTURED,SECOND_TEXTURE</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SECOND_TEXTURE_UVTRANSFORM</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SECOND_TEXTURE_MUL_RGB</option>
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option>DEPTH,PROJECT</option>
+            <option>DEPTH,PROJECT,TEXTURED</option>
+            <option>DEPTH,PROJECT,TEXTURED,KILLOUTSIDE</option>
+        </options>
+    </domain>
+
+    <!-- Fire variations -->
+    <domain>
+        <options>
+            <option></option>
+            <option>FIREUI_TEXTURED</option>
+            <option>TEXTURED,UVTRANSFORM</option>
+            <option>TEXTURED,UVTRANSFORM,BINK</option>
+            <option>TEXTURED,UVTRANSFORM,BINK,BINK_ALPHA</option>
+            <option>TEXTURED,FIREUI_TEXTURED</option>
+            <option>TEXTURED,FIREUI_TEXTURED,BINK</option>
+            <option>TEXTURED,FIREUI_TEXTURED,BINK,BINK_ALPHA</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>COLORMULTIPLIER</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>COLORADD</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>POSTFXMASK_CLIP</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>PROJECT</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>REMOVE_EXPOSURE_SCALE</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>USE_GREEN_AS_ALPHA</option>
+        </options>
+        <options>
+            <option></option>
+            <option>BLIT_OFFSCREEN</option>
+        </options>
+
+        <options>
+            <option>FIREUI</option>
+            <option>FIREUI,FIREUI_COLORED</option>
+        </options>
+              
+    </domain>
+
+    <exclusion>
+        <any>INVERSETEXTURE</any>
+        <none>TEXTURED,ALPHATEXTURED</none>
+    </exclusion>
+    
+    <exclusion>
+		<any>BINK</any>
+		<any>ALPHATEXTURED</any>
+    </exclusion>
+    
+    <exclusion>
+		<any>REMOVE_EXPOSURE_SCALE</any>
+		<none>PROJECT</none>
+    </exclusion>
+
+    <exclusion>
+        <any>MANUAL_SRGB</any>
+        <any>BINK,THICK_LINE,SKIDMARKS,DIRECTIONAL,AMBIENT</any>
+    </exclusion>
+
+    <exclusion>
+        <any>MANUAL_SRGB</any>
+        <none>TEXTURED</none>
+    </exclusion>
+
+    <exclusion>
+        <any>USE_GREEN_AS_ALPHA</any>
+        <none>FIREUI_TEXTURED</none>
+    </exclusion>
+
+    <exclusion>
+        <any>USE_GREEN_AS_ALPHA</any>
+        <any>BINK</any>
+    </exclusion>
+
+    <xi:include href="Includes/ShadowExclusions.xml" />
+    <xi:include href="Includes/SingleCascadeExclusions.xml" />
+    <xi:include href="Includes/ForwardRenderingExclusions.xml" />
+</metashader>

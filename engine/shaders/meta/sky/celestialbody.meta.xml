@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="CelestialBodySampler" state="ColorClamp" />
+    <samplerstate sampler="TimeOfDayColorSampler" state="ColorWrap" />
+
+    <define name="TIME_OF_DAY_MAPPING" />
+    <define name="VISIBILITY_TEST" />
+	<define name="TIME_OF_DAY_COLOR" />
+	<define name="TEXKILL" />
+    <define name="ADDITIVE" />
+    <define name="PARABOLOID_REFLECTION" />
+
+    <domain>
+        <options>
+            <option></option>
+            <option>VISIBILITY_TEST</option>
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option></option>
+            <option>TIME_OF_DAY_MAPPING</option>
+            <option>TIME_OF_DAY_COLOR</option>
+        </options>
+        <options>
+            <option></option>
+            <option>TEXKILL</option>
+        </options>
+        <options>
+            <option></option>
+            <option>ADDITIVE</option>
+        </options>
+        <options>
+            <option></option>
+            <option>PARABOLOID_REFLECTION</option>
+        </options>
+    </domain>
+
+</metashader>

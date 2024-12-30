@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="ShadowMaskTexture" state="ColorPointClamp" />
+
+    <define name="LAST_SAMPLE_INDEX" max_value="20" />
+    <define name="LAST_PASS" />
+
+    <domain>
+        <options>
+            <option>LAST_SAMPLE_INDEX</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>LAST_PASS</option>
+        </options>
+    </domain>
+    
+</metashader>

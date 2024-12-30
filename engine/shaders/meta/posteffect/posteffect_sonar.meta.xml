@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+  <samplerstate sampler="NormalSampler" state="NormalClampTransparentBorder" />
+  <samplerstate sampler="DiffuseSampler" state="ColorClamp" />
+  <samplerstate sampler="DepthTextureSampler" state="DepthSampler" />
+  <samplerstate sampler="LinearSampler"       state="ColorClamp2D" />
+  <samplerstate sampler="PostFxMaskTexture" state="ColorClamp2D" />
+  <samplerstate sampler="GBufferNormalTexture"  state="ColorClamp" />
+
+  <domain>
+    <options>
+      <option></option>
+    </options>
+  </domain>
+
+</metashader>

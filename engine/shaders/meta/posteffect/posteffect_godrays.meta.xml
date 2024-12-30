@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="colorSamplerBilinear"            state="ColorClamp2D" />
+    <samplerstate sampler="reflectionSampler"               state="ColorClamp2D" />    
+    <samplerstate sampler="colorIndirectTextureBilinear"    state="ColorPointClamp2D" />
+    <samplerstate sampler="colorTextureBilinear"            state="ColorPointClamp2D" />
+
+    <define name="FINAL" />
+    <define name="RADIALBLUR" />
+    <define name="RADIALBLUR_SOURCEDIRECTTEXURE" />
+    <define name="USE_SHADOWPROJECTOR" />
+
+    <domain>
+        <options>
+            <option></option>
+            <option>USE_SHADOWPROJECTOR</option>            
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option>RADIALBLUR</option>
+            <option>RADIALBLUR,RADIALBLUR_SOURCEDIRECTTEXURE</option>
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option>FINAL</option>
+        </options>
+    </domain>
+    
+</metashader>

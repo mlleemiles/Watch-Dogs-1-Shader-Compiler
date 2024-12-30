@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<materialdescriptor name="Hair">
+    <geometryInputs normal="1" tangent="1" binormal="1" color="1" uvChannels="2" />
+
+    <parameter name="AlphaTestEnabled" type="bool" />
+    <parameter name="TwoSided" type="bool" />
+    <parameter name="BlendingType" type="int" />
+
+    <parameter name="DiffuseTexture1" type="sampler2D" tilingName="DiffuseTiling1" UvName="DiffuseUV1" />
+    <parameter name="DiffuseTiling1" type="float2" />
+    <parameter name="DiffuseColorBase" type="float4" defaultvalue="1,1,1,1" />
+    <parameter name="DiffuseColor1" type="float4" defaultvalue="1,1,1,1" />
+    <parameter name="DiffuseTexture1Priority" type="int" defaultvalue="1" />
+    <parameter name="OmniSpotLightingDisabled" type="bool" />
+
+    <parameter name="SpecularTexture1" type="sampler2D" tilingName="SpecularTiling1" UvName="SpecularUV1" />
+    <parameter name="SpecularTiling1" type="float2" />
+    <parameter name="SpecularColorBase" type="float4" />
+    <parameter name="SpecularColor1" type="float4" />
+    <parameter name="SpecularPower" type="float" defaultvalue="16" />
+    <parameter name="SpecularTexture1Priority" type="int" defaultvalue="4" />
+    <parameter name="FresnelPower" type="float" defaultvalue="16" />
+    <parameter name="FresnelColor" type="float4" />
+
+    <parameter name="NormalTexture1" type="sampler2D" tilingName="NormalTiling1" UvName="NormalUV1" />
+    <parameter name="NormalTiling1" type="float2" />
+    <parameter name="NormalTexture1Priority" type="int" defaultvalue="3" />
+
+    <parameter name="UVGroupMapChannel1" type="int" />
+    <parameter name="UVGroupMapChannel2" type="int" />
+    <parameter name="UVGroupMapChannel3" type="int" />
+
+    <parameter name="DiffuseTiling1AndGroup1" type="float4" defaultvalue="1,1,0,0" />
+    <parameter name="DiffuseTiling2AndGroup2" type="float4" defaultvalue="1,1,0,0" />
+    <parameter name="NormalTiling1AndGroup3" type="float4" defaultvalue="1,1,0,0" />
+    <parameter name="SpecularTiling1AndGroup1" type="float4" defaultvalue="1,1,0,0" />
+
+    <parameterprovider parametersfilename="Mesh_Hair.fx">
+        <parameter name="DiffuseTexture1" />
+        <parameter name="DiffuseColorBase" />
+        <parameter name="DiffuseColor1" />
+        <parameter name="DiffuseTexture1Priority" />
+        <parameter name="OmniSpotLightingDisabled" />
+        <parameter name="SpecularTexture1" />
+        <parameter name="SpecularColorBase" />
+        <parameter name="SpecularColor1" />
+        <parameter name="SpecularPower" />
+        <parameter name="SpecularTexture1Priority" />
+        <parameter name="FresnelPower" />
+        <parameter name="FresnelColor" />
+        <parameter name="NormalTexture1" />
+        <parameter name="NormalTexture1Priority" />
+        <parameter name="DiffuseTiling1AndGroup1" />
+        <parameter name="DiffuseTiling2AndGroup2" />
+        <parameter name="NormalTiling1AndGroup3" />
+        <parameter name="SpecularTiling1AndGroup1" />
+    </parameterprovider>
+    
+    <ui>
+        <group horizontal="1" label="Settings">
+            <group>
+                <checkbox label="Two sided" dataBindings="TwoSided" />
+                <checkbox label="Alpha test" dataBindings="AlphaTestEnabled" />
+            </group>
+            <group>
+                <label>Blending type</label>
+                <combobox dataBindings="BlendingType">
+                    <comboboxitem value="0">Opaque</comboboxitem>
+                    <comboboxitem value="1">Alpha</comboboxitem>
+                </combobox>
+            </group>
+            <checkbox label="Omni/Spot Lighting Disabled" dataBindings="OmniSpotLightingDisabled" />
+        </group>
+
+        <group label="Diffuse">
+            <group horizontal="1">
+                <button dataBindings="DiffuseColor1">
+                    <dataBindings type="color" />
+                </button>
+                <button dataBindings="DiffuseTexture1" fill="1" />
+                <textbox dataBindings="UVGroupMapChannel1">
+                    <dataBindings type="int" maxvalue="1" />
+                </textbox>
+                <group>
+                    <textbox dataBindings="DiffuseTiling1.x">
+                        <dataBindings type="int" />
+                    </textbox>
+                    <textbox dataBindings="DiffuseTiling1.y">
+                        <dataBindings type="int" />
+                    </textbox>
+                </group>
+            </group>
+
+            <button dataBindings="DiffuseColorBase" fill="1">
+                <dataBindings type="color" />
+            </button>
+        </group>
+
+        <group label="Fresnel" horizontal="1">
+            <label>Power</label>
+            <textbox databindings="FresnelPower" />
+            <label>Color</label>
+            <button dataBindings="FresnelColor">
+                <dataBindings type="color" />
+            </button>
+        </group>
+        
+        <group label="Specular">
+            <group horizontal="1">
+                <button dataBindings="SpecularColor1">
+                    <dataBindings type="color" />
+                </button>
+                <button dataBindings="SpecularTexture1" fill="1" />
+                <group>
+                    <textbox dataBindings="SpecularTiling1.x">
+                        <dataBindings type="int" />
+                    </textbox>
+                    <textbox dataBindings="SpecularTiling1.y">
+                        <dataBindings type="int" />
+                    </textbox>
+                </group>
+            </group>
+
+            <group horizontal="1">
+                <button dataBindings="SpecularColorBase" fill="1" >
+                    <dataBindings type="color" />
+                </button>
+                <dataBindingsAlias name="@SpecularPowerAlias" dataBindings="SpecularPower" />
+                <xi:include href="UI/SpecularPowerGroup.xml" />
+            </group>
+        </group>
+
+        <group horizontal="1" label="Normal">
+            <button dataBindings="NormalTexture1" fill="1" />
+            <textbox dataBindings="UVGroupMapChannel3">
+                <dataBindings type="int" maxvalue="1" />
+            </textbox>
+            <group>
+                <textbox dataBindings="NormalTiling1.x">
+                    <dataBindings type="int" />
+                </textbox>
+                <textbox dataBindings="NormalTiling1.y">
+                    <dataBindings type="int" />
+                </textbox>
+            </group>
+        </group>
+    </ui>
+
+</materialdescriptor>

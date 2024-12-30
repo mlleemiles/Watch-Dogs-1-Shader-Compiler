@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <exclusion>
+        <any>SAMPLE_SHADOW</any>
+        <none>SPOT,SUN,DIRECTIONAL</none>
+    </exclusion>
+
+    <!-- FC2 doesn't support shadow casting directionals (shader variation optimisation) -->
+    <exclusion>
+        <any>DIRECTIONAL</any>
+        <any>SAMPLE_SHADOW</any>
+    </exclusion>
+</metashader>

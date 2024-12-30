@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+    
+<metashader xmlns:xi="#">
+   
+    <samplerstate sampler="colorSampler0"       state="ColorPointClamp" />
+    <samplerstate sampler="colorSampler1"       state="ColorPointClamp" />
+    <samplerstate sampler="DepthCopyTexture"    state="DepthSampler" />
+    <samplerstate sampler="DotSampler"          state="ColorWrap" />
+    
+    <domain>
+        <options>
+            <option></option>
+        </options>
+    </domain>
+
+</metashader>
+ 

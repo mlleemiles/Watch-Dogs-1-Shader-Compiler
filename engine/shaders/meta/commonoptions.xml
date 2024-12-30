@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <define name="SHADOW" />
+    <define name="SHADOW_NOFSM" />
+    <define name="SHADOW_PARABOLOID" />
+    <define name="SAMPLE_SHADOW" />
+
+    <define name="DEPTH" />
+    <define name="DITHERING" />
+
+    <define name="INSTANCING" />
+    <define name="INSTANCING_POS_ROT_Z_TRANSFORM" />
+    <define name="INSTANCING_BUILDINGFACADEANGLES" />
+    <define name="INSTANCING_MISCDATA" />
+
+    <define name="SKINNING" />
+    <define name="SKINNING_EXTRA" />
+
+    <define name="ALPHA_TEST" />
+
+    <define name="PICKING" />
+
+    <define name="PARABOLOID_REFLECTION" />
+
+    <define name="GBUFFER_WITH_POSTFXMASK" />
+    <define name="GBUFFER_VELOCITY" />          <!-- Write to the velocity surface of the G-buffer -->
+
+    <define name="GRIDSHADING" />
+
+    <!-- legacy stuff still used by code -->
+    <define name="AMBIENT" />
+    <define name="SUN" />
+    <define name="OMNI" />
+    <define name="DIRECTIONAL" />
+    <define name="SPOT" />
+    <define name="PROJECTED_TEXTURE" />
+
+    <!-- stuff still referenced by commented out code -->
+    <!-- <define name="SHADOW_CRUDE_BIG_KERNEL" /> -->
+    <!-- <define name="RECEIVE_SINGLE_CASCADE" /> -->
+    <!-- <define name="ALPHA_TO_COVERAGE" /> -->
+</metashader>

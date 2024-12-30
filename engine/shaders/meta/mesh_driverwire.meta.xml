@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <samplerstate sampler="DiffuseTexture1" state="ColorWrap" />
+    <samplerstate sampler="ReflectionTexture" state="ColorWrap" />
+    <samplerstate sampler="ParaboloidReflectionTexture" state="ColorClamp" />
+
+    <define name="INSTANCING" />
+    <define name="INSTANCING_POS_ROT_Z_TRANSFORM" />
+
+    <define name="SAMPLE_SHADOW" />
+    <define name="RECEIVE_SINGLE_CASCADE" />
+
+    <define name="PICKING" />
+    
+    <xi:include href="Includes/LightingOptions.xml" />
+    <xi:include href="Includes/ShadowAndDepthDefines.xml" />
+
+    <options name="vertex">
+        <option></option>
+        <option>INSTANCING</option>
+        <option>INSTANCING,INSTANCING_POS_ROT_Z_TRANSFORM</option>
+    </options>
+
+    <domain>
+        <options ref="lighting" />
+
+        <xi:include href="Includes/ReceiveShadowsOptions.xml" />
+
+        <options ref="vertex" />
+    </domain>
+
+    <domain>
+        <options ref="vertex" />
+        <options ref="shadowanddepth" />
+    </domain>
+
+    <xi:include href="Includes/ShadowExclusions.xml" />
+    <xi:include href="Includes/SingleCascadeExclusions.xml" />
+    <xi:include href="Includes/ForwardRenderingExclusions.xml" />
+
+    <!-- wires are in opaque frame jobs but can't have a depth pass because they are blended -->
+    <exclusion>
+        <any>DEPTH</any>
+        <none>PICKING</none>
+    </exclusion>
+    
+</metashader>

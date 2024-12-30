@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="SrcSampler" state="ColorClamp2D" />
+
+	<define name="EDGE_DETECTION_TWEAK" />
+	
+    <domain>
+        <options>
+			<option>					</option>
+			<option>EDGE_DETECTION_TWEAK</option>
+        </options>
+    </domain>	
+</metashader>

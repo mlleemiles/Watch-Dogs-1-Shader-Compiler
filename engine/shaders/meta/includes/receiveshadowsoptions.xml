@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <options>
+        <option></option>
+        <option>SAMPLE_SHADOW</option>
+        <option>SAMPLE_SHADOW,SHADOW_NOFSM</option>
+    </options>
+
+    <xi:include href="ShadowOptions.xml" />
+</metashader>

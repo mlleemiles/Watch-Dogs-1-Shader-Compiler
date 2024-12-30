@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <samplerstate sampler="GBufferNormalTexture" state="ColorPointClamp" />
+    
+    <define name="SKINNING" />
+    <define name="INSTANCING" />
+    <define name="GBUFFER" />
+    
+    <!-- not used in shader, but needed by the code to check HasDefine() -->
+    <define name="GBUFFER_BLENDED2" />
+
+    <options name="vertex">
+        <option></option>
+        <option>SKINNING</option>
+        <option>INSTANCING</option>
+    </options>
+
+    <domain>
+        <options ref="vertex" />
+        <options>
+            <option>GBUFFER</option>
+        </options>
+    </domain>
+</metashader>

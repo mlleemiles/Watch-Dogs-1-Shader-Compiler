@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="DiffuseTexture1" state="ColorWrap" />
+
+    <define name="ATTENUATION" />
+    <define name="NOFOG" />
+    <define name="USE_INTENSITIES" />
+    <define name="SKINNING" />
+    <define name="INSTANCING" />
+    <define name="ELECTRIC_MATERIAL" />
+    <define name="ELECTRIC_MESH" />
+    <define name="MESH_HIGHLIGHT_SUPPORTED" />
+
+    <domain>
+        <options>
+            <option></option>
+            <option>ATTENUATION</option>
+            <option>NOFOG</option>
+            <option>ATTENUATION,NOFOG</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>USE_INTENSITIES</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SKINNING</option>
+            <option>INSTANCING</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>ELECTRIC_MATERIAL</option>
+            <option>ELECTRIC_MATERIAL,ELECTRIC_MESH</option>
+        </options>
+    </domain>
+</metashader>

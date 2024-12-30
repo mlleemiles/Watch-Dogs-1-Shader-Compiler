@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+  <samplerstate sampler="DiffuseTexture" state="" />
+  <samplerstate sampler="SpecularTexture" state="" />
+  <samplerstate sampler="ReflectionTexture" state="" />
+  <samplerstate sampler="NoiseTexture" state="ColorPointWrap" />
+
+  <define name="SKINNING" />
+  <define name="INSTANCING" />
+
+  <define name="ALPHA_TEST" />  
+  <define name="SPECULARMAP" />
+
+  <define name="FORWARD_LIGHTING" />
+  <define name="GOOCHSHADING" />
+  <define name="GOOCHSHADING_ADDMIDTONECOLOR" />
+  <define name="RIMLIGHTING" />
+
+  <!--Debug only -->
+  <define name="DEBUGLIGHTING" />
+
+  <xi:include href="Includes/ShadowAndDepthDefines.xml" />
+
+  <define name="HAS_MODIFIER" /> <!-- Added by modifier -->
+    
+  <!-- Normal Rendering -->
+  <domain>
+    <options>
+      <option></option>
+      <option>ALPHA_TEST</option>
+    </options>
+
+    <options>
+      <option></option>
+      <option>SKINNING</option>
+      <option>INSTANCING</option>
+    </options>
+
+    <options>
+      <option>FORWARD_LIGHTING</option>
+    </options>
+
+    <options>
+      <option></option>
+      <option>GOOCHSHADING</option>
+      <option>GOOCHSHADING,GOOCHSHADING_ADDMIDTONECOLOR</option>
+    </options>
+
+    <options>
+      <option></option>
+      <option>RIMLIGHTING</option>
+    </options>
+
+    <options>
+      <option></option>
+      <option>SPECULARMAP</option>
+    </options>
+
+    <!--Debug only -->
+    <options>
+      <option></option>
+      <option>DEBUGLIGHTING</option>
+    </options>
+
+      <options>
+          <option></option>
+          <option>HAS_MODIFIER</option>
+      </options>
+  </domain>
+
+  <!-- Shadow Rendering -->
+  <domain>
+	  <options>
+	      <option>DEPTH</option>
+	      <option>DEPTH,DITHERING</option>
+	  </options>
+      <options>
+          <option></option>
+          <option>SKINNING</option>
+          <option>INSTANCING</option>
+      </options>
+      <options>
+          <option></option>
+          <option>ALPHA_TEST</option>
+      </options>
+      <options>
+          <option></option>
+          <option>HAS_MODIFIER</option>
+      </options>
+  </domain>
+</metashader>

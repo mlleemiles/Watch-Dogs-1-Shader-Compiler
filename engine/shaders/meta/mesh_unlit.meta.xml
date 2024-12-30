@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <samplerstate sampler="DiffuseTexture1" state="" />
+    <samplerstate sampler="DepthIntersectionTexture" state="ColorClamp" />
+    <samplerstate sampler="VideoTexture1" state="Video" />
+    <samplerstate sampler="ReflectionTexture" state="ColorWrap" />
+    <samplerstate sampler="AutoExposureScaleTexture" state="ColorClamp2D" />
+
+    <define name="DIFFUSE_MAP_BASE" />
+    <define name="VIDEO_MAP_BASE" />
+    <define name="ATTENUATION" />
+    <define name="BLACKFOG" />
+    <define name="ALPHA_TEST" />
+    <!-- define name="ALPHA_TO_COVERAGE" />  -->
+    <define name="VERTEX_COLOR" />
+    <define name="SKINNING" />
+    <define name="INSTANCING" />
+    <define name="INSTANCING_MISCDATA" />
+    <!-- <define name="SECOND_DEPTHTEST" />  -->
+    <define name="PARABOLOID_REFLECTION" /><!-- Rendering to paraboloid reflection -->
+    <define name="REFLECTION" /><!-- Receive reflection -->
+    <define name="REFLECTION_AFFECTED_BY_DAYLIGHT" /> <!-- Multiplies the static reflection by the (outdoor) default ambient colour of the GI -->
+    <define name="REFLECTION_STATIC_TRANSITION" />
+
+    <define name="ELECTRIC_MATERIAL" />
+    <define name="ELECTRIC_MESH" />
+    <define name="AFFECTED_BY_TIMEOFDAY" />
+    <define name="DEPTH_INTERSECTION" />
+    <define name="AFFECTED_BY_EXPOSURE" />
+    <define name="GBUFFER_VELOCITY" platform="NEXTGEN"/><!-- Write to the velocity surface of the G-buffer -->
+
+    <xi:include href="Includes/ShadowAndDepthDefines.xml" />
+
+    <!-- Normal Rendering -->
+    <domain>
+        <options>
+            <option>DIFFUSE_MAP_BASE</option>
+            <option>VIDEO_MAP_BASE</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>REFLECTION</option>
+            <option>REFLECTION,REFLECTION_AFFECTED_BY_DAYLIGHT</option>
+            <option>REFLECTION,REFLECTION_STATIC_TRANSITION</option>
+            <option>REFLECTION,REFLECTION_STATIC_TRANSITION,REFLECTION_AFFECTED_BY_DAYLIGHT</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>ATTENUATION</option>
+            <option>BLACKFOG</option>
+            <option>ATTENUATION,BLACKFOG</option>
+        </options>
+        
+        <options>
+            <option></option>
+            <option>ALPHA_TEST</option>
+            <!--            <option>ALPHA_TO_COVERAGE</option> -->
+        </options>
+        
+        <options>
+            <option></option>
+            <!--             <option>SECOND_DEPTHTEST</option> -->
+        </options>
+        
+        <options>
+            <option></option>
+            <option>SKINNING</option>
+            <option>INSTANCING</option>
+            <option>INSTANCING,INSTANCING_MISCDATA</option>
+        </options>
+        
+        <options>
+            <option></option>
+            <option>VERTEX_COLOR</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>DEPTH_INTERSECTION</option>
+            <option>ELECTRIC_MATERIAL</option>
+            <option>ELECTRIC_MATERIAL,ELECTRIC_MESH</option>
+        </options>
+        
+        <options>
+            <option></option>
+            <option>AFFECTED_BY_TIMEOFDAY</option>
+        </options>
+        
+        <options>
+            <option></option>
+            <option>PARABOLOID_REFLECTION</option>
+            <option>GBUFFER_VELOCITY</option>
+        </options>
+        
+        <options>
+            <option></option>
+            <option>AFFECTED_BY_EXPOSURE</option>
+        </options>
+    </domain>
+
+    <!-- Shadow Rendering -->
+    <domain>
+        <options ref="shadowanddepth" />
+        <options>
+            <option></option>
+            <option>SKINNING</option>
+            <option>INSTANCING</option>
+            <option>INSTANCING,INSTANCING_MISCDATA</option>
+        </options>
+        <options>
+            <option></option>
+            <option>ALPHA_TEST</option>
+            <!--            <option>ALPHA_TO_COVERAGE</option> -->
+        </options>
+    </domain>
+
+    <exclusion>
+        <all>DEPTH_INTERSECTION</all>
+        <any>VIDEO_MAP_BASE,ELECTRIC_MATERIAL,ELECTRIC_MESH,AFFECTED_BY_TIMEOFDAY,REFLECTION</any>
+    </exclusion>
+
+    <!--<exclusion>SHADOW,ALPHA_TO_COVERAGE</exclusion>-->
+</metashader>

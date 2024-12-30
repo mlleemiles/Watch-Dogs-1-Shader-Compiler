@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="SourceTexture" state="ColorPointClamp" />
+    <samplerstate sampler="HistogramTexture" state="ColorPointClamp" />
+    <samplerstate sampler="HistogramStatsTexture" state="ColorPointClamp" />
+
+    <define name="BLIT" />
+    <define name="STATS" />
+
+    <domain deprecated="XENON,PS3">
+        <options>
+            <option></option>
+            <option>BLIT</option>
+            <option>STATS</option>
+        </options>
+    </domain>
+</metashader>

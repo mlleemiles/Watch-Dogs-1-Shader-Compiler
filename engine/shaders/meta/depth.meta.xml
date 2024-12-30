@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+
+    <samplerstate sampler="DepthTexture" state="DepthSampler" />	
+    <compiler platform="ps3" type="fragment">-po OutColorPrec=fp32</compiler >
+
+    <domain>
+        <options>
+            <option></option>
+        </options>
+    </domain>
+</metashader>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="TextureSampler"   state="ColorPointClamp2D" />
+    <define name="FIRST_PASS" />
+    <domain>
+        <options>
+            <option></option>
+            <option>FIRST_PASS</option>
+        </options>
+    </domain>
+</metashader>
+

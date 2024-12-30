@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+
+    <samplerstate sampler="OriginalTarget" state="ColorClamp" />
+
+    <define name="NBR_FIRE_NODES" max_value="31"/>
+    <define name="BLIT"/>
+    <domain>
+        <options>
+            <option>NBR_FIRE_NODES</option>
+        </options>
+    </domain>
+    <domain>
+        <options>
+            <option>BLIT</option>
+        </options>
+    </domain>
+</metashader>

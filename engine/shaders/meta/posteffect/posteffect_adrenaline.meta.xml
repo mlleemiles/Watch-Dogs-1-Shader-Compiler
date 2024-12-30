@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="DiffuseSampler" state="ColorClamp" />
+    <samplerstate sampler="RadialBlurSampler" state="ColorClamp" />
+    <samplerstate sampler="PostFxMaskTexture" state="ColorClamp2D" />
+    <samplerstate sampler="GBufferNormalTexture" state="ColorClamp2D" />
+    <samplerstate sampler="RadiaBlurMask" state="ColorClamp2D" />
+
+    <define name="RADIABLUR_MASK" />
+    <define name="HIGHLIGHT" />
+
+  <domain>
+        <options>
+            <option></option>
+            <option>RADIABLUR_MASK</option>
+            <option>HIGHLIGHT</option>
+            <option>RADIABLUR_MASK,HIGHLIGHT</option>
+        </options>
+    </domain>
+</metashader>

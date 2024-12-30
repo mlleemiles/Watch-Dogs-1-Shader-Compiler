@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <xi:include href="ShadowExclusionsGeneric.xml" />
+    
+    <!-- Sun must always be casting shadows (except for terrain) -->
+    <exclusion>
+        <any>SUN</any>
+        <none>SAMPLE_SHADOW</none>
+    </exclusion>
+</metashader>

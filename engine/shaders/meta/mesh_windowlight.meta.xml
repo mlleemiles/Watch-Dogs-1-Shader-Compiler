@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="DiffuseTexture1" state="ColorWrap" />
+    <samplerstate sampler="DiffuseTexture1Point" state="ColorPointWrap" />
+    <samplerstate sampler="MaskTexture1" state="ColorPointWrap" />
+    <samplerstate sampler="CeilingTexture" state="ColorWrap" />
+    <samplerstate sampler="MaterialPaletteTexture" state="ColorPointClamp" />
+
+    <define name="MASK_TEXTURE" />
+    <define name="TEXTURE_ERROR" />
+
+    <define name="ATTENUATION" />
+    <define name="ALPHA_TEST" />
+<!--     <define name="ALPHA_TO_COVERAGE" /> -->
+    <define name="VERTEX_COLOR" />
+    <define name="PARABOLOID_REFLECTION" />
+    <define name="INSTANCING" />
+    <define name="INSTANCING_MISCDATA" />
+    <define name="INSTANCING_POS_ROT_Z_TRANSFORM" />
+    <define name="IS_LOW_RES_BUILDING" />
+    <define name="LOW_RES_BUILDING_BATCH" />
+    <define name="CEILINGS" />
+
+    <define name="ELECTRIC_MATERIAL" />
+    <define name="ELECTRIC_MESH" />
+
+    <options name="vertex">
+        <option></option>
+        <option>INSTANCING</option>
+        <option>INSTANCING,INSTANCING_MISCDATA</option>
+        <option>INSTANCING,INSTANCING_POS_ROT_Z_TRANSFORM</option>
+        <option>INSTANCING,INSTANCING_POS_ROT_Z_TRANSFORM,INSTANCING_MISCDATA</option>
+        <option>INSTANCING,INSTANCING_POS_ROT_Z_TRANSFORM,INSTANCING_MISCDATA,IS_LOW_RES_BUILDING</option>
+        <option>LOW_RES_BUILDING_BATCH,IS_LOW_RES_BUILDING</option>
+    </options>
+
+    <!-- Normal Rendering -->
+    <domain>
+
+        <options>
+            <option></option>
+            <option>MASK_TEXTURE</option>
+            <option>TEXTURE_ERROR</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>ATTENUATION</option>
+        </options>
+        <options>
+            <option></option>
+            <option>ALPHA_TEST</option>
+<!--            <option>ALPHA_TO_COVERAGE</option> -->
+        </options>
+        <options>
+            <option></option>
+            <option>VERTEX_COLOR</option>
+        </options>
+        <options>
+            <option></option>
+            <option>ELECTRIC_MATERIAL</option>
+            <option>ELECTRIC_MATERIAL,ELECTRIC_MESH</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>PARABOLOID_REFLECTION</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>CEILINGS</option>
+        </options>
+
+        <options ref="vertex" />
+    </domain>
+
+    <exclusion>
+        <any>PARABOLOID_REFLECTION</any>
+        <any>CEILINGS</any>
+    </exclusion>
+
+    <exclusion>
+        <any>IS_LOW_RES_BUILDING</any>
+        <any>CEILINGS</any>
+    </exclusion>
+</metashader>

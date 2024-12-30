@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="FrameBufferTexture"      state="ColorPointClamp2D" />
+    <samplerstate sampler="PrevFrameBufferTexture"  state="ColorClamp2D" />
+    <samplerstate sampler="CurrFrameBufferTexture"  state="ColorPointClamp2D" />
+
+    <samplerstate sampler="LinearSampler"           state="ColorClamp2D" />
+    <samplerstate sampler="PointSampler"            state="ColorPointClamp2D"/>
+    <samplerstate sampler="DepthSampler"            state="DepthVPSampler" />
+    <samplerstate sampler="GBufferVelocityTexture"  state="ColorPointClamp2D"/>
+    
+    <define name="GENERATE"                         platform="PC,DURANGO,ORBIS"/>
+    <define name="ZERO_TIME_DELTA"                  platform="PC,DURANGO,ORBIS"/>
+    <define name="NO_PREVIOUS_FRAME"                platform="PC,DURANGO,ORBIS"/><!-- Don't use the accumulated previous frames (just 'reset' the buffer with the current frame) -->
+    <define name="VECTOR_ONLY"                      platform="PC"/>
+    <define name="RESOLVE"                          platform="PC"/><!-- This pass is required only if DEFERREDFXANTIALIAS_RESOLVE_PASS is defined -->
+    
+    <domain>
+        <options>
+			<option> GENERATE </option>     <!-- Produce the antialiased image on a buffer that will also contribute to the next frame's antialising. -->
+            <option> GENERATE, VECTOR_ONLY </option>
+            <option> GENERATE, ZERO_TIME_DELTA </option><!-- As above, for when the time delta is zero (in this case, we sample the accumulated frames without using any reprojection). -->
+            <option> GENERATE, NO_PREVIOUS_FRAME </option>
+            <option> GENERATE, ZERO_TIME_DELTA, NO_PREVIOUS_FRAME </option>
+            <option> GENERATE, ZERO_TIME_DELTA, VECTOR_ONLY </option>
+            <option> RESOLVE </option>      <!-- Copy the antialiased image to the effect's final destination surface. -->
+        </options>
+    </domain>
+</metashader>

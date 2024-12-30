@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="DepthTexture"            state="DepthSampler" />
+    <define name="COLORKEY" />    
+
+    <domain>
+        <options>
+            <option></option>
+            <option>COLORKEY</option>            
+        </options>
+    </domain>
+</metashader>

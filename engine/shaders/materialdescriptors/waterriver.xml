@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<materialdescriptor name="WaterRiver">
+    <geometryInputs normal="1" tangent="1" binormal="1" color="1" uvChannels="1" />
+
+    <parameter name="AlphaTestEnabled" type="bool" />
+    <parameter name="TwoSided" type="bool" />
+    <parameter name="ReflectionQuality" type="int" defaultvalue="100" />
+    <parameter name="ReflectionMinRadius" type="float" />
+
+    <parameter name="NormalTexture" type="sampler2D" />
+    <parameter name="NormalOffsetScale" type="float" defaultvalue="0.2"/>
+    <parameter name="CenterTiling1" type="float2" defaultvalue="2.0,5.0" />
+    <parameter name="CenterTiling2" type="float2" defaultvalue="0.4,0.6" />
+    <parameter name="BorderTiling1" type="float2" defaultvalue="2.0,5.0" />
+    <parameter name="BorderTiling2" type="float2" defaultvalue="0.4,0.6" />
+    <parameter name="CenterDir1" type="float2" defaultvalue="0.01,-0.2" />
+    <parameter name="CenterDir2" type="float2" defaultvalue="0.0,-0.05" />
+    <parameter name="BorderDir1" type="float2" defaultvalue="0.033,0.0" />
+    <parameter name="BorderDir2" type="float2" defaultvalue="0.0,-0.0165" />
+
+    <parameter name="CausticsFadeDepths" type="float2" defaultvalue="0.5,5.0" />
+    <parameter name="CausticsIntensity" type="float" defaultvalue="1.1"/>
+    <parameter name="CausticsScale" type="float" defaultvalue="0.4"/>
+    <parameter name="CausticsTexture" type="sampler2D" />
+    <parameter name="CausticsShadowBiasX" type="float" />
+    <parameter name="CausticsShadowBiasY" type="float" />
+    <parameter name="CausticsShadowBiasZ" type="float" defaultvalue="0.01" />
+
+    <parameter name="ReflectionCubeTexture" type="samplerCUBE" />
+    <parameter name="ReflectionNormalOffsetScale" type="float" defaultvalue="0.4"/>
+
+    <parameter name="DiffuseTexture" type="sampler2D" />
+    <parameter name="DiffuseTiling" type="float2" defaultvalue="1.0,1.0" />
+    <parameter name="DiffuseSpeedFactor" type="float" defaultvalue="1.0" />
+    <parameter name="DiffuseMaskTexture" type="sampler2D" />
+    <parameter name="DiffuseMaskTiling" type="float2" defaultvalue="1.0,1.0" />
+
+    <parameter name="WaterColor" type="float4" defaultvalue="0.12,0.14,0.07,1" />
+    <parameter name="DensityRange" type="float" defaultvalue="2" />
+    <parameter name="DensityFactor" type="float" defaultvalue="0.95" />
+    <parameter name="FresnelBias" type="float" defaultvalue="0.02037" />
+    <parameter name="FresnelPower" type="float" defaultvalue="12" />
+    <parameter name="SpecularPower" type="float" defaultvalue="300" />
+
+    <parameter name="BaseTiling" type="float2" defaultvalue="2.2,10.2" />
+
+    <parameterprovider parametersfilename="WaterRiver.fx">
+        <parameter name="NormalTexture" />
+        <parameter name="NormalOffsetScale" />
+        <parameter name="CenterTiling1" />
+        <parameter name="CenterTiling2" />
+        <parameter name="BorderTiling1" />
+        <parameter name="BorderTiling2" />
+        <parameter name="CenterDir1" />
+        <parameter name="CenterDir2" />
+        <parameter name="BorderDir1" />
+        <parameter name="BorderDir2" />
+        <parameter name="CausticsFadeDepths" />
+        <parameter name="CausticsIntensity" />
+        <parameter name="CausticsScale" />
+        <parameter name="CausticsTexture" />
+        <parameter name="CausticsShadowBiasX" />
+        <parameter name="CausticsShadowBiasY" />
+        <parameter name="CausticsShadowBiasZ" />
+        <parameter name="ReflectionCubeTexture" />
+        <parameter name="ReflectionNormalOffsetScale" />
+        <parameter name="DiffuseTexture" />
+        <parameter name="DiffuseTiling" />
+        <parameter name="DiffuseSpeedFactor" />
+        <parameter name="DiffuseMaskTexture" />
+        <parameter name="DiffuseMaskTiling" />
+        <parameter name="WaterColor" />
+        <parameter name="DensityRange" />
+        <parameter name="DensityFactor" />
+        <parameter name="FresnelBias" />
+        <parameter name="FresnelPower" />
+        <parameter name="SpecularPower" />
+        <parameter name="BaseTiling" />
+    </parameterprovider>
+    
+    <ui>
+        <xi:include href="UI/DataClasses.xml" />
+
+        <checkbox label="Alpha test" dataBindings="AlphaTestEnabled" />
+        <checkbox label="Two sided" dataBindings="TwoSided" />
+
+        <combobox dataBindings="ReflectionQuality">
+            <comboboxitem value="0">None</comboboxitem>
+            <comboboxitem value="10">Static</comboboxitem>
+            <comboboxitem value="20">Sky</comboboxitem>
+            <comboboxitem value="30">Sky, terrain</comboboxitem>
+            <comboboxitem value="40">Sky, vegetation</comboboxitem>
+            <comboboxitem value="50">Sky, terrain, vegetation</comboboxitem>
+            <comboboxitem value="60">Sky, terrain, vegetation, objects</comboboxitem>
+            <comboboxitem value="100">Maximum</comboboxitem>
+        </combobox>
+
+        <label>Reflection min radius</label>
+        <textbox dataBindings="ReflectionMinRadius">
+            <dataBindings minvalue="0.01" />
+        </textbox>
+
+        <label>Normal texture</label>
+        <button dataBindings="NormalTexture" fill="1" />
+        
+        <group horizontal="1">
+            <label>Center tiling 1</label>
+            <group>
+                <textbox dataBindings="CenterTiling1.x">
+                    <dataBindings class="Tiling" />
+                </textbox>
+                <textbox dataBindings="CenterTiling1.y">
+                    <dataBindings class="Tiling" />
+                </textbox>
+            </group>
+            <label>Center tiling 2</label>
+            <group>
+                <textbox dataBindings="CenterTiling2.x">
+                    <dataBindings class="Tiling" />
+                </textbox>
+                <textbox dataBindings="CenterTiling2.y">
+                    <dataBindings class="Tiling" />
+                </textbox>
+            </group>
+            <label>Border tiling 1</label>
+            <group>
+                <textbox dataBindings="BorderTiling1.x">
+                    <dataBindings class="Tiling" />
+                </textbox>
+                <textbox dataBindings="BorderTiling1.y">
+                    <dataBindings class="Tiling" />
+                </textbox>
+            </group>
+            <label>Border tiling 2</label>
+            <group>
+                <textbox dataBindings="BorderTiling2.x">
+                    <dataBindings class="Tiling" />
+                </textbox>
+                <textbox dataBindings="BorderTiling2.y">
+                    <dataBindings class="Tiling" />
+                </textbox>
+            </group>
+        </group>
+        <group horizontal="1">
+            <label>Normal offset scale</label>
+            <textbox dataBindings="NormalOffsetScale" />
+        </group>
+        <group horizontal="1">
+            <label>CenterDir1</label>
+            <group>
+                <textbox dataBindings="CenterDir1.x">
+                    <dataBindings class="Tiling" />
+                </textbox>
+                <textbox dataBindings="CenterDir1.y">
+                    <dataBindings class="Tiling" />
+                </textbox>
+            </group>
+            <label>CenterDir2</label>
+            <group>
+                <textbox dataBindings="CenterDir2.x">
+                    <dataBindings class="Tiling" />
+                </textbox>
+                <textbox dataBindings="CenterDir2.y">
+                    <dataBindings class="Tiling" />
+                </textbox>
+            </group>
+            <label>BorderDir1</label>
+            <group>
+                <textbox dataBindings="BorderDir1.x">
+                    <dataBindings class="Tiling" />
+                </textbox>
+                <textbox dataBindings="BorderDir1.y">
+                    <dataBindings class="Tiling" />
+                </textbox>
+            </group>
+            <label>BorderDir2</label>
+            <group>
+                <textbox dataBindings="BorderDir2.x">
+                    <dataBindings class="Tiling" />
+                </textbox>
+                <textbox dataBindings="BorderDir2.y">
+                    <dataBindings class="Tiling" />
+                </textbox>
+            </group>
+        </group>
+
+        <group horizontal="1">
+            <label>Caustics fade depths</label>
+            <textbox dataBindings="CausticsFadeDepths.x" />
+            <textbox dataBindings="CausticsFadeDepths.y" />
+        </group>
+
+        <group horizontal="1">
+            <label>Caustics intensity</label>
+            <textbox dataBindings="CausticsIntensity" />
+        </group>
+
+        <group horizontal="1">
+            <label>Caustics scale</label>
+            <textbox dataBindings="CausticsScale" />
+        </group>
+
+        <group horizontal="1">
+            <label>Caustics Shadow Bias</label>
+            <textbox dataBindings="CausticsShadowBiasX" />
+            <textbox dataBindings="CausticsShadowBiasY" />
+            <textbox dataBindings="CausticsShadowBiasZ" />
+        </group>
+
+        <label>Reflection cube texture</label>
+        <button dataBindings="ReflectionCubeTexture" fill="1" />
+
+        <group horizontal="1">
+            <label>Reflection normal offset scale</label>
+            <textbox dataBindings="ReflectionNormalOffsetScale" />
+        </group>
+
+        <label>Diffuse texture</label>
+        <group horizontal="1">
+            <button dataBindings="DiffuseTexture" fill="1" />
+            <group>
+                <textbox dataBindings="DiffuseTiling.x">
+                    <dataBindings class="Tiling" />
+                </textbox>
+                <textbox dataBindings="DiffuseTiling.y">
+                    <dataBindings class="Tiling" />
+                </textbox>
+            </group>
+        </group>
+
+        <group horizontal="1">
+            <label>Diffuse speed factor</label>
+            <textbox dataBindings="DiffuseSpeedFactor" />
+        </group>
+
+        <label>Diffuse mask texture</label>
+        <group horizontal="1">
+            <button dataBindings="DiffuseMaskTexture" fill="1" />
+            <group>
+                <textbox dataBindings="DiffuseMaskTiling.x">
+                    <dataBindings class="Tiling" />
+                </textbox>
+                <textbox dataBindings="DiffuseMaskTiling.y">
+                    <dataBindings class="Tiling" />
+                </textbox>
+            </group>
+        </group>
+
+        <group horizontal="1">
+            <label>Water color</label>
+            <button dataBindings="WaterColor" >
+                <dataBindings type="color" />
+            </button>
+        </group>
+
+        <group horizontal="1">
+            <label>Density range</label>
+            <textbox dataBindings="DensityRange" />
+        </group>
+
+        <group horizontal="1">
+            <label>Density factor</label>
+            <textbox dataBindings="DensityFactor" />
+        </group>
+
+        <group horizontal="1">
+            <label>Fresnel bias</label>
+            <textbox dataBindings="FresnelBias" />
+        </group>
+
+        <group horizontal="1">
+            <label>Fresnel power</label>
+            <textbox dataBindings="FresnelPower" />
+        </group>
+
+        <group label="Specular">
+            <dataBindingsAlias name="@SpecularPowerAlias" dataBindings="SpecularPower" />
+            <xi:include href="UI/SpecularPowerGroup.xml" />
+        </group>
+
+        <label>Base tiling</label>
+        <group horizontal="1">
+            <textbox dataBindings="BaseTiling.x">
+                <dataBindings class="Tiling" />
+            </textbox>
+            <textbox dataBindings="BaseTiling.y">
+                <dataBindings class="Tiling" />
+            </textbox>
+        </group>
+    </ui>
+</materialdescriptor>

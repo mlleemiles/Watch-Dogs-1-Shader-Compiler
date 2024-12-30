@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+
+    <samplerstate sampler="DiffuseTexture1" state="ColorWrap" />
+    <samplerstate sampler="DiffuseTexture2" state="ColorWrap" />
+    <samplerstate sampler="SpecularTexture1" state="ColorWrap" />
+    <samplerstate sampler="HeightAtlasTexture1" state="ColorPointClamp2D" />
+    <samplerstate sampler="NormalAtlasTexture1" state="ColorClamp" />
+    <samplerstate sampler="NormalTexture1" state="NormalWrap" />
+
+    <!-- RenderPasses-->
+    <define name="DIFFUSE_ATLAS" platform="EDITOR" />
+    <define name="NORMAL_ATLAS" platform="EDITOR" />
+    <define name="HEIGHT_ATLAS" platform="EDITOR" />
+    <define name="MASK_ATLAS" platform="EDITOR" />
+    
+    <!-- Options-->
+    <define name="GENERIC" />
+    <define name="BUILDING" />
+    <define name="SPECULARMAP" />
+    <define name="COLORIZE_WITH_MASK_GREEN_CHANNEL" />
+    <define name="COLORIZE_WITH_ALPHA_FROM_DIFFUSETEXTURE1" />
+    <define name="DIFFUSETEXTURE2" />
+    <define name="BAKE_DIFFUSE" />
+    <define name="WINDOW_LIGHT" />
+    <define name="USE_MASK_BLUE_CHANNEL_AS_REFLECTION_MASK" />
+    <define name="INTERIOR" />
+
+    <domain>
+        <options>
+            <option></option>
+            <option>INTERIOR</option>
+        </options>
+        <options>
+            <option>DIFFUSE_ATLAS</option>
+        </options>
+        <options>
+            <option>GENERIC</option>
+            <option>BUILDING</option>
+        </options>
+        <options>
+            <option></option>
+            <option>SPECULARMAP</option>
+        </options>
+        <options>
+            <option></option>
+            <option>COLORIZE_WITH_MASK_GREEN_CHANNEL</option>
+            <option>COLORIZE_WITH_ALPHA_FROM_DIFFUSETEXTURE1</option>
+        </options>
+        <options>
+            <option></option>
+            <option>BAKE_DIFFUSE</option>
+            <option>BAKE_DIFFUSE,DIFFUSETEXTURE2</option>
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option></option>
+            <option>INTERIOR</option>
+        </options>
+        <options>
+            <option>HEIGHT_ATLAS</option>
+        </options>
+        <options>
+            <option>GENERIC</option>
+            <option>BUILDING</option>
+        </options>
+        <options>
+            <option></option>
+            <option>SPECULARMAP</option>
+        </options>
+    </domain>
+    
+    <domain>
+        <options>
+            <option></option>
+            <option>INTERIOR</option>
+        </options>
+        <options>
+            <option>NORMAL_ATLAS</option>
+        </options>
+        <options>
+            <option>GENERIC</option>
+            <option>BUILDING</option>
+        </options>
+        <options>
+            <option></option>
+            <option>SPECULARMAP</option>
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option></option>
+            <option>INTERIOR</option>
+        </options>
+        <options>
+            <option>MASK_ATLAS</option>
+        </options>
+ 
+        <options>
+            <option>GENERIC</option>
+            <option>GENERIC,SPECULARMAP</option>
+            <option>GENERIC,SPECULARMAP,USE_MASK_BLUE_CHANNEL_AS_REFLECTION_MASK</option>
+            <option>GENERIC,SPECULARMAP,COLORIZE_WITH_MASK_GREEN_CHANNEL</option>
+            <option>GENERIC,SPECULARMAP,COLORIZE_WITH_ALPHA_FROM_DIFFUSETEXTURE1</option>
+
+            <option>BUILDING</option>
+            <option>BUILDING,SPECULARMAP</option>
+            <option>BUILDING,SPECULARMAP,USE_MASK_BLUE_CHANNEL_AS_REFLECTION_MASK</option>
+            <option>BUILDING,SPECULARMAP,COLORIZE_WITH_MASK_GREEN_CHANNEL</option>
+            <option>BUILDING,SPECULARMAP,COLORIZE_WITH_ALPHA_FROM_DIFFUSETEXTURE1</option>
+
+            <option>WINDOW_LIGHT</option>
+        </options>
+    </domain>
+    
+</metashader>

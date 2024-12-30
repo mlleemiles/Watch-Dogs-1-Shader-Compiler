@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    
+    <samplerstate sampler="PDATraficTexture"        state="ColorPointWrap" />
+    <samplerstate sampler="FogOfWarTexture"        state="VertexClamp" />
+    
+
+    <define name="NOTEXTURE" />
+
+    
+    <domain>
+        <options>
+            <option></option>
+            <option>NOTEXTURE</option>
+        </options>
+    </domain>
+
+</metashader>

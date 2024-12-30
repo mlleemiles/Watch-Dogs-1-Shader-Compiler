@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <samplerstate sampler="DiffuseTexture1" state="" />
+    <samplerstate sampler="DiffuseTexture2" state="" />
+    <samplerstate sampler="NormalTexture1" state="" />
+    <samplerstate sampler="NormalTexture2" state="" />
+    <samplerstate sampler="SpecularTexture1" state="" />
+    <samplerstate sampler="ReflectionTexture" state="ColorWrap" />
+    <samplerstate sampler="ClothWrinkleNormalMap" state="ColorClamp" />
+    <samplerstate sampler="AvatarDiffuse2TextureOverride" state="ColorWrap" />
+
+    <define name="SKINNING" />
+    <define name="SKINNING_EXTRA" />
+
+    <define name="ALPHA_TEST" />
+<!--    
+    <define name="ALPHA_TO_COVERAGE" />
+-->
+    <define name="DIFFUSE2" />
+    <define name="NORMALMAP" />
+    <define name="NORMALMAP2" />
+    <define name="MULTIPLY_DIFFUSETEXTURES" />
+
+    <define name="NEUTRAL_MIDDLE_COLOR" />
+    
+    <!--
+    <define name="STATIC_REFLECTION" />
+    <define name="DYNAMIC_REFLECTION" />
+-->
+
+    <define name="GBUFFER" />
+    <define name="GBUFFER_VELOCITY" platform="NEXTGEN"/>
+    <define name="GBUFFER_WITH_POSTFXMASK" platform="XENON,PS3" />
+
+    <define name="SAMPLE_SHADOW" />
+    <define name="RECEIVE_SINGLE_CASCADE" />
+
+    <define name="CLOTH_DYNAMIC_WRINKLES" />
+
+    <define name="AVATAR_COLOR_OVERRIDES" />
+    <define name="AVATAR_DIFFUSE2_OVERRIDE" />
+    <define name="AVATAR_INVERT_DIFFUSE2_MASK_OVERRIDE" />
+
+    <define name="WIND_ANIMATION_SCALE" />
+
+    <xi:include href="Includes/LightingOptions.xml" />
+    <xi:include href="Includes/ShadowAndDepthDefines.xml" />
+
+    <options name="vertex">
+        <option></option>
+        <option>SKINNING</option>
+        <option>SKINNING,SKINNING_EXTRA</option>
+    </options>
+
+    <!-- Shadow and Depth -->
+    <domain>
+        <options>
+            <option></option>
+            <option>ALPHA_TEST</option>
+<!--    
+            <option>ALPHA_TO_COVERAGE</option>
+-->
+        </options>
+
+        <options>
+            <option></option>
+            <option>WIND_ANIMATION_SCALE</option>
+        </options>
+
+        <options ref="shadowanddepth" />
+
+        <options ref="vertex" />
+    </domain>
+
+    <!-- GBuffer -->
+    <domain>
+        <options>
+            <option></option>
+            <option>ALPHA_TEST</option>
+        </options>
+        
+        <options>
+            <option></option>
+            <option>NORMALMAP</option>
+            <option>NORMALMAP,NORMALMAP2</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>DIFFUSE2</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>NEUTRAL_MIDDLE_COLOR</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>MULTIPLY_DIFFUSETEXTURES</option>
+        </options>
+
+        <options>
+            <option>GBUFFER</option>
+            <option>GBUFFER,GBUFFER_WITH_POSTFXMASK</option>
+            <option>GBUFFER,GBUFFER_VELOCITY</option>
+        </options>
+
+        <!--
+        <options>
+            <option></option>
+            <option>CLOTH_DYNAMIC_WRINKLES</option>
+        </options>
+        -->
+        
+        <options>
+            <option></option>
+            <option>AVATAR_COLOR_OVERRIDES</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>AVATAR_DIFFUSE2_OVERRIDE</option>
+            <option>AVATAR_DIFFUSE2_OVERRIDE,AVATAR_INVERT_DIFFUSE2_MASK_OVERRIDE</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>WIND_ANIMATION_SCALE</option>
+        </options>
+
+        <!--
+        <options>
+            <option></option>
+            <option>STATIC_REFLECTION</option>
+            <option>DYNAMIC_REFLECTION</option>
+        </options>
+        -->
+
+        <options ref="vertex" />
+    </domain>
+
+    <exclusion>
+        <none>DIFFUSE2</none>
+        <any>MULTIPLY_DIFFUSETEXTURES</any>
+    </exclusion>
+
+    <xi:include href="Includes/ShadowExclusions.xml" />
+    <xi:include href="Includes/SingleCascadeExclusions.xml" />
+</metashader>

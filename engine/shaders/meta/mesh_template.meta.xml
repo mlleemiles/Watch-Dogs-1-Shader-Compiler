@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <define name="SKINNING" />
+    <define name="INSTANCING" />
+    <define name="PARABOLOID_REFLECTION" />
+    <define name="ALPHA_TO_COVERAGE" />
+
+    <xi:include href="Includes/ShadowAndDepthDefines.xml" />
+
+    <options name="vertex">
+        <option></option>
+        <option>SKINNING</option>
+        <option>INSTANCING</option>
+    </options>
+
+    <domain>
+        <options ref="vertex" />
+    </domain>
+
+    <domain>
+        <options ref="shadowanddepth" />
+        <options ref="vertex" />
+    </domain>
+
+    <domain>
+        <options>
+            <option>PARABOLOID_REFLECTION</option>
+        </options>
+       
+        <options ref="vertex" />
+    </domain>
+
+    <exclusion>SHADOW,ALPHA_TO_COVERAGE</exclusion>
+</metashader>

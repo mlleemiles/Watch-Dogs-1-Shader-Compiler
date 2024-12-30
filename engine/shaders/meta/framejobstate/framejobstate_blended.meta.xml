@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <define name="STENCIL_TEST" />
+    <define name="STENCIL_WRITE" />
+    <define name="WRITEALPHA" />
+    <domain>
+        <options>
+            <option></option>
+            <option>STENCIL_TEST</option>
+			      <option>STENCIL_WRITE</option>
+        </options>
+      
+        <options>
+            <option></option>
+            <option>WRITEALPHA</option>
+        </options>      
+    </domain>
+</metashader>

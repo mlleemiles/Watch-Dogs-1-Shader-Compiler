@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="DiffuseSampler" state="ColorClamp" />
+
+    <define name="LAST_POSTFX" />
+
+    <domain>
+        <options>
+            <option></option>
+            <option>LAST_POSTFX</option>
+        </options>
+    </domain>
+</metashader>

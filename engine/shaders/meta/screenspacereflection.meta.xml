@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+
+    <samplerstate sampler="ColorTexture"               state="ColorClamp" />
+    <samplerstate sampler="DepthTexture"               state="ColorPointClamp" />
+
+    <samplerstate sampler="ColorTextureDirect"         state="ColorPointClamp" />
+    <samplerstate sampler="ColorTextureIndirect"       state="ColorPointClamp" />    
+
+    <define name="MAIN"              platform="PC,DURANGO,ORBIS"/>
+    <define name="CLEAR"             platform="PC,DURANGO,ORBIS"/>
+    <define name="DEPTH"             platform="PC,DURANGO,ORBIS"/>    
+
+    <domain>
+        <options>
+            <option>MAIN</option>
+            <option>MAIN,CLEAR</option>
+            <option>MAIN,DEPTH</option>
+        </options>
+    </domain>
+
+</metashader>

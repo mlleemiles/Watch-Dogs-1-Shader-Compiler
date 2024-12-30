@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <samplerstate sampler="FogOfWarTexture"        state="VertexClamp" />
+    
+    <define name="SKINNING" />
+    <define name="INSTANCING" />
+    <define name="PARABOLOID_REFLECTION" />
+    <define name="ALPHA_TO_COVERAGE" />
+   
+    <xi:include href="Includes/ShadowAndDepthDefines.xml" />
+    
+    <domain>
+        <options>
+            <option></option>
+            <option>INSTANCING</option>
+            <option>ALPHA_TO_COVERAGE</option>
+            <option>INSTANCING,ALPHA_TO_COVERAGE</option>
+            <option>SHADOW_CRUDE_BIG_KERNEL,INSTANCING</option>
+            <option>SHADOW_CRUDE_BIG_KERNEL,ALPHA_TO_COVERAGE</option>
+            <option>SHADOW_CRUDE_BIG_KERNEL,INSTANCING,ALPHA_TO_COVERAGE</option>
+        </options>
+    </domain>
+
+    <exclusion>PARABOLOID_REFLECTION,ALPHA_TO_COVERAGE</exclusion>
+
+</metashader>

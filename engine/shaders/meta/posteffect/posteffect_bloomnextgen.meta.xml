@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="SourceSamplerSAT" state="ColorClamp2D" />
+
+    <define name="SAT_HORIZONTAL_CS" platform="NEXTGEN" />
+    <define name="SAT_VERTICAL_CS" platform="NEXTGEN" />
+    <define name="SAT_LINE_LENGTH_POW2_CS" max_value="10" platform="NEXTGEN" />
+    <define name="SAT_SIZE_DIVIDER_CS" max_value="4" platform="NEXTGEN" />
+    
+    <define name="GENERATE_BLUR_FROM_SAT" platform="NEXTGEN" />
+    <define name="GENERATE_BLUR_FINAL_PASS" platform="NEXTGEN" />
+
+
+    <domain>
+        <options>
+            <option>SAT_HORIZONTAL_CS,SAT_LINE_LENGTH_POW2_CS</option>
+            <option>SAT_VERTICAL_CS,SAT_LINE_LENGTH_POW2_CS</option>
+        </options>
+        <options>
+            <option></option>
+            <option>SAT_SIZE_DIVIDER_CS</option>
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option>GENERATE_BLUR_FROM_SAT</option>
+            <option>GENERATE_BLUR_FROM_SAT,GENERATE_BLUR_FINAL_PASS</option>
+        </options>
+    </domain>
+    
+    <exclusion>
+        <any>
+            SAT_SIZE_DIVIDER_CS=0,SAT_SIZE_DIVIDER_CS=1
+        </any>
+    </exclusion>
+</metashader>

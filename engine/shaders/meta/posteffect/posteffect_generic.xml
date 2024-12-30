@@ -1,0 +1,64 @@
+﻿<metashader>
+    <samplerstate sampler="TextureSampler" state="ColorWrap" />
+    <samplerstate sampler="TextureSamplerPoint" state="ColorPointWrap" />    
+
+    <samplerstate sampler="SrcSampler" state="ColorPointClamp2D" />
+    <samplerstate sampler="SrcSamplerLinear" state="ColorClamp2D" />
+    <samplerstate sampler="SrcSamplerWrap" state="ColorPointWrap2D" />
+
+    <samplerstate sampler="PostFxMaskTexture" state="ColorClamp2D" />
+    <samplerstate sampler="PostFxMaskTexturePoint" state="ColorPointClamp2D" />
+
+    <samplerstate sampler="DownsampleTexturePoint" state="ColorPointWrap2D" />
+    <samplerstate sampler="DownsampleTextureLinear" state="ColorWrap2D" />
+    
+    <samplerstate sampler="GBufferNormalTexture" state="ColorClamp" />
+
+	<define name="TEXTURED" />
+
+    <define name="ALPHABLEND" />
+    <define name="ADDITIVE" />
+	<define name="MULTIPLY" />
+	<define name="MULTIPLY2X" />
+	<define name="SUBSTRACTIVE" />
+	<define name="SCREEN" />
+
+    <define name="LAST_POSTFX" />
+
+	<define name="DOWNSAMPLE" />
+
+    <define name="FADE_BLEND_WITH_ALPHA" />
+
+    <domain>
+        <options>
+            <option>DOWNSAMPLE</option>
+        </options>
+    </domain>
+    	
+    <domain>
+        <options>
+            <option></option>
+            <option>TEXTURED</option>
+        </options>
+        
+        <options>
+            <option></option>
+            <option>ALPHABLEND</option>
+            <option>ADDITIVE</option>
+            <option>MULTIPLY</option>
+            <option>MULTIPLY2X</option>
+            <option>SUBSTRACTIVE</option>
+            <option>SCREEN</option>
+            <option>FADE_BLEND_WITH_ALPHA,ADDITIVE</option>
+            <option>FADE_BLEND_WITH_ALPHA,MULTIPLY</option>
+            <option>FADE_BLEND_WITH_ALPHA,MULTIPLY2X</option>
+            <option>FADE_BLEND_WITH_ALPHA,SUBSTRACTIVE</option>
+            <option>FADE_BLEND_WITH_ALPHA,SCREEN</option>
+        </options>
+        
+        <options>
+            <option></option>
+            <option>LAST_POSTFX</option>
+        </options>
+    </domain>
+</metashader>

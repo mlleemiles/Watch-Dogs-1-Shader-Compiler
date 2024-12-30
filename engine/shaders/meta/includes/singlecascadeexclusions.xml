@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <exclusion>
+        <none>SUN</none>
+        <any>RECEIVE_SINGLE_CASCADE</any>
+    </exclusion>
+</metashader>

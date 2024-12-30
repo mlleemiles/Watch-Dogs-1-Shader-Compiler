@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="LightTexture" state="ColorClamp" />
+    <samplerstate sampler="SplineTexture" state="ColorPointClamp" />
+
+    <domain deprecated="XENON,PS3">
+        <options>
+            <option></option>
+        </options>
+    </domain>
+</metashader>

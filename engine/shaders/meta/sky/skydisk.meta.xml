@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="SunSampler" state="ColorClamp" />
+
+	<define name="TEXKILL" />
+    <define name="PARABOLOID_REFLECTION" />
+
+    <domain>
+        <options>
+            <option></option>
+            <option>TEXKILL</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>PARABOLOID_REFLECTION</option>
+        </options>
+    </domain>
+</metashader>

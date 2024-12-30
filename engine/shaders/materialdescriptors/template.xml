@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<materialdescriptor xmlns:xi="#" name="Template" displayname="Template" showinui="0" id="#(0x84c0b9c7, 0x36fa71b0)">
+    <geometryInputs normal="1" tangent="0" binormal="0" color="0" uvChannels="1" />
+
+    <parameterprovider parametersfilename="Mesh_Template.fx">
+    </parameterprovider>
+
+    <ui>
+        <xi:include href="UI/DataClasses.xml" />
+    </ui>
+</materialdescriptor>

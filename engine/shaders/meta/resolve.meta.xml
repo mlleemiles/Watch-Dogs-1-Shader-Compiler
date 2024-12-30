@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+
+	<samplerstate sampler="ResolveSampler" state="Resolve" />	
+	<samplerstate sampler="DepthResolveSampler" state="DepthSampler" />	
+	<compiler platform="ps3" type="fragment">-po OutColorPrec=fp16</compiler >
+
+	<define name="RESOLVE_DEPTH" />
+	<define name="RESOLVE_COLOR" />
+	<define name="RESOLVE_DOF" />
+	<define name="RESOLVE_BLUR" />
+	<define name="RESOLVE_NOISE" />
+	<define name="RESOLVE_HUE_SATURATION" />
+	<define name="MSAA_2X" />
+	<define name="MSAA_4X" />
+	<define name="MSAA_4X_OPTIMIZED" />
+	<define name="STANDARD_DEFINITION" />
+	<define name="RESOLVE_SMOOTH" />
+		
+    <domain>
+        <options>
+            <option>RESOLVE_DEPTH</option>
+        </options>
+        <options>
+            <option>MSAA_2X</option>
+            <option>MSAA_4X</option>
+            <option>MSAA_4X_OPTIMIZED</option>
+        </options>
+    </domain>        
+    <domain>
+        <options>
+            <option>RESOLVE_COLOR</option>
+        </options>
+        <options>
+            <option></option>
+  	        <option>RESOLVE_DOF</option>
+  	        <option>RESOLVE_BLUR</option>
+  	        <option>RESOLVE_NOISE</option>
+  	        <option>RESOLVE_HUE_SATURATION</option>
+        </options>  
+        <options>
+            <option>MSAA_2X</option>
+            <option>MSAA_4X</option>
+            <option>MSAA_4X_OPTIMIZED</option>
+            <option>MSAA_4X_OPTIMIZED,STANDARD_DEFINITION</option>
+            <option>MSAA_4X_OPTIMIZED,RESOLVE_SMOOTH</option>
+        </options>      
+    </domain>  
+</metashader>

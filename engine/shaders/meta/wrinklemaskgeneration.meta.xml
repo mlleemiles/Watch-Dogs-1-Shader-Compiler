@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="WrinkleMaskTexture0" state="ColorClamp2D" />
+    <samplerstate sampler="WrinkleMaskTexture1" state="ColorClamp2D" />
+    <samplerstate sampler="WrinkleMaskTexture2" state="ColorClamp2D" />
+    <samplerstate sampler="WrinkleMaskTexture3" state="ColorClamp2D" />
+    <samplerstate sampler="WrinkleMaskTexture4" state="ColorClamp2D" />
+    <samplerstate sampler="WrinkleMaskTexture5" state="ColorClamp2D" />
+    <samplerstate sampler="WrinkleMaskTexture6" state="ColorClamp2D" />
+    <samplerstate sampler="WrinkleMaskTexture7" state="ColorClamp2D" />
+    <samplerstate sampler="WrinkleMaskTexture8" state="ColorClamp2D" />
+    <samplerstate sampler="WrinkleMaskTexture9" state="ColorClamp2D" />
+    <samplerstate sampler="WrinkleMaskTexture10" state="ColorClamp2D" />
+    <samplerstate sampler="WrinkleMaskTexture11" state="ColorClamp2D" />
+
+    <define name="MASK_COUNT" max_value="11"/>
+
+    <domain>
+        <options>
+            <option>MASK_COUNT</option>
+        </options>
+    </domain>
+
+</metashader>

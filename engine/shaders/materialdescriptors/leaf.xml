@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<materialdescriptor name="Leaf" id="#(0xe757680, 0x755b0001)">
+    <geometryInputs normal="1" tangent="0" binormal="0" color="1" uvChannels="1" />
+
+    <parameter name="TwoSided" type="bool" />
+
+    <parameter name="TranslucencyEnabled" type="bool" />
+    <parameter name="TranslucencyMask" type="bool" />
+
+    <parameter name="DiffuseTexture1" type="sampler2D" UvName="DiffuseUV1" />
+    <parameter name="SpecularTexture1" type="sampler2D" UvName="SpecularUV1" />
+    <parameter name="SpecularID" type="sampler2D" UvName="SpecularIDUV" />
+    <parameter name="FakeSpecularPower" type="float" />
+    <parameter name="SpecularPower" type="float" />
+    <parameter name="SpecularColorBase" type="float4" defaultvalue="1,1,1,1" />
+
+    <parameter name="SSSHighLight" type="float" />
+    <parameter name="SSSStrength" type="float" />
+
+    <parameter name="OcclusionIntensity" type="float" defaultvalue="1" />
+
+    <parameterprovider parametersfilename="Realtree_Leaf.fx">
+        <parameter name="DiffuseTexture1" />
+        <parameter name="SpecularTexture1" />
+        <parameter name="SpecularID" />
+        <parameter name="FakeSpecularPower" />
+        <parameter name="SpecularPower" />
+        <parameter name="SpecularColorBase" />
+        <parameter name="SSSHighLight" />
+        <parameter name="SSSStrength" />
+        <parameter name="OcclusionIntensity" />
+    </parameterprovider>
+
+    <ui>
+        <group label="Settings">
+            <group horizontal="1">
+                <checkbox label="Two sided" dataBindings="TwoSided" />
+                <checkbox label="Translucency" dataBindings="TranslucencyEnabled" />
+                <checkbox label="Translucency Mask" dataBindings="TranslucencyMask" />
+            </group>
+            <group horizontal="1">
+                <label>Occlusion Intensity</label>
+                <textbox dataBindings="OcclusionIntensity">
+                    <dataBindings maxvalue="1" />
+                </textbox>
+            </group>
+        </group>
+
+        <group label="Specular">
+            <group horizontal="1">
+                <button dataBindings="SpecularColorBase">
+                    <dataBindings type="color" />
+                </button>
+                <button dataBindings="SpecularTexture1" fill="1" />
+            </group>
+
+            <group horizontal="1">
+                <dataBindingsAlias name="@SpecularPowerAlias" dataBindings="SpecularPower" />
+                <xi:include href="UI/SpecularPowerGroup.xml" />
+                <label>Fake Power</label>
+                <textbox databindings="FakeSpecularPower" />
+            </group>
+
+            <label>Specular ID</label>
+            <button dataBindings="SpecularID" fill="1" />
+        </group>
+
+        <group label="Diffuse Texture">
+            <button dataBindings="DiffuseTexture1" fill="1" />
+        </group>
+
+        <group label="SSS" horizontal="1">
+            <label>Highlight</label>
+            <textbox dataBindings="SSSHighLight" />
+            <label>Strength</label>
+            <textbox dataBindings="SSSStrength" />
+        </group>
+    </ui>
+</materialdescriptor>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="VolumeTextureR"   state="ColorPointClamp" />
+    <samplerstate sampler="VolumeTextureG"   state="ColorPointClamp" />
+    <samplerstate sampler="VolumeTextureB"   state="ColorPointClamp" />
+    <samplerstate sampler="FloorCeilingTexture"  state="ColorPointClamp2D" />
+    <domain>
+        <options>
+            <option></option>
+        </options>
+    </domain>
+</metashader>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+
+  <compiler platform="ps3" type="fragment">-po OutColorPrec=fp16</compiler >
+
+  <samplerstate sampler="BigProbeVolumeTextureUpperColor" state="ColorClamp2D" />
+  <samplerstate sampler="BigProbeVolumeTextureLowerColor" state="ColorClamp2D" />
+  <samplerstate sampler="BigProbeVolumeTextureFloorCeiling" state="ColorClamp2D" />
+  <samplerstate sampler="BigProbeVolumeTextureUpperColor3D" state="ColorClamp2D" />
+  <samplerstate sampler="BigProbeVolumeTextureLowerColor3D" state="ColorClamp2D" />
+  <samplerstate sampler="BigProbeVolumeTextureFloorCeiling3D" state="ColorClamp2D" />
+  <samplerstate sampler="GBufferNormalTexture" state="ColorClamp2D" />
+  <samplerstate sampler="VolumeTextureR" state="ColorClamp" />
+  <samplerstate sampler="DepthTexture" state="DepthVPSampler" />
+  <samplerstate sampler="SmallDepthTexture" state="DepthVPSampler" />
+  <samplerstate sampler="InteriorVolumeTexture" state="ColorClamp" />
+  <samplerstate sampler="VolumeFadingTexture" state="ColorWhiteOpaqueBorder" />
+  <samplerstate sampler="VolumeBaseZTexture" state="ColorPointClamp" />
+  <samplerstate sampler="LongRangeShadowVolumeTexture" state="LongRangeShadowSampler" />
+
+  <define name="INSIDE" />
+  <define name="INTERIOR" />
+  <define name="STENCILTAG" />
+  <define name="SHADOWMASK" />
+  <define name="FOG" />
+  <define name="FIXUPREGION" />
+  <define name="PROBEAMBIENTLIGHT" />
+  
+  <domain deprecated="ORBIS,DURANGO">
+    <options>
+      <option></option>
+      <option>FOG</option>
+      <option>FOG,SHADOWMASK</option>
+      <option>SHADOWMASK</option>
+      <option>INTERIOR</option>
+      <option>INTERIOR,INSIDE</option>
+      <option>INTERIOR,PROBEAMBIENTLIGHT</option>
+      <option>INTERIOR,INSIDE,PROBEAMBIENTLIGHT</option>
+      <option>INTERIOR,STENCILTAG</option>
+      <option>FIXUPREGION</option>
+      <option>FIXUPREGION,INSIDE</option>
+      <option>FIXUPREGION,STENCILTAG</option>
+    </options>
+  </domain>
+</metashader>

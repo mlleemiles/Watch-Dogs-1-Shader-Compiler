@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="SourceTextureSampler" state="ColorClamp" />
+    <samplerstate sampler="BlurredTextureSampler" state="ColorClamp" />
+    <samplerstate sampler="DepthTextureSampler" state="DepthSampler" />
+	
+	<samplerstate sampler="HexSource1TextureSampler" state="ColorClamp" />
+	<samplerstate sampler="HexSource2TextureSampler" state="ColorClamp" />
+    
+    <define name="DOWNSAMPLE" />
+    <define name="BLUR" />
+    <define name="LAST_POSTFX" />
+	<define name="HEXBLUR1" />
+	<define name="HEXBLUR2" />
+	<define name="HEX_HALFBLUR" />
+	<define name="MASK_SKY" />
+  <define name="DECODE_SCENECOLOR" platform="XENON" />
+
+	<domain>
+		<options>
+			<option></option>
+			<option>DOWNSAMPLE</option>
+			<option>LAST_POSTFX</option>
+		</options>
+		
+		<options>
+			<option/>
+			<option>MASK_SKY</option>
+		</options>
+
+    <options>
+      <option></option>
+      <option>DECODE_SCENECOLOR</option>
+    </options>
+  </domain>
+	
+	<domain>
+		<options>
+			<option>BLUR</option>
+		</options>
+
+</domain>
+
+	<domain>
+		<options>
+			<option>HEXBLUR1</option>
+			<option>HEXBLUR2</option>
+		</options>
+		
+		<options>
+			<option></option>
+			<option>HEX_HALFBLUR</option>
+		</options>
+
+</domain>
+</metashader>

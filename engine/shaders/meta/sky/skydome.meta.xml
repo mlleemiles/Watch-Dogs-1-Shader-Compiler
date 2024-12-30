@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="SkyColorSunSideTexture" state="ColorClamp" />
+    <samplerstate sampler="SkyColorSunOppositeSideTexture" state="ColorClamp" />
+    <samplerstate sampler="SkyColorStormTexture" state="ColorClamp" />
+    <samplerstate sampler="SkyColorNoise" state="ColorWrap" />
+
+    <define name="SKY_STORM_BLEND" />
+    <define name="OPAQUE" />
+    <define name="PARABOLOID_REFLECTION" />
+    <define name="GBUFFER_WITH_POSTFXMASK" />
+
+    <domain>
+        <options>
+            <option></option>
+            <option>SKY_STORM_BLEND</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>OPAQUE</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>PARABOLOID_REFLECTION</option>
+        </options>
+
+        <options>
+          <option></option>
+          <option>GBUFFER_WITH_POSTFXMASK</option>
+        </options>      
+    </domain>
+</metashader>

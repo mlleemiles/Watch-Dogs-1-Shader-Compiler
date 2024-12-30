@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+  <samplerstate sampler="DiffuseSampler" state="ColorClamp" />
+  <samplerstate sampler="DeformSampler" state="ColorWrap" />
+
+  <define name="USE_DEFTEX" />
+
+  <domain>
+    <options>
+      <option>                          </option>
+      <option>USE_DEFTEX                </option>
+    </options>
+  </domain>
+
+</metashader>

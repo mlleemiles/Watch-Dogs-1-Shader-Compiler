@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<materialdescriptor name="Road">
+    <geometryInputs normal="1" tangent="1" binormal="1" color="1" uvChannels="1" />
+
+    <parameter name="AlphaTestEnabled" type="bool" />
+    <parameter name="TwoSided" type="bool" />
+    <parameter name="BlendingType" type="int" defaultvalue="1" />
+
+    <parameter name="DiffuseTexture1" type="sampler2D" />
+    <parameter name="DiffuseTiling1" type="float2" />
+    <parameter name="DiffuseColorBase" type="float4" defaultvalue="1,1,1,1" />
+    <parameter name="DiffuseColor1" type="float4" defaultvalue="1,1,1,1" />
+
+    <parameter name="DiffuseTexture2" type="sampler2D" />
+    <parameter name="DiffuseTiling2" type="float2" />
+    <parameter name="DiffuseColor2" type="float4" defaultvalue="1,1,1,1" />
+
+    <parameter name="MaskTexture1" type="sampler2D" />
+    <parameter name="MaskTiling1" type="float2" />
+    
+    <parameter name="SpecularTexture1" type="sampler2D" />
+    <parameter name="SpecularTiling1" type="float2" />
+    <parameter name="SpecularColorBase" type="float4" />
+    <parameter name="SpecularColor1" type="float4" />
+    <parameter name="SpecularPower" type="float" defaultvalue="16" />
+    
+    <parameter name="NormalTexture1" type="sampler2D" />
+    <parameter name="NormalTiling1" type="float2" />
+
+    <parameter name="HeightTexture1" type="sampler2D" />
+    <parameter name="ParallaxHeightAndOffset" type="float2" defaultvalue="-0.1,0" />
+    <parameter name="ParallaxScaleDiffuse" type="float4" defaultvalue="1,1,1,1" provideronly="1" />
+    <parameter name="ParallaxScaleMaskSpecular" type="float4" defaultvalue="1,1,1,1" provideronly="1" />
+
+    <parameter name="DiffuseTilings" type="float4" defaultvalue="1,1,1,1" provideronly="1" />
+    <parameter name="NormalAndSpecularTilings" type="float4" defaultvalue="1,1,1,1" provideronly="1" />
+
+    <parameterprovider parametersfilename="Road.fx">
+        <parameter name="DiffuseTexture1" />
+        <parameter name="DiffuseColorBase" />
+        <parameter name="DiffuseColor1" />
+        <parameter name="DiffuseTexture2" />
+        <parameter name="DiffuseColor2" />
+    
+        <parameter name="MaskTexture1" />
+        <parameter name="MaskTiling1" />
+    
+        <parameter name="SpecularTexture1" />
+        <parameter name="SpecularColorBase" />
+        <parameter name="SpecularColor1" />
+        <parameter name="SpecularPower" />
+    
+        <parameter name="NormalTexture1" />
+    
+        <parameter name="HeightTexture1" />
+        <parameter name="ParallaxHeightAndOffset" />
+        <parameter name="ParallaxScaleDiffuse" />
+        <parameter name="ParallaxScaleMaskSpecular" />
+    
+        <parameter name="DiffuseTilings" />
+        <parameter name="NormalAndSpecularTilings" />
+    </parameterprovider>
+
+    <ui>
+        <group horizontal="1" label="Settings">
+            <group>
+                <checkbox label="Two sided" dataBindings="TwoSided" />
+                <checkbox label="Alpha test" dataBindings="AlphaTestEnabled" />
+            </group>
+            <group>
+                <label>Blending type</label>
+                <combobox dataBindings="BlendingType">
+                    <comboboxitem value="0">Opaque</comboboxitem>
+                    <comboboxitem value="1">Alpha</comboboxitem>
+                </combobox>
+            </group>
+        </group>
+
+        <group horizontal="1" label="Mask">
+            <button dataBindings="MaskTexture1" fill="1" />
+            <group>
+                <textbox dataBindings="MaskTiling1.x">
+                    <dataBindings type="int" />
+                </textbox>
+                <textbox dataBindings="MaskTiling1.y">
+                    <dataBindings type="int" />
+                </textbox>
+            </group>
+        </group>
+
+        <group label="Diffuse">
+            <label>Texture 2</label>
+            <group horizontal="1">
+                <button dataBindings="DiffuseColor2">
+                    <dataBindings type="color" />
+                </button>
+                <button dataBindings="DiffuseTexture2" fill="1" />
+                <group>
+                    <textbox dataBindings="DiffuseTiling2.x">
+                        <dataBindings type="int" />
+                    </textbox>
+                    <textbox dataBindings="DiffuseTiling2.y">
+                        <dataBindings type="int" />
+                    </textbox>
+                </group>
+            </group>
+
+            <label>Texture 1</label>
+            <group horizontal="1">
+                <button dataBindings="DiffuseColor1">
+                    <dataBindings type="color" />
+                </button>
+                <button dataBindings="DiffuseTexture1" fill="1" />
+                <group>
+                    <textbox dataBindings="DiffuseTiling1.x">
+                        <dataBindings type="int" />
+                    </textbox>
+                    <textbox dataBindings="DiffuseTiling1.y">
+                        <dataBindings type="int" />
+                    </textbox>
+                </group>
+            </group>
+
+            <button dataBindings="DiffuseColorBase" fill="1">
+                <dataBindings type="color" />
+            </button>
+        </group>
+
+        <group label="Specular">
+            <group horizontal="1">
+                <button dataBindings="SpecularColor1">
+                    <dataBindings type="color" />
+                </button>
+                <button dataBindings="SpecularTexture1" fill="1" />
+                <group>
+                    <textbox dataBindings="SpecularTiling1.x">
+                        <dataBindings type="int" />
+                    </textbox>
+                    <textbox dataBindings="SpecularTiling1.y">
+                        <dataBindings type="int" />
+                    </textbox>
+                </group>
+            </group>
+
+            <group horizontal="1">
+                <button dataBindings="SpecularColorBase" fill="1" >
+                    <dataBindings type="color" />
+                </button>
+                <dataBindingsAlias name="@SpecularPowerAlias" dataBindings="SpecularPower" />
+                <xi:include href="UI/SpecularPowerGroup.xml" />
+            </group>
+        </group>
+
+        <group horizontal="1" label="Normal">
+            <button dataBindings="NormalTexture1" fill="1" />
+            <group>
+                <textbox dataBindings="NormalTiling1.x">
+                    <dataBindings type="int" />
+                </textbox>
+                <textbox dataBindings="NormalTiling1.y">
+                    <dataBindings type="int" />
+                </textbox>
+            </group>
+        </group>
+
+        <group horizontal="1" label="Parallax">
+            <button dataBindings="HeightTexture1" fill="1" />
+            <group>
+                <group horizontal="1">
+                    <label>Height</label>
+                    <textbox dataBindings="ParallaxHeightAndOffset.x" />
+                </group>
+                <group horizontal="1">
+                    <label>Offset</label>
+                    <textbox dataBindings="ParallaxHeightAndOffset.y" />
+                </group>
+            </group>
+        </group>
+    </ui>
+
+</materialdescriptor>

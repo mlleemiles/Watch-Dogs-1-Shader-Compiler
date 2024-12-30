@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <samplerstate sampler="OverlayTexture" state="ColorWrap" />
+    <samplerstate sampler="FlowTexture" state="ColorWrap" />
+    <samplerstate sampler="NormalTexture1" state="NormalWrap" />
+    <samplerstate sampler="ReflectionTexture" state="ColorWrap" />
+
+    <define name="INSTANCING" />
+    <define name="INSTANCING_POS_ROT_Z_TRANSFORM" />
+<!--
+    <define name="SAMPLE_SHADOW" />
+    <define name="RECEIVE_SINGLE_CASCADE" />
+-->
+    <define name="ATTENUATION" />
+
+    <define name="REFLECTION_STATIC_TRANSITION" />
+
+    <xi:include href="Includes/LightingOptions.xml" />
+  
+    <define name="DEPTH" />
+
+    <options name="vertex">
+        <option></option>
+        <option>INSTANCING</option>
+        <option>INSTANCING,INSTANCING_POS_ROT_Z_TRANSFORM</option>
+    </options>
+
+    <domain>
+        <options ref="lighting" />
+
+        <options ref="vertex" />
+
+        <!-- for PICKING only -->
+        <options>
+            <option></option>
+            <option platform="EDITOR">DEPTH</option>
+        </options>
+      
+        <options>
+          <option></option>
+          <option>ATTENUATION</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>REFLECTION_STATIC_TRANSITION</option>
+        </options>
+    </domain>
+
+    <xi:include href="Includes/ForwardRenderingExclusions.xml" />
+
+</metashader>

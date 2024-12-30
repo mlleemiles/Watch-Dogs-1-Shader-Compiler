@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <samplerstate sampler="FogOfWarTexture"        state="VertexClamp" />
+    <samplerstate sampler="DiffuseTexture0"        state="ColorWrap" />
+    <samplerstate sampler="DiffuseTexture1"        state="ColorWrap" />
+    <samplerstate sampler="FogOfWarGlitchTexture"  state="ColorClamp" />
+    
+    <define name="MODIFY_COLOR" />
+    <define name="MANUAL_SRGB" />
+    <define name="USE_DIFFUSETEXTURE0" />
+    <define name="USE_DIFFUSETEXTURE1" />
+    <define name="USE_FOGOFWARGLITCH" />
+    
+
+    <domain>
+        <options>
+            <option></option>
+            <option>USE_DIFFUSETEXTURE0</option>
+            <option>USE_DIFFUSETEXTURE1</option>
+            <option>USE_DIFFUSETEXTURE0,USE_DIFFUSETEXTURE1</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>MODIFY_COLOR</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>MANUAL_SRGB</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>USE_FOGOFWARGLITCH</option>
+        </options>
+        
+    </domain>
+
+</metashader>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+
+    <define name="HIGH_PRECISION" />
+
+    <domain>
+      <options>
+          <option></option>
+          <option>HIGH_PRECISION</option>
+      </options>
+    </domain>
+  
+</metashader>
+ 

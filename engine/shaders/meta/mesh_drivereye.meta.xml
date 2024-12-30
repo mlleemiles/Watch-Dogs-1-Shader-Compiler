@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <samplerstate sampler="MaskTexture" state="ColorClamp" />
+    <samplerstate sampler="NormalTexture1" state="NormalWrap" />
+    <samplerstate sampler="ReflectionTexture" state="ColorClamp" />
+
+    <define name="SKINNING" />
+    <define name="NORMALMAP" />
+    <define name="PER_PIXEL_GLOSSINESS" />
+    <define name="HDR_MATCAP_REFLECTION" />
+    <define name="REFLECTION_STATIC" />
+    <define name="VERTICAL_STRETCH" />
+    <define name="UPPER_VERTICAL_FADE" />
+    <define name="LOWER_VERTICAL_FADE" />
+    <define name="MATCAP" />
+    <define name="MATCAP_OVERRIDE" />
+    <define name="DEPTH" platform="EDITOR" />
+
+    <options name="vertex">
+        <option></option>
+        <option>SKINNING</option>
+    </options>
+
+    <domain>
+        <options>
+            <option></option>
+            <option>NORMALMAP</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>PER_PIXEL_GLOSSINESS</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>REFLECTION_STATIC</option>
+            <option>MATCAP</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>MATCAP_OVERRIDE</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>HDR_MATCAP_REFLECTION</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>VERTICAL_STRETCH</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>UPPER_VERTICAL_FADE</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>LOWER_VERTICAL_FADE</option>
+        </options>
+        
+        <options ref="vertex" />
+
+        <!-- for PICKING only -->
+        <options>
+            <option></option>
+            <option platform="EDITOR">DEPTH</option>
+        </options>
+    </domain>
+
+    <exclusion>
+        <any>REFLECTION_STATIC,MATCAP</any>
+        <any>VERTICAL_STRETCH</any>
+    </exclusion>
+
+</metashader>

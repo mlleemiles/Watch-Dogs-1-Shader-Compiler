@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="LinearTextureSampler0" state="MipMapGeneration" />
+    <samplerstate sampler="PointTextureSampler0"  state="ColorWrap" />
+    <samplerstate sampler="LinearTextureSampler1" state="MipMapGeneration" />
+    <samplerstate sampler="PointTextureSampler1"  state="ColorWrap" />
+
+    <define name="BLUR_GLOSS" />
+    <define name="BLUR_NORMALMAP" />
+    <define name="NBR_TEXTURES" max_value="2" />
+    <define name="AVOID_TWOSIDES_COLORBLEEDING" />
+    
+    <domain>
+        <options>
+            <option></option>
+            <option>BLUR_GLOSS</option>
+            <option>BLUR_NORMALMAP</option>
+        </options>
+        <options>
+            <option></option>
+            <option>NBR_TEXTURES</option>
+        </options>
+        <options>
+            <option></option>
+            <option>AVOID_TWOSIDES_COLORBLEEDING</option>
+        </options>
+    </domain>
+</metashader>
+

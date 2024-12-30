@@ -1,0 +1,397 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <samplerstate sampler="DiffuseTexture1" state="" />
+    <samplerstate sampler="DiffuseTexture2" state="" />
+    <samplerstate sampler="AlphaTexture1" state="ColorWrap" />
+    <samplerstate sampler="NormalTexture1" state="" />
+    <samplerstate sampler="SpecularTexture1" state="ColorWrap" />
+    <samplerstate sampler="ReflectionTexture" state="ColorWrap" />
+    <samplerstate sampler="GrungeTexture" state="ColorWrap" />
+    <samplerstate sampler="RaindropSplashesTexture" state="RaindropSplashes" />
+    <samplerstate sampler="EmissiveTexture" state="ColorWrap" />
+
+    <define name="SKINNING" />
+    <define name="INSTANCING" />
+    <define name="INSTANCING_POS_ROT_Z_TRANSFORM" />
+    <define name="INSTANCING_BUILDINGFACADEANGLES" />
+    <define name="INSTANCING_MISCDATA" />
+    <define name="IS_SPLINE_LOFT" />
+    <define name="IS_SPLINE_LOFT_COMPRESSED" />
+
+    <define name="ALPHA_TEST" />
+    <define name="ALPHA_TO_COVERAGE" />
+
+    <define name="NORMALMAP" />
+    <define name="SPECULARMAP" />
+
+    <define name="GRUNGETEXTURE" />
+
+    <define name="GBUFFER" />
+    <define name="GBUFFER_BLENDED" />
+	  <define name="GBUFFER_WITH_POSTFXMASK" platform="XENON,PS3" />
+    <define name="GBUFFER_VELOCITY" platform="NEXTGEN"/>
+
+    <define name="CUSTOM_REFLECTION" platform="PC,DURANGO,ORBIS"/>
+<!--
+    <define name="STATIC_REFLECTION" />
+    <define name="DYNAMIC_REFLECTION" />
+-->
+
+    <define name="SAMPLE_SHADOW" />
+    <define name="RECEIVE_SINGLE_CASCADE" />
+
+    <define name="NORMALINTENSITY" />
+    <define name="ALPHAMAP" />
+
+    <define name="WAVE_EFFECT" />
+
+    <define name="PARABOLOID_REFLECTION" />
+    <define name="GRIDSHADING" />
+
+    <define name="DIFFUSETEXTURE2" />
+    <define name="COLORIZE_WITH_ALPHA_FROM_DIFFUSETEXTURE1" />
+    <define name="COLORIZE_WITH_MASK_GREEN_CHANNEL" />
+    <define name="USE_MASK_BLUE_CHANNEL_AS_REFLECTION_MASK" />
+    <define name="SWAP_SPECULAR_GLOSS_AND_OCCLUSION" />
+
+    <define name="MATCAP" platform="PC,DURANGO,ORBIS"/>
+
+    <define name="HAS_RAINDROP_RIPPLE" />
+
+    <define name="RELIEF_MAPPING" platform="PC,DURANGO,ORBIS" />
+
+    <define name="VERTEX_ANIMATION" />
+
+    <define name="CROWD_ANIMATION" />
+
+    <define name="EMISSIVE_MESH_LIGHTS" />
+    <define name="ELECTRIC_MESH" />
+
+    <define name="MESH_HIGHLIGHT_SUPPORTED" />
+
+    <define name="DYNAMIC_DECAL" />
+    <define name="DYNAMIC_PROJECTED_DECAL" />
+    <define name="DYNAMIC_CLIPPED_DECAL" />
+    <define name="SPLINE_DECAL" />
+    <define name="INSTANCING_PROJECTED_DECAL" platform="PC,DURANGO,ORBIS"/>
+
+    <xi:include href="Includes/LightingOptions.xml" />
+    <xi:include href="Includes/ShadowAndDepthDefines.xml" />
+
+    <options name="vertex">
+        <option></option>
+        <option>SKINNING</option>
+        <option>VERTEX_ANIMATION</option>
+        <option>VERTEX_ANIMATION,SKINNING</option>
+        <option>CROWD_ANIMATION</option>
+        <option>INSTANCING</option>
+        <option>INSTANCING,CROWD_ANIMATION</option>
+        <option>INSTANCING,VERTEX_ANIMATION</option>
+        <option>INSTANCING,INSTANCING_POS_ROT_Z_TRANSFORM,INSTANCING_MISCDATA</option>
+        <option>INSTANCING,INSTANCING_POS_ROT_Z_TRANSFORM,INSTANCING_BUILDINGFACADEANGLES,INSTANCING_MISCDATA</option>
+        <option>IS_SPLINE_LOFT</option>
+        <option>IS_SPLINE_LOFT,IS_SPLINE_LOFT_COMPRESSED</option>
+    </options>
+
+    <!-- Shadow and depth -->
+    <domain>
+        <options>
+            <option></option>
+            <option>ALPHA_TEST</option>
+            <option>ALPHAMAP,ALPHA_TEST</option>
+	<!--
+            <option>ALPHA_TO_COVERAGE</option>
+            <option>ALPHAMAP,ALPHA_TO_COVERAGE</option>
+	-->
+        </options>
+
+        <options ref="shadowanddepth" />
+
+        <options>
+            <option></option>
+            <option>WAVE_EFFECT</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>INSTANCING_PROJECTED_DECAL</option>
+        </options>
+
+        <options ref="vertex" />
+    </domain>
+
+    <!-- GBuffer -->
+    <domain>
+        <options>
+            <option></option>
+            <option>ALPHA_TEST</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>ALPHAMAP</option>
+        </options>
+
+        <options>
+            <option></option>
+            <!--<option>NORMALMAP</option>-->
+            <option>NORMALMAP,NORMALINTENSITY</option>
+            <option>NORMALMAP,NORMALINTENSITY,RELIEF_MAPPING</option>
+        </options>
+
+      <options>
+        <option></option>
+        <option>ALPHAMAP</option>
+      </options>
+
+      <options>
+            <option></option>
+            <option>SPECULARMAP</option>
+            <option>SPECULARMAP,DIFFUSETEXTURE2</option>
+            <option>SPECULARMAP,USE_MASK_BLUE_CHANNEL_AS_REFLECTION_MASK</option>
+            <option>SPECULARMAP,DIFFUSETEXTURE2,USE_MASK_BLUE_CHANNEL_AS_REFLECTION_MASK</option>
+            <option>SPECULARMAP,SWAP_SPECULAR_GLOSS_AND_OCCLUSION</option>
+            <option>SPECULARMAP,DIFFUSETEXTURE2,SWAP_SPECULAR_GLOSS_AND_OCCLUSION</option>
+            <option>SPECULARMAP,GRUNGETEXTURE</option>
+            <option>SPECULARMAP,DIFFUSETEXTURE2,GRUNGETEXTURE</option>
+            <option>SPECULARMAP,USE_MASK_BLUE_CHANNEL_AS_REFLECTION_MASK,GRUNGETEXTURE</option>
+            <option>SPECULARMAP,DIFFUSETEXTURE2,USE_MASK_BLUE_CHANNEL_AS_REFLECTION_MASK,GRUNGETEXTURE</option>
+
+            <option>COLORIZE_WITH_ALPHA_FROM_DIFFUSETEXTURE1</option>
+            <option>COLORIZE_WITH_ALPHA_FROM_DIFFUSETEXTURE1,SPECULARMAP</option>
+            <option>COLORIZE_WITH_ALPHA_FROM_DIFFUSETEXTURE1,SPECULARMAP,DIFFUSETEXTURE2</option>
+            <option>COLORIZE_WITH_ALPHA_FROM_DIFFUSETEXTURE1,SPECULARMAP,USE_MASK_BLUE_CHANNEL_AS_REFLECTION_MASK</option>
+            <option>COLORIZE_WITH_ALPHA_FROM_DIFFUSETEXTURE1,SPECULARMAP,DIFFUSETEXTURE2,USE_MASK_BLUE_CHANNEL_AS_REFLECTION_MASK</option>
+            <option>COLORIZE_WITH_ALPHA_FROM_DIFFUSETEXTURE1,SPECULARMAP,SWAP_SPECULAR_GLOSS_AND_OCCLUSION</option>
+            <option>COLORIZE_WITH_ALPHA_FROM_DIFFUSETEXTURE1,SPECULARMAP,DIFFUSETEXTURE2,SWAP_SPECULAR_GLOSS_AND_OCCLUSION</option>
+            <option>COLORIZE_WITH_ALPHA_FROM_DIFFUSETEXTURE1,SPECULARMAP,GRUNGETEXTURE</option>
+            <option>COLORIZE_WITH_ALPHA_FROM_DIFFUSETEXTURE1,SPECULARMAP,DIFFUSETEXTURE2,GRUNGETEXTURE</option>
+            <option>COLORIZE_WITH_ALPHA_FROM_DIFFUSETEXTURE1,SPECULARMAP,USE_MASK_BLUE_CHANNEL_AS_REFLECTION_MASK,GRUNGETEXTURE</option>
+            <option>COLORIZE_WITH_ALPHA_FROM_DIFFUSETEXTURE1,SPECULARMAP,DIFFUSETEXTURE2,USE_MASK_BLUE_CHANNEL_AS_REFLECTION_MASK,GRUNGETEXTURE</option>
+
+            <option>COLORIZE_WITH_MASK_GREEN_CHANNEL,SPECULARMAP</option>
+            <option>COLORIZE_WITH_MASK_GREEN_CHANNEL,SPECULARMAP,USE_MASK_BLUE_CHANNEL_AS_REFLECTION_MASK</option>
+            <option>COLORIZE_WITH_MASK_GREEN_CHANNEL,SPECULARMAP,SWAP_SPECULAR_GLOSS_AND_OCCLUSION</option>
+
+            <option>COLORIZE_WITH_MASK_GREEN_CHANNEL,SPECULARMAP,GRUNGETEXTURE</option>
+            <option>COLORIZE_WITH_MASK_GREEN_CHANNEL,SPECULARMAP,USE_MASK_BLUE_CHANNEL_AS_REFLECTION_MASK,GRUNGETEXTURE</option>
+            <option>COLORIZE_WITH_MASK_GREEN_CHANNEL,SPECULARMAP,SWAP_SPECULAR_GLOSS_AND_OCCLUSION,GRUNGETEXTURE</option>
+
+        </options>
+
+        <options>
+            <option></option>
+            <option>WAVE_EFFECT</option>
+        </options>
+
+        <options>
+            <option>GBUFFER</option>
+            <option>GBUFFER,GBUFFER_BLENDED</option>
+			<option>GBUFFER,GBUFFER_WITH_POSTFXMASK</option>
+            <option>GBUFFER,GBUFFER_VELOCITY</option>
+        </options>
+
+
+        <options>
+            <option></option>
+            <option>CUSTOM_REFLECTION</option>
+            <option>MATCAP</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>HAS_RAINDROP_RIPPLE</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SPLINE_DECAL</option>
+            <option>DYNAMIC_DECAL,DYNAMIC_PROJECTED_DECAL</option>
+            <option>DYNAMIC_DECAL,DYNAMIC_CLIPPED_DECAL</option>
+            <option>INSTANCING_PROJECTED_DECAL</option>
+        </options>
+
+        <!--
+            <option>STATIC_REFLECTION</option>
+            <option>DYNAMIC_REFLECTION</option>
+        </options>
+-->
+
+        <options ref="vertex" />
+    </domain>
+
+<!--
+    <exclusion>
+        <any>GBUFFER_BLENDED</any>
+        <any>CUSTOM_REFLECTION,STATIC_REFLECTION,DYNAMIC_REFLECTION</any>
+    </exclusion>
+-->
+
+    <!-- Paraboloid reflection -->
+    <domain>
+        <options>
+            <option></option>
+            <option>ALPHAMAP</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>ALPHA_TEST</option>
+<!--
+            <option>ALPHA_TO_COVERAGE</option>
+-->
+        </options>
+
+        <options>
+            <option>PARABOLOID_REFLECTION</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SAMPLE_SHADOW</option>
+        </options>
+
+        <options ref="vertex" />
+    </domain>
+
+    <!-- grid shading (for camera transition) -->
+    <domain>
+        <options>
+            <option>GRIDSHADING</option>
+        </options>
+
+        <options ref="vertex" />
+    </domain>
+
+    <!-- Emissive Mesh Lights -->
+    <domain>
+        <options>
+            <option>EMISSIVE_MESH_LIGHTS</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>ELECTRIC_MESH</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SKINNING</option>
+            <option>VERTEX_ANIMATION</option>
+            <option>VERTEX_ANIMATION,SKINNING</option>
+        </options>
+    </domain>
+
+    <!-- Exclusions -->
+
+    <exclusion>
+        <any>WAVE_EFFECT</any>
+		    <any>INSTANCING_POS_ROT_Z_TRANSFORM,INSTANCING_BUILDINGFACADEANGLES,GRUNGETEXTURE,GBUFFER_BLENDED,CUSTOM_REFLECTION,IS_SPLINE_LOFT,SWAP_SPECULAR_GLOSS_AND_OCCLUSION,MATCAP</any>
+    </exclusion>
+
+    <exclusion>
+        <any>SKINNING</any>
+        <any>INSTANCING_BUILDINGFACADEANGLES,GRUNGETEXTURE,CUSTOM_REFLECTION,IS_SPLINE_LOFT,SWAP_SPECULAR_GLOSS_AND_OCCLUSION</any>
+    </exclusion>
+
+    <exclusion>
+        <any>INSTANCING_POS_ROT_Z_TRANSFORM,INSTANCING_BUILDINGFACADEANGLES</any>
+        <any>GBUFFER_BLENDED,CUSTOM_REFLECTION,ALPHAMAP,WAVE_EFFECT,IS_SPLINE_LOFT,SWAP_SPECULAR_GLOSS_AND_OCCLUSION</any>
+    </exclusion>
+
+    <exclusion>
+        <any>ALPHA_TEST</any>
+        <any>GRUNGETEXTURE,GBUFFER_BLENDED,CUSTOM_REFLECTION</any>
+    </exclusion>
+
+    <exclusion>
+        <any>ALPHAMAP</any>
+        <none>PARABOLOID_REFLECTION, ALPHA_TEST, GBUFFER_BLENDED</none>
+    </exclusion>
+
+    <exclusion>
+        <any>GBUFFER_BLENDED</any>
+        <any>INSTANCING_POS_ROT_Z_TRANSFORM,INSTANCING_BUILDINGFACADEANGLES,CUSTOM_REFLECTION,WAVE_EFFECT,SWAP_SPECULAR_GLOSS_AND_OCCLUSION,MATCAP</any>
+    </exclusion>
+
+    <exclusion>
+        <any>MATCAP</any>
+        <any>GBUFFER_BLENDED,IS_SPLINE_LOFT,COLORIZE_WITH_MASK_GREEN_CHANNEL,COLORIZE_WITH_ALPHA_FROM_DIFFUSETEXTURE1</any>
+    </exclusion>
+
+    <exclusion>
+        <any>CUSTOM_REFLECTION</any>
+        <any>GBUFFER_BLENDED,GRUNGETEXTURE,WAVE_EFFECT,IS_SPLINE_LOFT,SWAP_SPECULAR_GLOSS_AND_OCCLUSION</any>
+    </exclusion>
+
+    <exclusion>
+        <any>GRUNGETEXTURE</any>
+        <any>WAVE_EFFECT,SKINNING,SWAP_SPECULAR_GLOSS_AND_OCCLUSION</any>
+    </exclusion>
+
+    <exclusion>
+        <any>SWAP_SPECULAR_GLOSS_AND_OCCLUSION</any>
+        <any>INSTANCING_POS_ROT_Z_TRANSFORM,INSTANCING_BUILDINGFACADEANGLES,INSTANCING_MISCDATA,GRUNGETEXTURE,CUSTOM_REFLECTION,WAVE_EFFECT,MATCAP</any>
+    </exclusion>
+
+    <exclusion>
+        <any>USE_MASK_BLUE_CHANNEL_AS_REFLECTION_MASK</any>
+        <any>SWAP_SPECULAR_GLOSS_AND_OCCLUSION</any>
+    </exclusion>
+
+    <exclusion>
+        <any>HAS_RAINDROP_RIPPLE</any>
+        <any>INSTANCING_POS_ROT_Z_TRANSFORM,INSTANCING_BUILDINGFACADEANGLES,GRUNGETEXTURE,CUSTOM_REFLECTION,WAVE_EFFECT</any>
+    </exclusion>
+
+    <exclusion>
+        <any>RELIEF_MAPPING</any>
+        <any>WAVE_EFFECT,SKINNING,SWAP_SPECULAR_GLOSS_AND_OCCLUSION,MATCAP</any>
+    </exclusion>
+
+    <exclusion>
+        <any>VERTEX_ANIMATION</any>
+        <any>INSTANCING_POS_ROT_Z_TRANSFORM,INSTANCING_BUILDINGFACADEANGLES,INSTANCING_MISCDATA,GRUNGETEXTURE,GBUFFER_BLENDED,GBUFFER_WITH_POSTFXMASK,WAVE_EFFECT,HAS_RAINDROP_RIPPLE,IS_SPLINE_LOFT,HAS_RAINDROP_RIPPLE,SWAP_SPECULAR_GLOSS_AND_OCCLUSION</any>
+    </exclusion>
+
+    <exclusion>
+      <any>CROWD_ANIMATION</any>
+      <any>VERTEX_ANIMATION,INSTANCING_POS_ROT_Z_TRANSFORM,INSTANCING_BUILDINGFACADEANGLES,INSTANCING_MISCDATA,GRUNGETEXTURE,GBUFFER_BLENDED,GBUFFER_WITH_POSTFXMASK,WAVE_EFFECT,HAS_RAINDROP_RIPPLE,IS_SPLINE_LOFT,HAS_RAINDROP_RIPPLE,SWAP_SPECULAR_GLOSS_AND_OCCLUSION</any>
+    </exclusion>
+
+  <exclusion>
+        <any>DYNAMIC_DECAL,SPLINE_DECAL</any>
+        <any>INSTANCING_POS_ROT_Z_TRANSFORM,INSTANCING_BUILDINGFACADEANGLES,INSTANCING_MISCDATA,GRUNGETEXTURE,GBUFFER_WITH_POSTFXMASK,WAVE_EFFECT,HAS_RAINDROP_RIPPLE,IS_SPLINE_LOFT,HAS_RAINDROP_RIPPLE,SWAP_SPECULAR_GLOSS_AND_OCCLUSION</any>
+    </exclusion>
+
+    <exclusion>
+        <any>DYNAMIC_DECAL</any>
+        <any>PARABOLOID_REFLECTION</any>
+    </exclusion>
+
+    <exclusion>
+        <any>DYNAMIC_DECAL</any>
+        <any>GRIDSHADING</any>
+    </exclusion>
+
+    <exclusion>
+        <any>INSTANCING_PROJECTED_DECAL</any>
+        <any>INSTANCING_POS_ROT_Z_TRANSFORM,INSTANCING_BUILDINGFACADEANGLES,INSTANCING_MISCDATA,GRUNGETEXTURE,GBUFFER_WITH_POSTFXMASK,WAVE_EFFECT,IS_SPLINE_LOFT,VERTEX_ANIMATION</any>
+    </exclusion>
+
+    <exclusion>
+        <any>INSTANCING_PROJECTED_DECAL</any>
+        <none>INSTANCING</none>
+    </exclusion>
+
+	<exclusion>
+		<any>GBUFFER_WITH_POSTFXMASK</any>
+		<any>INSTANCING</any>
+	</exclusion>
+
+    <exclusion>
+        <any>GBUFFER_VELOCITY</any>
+        <any>CROWD_ANIMATION,INSTANCING,IS_SPLINE_LOFT</any>
+    </exclusion>
+
+</metashader>

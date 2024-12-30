@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+
+    <samplerstate sampler="HeightTexture" state="ColorPointClamp2D" />
+    <samplerstate sampler="InfluenceTexture" state="ColorPointClamp2D" />
+    <samplerstate sampler="WaterMaskTexture" state="ColorPointClamp2D" />
+
+    <define name="BLUR" />
+    <define name="WATERMASK" />
+    <define name="INFLATE" />
+
+    <domain platform="EDITOR">
+        <options>
+            <option></option>
+            <option>BLUR</option>
+            <option>BLUR,WATERMASK</option>
+            <option>BLUR,INFLATE</option>
+        </options>
+    </domain>
+
+    <domain platform="EDITOR">
+        <options>
+            <option></option>
+            <option>WATERMASK</option>
+        </options>
+    </domain>
+
+</metashader>

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+
+    <samplerstate sampler="DisplacementTextureSource" state="ColorPointTransparentBorder" />
+
+    <define name="FIRST_FRAME" />
+    <define name="UPDATE" />
+    <define name="BOXES" />
+
+    <domain>
+        <options>
+            <option>UPDATE</option>
+            <option>BOXES</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>FIRST_FRAME</option>
+        </options>
+    </domain>
+
+</metashader>

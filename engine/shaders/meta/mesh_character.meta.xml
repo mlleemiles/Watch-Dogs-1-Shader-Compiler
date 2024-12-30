@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <samplerstate sampler="DiffuseTexture1" state="" />
+    <samplerstate sampler="DiffuseTexture2" state="" />
+    <samplerstate sampler="NormalTexture1" state="" />
+    <samplerstate sampler="NormalTexture2" state="" />
+    <samplerstate sampler="NormalDynamicWrinklesTexture1" state="" />
+    <samplerstate sampler="NormalDynamicWrinklesTexture2" state="" />
+    <samplerstate sampler="SpecularTexture1" state="" />
+    <samplerstate sampler="ReflectionTexture" state="ColorWrap" />
+    <samplerstate sampler="WrinkleWeightTexture" state="ColorClamp" />
+    <samplerstate sampler="MaskTexture" state="" />
+    <samplerstate sampler="AvatarDiffuse2TextureOverride" state="ColorWrap" />
+    <samplerstate sampler="LightProjectedTexture" state="" />
+    <samplerstate sampler="LightProjectedVideo" state="Video" />
+    <samplerstate sampler="ProbeLightingTexture" state="ColorPointClamp2D" />
+
+    <define name="SKINNING" />
+    <define name="SKINNING_EXTRA" />
+
+    <define name="ALPHA_TEST" />
+<!--
+    <define name="ALPHA_TO_COVERAGE" />
+-->
+    <define name="DIFFUSE2" />
+    <define name="NORMALMAP" />
+    <define name="NORMALMAP2" />
+    <define name="NORMALMAP_DYNAMIC_WRINKLES" max_value="1"/>    
+    <define name="SPECULARMAP" />
+    <define name="REFLECTION" />
+    <define name="MULTIPLY_DIFFUSETEXTURES" />
+
+    <!--
+    <define name="STATIC_REFLECTION" />
+    <define name="DYNAMIC_REFLECTION" />
+-->
+
+    <define name="GBUFFER" />
+    <define name="GBUFFER_VELOCITY" platform="NEXTGEN"/>
+    <define name="GBUFFER_WITH_POSTFXMASK" platform="XENON,PS3" />
+
+    <define name="SAMPLE_SHADOW" />
+    <define name="SAMPLE_SHADOW_HIRESFILTERING" />
+    <define name="RECEIVE_SINGLE_CASCADE" />
+    <define name="PROJECTED_VIDEO" />
+
+    <define name="NORMALINTENSITY" />
+
+    <define name="DEFERRED_FX_MASK" />
+
+    <define name="DUALCOLORIZE" />
+
+    <define name="FORWARD_LIGHTING" />
+    <define name="PROJECTED_CLOUDS" platform="PC,DURANGO,ORBIS" />
+
+    <define name="AVATAR_DIFFUSE2_OVERRIDE" />
+
+    <define name="SUN_SHADOW_MASK" />
+
+    <xi:include href="Includes/LightingOptions.xml" />
+    <xi:include href="Includes/ShadowAndDepthDefines.xml" />
+
+    <options name="vertex">
+        <option></option>
+        <option>SKINNING</option>
+        <option>SKINNING,SKINNING_EXTRA</option>
+    </options>
+
+    <!-- Shadow and depth -->
+    <domain>
+        <options>
+            <option></option>
+            <option>ALPHA_TEST</option>
+<!--    
+            <option>ALPHA_TO_COVERAGE</option>
+-->
+        </options>
+
+        <options ref="shadowanddepth" />
+
+        <options ref="vertex" />
+    </domain>
+
+    <!-- GBuffer -->
+    <domain>
+        <options>
+            <option></option>
+            <option>ALPHA_TEST</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>NORMALMAP,NORMALINTENSITY</option>
+            <option>NORMALMAP,NORMALINTENSITY,NORMALMAP2</option>
+            <option>NORMALMAP,NORMALINTENSITY,NORMALMAP_DYNAMIC_WRINKLES</option>
+            <option>NORMALMAP,NORMALINTENSITY,NORMALMAP2,NORMALMAP_DYNAMIC_WRINKLES</option>            
+        </options>
+
+        <options>
+            <option></option>
+            <option>SPECULARMAP</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>DUALCOLORIZE</option>
+        </options>
+
+        <options>
+          <option></option>
+          <option>DIFFUSE2</option>
+        </options>
+      
+        <options>
+            <option>GBUFFER</option>
+            <option>GBUFFER,GBUFFER_WITH_POSTFXMASK</option>
+            <option>GBUFFER,GBUFFER_VELOCITY</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>AVATAR_DIFFUSE2_OVERRIDE</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>MULTIPLY_DIFFUSETEXTURES</option>
+        </options>
+
+        <!--
+        <options>
+            <option></option>
+            <option>STATIC_REFLECTION</option>
+            <option>DYNAMIC_REFLECTION</option>
+        </options>
+-->
+
+        <options ref="vertex" />
+    </domain>
+
+    <!-- Skin SSS mask generation -->
+    <domain>
+        <options>
+            <option></option>
+            <option>ALPHA_TEST</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SPECULARMAP</option>
+        </options>
+
+        <options>
+            <option>DEFERRED_FX_MASK</option>
+        </options>
+
+        <options ref="vertex" />
+    </domain>
+
+    <!-- Skin Forward Specular -->
+    <domain>
+        <options ref="vertex" />
+
+        <options>
+            <option>FORWARD_LIGHTING</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>NORMALMAP,NORMALINTENSITY</option>
+            <option>NORMALMAP,NORMALINTENSITY,NORMALMAP2</option>
+            <option>NORMALMAP,NORMALINTENSITY,NORMALMAP_DYNAMIC_WRINKLES</option>
+            <option>NORMALMAP,NORMALINTENSITY,NORMALMAP2,NORMALMAP_DYNAMIC_WRINKLES</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SPECULARMAP</option>
+        </options>
+
+        <options>
+            <option>SUN</option>
+            <option>SUN,SAMPLE_SHADOW</option>
+            <option>SUN,SAMPLE_SHADOW,SHADOW_NOFSM</option>
+            <option>SUN,SAMPLE_SHADOW,SUN_SHADOW_MASK</option>
+            <option>SUN,SAMPLE_SHADOW,SHADOW_NOFSM,SUN_SHADOW_MASK</option>
+            <option>OMNI</option>
+            <option>OMNI,SAMPLE_SHADOW</option>
+            <option>OMNI,SAMPLE_SHADOW,SAMPLE_SHADOW_HIRESFILTERING</option>
+            <option>SPOT</option>
+            <option>SPOT,SAMPLE_SHADOW</option>
+            <option>SPOT,SAMPLE_SHADOW,SAMPLE_SHADOW_HIRESFILTERING</option>
+            <option>SPOT,PROJECTED_TEXTURE</option>
+            <option>SPOT,PROJECTED_VIDEO</option>
+            <option>SPOT,SAMPLE_SHADOW,PROJECTED_TEXTURE</option>
+            <option>SPOT,SAMPLE_SHADOW,PROJECTED_VIDEO</option>
+            <option>SPOT,SAMPLE_SHADOW,SAMPLE_SHADOW_HIRESFILTERING,PROJECTED_TEXTURE</option>
+            <option>SPOT,SAMPLE_SHADOW,SAMPLE_SHADOW_HIRESFILTERING,PROJECTED_VIDEO</option>
+        </options>
+    
+        <options>
+            <option></option>
+            <option>PROJECTED_CLOUDS</option>
+        </options>
+    </domain>
+
+    <exclusion>
+        <none>SUN</none>
+        <any>PROJECTED_CLOUDS</any>
+    </exclusion>
+
+    <exclusion>
+        <none>DIFFUSE2</none>
+        <any>MULTIPLY_DIFFUSETEXTURES</any>
+    </exclusion>
+
+    <exclusion>
+        <none>SPECULARMAP</none>
+        <any>DUALCOLORIZE</any>
+    </exclusion>
+
+</metashader>

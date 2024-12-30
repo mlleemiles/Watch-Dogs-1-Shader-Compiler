@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+    
+<metashader xmlns:xi="#">
+
+    <samplerstate sampler="WaveTexturePoint" state="ColorPointWrap" />
+    <samplerstate sampler="WaveTexture" state="ColorWrap" />
+    <samplerstate sampler="DetailNormalMapTexture" state="NormalWrap" />
+    <samplerstate sampler="RippleNormalMapTexture" state="NormalWrap" />
+    <samplerstate sampler="ParametersMapTexture" state="ColorWrap" />
+    <samplerstate sampler="ColorMapTexture" state="ColorWrap" />
+    <samplerstate sampler="WaterParams" state="ColorWrap" />
+    <samplerstate sampler="DepthCopyTexture" state="DepthSampler" />
+    <samplerstate sampler="ScreenSpaceReflectionTexture" state="ColorClamp" />
+    
+
+    <samplerstate sampler="FoamTexture" state="ColorWrap" />
+
+    <samplerstate sampler="VectorMapTexture" state="ColorPointClamp" />
+    <samplerstate sampler="NormalMapTexture" state="ColorClamp" />
+    <samplerstate sampler="FlowTexture" state="NormalWrap" />
+    
+    <define name="DRAW" platform="PC,DURANGO,ORBIS" />
+    <define name="VECTORMAP" platform="PC,DURANGO,ORBIS"/>
+    <define name="NORMALMAP" platform="PC,DURANGO,ORBIS"/>
+    <define name="SPLINE" platform="PC,DURANGO,ORBIS"/>
+    <define name="USE_WATER_GRID_PROJECTION" platform="PC,DURANGO,ORBIS" />
+    <define name="ARCHIMEDES_HEIGHTMAP" platform="PC,DURANGO,ORBIS" />
+    <define name="WATERMASK" platform="PC,DURANGO,ORBIS"/>
+    <define name="SHADOW_NOFSM" platform="PC,DURANGO,ORBIS"/>
+    <define name="SUNSHADOW" platform="PC,DURANGO,ORBIS"/>
+    <define name="FOURLIGHTS" platform="PC,DURANGO,ORBIS"/>
+    <define name="EIGHTLIGHTS" platform="PC,DURANGO,ORBIS"/>
+    <define name="OCCLUSIONBOX" platform="PC,DURANGO,ORBIS"/>
+    <define name="USE_SSR" platform="PC,DURANGO,ORBIS"/>
+    <define name="NOREFLECTION" platform="PC,DURANGO,ORBIS"/>
+    
+    <domain>
+        <options>
+            <option>DRAW</option>
+            <option>DRAW,SUNSHADOW</option>
+            <option>DRAW,SUNSHADOW,SHADOW_NOFSM</option>
+            <option>DRAW,FOURLIGHTS</option>
+            <option>DRAW,FOURLIGHTS,EIGHTLIGHTS</option>
+            <option>DRAW,SUNSHADOW,FOURLIGHTS</option>
+            <option>DRAW,SUNSHADOW,FOURLIGHTS,EIGHTLIGHTS</option>
+        </options>
+        
+        <options>
+            <option></option>
+            <option>USE_SSR</option>
+        </options>
+        
+        <options>
+            <option></option>
+            <option>NOREFLECTION</option>
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option>VECTORMAP</option>
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option>NORMALMAP</option>
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option>SPLINE</option>
+            <option>SPLINE,USE_WATER_GRID_PROJECTION</option>
+            <option>SPLINE,ARCHIMEDES_HEIGHTMAP</option>
+            <option>SPLINE,WATERMASK</option>            
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option>OCCLUSIONBOX</option>
+        </options>
+    </domain>
+    
+    
+
+</metashader>
+ 

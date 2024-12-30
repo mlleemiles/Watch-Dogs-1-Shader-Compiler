@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <define name="WRITEZ" />
+    <define name="ALPHA_TEST" />
+    <define name="ALPHA_TO_COVERAGE" />
+
+    <domain>
+        <options>
+            <option></option>
+            <option>WRITEZ</option>
+        </options>
+        <options>
+            <option>ALPHA_TEST</option>
+            <option>ALPHA_TO_COVERAGE</option>
+        </options>
+    </domain>
+</metashader>

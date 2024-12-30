@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<materialdescriptor name="StarSphere">
+    <geometryInputs normal="1" tangent="0" binormal="0" color="0" uvChannels="1" />
+
+    <parameter name="DiffuseTexture1" type="sampler2D"/>
+    
+    <parameterprovider parametersfilename="StarSphere.fx">
+        <parameter name="DiffuseTexture1" />
+    </parameterprovider>
+    
+    <ui>
+        <group label="Diffuse texture">
+            <button dataBindings="DiffuseTexture1" fill="1" />
+        </group>
+    </ui>
+    
+</materialdescriptor>

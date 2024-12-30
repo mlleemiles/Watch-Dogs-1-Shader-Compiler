@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<materialdescriptor xmlns:xi="#" name="DriverSpline" id="#(0xb9c74c80, 0x6fb03a71)">
+    <geometryInputs normal="1" tangent="1" binormal="1" color="1" uvChannels="1" />
+
+    <parameter name="AlphaTestEnabled" type="bool" />
+    <parameter name="BlendingType" type="int" />
+
+    <parameter name="DiffuseTexture1" type="sampler2D" tilingName="DiffuseTiling1" />
+    <parameter name="DiffuseTiling1" type="float2" defaultvalue="1,1" />
+    <parameter name="DiffuseColor1" type="color3" defaultvalue="1,1,1" />
+
+    <parameter name="HeightTexture1" type="sampler2D" />
+    <parameter name="ParallaxHeightAndOffset" type="float2" defaultvalue="-0.1,0" />
+    <parameter name="ParallaxScaleDiffuse" type="float2" defaultvalue="1,1" provideronly="1" />
+    <parameter name="ParallaxScaleSpecular" type="float2" defaultvalue="1,1" provideronly="1" />
+
+    <parameter name="NormalTexture1" type="sampler2D" tilingName="NormalTiling1" />
+    <parameter name="NormalTiling1" type="float2" defaultvalue="1,1" />
+
+    <parameter name="AlphaTexture1" type="sampler2D" />
+
+    <parameter name="SpecularTexture1" type="sampler2D" tilingName="SpecularTiling1" />
+    <parameter name="SpecularTiling1" type="float2" defaultvalue="1,1" />
+    <parameter name="SpecularColor1" type="color3" defaultvalue="1,1,1" />
+    <parameter name="SpecularPower" type="float" defaultvalue="16" />
+
+    <parameterprovider parametersfilename="Mesh_DriverSpline.fx">
+        <parameter name="DiffuseTexture1" />
+        <parameter name="DiffuseTiling1" />
+        <parameter name="DiffuseColor1" />
+        
+        <parameter name="HeightTexture1" />
+        <parameter name="ParallaxHeightAndOffset" />
+        <parameter name="ParallaxScaleDiffuse" />
+        <parameter name="ParallaxScaleSpecular" />
+        
+        <parameter name="NormalTexture1" />
+        <parameter name="NormalTiling1" />
+
+        <parameter name="AlphaTexture1" />
+        
+        <parameter name="SpecularTexture1" />
+        <parameter name="SpecularTiling1" />
+        <parameter name="SpecularColor1" />
+        <parameter name="SpecularPower" />
+    </parameterprovider>
+    
+    <ui defaultFilePath="graphics/_Textures/" >
+        <xi:include href="UI/DataClasses.xml" />
+
+        <group horizontal="1" label="Settings">
+            <group>
+                <checkbox label="Alpha test" dataBindings="AlphaTestEnabled" />
+            </group>
+            <group>
+                <label>Blending type</label>
+                <combobox dataBindings="BlendingType">
+                    <comboboxitem value="0">Opaque</comboboxitem>
+                    <comboboxitem value="1">Alpha</comboboxitem>
+                </combobox>
+            </group>
+        </group>
+        <group label="Diffuse" horizontal="1">
+            <button dataBindings="DiffuseColor1" />
+            <button dataBindings="DiffuseTexture1" fill="1" />
+            <group>
+                <textbox dataBindings="DiffuseTiling1.x">
+                    <dataBindings class="Tiling" />
+                </textbox>
+                <textbox dataBindings="DiffuseTiling1.y">
+                    <dataBindings class="Tiling" />
+                </textbox>
+            </group>
+        </group>
+        <group label="Specular">
+            <group horizontal="1">
+                <button dataBindings="SpecularColor1" />
+                <button dataBindings="SpecularTexture1" fill="1" />
+                <group>
+                    <textbox dataBindings="SpecularTiling1.x">
+                        <dataBindings class="Tiling" />
+                    </textbox>
+                    <textbox dataBindings="SpecularTiling1.y">
+                        <dataBindings class="Tiling" />
+                    </textbox>
+                </group>
+            </group>
+            <dataBindingsAlias name="@ReflectanceAlias" dataBindings="Reflectance" />
+        	<xi:include href="UI/ReflectanceGroup.xml" />
+
+            <dataBindingsAlias name="@SpecularPowerAlias" dataBindings="SpecularPower" />
+            <xi:include href="UI/SpecularPowerGroup.xml" />
+        </group>
+        <group label="Normal" horizontal="1">
+            <button dataBindings="NormalTexture1" fill="1" />
+            <group>
+                <textbox dataBindings="NormalTiling1.x">
+                    <dataBindings class="Tiling" />
+                </textbox>
+                <textbox dataBindings="NormalTiling1.y">
+                    <dataBindings class="Tiling" />
+                </textbox>
+            </group>
+        </group>
+        <group label="Parallax">
+            <group horizontal="1">
+                <group fill="1">
+                    <label>Texture is sampled using the normal map UV</label>
+                    <button dataBindings="HeightTexture1" fill="1" />
+                </group>
+                <group>
+                    <group horizontal="1">
+                        <label>Height</label>
+                        <textbox dataBindings="ParallaxHeightAndOffset.x" />
+                    </group>
+                    <group horizontal="1">
+                        <label>Offset</label>
+                        <textbox dataBindings="ParallaxHeightAndOffset.y" />
+                    </group>
+                </group>
+            </group>
+        </group>
+        <group label="Alpha">
+            <label>Texture is sampled using the diffuse map UV</label>
+            <button dataBindings="AlphaTexture1" fill="1" />
+        </group>
+    </ui>
+</materialdescriptor>

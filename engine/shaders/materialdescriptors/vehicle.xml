@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<materialdescriptor xmlns:xi="#" name="Vehicle" id="#(0x626db4ce, 0x15811497)">
+    <geometryInputs normal="1" tangent="1" binormal="1" color="1" uvChannels="2" />
+
+    <parameter name="TwoSided" type="bool" />
+    <parameter name="BlendingType" type="int" />
+
+    <parameter name="DiffuseTexture1" type="sampler2D" tilingName="DiffuseTiling1" UvName="DiffuseUV1" uvTilingName="DiffuseUVTiling1" uvGroup="1" />
+    <parameter name="DiffuseTexture2" type="sampler2D" tilingName="DiffuseTiling2" UvName="DiffuseUV2" uvTilingName="DiffuseUVTiling2" uvGroup="2" />
+    <parameter name="DiffuseColor1Clean" type="float3" />
+    <parameter name="DiffuseColor1Broken" type="float3" />
+    <parameter name="DiffuseColorBaseBroken" type="float3" />
+    <parameter name="DiffuseColorBaseClean" type="float3" />
+    <parameter name="DiffuseColor2Broken" type="float3" />
+    <parameter name="DiffuseColor2Clean" type="float3" />
+    <parameter name="DiffuseTiling1" type="float2" />
+    <parameter name="DiffuseTiling2" type="float2" />
+    <parameter name="DiffuseUV1" type="int" />
+    <parameter name="DiffuseUV2" type="int" />
+
+    <parameter name="MaskTexture0" type="sampler2D" />
+    <parameter name="MaskTexture1" type="sampler2D" />
+
+    <parameter name="NormalTexture1" type="sampler2D" tilingName="NormalTiling1" UvName="NormalUV1" uvTilingName="NormalUVTiling1" uvGroup="3" />
+    <parameter name="NormalTiling1" type="float2" />
+    <parameter name="NormalUV1" type="int" />
+
+    <parameter name="SpecularTexture1" type="sampler2D" tilingName="SpecularTiling1" UvName="SpecularUV1" uvTilingName="SpecularUVTiling1" uvGroup="1" />
+    <parameter name="SpecularColor1Clean" type="float3" />
+    <parameter name="SpecularColor1Broken" type="float3" />
+    <parameter name="SpecularColorBaseBroken" type="float3" />
+    <parameter name="SpecularColorBaseClean" type="float3" />
+    <parameter name="SpecularTiling1" type="float2" />
+    <parameter name="SpecularPower" type="float" />
+    <parameter name="SpecularUV1" type="int" />
+
+    <parameter name="ReflectionTexture" type="samplerCUBE" />
+    <parameter name="ReflectionPower" type="float" />
+
+    <parameter name="dirtBlendFactor" type="float" />
+    <parameter name="dustBlendFactor" type="float" />
+    <parameter name="ColorOverride" type="bool" />
+    <parameter name="Glass" type="bool" />
+    <parameter name="GlassInterior" type="bool" />
+
+    <parameter name="invGreenComponent" type="float" />
+    <parameter name="invGreenComponentBlended" type="float" />
+    <parameter name="invGreenComponentReflectionBlended" type="float" />
+
+    <parameter name="UVGroupMapChannel1" type="int" />
+    <parameter name="UVGroupMapChannel2" type="int" />
+    <parameter name="UVGroupMapChannel3" type="int" />
+
+    <parameter name="DiffuseUVTiling1" type="float4" provideronly="1" />
+    <parameter name="DiffuseUVTiling2" type="float4" provideronly="1" />
+    <parameter name="NormalUVTiling1" type="float4" provideronly="1" />
+    <parameter name="SpecularUVTiling1" type="float4" provideronly="1" />
+
+    <parameterprovider parametersfilename="Mesh_Vehicle.fx">
+        <parameter name="DiffuseTexture1" />
+        <parameter name="DiffuseTexture2" />
+        <parameter name="DiffuseColor1Clean" />
+        <parameter name="DiffuseColor1Broken" />
+        <parameter name="DiffuseColorBaseBroken" />
+        <parameter name="DiffuseColorBaseClean" />
+        <parameter name="DiffuseColor2Broken" />
+        <parameter name="DiffuseColor2Clean" />
+        <parameter name="MaskTexture0" />
+        <parameter name="MaskTexture1" />
+        <parameter name="NormalTexture1" />
+        <parameter name="SpecularTexture1" />
+        <parameter name="SpecularColor1Clean" />
+        <parameter name="SpecularColor1Broken" />
+        <parameter name="SpecularColorBaseBroken" />
+        <parameter name="SpecularColorBaseClean" />
+        <parameter name="SpecularPower" />
+        <parameter name="ReflectionTexture" />
+        <parameter name="ReflectionPower" />
+        <parameter name="dirtBlendFactor" />
+        <parameter name="dustBlendFactor" />
+        <parameter name="ColorOverride" />
+        <parameter name="Glass" />
+        <parameter name="GlassInterior" />
+        <parameter name="DiffuseUVTiling1" />
+        <parameter name="DiffuseUVTiling2" />
+        <parameter name="NormalUVTiling1" />
+        <parameter name="SpecularUVTiling1" />
+    </parameterprovider>
+    
+    <ui>
+        <xi:include href="UI/DataClasses.xml" />
+
+        <group horizontal="1" label="Settings">
+            <checkbox label="Two sided" dataBindings="TwoSided" />
+            <group>
+                <label>Blending type</label>
+                <combobox dataBindings="BlendingType">
+                    <comboboxitem value="0">Opaque</comboboxitem>
+                    <comboboxitem value="1">Alpha</comboboxitem>
+                </combobox>
+            </group>
+        </group>
+
+        <group label="Mask">
+            <label>Texture 1</label>
+            <button dataBindings="MaskTexture0" fill="1" />
+            <label>Texture 2</label>
+            <button dataBindings="MaskTexture1" fill="1" />
+        </group>
+
+        <group label="Diffuse">
+            <label>Texture 2</label>
+            <group horizontal="1">
+                <button dataBindings="DiffuseTexture2" fill="1" />
+                <textbox dataBindings="DiffuseUV2">
+                    <dataBindings class="UVChannel" />
+                </textbox>
+                <group>
+                    <textbox dataBindings="DiffuseTiling2.x">
+                        <dataBindings class="Tiling" />
+                    </textbox>
+                    <textbox dataBindings="DiffuseTiling2.y">
+                        <dataBindings class="Tiling" />
+                    </textbox>
+                </group>
+            </group>
+
+            <label>Texture 1</label>
+            <group horizontal="1">
+                <button dataBindings="DiffuseTexture1" fill="1" />
+                <textbox dataBindings="DiffuseUV1">
+                    <dataBindings class="UVChannel" />
+                </textbox>
+                <group>
+                    <textbox dataBindings="DiffuseTiling1.x">
+                        <dataBindings class="Tiling" />
+                    </textbox>
+                    <textbox dataBindings="DiffuseTiling1.y">
+                        <dataBindings class="Tiling" />
+                    </textbox>
+                </group>
+            </group>
+
+            <group label="Broken" horizontal="1">
+                <label>Broken Base</label>
+                <button dataBindings="DiffuseColorBaseBroken">
+                    <dataBindings type="color" />
+                </button>
+                <label>Broken 1</label>
+                <button dataBindings="DiffuseColor1Broken">
+                    <dataBindings type="color" />
+                </button>
+                <label>Broken 2</label>
+                <button dataBindings="DiffuseColor2Broken">
+                    <dataBindings type="color" />
+                </button>
+            </group>
+
+            <group label="Clean" horizontal="1">
+                <label>Clean Base</label>
+                <button dataBindings="DiffuseColorBaseClean">
+                    <dataBindings type="color" />
+                </button>
+                <label>Clean 1</label>
+                <button dataBindings="DiffuseColor1Clean">
+                    <dataBindings type="color" />
+                </button>
+                <label>Clean 2</label>
+                <button dataBindings="DiffuseColor2Clean">
+                    <dataBindings type="color" />
+                </button>
+            </group>
+        </group>
+
+        <group label="Specular">
+            <group horizontal="1">
+                <button dataBindings="SpecularTexture1" fill="1" />
+                <textbox dataBindings="SpecularUV1">
+                    <dataBindings class="UVChannel" />
+                </textbox>
+                <group>
+                    <textbox dataBindings="SpecularTiling1.x">
+                        <dataBindings class="Tiling" />
+                    </textbox>
+                    <textbox dataBindings="SpecularTiling1.y">
+                        <dataBindings class="Tiling" />
+                    </textbox>
+                </group>
+            </group>
+
+            <dataBindingsAlias name="@SpecularPowerAlias" dataBindings="SpecularPower" />
+            <xi:include href="UI/SpecularPowerGroup.xml" />
+
+            <group label="Broken" horizontal="1">
+                <label>Broken Base</label>
+                <button dataBindings="SpecularColorBaseBroken">
+                    <dataBindings type="color" />
+                </button>
+                <label>Broken 1</label>
+                <button dataBindings="SpecularColor1Broken">
+                    <dataBindings type="color" />
+                </button>
+            </group>
+
+            <group label="Clean" horizontal="1">
+                <label>Clean Base</label>
+                <button dataBindings="SpecularColorBaseClean">
+                    <dataBindings type="color" />
+                </button>
+                <label>Clean 1</label>
+                <button dataBindings="SpecularColor1Clean">
+                    <dataBindings type="color" />
+                </button>
+            </group>
+        </group>
+
+        <group horizontal="1" label="Normal">
+            <button dataBindings="NormalTexture1" fill="1" />
+            <textbox dataBindings="NormalUV1">
+                <dataBindings class="UVChannel" />
+            </textbox>
+            <group>
+                <textbox dataBindings="NormalTiling1.x">
+                    <dataBindings class="Tiling" />
+                </textbox>
+                <textbox dataBindings="NormalTiling1.y">
+                    <dataBindings class="Tiling" />
+                </textbox>
+            </group>
+        </group>
+
+        <group horizontal="1" label="Cubemap">
+            <button dataBindings="ReflectionTexture" fill="1" />
+            <textbox databindings="ReflectionPower" />
+        </group>
+
+        <group label="Specific">
+            <group horizontal="1">
+                <label>Dirt blend factor</label>
+                <textbox databindings="dirtBlendFactor" />
+            </group>
+            <group horizontal="1">
+                <label>Dust blend factor</label>
+                <textbox databindings="dustBlendFactor" />
+            </group>
+            <checkbox label="Color override" databindings="ColorOverride" />
+            <checkbox label="Glass" databindings="Glass" />
+            <checkbox label="Glass interior" databindings="GlassInterior" />
+            <group horizontal="1">
+                <label>1 / Green Component</label>
+                <textbox databindings="invGreenComponent" />
+            </group>
+            <group horizontal="1">
+                <label>1 / Green Component Blended</label>
+                <textbox databindings="invGreenComponentBlended" />
+            </group>
+            <group horizontal="1">
+                <label>1 / Green Component Reflection Blended</label>
+                <textbox databindings="invGreenComponentReflectionBlended" />
+            </group>
+        </group>
+    </ui>
+
+</materialdescriptor>

@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<materialdescriptor name="RealtreeTrunk" id="#(0x18748ca4, 0x4bb67cc0)">
+    <geometryInputs normal="1" tangent="1" binormal="1" color="1" uvChannels="1" />
+
+    <parameter name="DiffuseTexture1" type="sampler2D" tilingName="DiffuseTiling1" />
+    <parameter name="DiffuseColor1" type="float4" defaultvalue="1,1,1,1" />
+    <parameter name="DiffuseTiling1" type="float2" defaultvalue="1,1" />
+    <parameter name="DiffuseTexture2" type="sampler2D" tilingName="DiffuseTiling2" />
+    <parameter name="DiffuseColor2" type="float4" defaultvalue="1,1,1,1" />
+    <parameter name="DiffuseTiling2" type="float2" defaultvalue="1,1" />
+    <parameter name="BurntDiffuseTexture" type="sampler2D" tilingName="BurntDiffuseTiling" />
+    <parameter name="BurntDiffuseColor" type="float4" defaultvalue="1,1,1,1" />
+    <parameter name="BurntDiffuseTiling" type="float2" defaultvalue="1,1" />
+
+    <parameter name="SpecularTexture1" type="sampler2D" tilingName="SpecularTiling1" />
+    <parameter name="SpecularTiling1" type="float2" defaultvalue="1,1" />
+    <parameter name="SpecularColor1" type="float4" defaultvalue="1,1,1,1" />
+    <parameter name="SpecularPower" type="float" defaultvalue="16" />
+
+    <parameter name="NormalTexture1" type="sampler2D" tilingName="NormalTiling1" />
+    <parameter name="NormalTiling1" type="float2" defaultvalue="1,1" />
+
+    <parameter name="OcclusionIntensity" type="float" defaultvalue="1" />
+
+    <parameterprovider parametersfilename="Realtree_Trunk.fx">
+        <parameter name="DiffuseTexture1" />
+        <parameter name="DiffuseColor1" />
+        <parameter name="DiffuseTiling1" />
+        <parameter name="DiffuseTexture2" />
+        <parameter name="DiffuseColor2" />
+        <parameter name="DiffuseTiling2" />
+        <parameter name="BurntDiffuseTexture" />
+        <parameter name="BurntDiffuseColor" />
+        <parameter name="BurntDiffuseTiling" />
+        <parameter name="SpecularTexture1" />
+        <parameter name="SpecularTiling1" />
+        <parameter name="SpecularColor1" />
+        <parameter name="SpecularPower" />
+        <parameter name="NormalTexture1" />
+        <parameter name="NormalTiling1" />
+        <parameter name="OcclusionIntensity" />
+    </parameterprovider>
+    
+    <ui>
+        <group horizontal="1" label="Settings">
+            <label>Occlusion Intensity</label>
+            <textbox dataBindings="OcclusionIntensity">
+                <dataBindings maxValue="1" />
+            </textbox>
+        </group>
+
+        <group label="Diffuse">
+            <label>Texture 2</label>
+            <group horizontal="1">
+                <button dataBindings="DiffuseColor2">
+                    <dataBindings type="color" />
+                </button>
+                <button dataBindings="DiffuseTexture2" fill="1" />
+                <group>
+                    <textbox dataBindings="DiffuseTiling2.x">
+                        <dataBindings type="int" />
+                    </textbox>
+                    <textbox dataBindings="DiffuseTiling2.y">
+                        <dataBindings type="int" />
+                    </textbox>
+                </group>
+            </group>
+
+            <label>Texture 1</label>
+            <group horizontal="1">
+                <button dataBindings="DiffuseColor1">
+                    <dataBindings type="color" />
+                </button>
+                <button dataBindings="DiffuseTexture1" fill="1" />
+                <group>
+                    <textbox dataBindings="DiffuseTiling1.x">
+                        <dataBindings type="int" />
+                    </textbox>
+                    <textbox dataBindings="DiffuseTiling1.y">
+                        <dataBindings type="int" />
+                    </textbox>
+                </group>
+            </group>
+        </group>
+
+        <group label="Specular">
+            <group horizontal="1">
+                <button dataBindings="SpecularColor1">
+                    <dataBindings type="color" />
+                </button>
+                <button dataBindings="SpecularTexture1" fill="1" />
+                <group>
+                    <textbox dataBindings="SpecularTiling1.x">
+                        <dataBindings type="int" />
+                    </textbox>
+                    <textbox dataBindings="SpecularTiling1.y">
+                        <dataBindings type="int" />
+                    </textbox>
+                </group>
+            </group>
+
+            <dataBindingsAlias name="@SpecularPowerAlias" dataBindings="SpecularPower" />
+            <xi:include href="UI/SpecularPowerGroup.xml" />
+        </group>
+
+        <group label="Burnt">
+            <group horizontal="1">
+                <button dataBindings="BurntDiffuseColor">
+                    <dataBindings type="color" />
+                </button>
+                <button dataBindings="BurntDiffuseTexture" fill="1" />
+                <group>
+                    <textbox dataBindings="BurntDiffuseTiling.x">
+                        <dataBindings type="int" />
+                    </textbox>
+                    <textbox dataBindings="BurntDiffuseTiling.y">
+                        <dataBindings type="int" />
+                    </textbox>
+                </group>
+            </group>
+        </group>
+
+        <group horizontal="1" label="Normal">
+            <button dataBindings="NormalTexture1" fill="1" />
+            <group>
+                <textbox dataBindings="NormalTiling1.x">
+                    <dataBindings type="int" />
+                </textbox>
+                <textbox dataBindings="NormalTiling1.y">
+                    <dataBindings type="int" />
+                </textbox>
+            </group>
+        </group>
+    </ui>
+
+</materialdescriptor>

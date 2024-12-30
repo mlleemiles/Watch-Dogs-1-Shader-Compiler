@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="FrameBufferTexture"      state="ColorPointClamp2D" />
+    <samplerstate sampler="PrevFrameBufferTexture"  state="ColorPointClamp2D" />
+    <samplerstate sampler="BlendTexture"        state="ColorPointClamp2D" />    
+    <samplerstate sampler="AreaTexture"         state="ColorPointWrap2D" />
+    <samplerstate sampler="SearchTexture"       state="ColorPointWrap2D" />
+    <samplerstate sampler="LinearSampler"       state="ColorClamp2D" />
+    <samplerstate sampler="PointSampler"        state="ColorPointClamp2D"/> 
+    <samplerstate sampler="CurrDepthTexture"        state="ColorPointClamp2D"/>
+    <samplerstate sampler="VelocityTexture"         state="ColorPointClamp2D"/>
+  <samplerstate sampler="BloomSampler"            state="ColorClamp2D"/>
+  <samplerstate sampler="ColorRemapTexture"       state="ColorClamp" />
+  <samplerstate sampler="PostFxMaskTexture"       state="ColorClamp2D" />
+
+    <define name="EDGE_DETECTION"               platform="PC,DURANGO,ORBIS"/>
+    <define name="BLENDING_WEIGHT_CALCULATION"  platform="PC,DURANGO,ORBIS"/>
+    <define name="NEIGHBORHOOD_BLENDING"        platform="PC,DURANGO,ORBIS"/>
+    <define name="RESOLVE"                      platform="PC,DURANGO,ORBIS"/>
+    <define name="VELOCITY"                     platform="PC,DURANGO,ORBIS"/>
+    <define name="SMAA_TEMPORAL"                platform="PC,DURANGO,ORBIS"/>
+  <define name="COPY_MSAA_SUBPIXEL"           platform="PC,DURANGO,ORBIS"/>
+  <define name="MERGE_AA"                     platform="PC,DURANGO,ORBIS"/>
+
+  <define name="MASK_IN_ALPHA"                platform="PC,DURANGO,ORBIS"/>
+  <define name="BLOOM"                        platform="PC,DURANGO,ORBIS"/>
+  <define name="TONEMAP"                      platform="PC,DURANGO,ORBIS"/>
+  <define name="ARTIFACT"                     platform="PC,DURANGO,ORBIS"/>
+  <define name="COLOR_REMAP"                  platform="PC,DURANGO,ORBIS"/>
+    
+    
+    <domain>
+        <options>
+            <option> EDGE_DETECTION </option>
+            <option> BLENDING_WEIGHT_CALCULATION </option>
+            <option> NEIGHBORHOOD_BLENDING </option>
+            <option> NEIGHBORHOOD_BLENDING,SMAA_TEMPORAL </option>
+            <option> VELOCITY </option>
+            <option> RESOLVE </option>            
+            <option> RESOLVE , SMAA_TEMPORAL</option>
+        </options>
+    </domain>
+
+  <domain>
+    <options>
+      <option> MERGE_AA </option>
+    </options>
+    <options>
+      <option></option>
+      <option>MASK_IN_ALPHA</option>
+    </options>
+  </domain>
+  
+  <domain>
+    <options>
+      <option> COPY_MSAA_SUBPIXEL </option>
+    </options>
+    <options>
+      <option></option>
+      <option>BLOOM</option>
+    </options>
+    <options>
+      <option></option>
+      <option>TONEMAP</option>
+    </options>
+    <options>
+      <option></option>
+      <option>ARTIFACT</option>
+    </options>
+    <options>
+      <option></option>
+      <option>COLOR_REMAP</option>
+    </options>
+  </domain>
+</metashader>

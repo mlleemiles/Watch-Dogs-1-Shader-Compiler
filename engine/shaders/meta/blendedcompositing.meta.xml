@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="MinColorTexture" state="ColorClamp2D" />
+    <samplerstate sampler="MinColorTexturePoint" state="ColorPointClamp2D" />
+    <samplerstate sampler="MaxColorTexture" state="ColorClamp2D" />
+    <samplerstate sampler="MaxColorTexturePoint" state="ColorPointClamp2D" />
+    <samplerstate sampler="TweakedMinColorTexture" state="ColorClamp2D" />
+    <samplerstate sampler="TweakedMinColorTexturePoint" state="ColorPointClamp2D" />
+    <samplerstate sampler="TweakedMaxColorTexture" state="ColorClamp2D" />
+    <samplerstate sampler="TweakedMaxColorTexturePoint" state="ColorPointClamp2D" />
+    <samplerstate sampler="DiffTexture" state="ColorClamp2D" />
+    <samplerstate sampler="DiffTexturePoint" state="ColorPointClamp2D" />
+    <samplerstate sampler="MergedDepthTexture" state="DepthVPSampler" />
+    <samplerstate sampler="DepthSampler" state="DepthVPSampler" />
+
+    <define name="DEPTH" />
+    <define name="DEPTH_SECONDPASS" />
+    <define name="MERGE" />
+    <define name="FILL_POINTS" platform="XENON,PS3" />
+    <define name="FILL_POINTS_DEFAULT" platform="PS3" />
+    <define name="USE_POINTS" platform="XENON,PS3" />
+    <define name="FULL_COMPOSITING" />
+    <define name="TWEAK" />
+    <define name="TWEAK_MIN" />
+    <define name="TWEAK_MAX" />
+<!--
+    <domain>
+        <options>
+            <option>DEPTH</option>
+            <option>DEPTH,DEPTH_SECONDPASS</option>
+            <option>MERGE</option>
+            <option>FILL_POINTS</option>
+            <option>FILL_POINTS,FILL_POINTS_DEFAULT</option>
+            <option>USE_POINTS,FULL_COMPOSITING</option>
+            <option>USE_POINTS</option>
+            <option>FULL_COMPOSITING</option>
+            <option>TWEAK,TWEAK_MIN</option>
+            <option>TWEAK,TWEAK_MAX</option>
+        </options>
+    </domain>
+-->
+</metashader>

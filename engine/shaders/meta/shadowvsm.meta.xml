@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+	<define name="VERTICAL" />
+
+    <domain>
+        <options>
+            <option></option>
+  	        <option>VERTICAL</option>
+        </options>
+    </domain>
+</metashader>

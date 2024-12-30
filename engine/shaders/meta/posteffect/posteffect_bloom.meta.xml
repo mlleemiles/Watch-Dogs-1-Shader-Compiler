@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="FilteredSampler" state="ColorBlackTransparentBorder" />
+    <samplerstate sampler="FilteredClampSampler" state="ColorClamp2D" />
+    <samplerstate sampler="SourceTextureSampler" state="ColorPointClamp2D" />
+    <samplerstate sampler="BlurSampler" state="ColorBlackTransparentBorder" />
+    <samplerstate sampler="BloomSampler" state="ColorBlackTransparentBorder" />
+    <samplerstate sampler="PostFxMaskTexture" state="ColorClamp2D" />
+    <samplerstate sampler="HistogramSourceTexture" state="" />
+    <samplerstate sampler="ColorRemapTexture" state="ColorClamp" />
+
+    <samplerstate sampler="AvgLumTexture" state="ColorClamp2D" />
+    <samplerstate sampler="CurrentLuminanceTexture" state="ColorClamp2D" />
+    <samplerstate sampler="CurrentAutoExposureScaleTexture" state="ColorClamp2D" />
+    <samplerstate sampler="PreviousAutoExposureScaleTexture" state="ColorClamp2D" />
+
+    <define name="COMPUTE_AVERAGE_LUMINANCE_INIT" platform="NEXTGEN"/>
+    <define name="COMPUTE_AVERAGE_LUMINANCE_STEP" platform="NEXTGEN"/>
+    <define name="COMPUTE_AVERAGE_LUMINANCE_LAST" platform="NEXTGEN"/>
+
+    <define name="FORCE_AUTO_EXPOSURE_SCALE" platform="NEXTGEN"/>
+    <define name="COMPUTE_AUTO_EXPOSURE_SCALE" platform="NEXTGEN"/>
+    <define name="COMPUTE_AUTO_EXPOSURE_SCALE_SMOOTH_IN_EV" platform="NEXTGEN"/>
+    <define name="COMPUTE_AUTO_EXPOSURE_SCALE_MANUAL" platform="NEXTGEN"/>
+
+    <define name="USE_AUTO_EXPOSURE_SCALE_TEXTURE" platform="NEXTGEN"/>
+
+    <define name="APPLY_THRESHOLD" />
+    <define name="DILATE" />
+    <define name="BLUR" max_value="9" />
+    <define name="BOOST" />
+    <define name="BLIT" />
+    <define name="MASK_IN_ALPHA" />
+    <define name="TONEMAP" />
+    <define name="CHROMATIC_ABERRATION" />
+    <define name="ARTIFACT" />
+    <define name="HISTOGRAM_TEST" />
+    <define name="COLOR_REMAP" />
+    <define name="DECODE_SCENECOLOR" platform="XENON" />
+    <define name="SHADER_GAMMA_20" platform="XENON" />
+
+    <domain>
+        <options>
+            <option>APPLY_THRESHOLD</option>
+            <option>APPLY_THRESHOLD,USE_AUTO_EXPOSURE_SCALE_TEXTURE</option>
+            <option>APPLY_THRESHOLD,DECODE_SCENECOLOR</option>
+            <option>APPLY_THRESHOLD,DECODE_SCENECOLOR,USE_AUTO_EXPOSURE_SCALE_TEXTURE</option>
+            <option>DILATE</option>
+            <option>BLUR</option>
+            <option>BOOST</option>
+            <option>CHROMATIC_ABERRATION</option>
+            <option>HISTOGRAM_TEST</option>
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option>BLIT</option>
+            <option>BLIT,USE_AUTO_EXPOSURE_SCALE_TEXTURE</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>MASK_IN_ALPHA</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>TONEMAP</option>
+            <option>TONEMAP,COLOR_REMAP</option>
+            <option>TONEMAP,COLOR_REMAP,SHADER_GAMMA_20</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>ARTIFACT</option>
+        </options>
+
+        <options>
+          <option></option>
+          <option>DECODE_SCENECOLOR</option>
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option>COMPUTE_AVERAGE_LUMINANCE_INIT</option>
+            <option>COMPUTE_AVERAGE_LUMINANCE_STEP</option>
+            <option>COMPUTE_AVERAGE_LUMINANCE_LAST</option>
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option>FORCE_AUTO_EXPOSURE_SCALE</option>
+            <option>COMPUTE_AUTO_EXPOSURE_SCALE</option>
+            <option>COMPUTE_AUTO_EXPOSURE_SCALE,COMPUTE_AUTO_EXPOSURE_SCALE_SMOOTH_IN_EV</option>
+            <option>COMPUTE_AUTO_EXPOSURE_SCALE,COMPUTE_AUTO_EXPOSURE_SCALE_MANUAL</option>
+            <option>COMPUTE_AUTO_EXPOSURE_SCALE,COMPUTE_AUTO_EXPOSURE_SCALE_SMOOTH_IN_EV,COMPUTE_AUTO_EXPOSURE_SCALE_MANUAL</option>
+        </options>
+    </domain>
+
+</metashader>

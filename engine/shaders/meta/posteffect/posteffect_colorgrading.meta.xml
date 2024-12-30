@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="SourceTextureSampler" state="ColorPointClamp2D" />
+    <samplerstate sampler="NoiseSampler" state="ColorWrap" />
+
+    <define name="MERGE_NOISE" />
+    <define name="DECODE_SCENECOLOR" platform="XENON" />
+
+    <domain>
+        <options>
+            <option></option>
+            <option>MERGE_NOISE</option>
+        </options>
+
+        <options>
+          <option></option>
+          <option>DECODE_SCENECOLOR</option>
+        </options>
+    </domain>
+</metashader>

@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<materialdescriptor name="Rain" showinui="1" id="#(0xaa06207, 0x24c945d0)">
+    <geometryInputs normal="1" tangent="0" binormal="0" color="1" uvChannels="1" />
+
+    <parameter name="BlendingType" type="int" defaultvalue="1"/>
+    <parameter name="DiffuseTexture" type="sampler2D" tilingName="DiffuseTiling" UvName="DiffuseUV" optional="0" />
+    <parameter name="DiffuseTextureState" type="samplerState" defaultvalue="ColorWrap" />
+    <parameter name="DiffuseTiling" type="float2" />
+    <parameter name="DiffuseColor" type="color3" defaultvalue="1,1,1" />
+    <parameter name="HDRMul" type="float" defaultvalue="1" />
+    
+    <!-- Parameter provider description -->
+    <parameterprovider parametersfilename="Mesh_Rain.fx">
+        <parameter name="DiffuseTexture" />
+        <parameter name="DiffuseTextureState" />
+        <parameter name="DiffuseTiling" />
+        <parameter name="DiffuseColor" />        
+        <parameter name="HDRMul" />
+    </parameterprovider>
+
+    <ui>
+        <!-- Diffuse texture -->
+        <label> </label>
+        <group label="Diffuse Texture">
+            <group horizontal="1">
+                <button dataBindings="DiffuseColor" />
+                <button dataBindings="DiffuseTexture" fill="1" />
+                <group show_if="DiffuseTexture">
+                    <textbox dataBindings="DiffuseTiling.x">
+                        <dataBindings type="int" />
+                    </textbox>
+                    <textbox dataBindings="DiffuseTiling.y">
+                        <dataBindings type="int" />
+                    </textbox>
+                </group>
+            </group>
+            <group horizontal="1" show_if="DiffuseTexture">
+                <label>Addressing</label>
+                <combobox dataBindings="DiffuseTextureState">
+                    <comboboxitem value="ColorWrap">Wrap</comboboxitem>
+                    <comboboxitem value="ColorClamp">Clamp</comboboxitem>
+                </combobox>
+            </group>
+        </group>
+        <label> </label>
+    </ui>
+
+</materialdescriptor>

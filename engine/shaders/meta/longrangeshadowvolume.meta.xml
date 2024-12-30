@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+
+    <samplerstate sampler="LongRangeShadowTexture" state="ShadowSampler" />
+
+    <define name="LAST_SHADOW_SAMPLE_INDEX" max_value="15" />
+    <define name="PROCEDURAL_OCCLUDER" platform="PC"/>
+    <define name="SHADOW_NOFSM" platform="PC"/>
+
+    <domain>
+        <options>
+            <option>LAST_SHADOW_SAMPLE_INDEX</option>
+            <option>PROCEDURAL_OCCLUDER, SHADOW_NOFSM</option>
+        </options>
+    </domain>
+
+</metashader>

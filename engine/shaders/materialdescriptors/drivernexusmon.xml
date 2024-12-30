@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<materialdescriptor xmlns:xi="#" name="DriverNexusmon" displayname="Nexusmon" showinui="1" id="#(0x8b623dd, 0x504368b3)">
+    <geometryInputs normal="1" tangent="1" binormal="1" color="1" uvChannels="2" packedUVChannel="10" />
+
+    <parameter name="DiffuseTexture" type="sampler2D" tilingName="DiffuseTiling" UvName="DiffuseUV" uvTilingName="DiffuseUVTiling" />
+    <parameter name="DiffuseTextureState" type="samplerState" defaultvalue="ColorClamp" />
+    <parameter name="DiffuseTiling" type="float2" defaultvalue="1,1" />
+    <parameter name="DiffuseUV" type="int" />
+    <parameter name="DiffuseUVTiling" type="float4" provideronly="1" />
+    <parameter name="DiffuseColor" type="color3" defaultvalue="1,1,1" />
+
+    <parameter name="SpecularTexture" type="sampler2D" tilingName="SpecularTiling" UvName="SpecularUV" uvTilingName="SpecularUVTiling" />
+    <parameter name="SpecularTiling" type="float2" defaultvalue="1,1" />
+    <parameter name="SpecularTextureState" type="samplerState" defaultvalue="ColorClamp" />
+    <parameter name="SpecularUV" type="int" />
+    <parameter name="SpecularUVTiling" type="float4" provideronly="1" />
+    <parameter name="SpecularColor" type="color3" defaultvalue="1,1,1" />
+    <parameter name="SpecularPower" type="float4" defaultvalue="16,0,1,0" op_z="x/8192" op_w="y/8192" />
+    <parameter name="Reflectance" type="float3" defaultvalue="0.04,0,1" />
+
+    <!-- ARCollisionFX -->
+    <parameter name="ARCollisionEnabled" type="bool" />
+    <parameter name="NoiseTexture" type="sampler2D" />
+    <parameter name="NoiseTextureState" type="samplerState" defaultvalue="ColorPointWrap" />
+
+    <!-- Forward Lighting -->
+    <parameter name="ShadingMode" type="int" defaultvalue="0" />
+    <parameter name="UserDefinedLightDirection" type="float3" defaultvalue="0,0,-1" />
+    <!-- Phong -->
+    <parameter name="UserDefinedLightColor" type="color3" defaultvalue="1, 1, 1" />
+    <parameter name="UserDefinedLightIntensity" type="float" defaultvalue="1" />
+    <parameter name="UserDefinedAmbientColor" type="color3" defaultvalue="0.1,0.1,0.1" />
+    <!-- Gooch -->
+    <parameter name="LiteColor" type="color3" defaultvalue="0.8, 0.5, 0.1" />
+    <parameter name="DarkColor" type="color3" defaultvalue="0, 0, 0" />
+    <parameter name="WarmColor" type="color3" defaultvalue="0.5, 0.4, 0.05" />
+    <parameter name="CoolColor" type="color3" defaultvalue="0.05, 0.05, 0.6" />
+    <parameter name="GoochColorIntensity" type="float4" defaultvalue="1, 1, 1, 1" />
+    <parameter name="MidToneColorEnabled" type="bool" />
+    <parameter name="MidToneColor" type="color3" defaultvalue="0.8, 0.5, 0.1" />
+    <parameter name="MidToneColorIntensity" type="float" defaultvalue="1" />
+
+    <!-- Rim Lighting -->
+    <parameter name="RimLightEnabled" type="bool" />
+    <parameter name="RimLightColor" type="color3" defaultvalue="0.9, 0.9, 0.9" />
+    <parameter name="RimLightColorIntensity" type="float" defaultvalue="1" />
+    <parameter name="RimWidthControl" type="float" defaultvalue="0.25" />
+
+    <!-- Debug -->
+    <parameter name="DebugLightingEnabled" type="bool" />
+
+    <parameterprovider parametersfilename="Mesh_DriverNexusmon.fx">
+        <parameter name="DiffuseColor" />
+        <parameter name="DiffuseTexture" />
+        <parameter name="DiffuseTextureState" />
+        <parameter name="DiffuseUV" />
+        <parameter name="DiffuseUVTiling" />
+        <parameter name="SpecularColor" />
+        <parameter name="SpecularTexture" />
+        <parameter name="SpecularTextureState" />
+        <parameter name="SpecularUV" />
+        <parameter name="SpecularUVTiling" />
+        <parameter name="SpecularPower" />
+        <parameter name="Reflectance" />
+        <!-- ARCollisionFX -->
+        <parameter name="ARCollisionEnabled" />
+        <parameter name="NoiseTexture" />
+        <parameter name="NoiseTextureState" />
+        <!-- Forward Lighting -->
+        <parameter name="ShadingMode" />
+        <parameter name="UserDefinedLightDirection" />
+        <!-- Phong -->
+        <parameter name="UserDefinedLightColor" />
+        <parameter name="UserDefinedLightIntensity" />
+        <parameter name="UserDefinedAmbientColor" />
+        <!-- Gooch -->
+        <parameter name="LiteColor" />
+        <parameter name="DarkColor" />
+        <parameter name="WarmColor" />
+        <parameter name="CoolColor" />
+        <parameter name="GoochColorIntensity" />
+        <parameter name="MidToneColorEnabled" />
+        <parameter name="MidToneColor" />
+        <parameter name="MidToneColorIntensity" />
+        <!-- Rim Lighting -->
+        <parameter name="RimLightEnabled" />
+        <parameter name="RimLightColor" />
+        <parameter name="RimLightColorIntensity" />
+        <parameter name="RimWidthControl" />
+        <!-- Debug -->
+        <parameter name="DebugLightingEnabled" />
+    </parameterprovider>
+
+    <ui defaultFilePath="graphics/_Textures/" >
+        <xi:include href="UI/DataClasses.xml" />
+        <dataclass name="GenericControl" minvalue="0.0" maxvalue="1.0" />
+        <dataclass name="LightDirection" minvalue="-1.0" maxvalue="1.0" />
+        <dataclass name="LightIntensity" minvalue="0.0" maxvalue="8.0" />
+
+        <!-- Diffuse -->
+        <group label="Diffuse" horizontal="0">
+            <group horizontal="1">
+                <button dataBindings="DiffuseColor" />
+                <button dataBindings="DiffuseTexture" fill="1" />
+                <textbox dataBindings="DiffuseUV">
+                    <dataBindings class="UVChannel" />
+                </textbox>
+                <group>
+                    <textbox dataBindings="DiffuseTiling.x">
+                        <dataBindings class="Tiling" />
+                    </textbox>
+                    <textbox dataBindings="DiffuseTiling.y">
+                        <dataBindings class="Tiling" />
+                    </textbox>
+                </group>
+                <combobox dataBindings="DiffuseTextureState">
+                    <comboboxitem value="ColorWrap">Wrap</comboboxitem>
+                    <comboboxitem value="ColorClamp">Clamp</comboboxitem>
+                </combobox>
+            </group>
+        </group>
+        <label> </label>
+
+        <!-- Specular -->
+        <group label="Specular">
+            <group horizontal="1">
+                <button dataBindings="SpecularColor" />
+                <button dataBindings="SpecularTexture" fill="1" />
+                <textbox dataBindings="SpecularUV">
+                    <dataBindings class="UVChannel" />
+                </textbox>
+                <group>
+                    <textbox dataBindings="SpecularTiling.x">
+                        <dataBindings class="Tiling" />
+                    </textbox>
+                    <textbox dataBindings="SpecularTiling.y">
+                        <dataBindings class="Tiling" />
+                    </textbox>
+                </group>
+                <combobox dataBindings="SpecularTextureState">
+                    <comboboxitem value="ColorWrap">Wrap</comboboxitem>
+                    <comboboxitem value="ColorClamp">Clamp</comboboxitem>
+                </combobox>
+            </group>
+            <group>
+                <dataBindingsAlias name="@ReflectanceAlias" dataBindings="Reflectance" />
+                <xi:include href="UI/ReflectanceGroup.xml" />
+
+                <dataBindingsAlias name="@SpecularPowerAlias" dataBindings="SpecularPower" />
+                <xi:include href="UI/SpecularPowerGroup.xml" />
+            </group>
+        </group>
+        <label> </label>
+
+        <!-- Lighting UI -->
+        <group label="Lighting">
+            <group label="Common">
+                <group>
+                    <label>Light Direction</label>
+                    <group horizontal="1">
+                        <textbox dataBindings="UserDefinedLightDirection.x">
+                            <databindings increment="0.01" minvalue="-1.0" maxvalue="1.0" />
+                        </textbox>
+                        <label>-1.0</label>
+                        <slider dataBindings="UserDefinedLightDirection.x">
+                            <dataBindings class="LightDirection" />
+                        </slider>
+                        <label>1.0</label>
+                    </group>
+                    <group horizontal="1">
+                        <textbox dataBindings="UserDefinedLightDirection.y">
+                            <databindings increment="0.01" minvalue="-1.0" maxvalue="1.0" />
+                        </textbox>
+                        <label>-1.0</label>
+                        <slider dataBindings="UserDefinedLightDirection.y">
+                            <dataBindings class="LightDirection" />
+                        </slider>
+                        <label>1.0</label>
+                    </group>
+                    <group horizontal="1">
+                        <textbox dataBindings="UserDefinedLightDirection.z">
+                            <databindings increment="0.01" minvalue="-1.0" maxvalue="1.0" />
+                        </textbox>
+                        <label>-1.0</label>
+                        <slider dataBindings="UserDefinedLightDirection.z">
+                            <dataBindings class="LightDirection" />
+                        </slider>
+                        <label>1.0</label>
+                    </group>
+                </group>
+                <label>Shading Mode Selection</label>
+                <combobox dataBindings="ShadingMode">
+                    <comboboxitem value="0">PhongShading</comboboxitem>
+                    <comboboxitem value="1">GoochShading</comboboxitem>
+                </combobox>
+                <checkbox label="DebugLighting Enabled" dataBindings="DebugLightingEnabled" />
+            </group>
+            <label> </label>
+            <group label="PhongShading">
+                <group horizontal="1">
+                    <label>Light Color</label>
+                    <button dataBindings="UserDefinedLightColor" />
+                </group>
+                <group horizontal="1">
+                    <label>Light ColorIntensity</label>
+                    <textbox dataBindings="UserDefinedLightIntensity">
+                        <databindings increment="0.01" minvalue="0.0" maxvalue="8.0" />
+                    </textbox>
+                    <label>0.0</label>
+                    <slider dataBindings="UserDefinedLightIntensity">
+                        <dataBindings class="LightIntensity" />
+                    </slider>
+                    <label>8.0</label>
+                </group>
+                <group horizontal="1">
+                    <label>Ambient Color</label>
+                    <button dataBindings="UserDefinedAmbientColor" />
+                </group>
+            </group>
+            <label> </label>
+            <group label="GoochShading">
+                <group horizontal="1">
+                    <label>Lite Color</label>
+                    <button dataBindings="LiteColor" />
+                    <label>Dark Color</label>
+                    <button dataBindings="DarkColor" />
+                    <label>Warm Color</label>
+                    <button dataBindings="WarmColor" />
+                    <label>Cool Color</label>
+                    <button dataBindings="CoolColor" />
+                </group>
+                <group horizontal="1">
+                    <label>Lite ColorIntensity</label>
+                    <textbox dataBindings="GoochColorIntensity.x">
+                        <databindings increment="0.01" minvalue="0.0" maxvalue="8.0" />
+                    </textbox>
+                    <label>0.0</label>
+                    <slider dataBindings="GoochColorIntensity.x">
+                        <dataBindings class="LightIntensity" />
+                    </slider>
+                    <label>8.0</label>
+                </group>
+                <group horizontal="1">
+                    <label>Dark ColorIntensity</label>
+                    <textbox dataBindings="GoochColorIntensity.y">
+                        <databindings increment="0.01" minvalue="0.0" maxvalue="8.0" />
+                    </textbox>
+                    <label>0.0</label>
+                    <slider dataBindings="GoochColorIntensity.y">
+                        <dataBindings class="LightIntensity" />
+                    </slider>
+                    <label>8.0</label>
+                </group>
+                <group horizontal="1">
+                    <label>Warm ColorIntensity</label>
+                    <textbox dataBindings="GoochColorIntensity.z">
+                        <databindings increment="0.01" minvalue="0.0" maxvalue="8.0" />
+                    </textbox>
+                    <label>0.0</label>
+                    <slider dataBindings="GoochColorIntensity.z">
+                        <dataBindings class="LightIntensity" />
+                    </slider>
+                    <label>8.0</label>
+                </group>
+                <group horizontal="1">
+                    <label>Cool ColorIntensity</label>
+                    <textbox dataBindings="GoochColorIntensity.w">
+                        <databindings increment="0.01" minvalue="0.0" maxvalue="8.0" />
+                    </textbox>
+                    <label>0.0</label>
+                    <slider dataBindings="GoochColorIntensity.w">
+                        <dataBindings class="LightIntensity" />
+                    </slider>
+                    <label>8.0</label>
+                </group>
+                <checkbox label="MidToneColor Enabled" dataBindings="MidToneColorEnabled" />
+                <group horizontal="1">
+                    <label>MidTone Color</label>
+                    <button dataBindings="MidToneColor" />
+                </group>
+                <group horizontal="1">
+                    <label>MidTone ColorIntensity</label>
+                    <textbox dataBindings="MidToneColorIntensity">
+                        <databindings increment="0.01" minvalue="0.0" maxvalue="8.0" />
+                    </textbox>
+                    <label>0.0</label>
+                    <slider dataBindings="MidToneColorIntensity">
+                        <dataBindings class="LightIntensity" />
+                    </slider>
+                    <label>8.0</label>
+                </group>
+            </group>
+            <label> </label>
+            <group label="Rim Lighting">
+                <checkbox label="RimLight Enabled" dataBindings="RimLightEnabled" />
+                <group horizontal="1">
+                    <label>RimLight Color</label>
+                    <button dataBindings="RimLightColor" />
+                </group>
+                <group horizontal="1">
+                    <label>RimLight ColorIntensity</label>
+                    <textbox dataBindings="RimLightColorIntensity">
+                        <databindings increment="0.01" minvalue="0.0" maxvalue="8.0" />
+                    </textbox>
+                    <label>0.0</label>
+                    <slider dataBindings="RimLightColorIntensity">
+                        <dataBindings class="LightIntensity" />
+                    </slider>
+                    <label>8.0</label>
+                </group>
+                <group horizontal="1">
+                    <label>RimWidth Control</label>
+                    <textbox dataBindings="RimWidthControl">
+                        <databindings increment="0.01" minvalue="0.0" maxvalue="1.0" />
+                    </textbox>
+                    <label>0.0</label>
+                    <slider dataBindings="RimWidthControl">
+                        <dataBindings class="GenericControl" />
+                    </slider>
+                    <label>1.0</label>
+                </group>
+            </group>
+        </group>
+        <label> </label>
+
+        <!-- Misc UI -->
+        <group label="Misc">
+            <checkbox label="AR Collision Enabled" dataBindings="ARCollisionEnabled" />
+            <label>ARCollisionFX Noise Texture</label>
+            <button dataBindings="NoiseTexture" fill="1" />
+        </group>
+
+    </ui>
+</materialdescriptor>

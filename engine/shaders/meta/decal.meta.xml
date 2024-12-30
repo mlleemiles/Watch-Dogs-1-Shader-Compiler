@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <samplerstate sampler="DiffuseTexture1" state="ColorBlackTransparentBorder" />
+    <samplerstate sampler="DiffuseTextureWhiteBorder" state="ColorWhiteTransparentBorder" />
+    <samplerstate sampler="SpecularTexture1" state="ColorClamp" />
+    <samplerstate sampler="NormalTexture1" state="NormalClamp" />
+
+  	<samplerstate sampler="DiffuseTexture1Wrap" state="ColorWrap" />
+    <samplerstate sampler="SpecularTexture1Wrap" state="ColorWrap" />
+    <samplerstate sampler="NormalTexture1Wrap" state="NormalWrap" />
+   	<samplerstate sampler="AlphaTexture1" state="ColorClamp" />
+
+    <define name="SAMPLE_SHADOW" />
+    <define name="RECEIVE_SINGLE_CASCADE" />
+
+    <define name="NORMALMAP" />
+    <define name="SPECULARMAP" />
+    <define name="ALPHAMAP" />
+    <define name="CLIP" />
+    <define name="PARALLAX" />
+    <define name="UNLIT" />
+    <define name="STATIC_ON_TERRAIN" />
+    <define name="DYNAMIC_ON_TERRAIN" />
+    <define name="UNLIT_ADDITIVE" />
+    <define name="UNLIT_MULTIPLY" />
+    <define name="PROJECTED" />
+    <define name="GBUFFER" />
+
+    <xi:include href="Includes/LightingOptions.xml" />
+    <xi:include href="Includes/ShadowAndDepthDefines.xml" />
+
+    <domain>
+        <options>
+            <option>GBUFFER</option>
+            <option>UNLIT</option>
+			<option>UNLIT,UNLIT_ADDITIVE</option>
+            <option>UNLIT,UNLIT_MULTIPLY</option>
+        </options>
+        
+        <options>
+            <option></option>
+            <option>PROJECTED</option>
+        </options>
+  
+        <xi:include href="Includes/ReceiveShadowsOptions.xml" />
+
+        <options>
+            <option></option>
+            <option>NORMALMAP</option>
+            <option>NORMALMAP,SPECULARMAP</option>
+            <option>NORMALMAP,PARALLAX</option>
+            <option>NORMALMAP,PARALLAX,SPECULARMAP</option>
+            <option>SPECULARMAP</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>CLIP</option>
+            <option>DYNAMIC_ON_TERRAIN</option>
+            <option>STATIC_ON_TERRAIN</option>
+            <option>STATIC_ON_TERRAIN,ALPHAMAP</option>
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option>DEPTH,STATIC_ON_TERRAIN</option>
+            <option>DEPTH,STATIC_ON_TERRAIN,ALPHAMAP</option>
+        </options>
+    </domain>
+
+    <exclusion>
+        <any>UNLIT</any>
+        <any>SAMPLE_SHADOW,SPECULARMAP</any>
+    </exclusion>
+    
+    <xi:include href="Includes/ShadowExclusions.xml" />
+    <xi:include href="Includes/SingleCascadeExclusions.xml" />
+    <xi:include href="Includes/ForwardRenderingExclusions.xml" />
+
+</metashader>

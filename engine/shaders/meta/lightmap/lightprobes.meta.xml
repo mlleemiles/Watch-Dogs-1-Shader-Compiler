@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Shader for CLightProbeRenderer, which generates a viewport-sized global illumination image. -->
+<!-- This file is only used on PC/next-gen (current-gen equivalent is DeferredAmbient.meta.xml). -->
+<metashader>
+    <samplerstate sampler="VolumeTextureR"   state="ColorClamp" />
+    <samplerstate sampler="VolumeTextureG"   state="ColorClamp" />
+    <samplerstate sampler="VolumeTextureB"   state="ColorClamp" />
+    <samplerstate sampler="FloorCeilingTexture"  state="ColorClamp2D" />
+    <samplerstate sampler="GBufferNormalTexture" state="ColorPointClamp" />
+    <samplerstate sampler="LongRangeShadowVolumeTexture" state="ColorPointWrap2D" />
+
+    <samplerstate sampler="LPDepthTexture"          state="ColorPointWrap" />
+    <samplerstate sampler="LPLightTexture"           state="ColorPointWrap" />
+
+    <define name="BACKGROUND" platform="NEXTGEN"/>    
+    <define name="INSIDE" platform="NEXTGEN"/>
+    <define name="FOREGROUND" platform="NEXTGEN"/>
+    <define name="LODEF" platform="NEXTGEN"/>              <!-- Low-definition volume for exterior GI in the distance.  See USE_LODEF_LIGHTPROBESRESOURCES -->
+    <define name="INTERIOR" platform="NEXTGEN"/>
+    <define name="INTERIOR_PREPASS" platform="NEXTGEN"/>
+    <define name="SHADOWMASK" platform="NEXTGEN"/>
+    <define name="SHADOW_NOFSM" platform="NEXTGEN"/>
+
+	<define name="MSSA_UPSCALER" />
+
+  	<define name="SUPERSAMPLE_MSAA" />
+
+    <define name="NOFLOORCEILING" platform="NEXTGEN" />    <!-- Don't use floor/ceiling texture -->
+    <define name="LARGE_DRAW_DISTANCE" platform="NEXTGEN"/><!-- Indicates that gfx_lightProbesDrawDistance is big enough that we don't need a background pass or a distance fade -->
+
+    <domain deprecated="XENON,PS3"><!-- LightProbes.fx is next-gen only (current-gen uses DeferredAmbient.fx) -->
+        <options>
+            <option>BACKGROUND</option>         <!-- The background pass renders only beyond the draw distance of the probe lighting effect, applying default lighting and masking the stencil so that all probe volumes will skip these background pixels. -->
+            <option>BACKGROUND, LARGE_DRAW_DISTANCE</option>
+            <option></option>                   <!-- Apply lighting from the probe volumes that don't intersect the near clip plane.  Mask the stencil so that closer probe volumes will skip these pixels. -->
+            <option>LARGE_DRAW_DISTANCE</option>
+            <option>LODEF</option>              <!-- Apply lighting from the low-def probe volumes used in the distance. -->
+            <option>LODEF, LARGE_DRAW_DISTANCE</option>
+            <option>INSIDE</option>             <!-- Apply lighting from the probe volumes that intersect the near clip plane. -->
+            <option>FOREGROUND</option>         <!-- The foreground pass draws last and fills any gaps between the volumes and the background pass.  Once the map is fully populated with probe data, this pass should only be needed when the camera is above the top height of the volumes. -->
+            
+            <option>INTERIOR</option>           <!-- Apply lighting from an interior GI box (alpha feather pass) that doesn't intersect the near clip plane. -->
+            <option>INTERIOR, INSIDE</option>   <!-- Apply lighting from an interior GI box (alpha feather pass) that intersects the near clip plane. -->
+            <option>INTERIOR, INTERIOR_PREPASS</option><!-- Apply lighting from an interior GI box (opaque prepass) that doesn't intersect the near clip plane. -->
+            <option>INTERIOR, INTERIOR_PREPASS, INSIDE</option><!-- Apply lighting from an interior GI box (opaque prepass) that intersects the near clip plane. -->
+        </options>
+
+        <options>
+            <option></option>
+            <option>SHADOWMASK</option>         <!-- Generate screen-space shadow mask in the second render target. -->
+            <option>SHADOWMASK,SHADOW_NOFSM</option>
+        </options>
+
+        <options>
+            <option></option>
+       		<option>SUPERSAMPLE_MSAA</option>
+		</options>
+        <options>
+            <option></option>
+            <option>NOFLOORCEILING</option>
+        </options>
+
+  	</domain>
+  	<domain>
+    	<options>
+        	<option>MSSA_UPSCALER</option>
+        </options>
+    </domain>
+
+    <!-- Interior alpha feather pass doesn`t write the shadow mask -->
+    <exclusion>                         <!-- The combination is excluded: -->
+        <all>INTERIOR, SHADOWMASK</all> <!-- if INTERIOR and SHADOWMASK are defined -->
+        <none>INTERIOR_PREPASS</none>    <!-- and INTERIOR_PREPASS is not defined. -->
+    </exclusion>
+
+    <!-- Floor-ceiling texture doesn't apply to background/foreground -->
+    <exclusion>                             <!-- The combination is excluded: -->
+        <any>BACKGROUND, FOREGROUND</any>   <!-- if BACKGROUND or FOREGROUND is defined -->
+        <all>NOFLOORCEILING</all>           <!-- and NOFLOORCEILING is defined -->
+    </exclusion>
+    
+</metashader>

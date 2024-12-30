@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <samplerstate sampler="Detail0DiffuseSampler" state="TerrainColorWrap" />
+    <samplerstate sampler="Detail1DiffuseSampler" state="TerrainColorWrap" />
+    <samplerstate sampler="Detail2DiffuseSampler" state="TerrainColorWrap" />
+    <samplerstate sampler="Detail3DiffuseSampler" state="TerrainColorWrap" />
+    <samplerstate sampler="Detail0NormalSampler" state="TerrainNormalWrap" />
+    <samplerstate sampler="Detail1NormalSampler" state="TerrainNormalWrap" />
+    <samplerstate sampler="Detail2NormalSampler" state="TerrainNormalWrap" />
+    <samplerstate sampler="Detail3NormalSampler" state="TerrainNormalWrap" />
+    <samplerstate sampler="Detail0SpecularSampler" state="TerrainColorWrap" />
+    <samplerstate sampler="Detail1SpecularSampler" state="TerrainColorWrap" />
+    <samplerstate sampler="Detail2SpecularSampler" state="TerrainColorWrap" />
+    <samplerstate sampler="Detail3SpecularSampler" state="TerrainColorWrap" />
+    <samplerstate sampler="MaskSampler" state="TerrainColorClamp" />
+    <samplerstate sampler="SelfShadowSampler" state="TerrainColorClamp" />
+    <samplerstate sampler="BigSelfShadowSampler" state="TerrainColorClamp" />
+    <samplerstate sampler="ColorSampler" state="TerrainColorClamp" />
+    <samplerstate sampler="DiffuseSampler" state="TerrainColorClamp" />
+    <samplerstate sampler="BurnSampler" state="TerrainColorClamp" />
+    <samplerstate sampler="BurnNoiseSampler" state="TerrainColorWrap" />
+
+    <define name="SIMPLE_VERTEX"/>
+    <define name="BATCH"/>
+    <define name="PER_PIXEL"/>
+    <define name="MASK_TEXTURE"/>
+    <define name="PARABOLOID_REFLECTION"/>
+    <define name="SAMPLE_SHADOW" />
+
+    <define name="PROJ_AXES_1_LAYER" max_value="2" platform="CURRENTGEN" />
+    <define name="PROJ_AXES_2_LAYER" max_value="5" platform="CURRENTGEN" />
+    <define name="PROJ_AXES_3_LAYER" max_value="9" platform="CURRENTGEN" />
+    <define name="PROJ_AXES_4_LAYER" max_value="14" platform="CURRENTGEN" />
+
+    <define name="SPEC_MASK" max_value="15"/>
+
+    <define name="LAYER_1_PROJ_INDEX" max_value="3" platform="NEXTGEN" />
+    <define name="LAYER_2_PROJ_INDEX" max_value="3" platform="NEXTGEN" />
+    <define name="LAYER_3_PROJ_INDEX" max_value="3" platform="NEXTGEN" />
+    <define name="LAYER_4_PROJ_INDEX" max_value="3" platform="NEXTGEN" />
+    
+    <xi:include href="../Includes/ShadowAndDepthDefines.xml" />
+    
+    <define name="GBUFFER" />
+
+    <domain>
+        <options>
+            <!--  0 Layers  -->
+            <option></option>
+            
+            <!--  1 Layers  -->
+            <option>PER_PIXEL,PROJ_AXES_1_LAYER,SPEC_MASK</option>
+            <option>PROJ_AXES_1_LAYER</option>
+           
+            <!--  2 Layers  -->
+            <option>MASK_TEXTURE,PER_PIXEL,PROJ_AXES_2_LAYER,SPEC_MASK</option>
+            <option>MASK_TEXTURE,PROJ_AXES_2_LAYER</option>
+           
+            <!--  3 Layers  -->
+            <option>MASK_TEXTURE,PER_PIXEL,PROJ_AXES_3_LAYER,SPEC_MASK</option>
+            <option>MASK_TEXTURE,PROJ_AXES_3_LAYER</option>
+
+            <!--  4 Layers -->
+            <option>MASK_TEXTURE,PER_PIXEL,PROJ_AXES_4_LAYER,SPEC_MASK</option>
+            <option>MASK_TEXTURE,PROJ_AXES_4_LAYER</option>
+        </options>
+
+        
+        <options>
+            <option></option>
+            <option>LAYER_1_PROJ_INDEX</option>
+            <option>MASK_TEXTURE,LAYER_1_PROJ_INDEX,LAYER_2_PROJ_INDEX</option>
+            <option>MASK_TEXTURE,LAYER_1_PROJ_INDEX,LAYER_2_PROJ_INDEX,LAYER_3_PROJ_INDEX</option>
+            <option>MASK_TEXTURE,LAYER_1_PROJ_INDEX,LAYER_2_PROJ_INDEX,LAYER_3_PROJ_INDEX,LAYER_4_PROJ_INDEX</option>
+
+            <option>LAYER_1_PROJ_INDEX,PER_PIXEL,SPEC_MASK</option>
+            <option>MASK_TEXTURE,LAYER_1_PROJ_INDEX,LAYER_2_PROJ_INDEX,PER_PIXEL,SPEC_MASK</option>
+            <option>MASK_TEXTURE,LAYER_1_PROJ_INDEX,LAYER_2_PROJ_INDEX,PER_PIXEL,SPEC_MASK</option>
+            <option>MASK_TEXTURE,LAYER_1_PROJ_INDEX,LAYER_2_PROJ_INDEX,LAYER_3_PROJ_INDEX,PER_PIXEL,SPEC_MASK</option>
+            <option>MASK_TEXTURE,LAYER_1_PROJ_INDEX,LAYER_2_PROJ_INDEX,LAYER_3_PROJ_INDEX,LAYER_4_PROJ_INDEX,PER_PIXEL,SPEC_MASK</option>
+        </options>
+
+        <options>
+            <option>GBUFFER</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SIMPLE_VERTEX</option>
+            <option>SIMPLE_VERTEX,BATCH</option>
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option>GBUFFER,SIMPLE_VERTEX,BATCH</option>
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option>PARABOLOID_REFLECTION</option>
+        </options>
+        <options>
+            <option></option>
+            <option>SIMPLE_VERTEX</option>
+            <option>SIMPLE_VERTEX,BATCH</option>
+        </options>
+        <options>
+            <option></option>
+            <option>SAMPLE_SHADOW</option>
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option></option>
+            <option>SIMPLE_VERTEX</option>
+            <option>SIMPLE_VERTEX,BATCH</option>
+        </options>
+        <options ref="shadowanddepth" />
+    </domain>
+
+    <domain>
+        <options>
+            <option></option>
+            <option>SIMPLE_VERTEX</option>
+            <option>SIMPLE_VERTEX,BATCH</option>
+        </options>
+    </domain>
+
+    <!--  Exclude everything that has 3 of the same horizontal projection -->
+    <exclusion>PROJ_AXES_3_LAYER=6</exclusion>
+    <exclusion>PROJ_AXES_4_LAYER=0</exclusion>
+    <exclusion>PROJ_AXES_4_LAYER=1</exclusion>
+    <exclusion>PROJ_AXES_4_LAYER=6</exclusion>
+    <exclusion>PROJ_AXES_4_LAYER=10</exclusion>
+    <exclusion>PROJ_AXES_4_LAYER=11</exclusion>
+
+    <exclusion>
+        <platform>CURRENTGEN</platform>
+        <any>PROJ_AXES_1_LAYER</any>
+        <any>SPEC_MASK=2,SPEC_MASK=3,SPEC_MASK=4,SPEC_MASK=5,SPEC_MASK=6,SPEC_MASK=7,SPEC_MASK=8,SPEC_MASK=9,SPEC_MASK=10,SPEC_MASK=11,SPEC_MASK=12,SPEC_MASK=13,SPEC_MASK=14,SPEC_MASK=15</any>
+    </exclusion>
+
+    <exclusion>
+        <platform>CURRENTGEN</platform>
+        <any>PROJ_AXES_2_LAYER</any>
+        <any>SPEC_MASK=4,SPEC_MASK=5,SPEC_MASK=6,SPEC_MASK=7,SPEC_MASK=8,SPEC_MASK=9,SPEC_MASK=10,SPEC_MASK=11,SPEC_MASK=12,SPEC_MASK=13,SPEC_MASK=14,SPEC_MASK=15</any>
+    </exclusion>
+
+    <exclusion>
+        <platform>CURRENTGEN</platform>
+        <any>PROJ_AXES_3_LAYER</any>
+        <any>SPEC_MASK=8,SPEC_MASK=9,SPEC_MASK=10,SPEC_MASK=11,SPEC_MASK=12,SPEC_MASK=13,SPEC_MASK=14,SPEC_MASK=15</any>
+    </exclusion>
+
+    <exclusion>
+        <platform>NEXTGEN</platform>
+        <none>LAYER_2_PROJ_INDEX</none>
+        <any>SPEC_MASK=2,SPEC_MASK=3,SPEC_MASK=4,SPEC_MASK=5,SPEC_MASK=6,SPEC_MASK=7,SPEC_MASK=8,SPEC_MASK=9,SPEC_MASK=10,SPEC_MASK=11,SPEC_MASK=12,SPEC_MASK=13,SPEC_MASK=14,SPEC_MASK=15</any>
+    </exclusion>
+
+    <exclusion>
+        <platform>NEXTGEN</platform>
+        <none>LAYER_3_PROJ_INDEX</none>
+        <any>SPEC_MASK=4,SPEC_MASK=5,SPEC_MASK=6,SPEC_MASK=7,SPEC_MASK=8,SPEC_MASK=9,SPEC_MASK=10,SPEC_MASK=11,SPEC_MASK=12,SPEC_MASK=13,SPEC_MASK=14,SPEC_MASK=15</any>
+    </exclusion>
+
+    <exclusion>
+        <platform>NEXTGEN</platform>
+        <none>LAYER_4_PROJ_INDEX</none>
+        <any>SPEC_MASK=8,SPEC_MASK=9,SPEC_MASK=10,SPEC_MASK=11,SPEC_MASK=12,SPEC_MASK=13,SPEC_MASK=14,SPEC_MASK=15</any>
+    </exclusion>
+    
+</metashader>

@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <samplerstate sampler="PrevPositionTexture"     state="ColorPointWrap" />
+    <samplerstate sampler="PrevVelocityTexture"     state="ColorPointWrap" />
+    <samplerstate sampler="InitialPositionTexture"  state="ColorPointWrap" />
+    <samplerstate sampler="PositionTexture"         state="ColorPointWrap" />
+    <samplerstate sampler="VelocityTexture"         state="ColorPointWrap" />
+    <samplerstate sampler="LightingTexture"         state="ColorPointWrap" />
+    <samplerstate sampler="DropletTexture"          state="RainNormal"/>
+    <samplerstate sampler="StreakTexture"           state="RainNormal"/>
+    <samplerstate sampler="GPUBasedExposureTexture" state="ColorPointClamp"/>
+    
+
+    <!-- GI ambient lighting stuff -->
+    <samplerstate sampler="VolumeTextureR"          state="ColorClamp" />
+    <samplerstate sampler="VolumeTextureG"          state="ColorClamp" />
+    <samplerstate sampler="VolumeTextureB"          state="ColorClamp" />
+    <samplerstate sampler="FloorCeilingTexture"     state="ColorClamp2D" />
+
+    <!-- CG GI ambient lighting stuff -->
+    <samplerstate sampler="BigProbeVolumeTextureUpperColor" state="ColorClamp2D" />
+    <samplerstate sampler="BigProbeVolumeTextureLowerColor" state="ColorClamp2D" />
+    <samplerstate sampler="BigProbeVolumeTextureFloorCeiling" state="ColorClamp2D" />
+    <samplerstate sampler="BigProbeVolumeTextureUpperColor3D" state="ColorClamp2D" />
+    <samplerstate sampler="BigProbeVolumeTextureLowerColor3D" state="ColorClamp2D" />
+    <samplerstate sampler="BigProbeVolumeTextureFloorCeiling3D" state="ColorClamp2D" />
+    <samplerstate sampler="GITexture" state="ColorClamp2D" />
+
+    <define name="RAINSTREAK_INTEGRATOR"/>
+    <define name="RAINSTREAK_RENDER"/>
+    <define name="RAINSTREAK_RESET"/>
+    <define name="RAINSTREAK_OCCLUDER"/>
+    <define name="SAMPLE_PARABOLOID_REFLECTION_BOTTOM" platform="PC,DURANGO,ORBIS"/>
+    <define name="RAINSTREAK_SHEETSOFRAIN" platform="PC,DURANGO,ORBIS"/>
+    <define name="RAINSTREAK_RENDER_PS3" platform="PS3"/>
+    <define name="RAINSTREAK_GI" platform="PS3,XENON"/>
+
+    <domain>
+        <options>
+            <option>RAINSTREAK_GI</option>
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option>RAINSTREAK_INTEGRATOR</option>
+            <option>RAINSTREAK_INTEGRATOR,RAINSTREAK_RESET</option>
+            <option>RAINSTREAK_INTEGRATOR,RAINSTREAK_OCCLUDER</option>
+            <option>RAINSTREAK_INTEGRATOR,RAINSTREAK_RESET,RAINSTREAK_OCCLUDER</option>
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option>RAINSTREAK_RENDER</option>
+            <option>RAINSTREAK_RENDER,RAINSTREAK_OCCLUDER</option>
+            <option>RAINSTREAK_RENDER,RAINSTREAK_SHEETSOFRAIN</option>
+            <option>RAINSTREAK_RENDER,RAINSTREAK_RENDER_PS3</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SAMPLE_PARABOLOID_REFLECTION_BOTTOM</option>
+        </options>
+    </domain>
+
+</metashader>
+ 

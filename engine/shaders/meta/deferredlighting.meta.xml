@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <compiler platform="ps3" type="fragment">-po OutColorPrec=fp16</compiler >
+
+    <samplerstate sampler="AlbedoTexture" state="ColorPointClamp2D" />
+    <samplerstate sampler="NormalTexture" state="ColorPointClamp2D" />
+	<samplerstate sampler="FlagsTexture" state="ColorPointClamp2D" />
+    <samplerstate sampler="OtherTexture" state="ColorPointClamp2D" />
+    <samplerstate sampler="AlbedoTextureMS" state="ColorPointClamp2D" />
+    <samplerstate sampler="NormalTextureMS" state="ColorPointClamp2D" />
+    <samplerstate sampler="OtherTextureMS" state="ColorPointClamp2D" />
+    <samplerstate sampler="PreprocessTexture" state="ColorPointClamp2D" />
+    <samplerstate sampler="DeferredReflectionTexture" state="ColorWrap" />
+    <samplerstate sampler="DeferredReflectionTextureDest" state="ColorWrap" />
+    <samplerstate sampler="ParaboloidReflectionTexture" state="ColorClamp" />
+    <samplerstate sampler="AmbientTexture" state="ColorClamp" />
+    <samplerstate sampler="GBufferNormalTexture" state="ColorClamp" />
+    <samplerstate sampler="WorldAmbientColorTexture" state="ColorWrap" />
+    <samplerstate sampler="LightProjectedTexture" state="" />
+    <samplerstate sampler="LightProjectedVideo" state="Video" />
+    <samplerstate sampler="WorldAmbientOcclusionReducedTexture" state="ColorWrap" />
+    <samplerstate sampler="WorldAmbientColorReducedTexture" state="ColorWrap" />
+    <samplerstate sampler="ProbeLightingTexture" state="ColorPointClamp2D" />
+<samplerstate sampler="SmallDepthTexture" state="DepthVPSampler" />
+    <samplerstate sampler="LongRangeShadowVolumeTexture" state="ColorPointWrap2D" />
+
+    <samplerstate sampler="BigProbeVolumeTextureUpperColor" state="ColorClamp2D" />
+    <samplerstate sampler="BigProbeVolumeTextureLowerColor" state="ColorClamp2D" />
+    <samplerstate sampler="BigProbeVolumeTextureFloorCeiling" state="ColorClamp2D" />
+    <samplerstate sampler="BigProbeVolumeTextureUpperColor3D" state="ColorClamp2D" />
+    <samplerstate sampler="BigProbeVolumeTextureLowerColor3D" state="ColorClamp2D" />
+    <samplerstate sampler="BigProbeVolumeTextureFloorCeiling3D" state="ColorClamp2D" />
+  
+  <define name="AMBIENT" />
+    <define name="ELECTRIC_POWER" />
+    <define name="SAMPLE_REFLECTION" />
+    <define name="SAMPLE_PARABOLOID_REFLECTION" />
+    <define name="WORLDAMBIENTOCCLUSION" />
+    <define name="WORLDAMBIENTCOLOR" />
+    <define name="GLOBALWORLDAMBIENTOCCLUSION" />
+    <define name="GLOBALWORLDAMBIENTCOLOR" />
+    <define name="AMBIENTOCCLUSIONVIEWMODE" platform="EDITOR"/>
+    <define name="AMBIENT_PROBES"/><!-- Take the ambient lighting from the radiance transfer probes -->
+	<define name="MAIN_PASS" platform="XENON,PS3"/>
+    <define name="DYNAMIC_REFLECTION" platform="XENON,PS3"/>
+    <define name="REFLECTION_STATIC_TRANSITION" />
+
+    <define name="SUN" />
+
+    <define name="SAMPLE_SHADOW" />
+
+    <define name="OMNI" />
+
+    <define name="CAPSULE" />
+
+    <define name="SPOT" />
+    <define name="NEAR_CLIPPED_SPOT" />
+	<define name="SAMPLE_SHADOW_HIRESFILTERING" />
+
+    <define name="SPECULAR" />
+    <define name="HALF_LAMBERT" />
+    <!--<define name="BACK_COLOR" />-->
+
+    <define name="STENCILTAG" />
+    <define name="STENCILTEST" />
+    <define name="USE_HI_STENCIL" platform="PS3"/>
+    <define name="PROJECT_IN_PIXEL" />
+    <define name="ORTHO_CAMERA" platform="EDITOR" />
+
+    <define name="BASE_PASS_VOLUME" />
+
+    <define name="PROJECTED_TEXTURE" />
+    <define name="PROJECTED_VIDEO" />
+
+    <xi:include href="Includes/ShadowAndDepthDefines.xml" />
+
+    <define name="DEBUG_GEOMETRY" />
+    <define name="FADING_CLIP_PLANES_MAX_IDX" max_value="7" />
+
+    <define name="PROCEDURAL_SHADOW_CASTER" />
+
+    <define name="SUN_SHADOW_MASK" />
+
+    <define name="GBUFFER_WITH_POSTFXMASK" platform="XENON,PS3" />
+
+    <define name="FORCE_TRANSLUCENCY_CURRENTGEN" platform="PC,XENON,PS3" />
+    
+    <!-- variations to tag stencil with different types of volumes -->
+
+    <domain>
+        <options>
+            <option>DEBUG_GEOMETRY</option>
+            <option>DEBUG_GEOMETRY,NEAR_CLIPPED_SPOT</option>
+            <option>DEBUG_GEOMETRY,CAPSULE</option>
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option>OMNI</option>
+            <option>CAPSULE</option>
+            <option>SPOT</option>
+            <option>SPOT,NEAR_CLIPPED_SPOT</option>
+        </options>
+
+        <options>
+            <option>STENCILTAG</option>
+        </options>
+    </domain>
+
+    <!-- variations for ambient with possibly sun and or reflection -->
+    <domain>
+        <options>
+            <option></option>
+            <option>SUN</option>
+            <option>AMBIENT</option>
+            <option>AMBIENT,SUN</option>
+            <option>AMBIENT,AMBIENT_PROBES</option>
+            <option>AMBIENT,AMBIENT_PROBES,SUN</option>
+            <option>AMBIENT,AMBIENT_PROBES,SUN,SUN_SHADOW_MASK</option>
+            <!--<option>AMBIENT,SUN,HALF_LAMBERT</option>-->
+            <!--<option>AMBIENT,SUN,BACK_COLOR</option>-->
+            <!--<option>AMBIENT,SUN,HALF_LAMBERT,BACK_COLOR</option>-->
+        </options>
+
+        <options>
+            <option></option>
+            <option>SAMPLE_REFLECTION</option>
+			<option>SAMPLE_REFLECTION,MAIN_PASS</option>
+            <option>SAMPLE_REFLECTION,MAIN_PASS,DYNAMIC_REFLECTION</option>
+            <option>SAMPLE_REFLECTION,REFLECTION_STATIC_TRANSITION</option>
+            <option>SAMPLE_REFLECTION,REFLECTION_STATIC_TRANSITION,MAIN_PASS</option>
+            <option>SAMPLE_REFLECTION,REFLECTION_STATIC_TRANSITION,MAIN_PASS,DYNAMIC_REFLECTION</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SAMPLE_PARABOLOID_REFLECTION</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>WORLDAMBIENTOCCLUSION</option>
+            <option>WORLDAMBIENTOCCLUSION,AMBIENTOCCLUSIONVIEWMODE</option>
+            <option>WORLDAMBIENTOCCLUSION,GLOBALWORLDAMBIENTOCCLUSION</option>
+            <option>WORLDAMBIENTOCCLUSION,GLOBALWORLDAMBIENTOCCLUSION,AMBIENTOCCLUSIONVIEWMODE</option>            
+        </options>
+
+        <options>
+            <option></option>
+            <option>WORLDAMBIENTCOLOR</option>
+            <option>WORLDAMBIENTCOLOR,ELECTRIC_POWER</option>
+            <option>WORLDAMBIENTCOLOR,GLOBALWORLDAMBIENTCOLOR</option>
+            <option>WORLDAMBIENTCOLOR,GLOBALWORLDAMBIENTCOLOR,ELECTRIC_POWER</option>            
+        </options>
+
+        <options>
+            <option></option>
+            <option>SAMPLE_SHADOW</option>
+            <option>SAMPLE_SHADOW,SHADOW_NOFSM</option>
+            <option>SAMPLE_SHADOW,PROCEDURAL_SHADOW_CASTER</option>
+            <option>SAMPLE_SHADOW,PROCEDURAL_SHADOW_CASTER,SHADOW_NOFSM</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>GBUFFER_WITH_POSTFXMASK</option>
+        </options>      
+        
+        <options>
+            <option></option>
+            <option>ORTHO_CAMERA</option>
+<!--
+            <option>PROJECT_IN_PIXEL</option>
+            <option>BASE_PASS_VOLUME</option>
+            <option>BASE_PASS_VOLUME,PROJECT_IN_PIXEL</option>
+-->
+        </options>
+    </domain>
+
+    <exclusion>
+        <none>AMBIENT</none>
+        <any>SAMPLE_REFLECTION,SAMPLE_PARABOLOID_REFLECTION,WORLDAMBIENTCOLOR,WORLDAMBIENTOCCLUSION,AMBIENT_PROBES</any>
+    </exclusion>
+
+    <exclusion>
+        <any>PROJECT_IN_PIXEL</any>
+        <none>OMNI,SPOT,CAPSULE,BASE_PASS_VOLUME</none>
+    </exclusion>
+
+    <!-- spot -->
+    <domain>
+        <options>
+            <option>STENCILTEST,SPOT</option>
+            <option>STENCILTEST,USE_HI_STENCIL,SPOT</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SPECULAR</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>NEAR_CLIPPED_SPOT</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>PROJECT_IN_PIXEL</option>
+            <option>ORTHO_CAMERA</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>HALF_LAMBERT</option>
+        </options>
+
+        <options>
+            <option></option>
+            <!--<option>BACK_COLOR</option>-->
+        </options>
+
+        <options>
+            <option></option>
+            <option>SAMPLE_SHADOW,SAMPLE_SHADOW_HIRESFILTERING</option>
+            <option>SAMPLE_SHADOW</option>
+			<option>SAMPLE_SHADOW, PROCEDURAL_SHADOW_CASTER</option>
+			<option>SAMPLE_SHADOW, SAMPLE_SHADOW_HIRESFILTERING,PROCEDURAL_SHADOW_CASTER</option>
+			
+        </options>
+
+        <options>
+            <option></option>
+            <option>PROJECTED_TEXTURE</option>
+            <option>PROJECTED_VIDEO</option>
+            <option>PROJECTED_TEXTURE,PROJECTED_VIDEO</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>FADING_CLIP_PLANES_MAX_IDX</option>
+        </options>
+    </domain>
+
+    <!-- Since the FORCE_TRANSLUCENCY_CURRENTGEN define is only to hackishly fix a bug with
+         a specific light, it should only be valid with that speicfic light's defines. Thus
+         it should only add one variation. -->
+         
+    <domain>
+        <options>
+            <option platform="PC,XENON">STENCILTEST,SPOT,SPECULAR,PROJECT_IN_PIXEL,SAMPLE_SHADOW,FORCE_TRANSLUCENCY_CURRENTGEN</option>
+            <option platform="PC,XENON">STENCILTEST,SPOT,SPECULAR,PROJECT_IN_PIXEL,SAMPLE_SHADOW,SAMPLE_SHADOW_HIRESFILTERING,FORCE_TRANSLUCENCY_CURRENTGEN</option>
+            <option platform="PC,XENON">STENCILTEST,SPOT,SPECULAR,PROJECT_IN_PIXEL,SAMPLE_SHADOW,PROCEDURAL_SHADOW_CASTER,FORCE_TRANSLUCENCY_CURRENTGEN</option>
+            <option platform="PC,XENON">STENCILTEST,SPOT,SPECULAR,PROJECT_IN_PIXEL,SAMPLE_SHADOW,SAMPLE_SHADOW_HIRESFILTERING,PROCEDURAL_SHADOW_CASTER,FORCE_TRANSLUCENCY_CURRENTGEN</option>
+            <option platform="PC,XENON">STENCILTEST,SPOT,SPECULAR,SAMPLE_SHADOW,FORCE_TRANSLUCENCY_CURRENTGEN</option>
+            <option platform="PC,XENON">STENCILTEST,SPOT,SPECULAR,SAMPLE_SHADOW,SAMPLE_SHADOW_HIRESFILTERING,FORCE_TRANSLUCENCY_CURRENTGEN</option>
+            <option platform="PC,XENON">STENCILTEST,SPOT,SPECULAR,SAMPLE_SHADOW,PROCEDURAL_SHADOW_CASTER,FORCE_TRANSLUCENCY_CURRENTGEN</option>
+            <option platform="PC,XENON">STENCILTEST,SPOT,SPECULAR,SAMPLE_SHADOW,SAMPLE_SHADOW_HIRESFILTERING,PROCEDURAL_SHADOW_CASTER,FORCE_TRANSLUCENCY_CURRENTGEN</option>
+
+            <option platform="PS3">STENCILTEST,USE_HI_STENCIL,SPOT,SPECULAR,PROJECT_IN_PIXEL,SAMPLE_SHADOW,FORCE_TRANSLUCENCY_CURRENTGEN</option>
+            <option platform="PS3">STENCILTEST,USE_HI_STENCIL,SPOT,SPECULAR,PROJECT_IN_PIXEL,SAMPLE_SHADOW,SAMPLE_SHADOW_HIRESFILTERING,FORCE_TRANSLUCENCY_CURRENTGEN</option>
+            <option platform="PS3">STENCILTEST,USE_HI_STENCIL,SPOT,SPECULAR,PROJECT_IN_PIXEL,SAMPLE_SHADOW,PROCEDURAL_SHADOW_CASTER,FORCE_TRANSLUCENCY_CURRENTGEN</option>
+            <option platform="PS3">STENCILTEST,USE_HI_STENCIL,SPOT,SPECULAR,PROJECT_IN_PIXEL,SAMPLE_SHADOW,SAMPLE_SHADOW_HIRESFILTERING,PROCEDURAL_SHADOW_CASTER,FORCE_TRANSLUCENCY_CURRENTGEN</option>
+            <option platform="PS3">STENCILTEST,USE_HI_STENCIL,SPOT,SPECULAR,SAMPLE_SHADOW,FORCE_TRANSLUCENCY_CURRENTGEN</option>
+            <option platform="PS3">STENCILTEST,USE_HI_STENCIL,SPOT,SPECULAR,SAMPLE_SHADOW,SAMPLE_SHADOW_HIRESFILTERING,FORCE_TRANSLUCENCY_CURRENTGEN</option>
+            <option platform="PS3">STENCILTEST,USE_HI_STENCIL,SPOT,SPECULAR,SAMPLE_SHADOW,PROCEDURAL_SHADOW_CASTER,FORCE_TRANSLUCENCY_CURRENTGEN</option>
+            <option platform="PS3">STENCILTEST,USE_HI_STENCIL,SPOT,SPECULAR,SAMPLE_SHADOW,SAMPLE_SHADOW_HIRESFILTERING,PROCEDURAL_SHADOW_CASTER,FORCE_TRANSLUCENCY_CURRENTGEN</option>
+        </options>
+    </domain>
+    
+    <!-- omni -->
+    <domain>
+        <options>
+            <option>STENCILTEST,OMNI</option>
+            <option>STENCILTEST,USE_HI_STENCIL,OMNI</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SPECULAR</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>HALF_LAMBERT</option>
+        </options>
+
+        <options>
+            <option></option>
+            <!--<option>BACK_COLOR</option>-->
+        </options>
+
+        <options>
+            <option></option>
+            <option>PROJECT_IN_PIXEL</option>
+            <option>ORTHO_CAMERA</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SAMPLE_SHADOW,SAMPLE_SHADOW_HIRESFILTERING</option>
+            <option>SAMPLE_SHADOW</option>
+			<option>SAMPLE_SHADOW, PROCEDURAL_SHADOW_CASTER</option>
+			<option>SAMPLE_SHADOW, SAMPLE_SHADOW_HIRESFILTERING, PROCEDURAL_SHADOW_CASTER</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>FADING_CLIP_PLANES_MAX_IDX</option>
+        </options>
+    </domain>
+
+    <!-- capsule -->
+    <domain>
+        <options>
+            <option>STENCILTEST,CAPSULE</option>
+            <option>STENCILTEST,USE_HI_STENCIL,CAPSULE</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SPECULAR</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>HALF_LAMBERT</option>
+        </options>
+
+        <options>
+            <option></option>
+            <!--<option>BACK_COLOR</option>-->
+        </options>
+
+        <options>
+            <option></option>
+            <option>PROJECT_IN_PIXEL</option>
+            <option>ORTHO_CAMERA</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>FADING_CLIP_PLANES_MAX_IDX</option>
+        </options>
+    </domain>
+
+    <!-- we use this method to remove variations instead of putting a platform attribute right on the define, because we need the shader option to be available in the C++ code to avoid changing behavior too much -->
+    <exclusion>
+        <platform>PC,DURANGO,ORBIS</platform>
+        <any>PROJECT_IN_PIXEL</any>
+    </exclusion>
+</metashader>

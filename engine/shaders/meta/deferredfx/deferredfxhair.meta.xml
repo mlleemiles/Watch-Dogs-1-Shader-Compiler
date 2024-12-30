@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="SourceTexture" state="ColorPointClamp2D" />
+    <samplerstate sampler="SourceTextureLinear" state="ColorClamp2D" />
+    <samplerstate sampler="DepthTexture" state="DepthSampler" />
+    <samplerstate sampler="MaskTexture" state="ColorPointClamp2D" />
+    <samplerstate sampler="MaskTextureLinear" state="ColorClamp2D" />
+
+    <define name="IMAGE_COPY" />
+    <define name="FILTER_KERNEL_SIZE" max_value="21" />
+
+    <!-- Hair -->
+    <domain>
+        <options>
+            <option>FILTER_KERNEL_SIZE</option>
+            <option>IMAGE_COPY</option>
+        </options>
+    </domain>
+
+</metashader>

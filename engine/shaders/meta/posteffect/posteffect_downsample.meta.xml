@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="SceneColorSampler" state="ColorClamp2D" />
+    <samplerstate sampler="PostFXMaskSampler" state="ColorPointClamp2D" />
+    <samplerstate sampler="DepthSampler" state="DepthSampler" />
+
+    <define name="MASK_POSTFX" />
+    <define name="MASK_SKY" />
+    <define name="REVERSE_MOTIONBLUR_MASK" />
+    <define name="DECODE_SCENECOLOR" platform="XENON" />
+    <define name="BILATERAL_FILTER_LUMINANCE" platform="XENON,PS3" />
+    <define name="BILATERAL_FILTER_DEPTH" platform="XENON,PS3" />
+
+  <domain>
+        <options>
+            <option></option>
+            <option>MASK_POSTFX</option>
+            <option>REVERSE_MOTIONBLUR_MASK</option>
+            <option>MASK_POSTFX,REVERSE_MOTIONBLUR_MASK</option>          
+        </options>
+        
+        <options>
+            <option></option>
+            <option>MASK_SKY</option>
+            <option>BILATERAL_FILTER_LUMINANCE</option>
+            <option>BILATERAL_FILTER_DEPTH</option>
+        </options>
+
+        <options>
+          <option></option>
+          <option>DECODE_SCENECOLOR</option>
+        </options>
+    </domain>
+</metashader>

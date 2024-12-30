@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+    
+<metashader xmlns:xi="#">
+
+    <samplerstate sampler="WaveTexture" state="ColorWrap" />
+    <samplerstate sampler="HeightTexture" state="ColorPointWrap" />
+    
+    <define name="HEIGHTMAP" platform="PC,DURANGO,ORBIS" />
+    <define name="FORCES" platform="PC,DURANGO,ORBIS" />
+    <define name="GATHERING" platform="PC,DURANGO,ORBIS"/>
+    <define name="INTEGRATION" platform="PC,DURANGO,ORBIS"/>
+    
+    <domain>
+        <options>
+            <option>HEIGHTMAP</option>
+            <option>FORCES</option>
+            <option>GATHERING</option>
+            <option>INTEGRATION</option>
+        </options>
+    </domain>
+
+</metashader>
+ 

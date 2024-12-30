@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="SourceTexturePoint"    state="ColorPointWrap" />
+    <samplerstate sampler="SourceTextureBilinear" state="ColorWrap" />
+    <samplerstate sampler="AdditionalNormalMap"   state="ColorWrap" />
+
+    <define name="IMPACTS" />
+    <define name="CONVOLUTION"/>
+    <define name="NORMALMAP" platform="PC,DURANGO,ORBIS"/>
+    <define name="EXTRANORMALMAP"/>
+    <define name="COMBOMAPS" platform="XENON,PS3"/>
+    <define name="COPY" platform="XENON"/>
+    <define name="NOSOURCEBILINEAR" platform="PC"/>
+  
+
+  <domain>
+        <options>
+            <option>IMPACTS</option>
+            <option>CONVOLUTION</option>
+            <option>NORMALMAP</option>
+            <option>NORMALMAP,EXTRANORMALMAP</option>
+            <option>NORMALMAP,NOSOURCEBILINEAR</option>
+            <option>NORMALMAP,EXTRANORMALMAP,NOSOURCEBILINEAR</option>
+            <option>COMBOMAPS</option>
+            <option>COMBOMAPS,EXTRANORMALMAP</option>
+            <option>COPY</option>
+        </options>
+    </domain>
+
+</metashader>

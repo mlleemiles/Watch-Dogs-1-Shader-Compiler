@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <define name="SHADOW_CRUDE_BIG_KERNEL" platform="PC" />
+
+    <define name="SHADOW" />
+    <define name="SHADOW_NOFSM" />
+    <define name="SHADOW_PARABOLOID" />
+    <define name="DEPTH" />
+    <define name="DITHERING" />
+
+    <options name="shadowanddepth">
+        <option>SHADOW</option>
+        <option>SHADOW,DITHERING</option>
+        <option>SHADOW,SHADOW_NOFSM</option>
+        <option>SHADOW,SHADOW_NOFSM,SHADOW_PARABOLOID</option>
+        <option>DEPTH</option>
+        <option>DEPTH,DITHERING</option>
+    </options>
+</metashader>

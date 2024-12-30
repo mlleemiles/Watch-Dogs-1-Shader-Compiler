@@ -1,0 +1,919 @@
+<config>
+	<property name="2x resolution" description="Indicate that the image is scaled 2 times the appropriate size it should have" type="resize" />
+	<property name="4x resolution" description="Indicate that the image is scaled 4 times the appropriate size it should have" type="resize" />
+	<property name="8x resolution" description="Indicate that the image is scaled 8 times the appropriate size it should have" type="resize" />
+
+	<resizeOp name="Original Size" type="none" />
+    <resizeOp name="Scale" type="scale">
+        <value value="2" />
+        <value value="4" />
+        <value value="8" />
+    </resizeOp>	
+    <resizeOp name="Fixed Width" type="fixed" />	
+
+	<profile id="5" displayname="ColorMap" legacyid="2402709566">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="None" values="Smooth" />
+			<colorspace type="sRGB" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="12434877" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Color" />
+		<mipmap type="Auto" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="1" displayname="ColorMap Sharper" legacyid="2950527329">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="None" values="Smooth" />
+			<colorspace type="sRGB" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="12434877" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Color" />
+		<mipmap type="Auto" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="2" displayname="ColorMap AlphaBlend" legacyid="2282889649">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="Blend" values="Smooth" />
+			<colorspace type="sRGB" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="0" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Color" />
+		<mipmap type="Auto" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="3" displayname="ColorMap Explicit Alpha" legacyid="966666351">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="Blend" values="Discrete" />
+			<colorspace type="sRGB" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="0" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Color" />
+		<mipmap type="Auto" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="11" displayname="ColorMap No MipMap" legacyid="1660866857">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="None" values="Smooth" />
+			<colorspace type="sRGB" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="12434877" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Color" />
+		<mipmap type="None" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="7" displayname="ColorMap AlphaTest" legacyid="2387106043">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="AlphaTest" values="Binary" />
+			<colorspace type="sRGB" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="0" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Color" />
+		<mipmap type="Auto" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="8" displayname="ColorMap AlphaTest Manual MipMap" legacyid="93088691">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="AlphaTest" values="Binary" />
+			<colorspace type="sRGB" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="0" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Color" />
+		<mipmap type="Manual" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="9" displayname="ColorMap AlphaBlend Manual MipMap" legacyid="1561225571">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="Blend" values="Smooth" />
+			<colorspace type="sRGB" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="0" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Color" />
+		<mipmap type="Manual" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="12" displayname="ColorMap AlphaBlend No MipMap" legacyid="2822931634">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="Blend" values="Smooth" />
+			<colorspace type="sRGB" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="0" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Color" />
+		<mipmap type="None" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="14" displayname="ColorMap Manual MipMap" legacyid="368809141">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="None" values="Smooth" />
+			<colorspace type="sRGB" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="12434877" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Color" />
+		<mipmap type="Manual" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="6" displayname="NormalMap" legacyid="562391268">
+		<description>
+			<image type="Texture" />
+			<color type="NormalMap" />
+			<alpha type="None" values="Smooth" />
+			<colorspace type="Linear" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="12434877" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Normalmap" />
+		<mipmap type="Auto" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="24" displayname="NormalMap LowPrecision" legacyid="3868467019">
+		<description>
+			<image type="Texture" />
+			<color type="NormalMap" />
+			<alpha type="None" values="Smooth" />
+			<colorspace type="Linear" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="0" />
+			<lowprecision enabled="1" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Normalmap" />
+		<mipmap type="Auto" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="4" displayname="NormalMap Fade" legacyid="1420166237">
+		<description>
+			<image type="Texture" />
+			<color type="NormalMap" />
+			<alpha type="None" values="Smooth" />
+			<colorspace type="Linear" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="12434877" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Normalmap" />
+		<mipmap type="Auto" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade color="8224255" mipstart="6" blending="0.4" />
+		</mipmap>
+	</profile>
+	<profile id="23" displayname="NormalMap Fade LowPrecision" legacyid="351592257">
+		<description>
+			<image type="Texture" />
+			<color type="NormalMap" />
+			<alpha type="None" values="Smooth" />
+			<colorspace type="Linear" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="0" />
+			<lowprecision enabled="1" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Normalmap" />
+		<mipmap type="Auto" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade color="8224255" mipstart="6" blending="0.4" />
+		</mipmap>
+	</profile>
+	<profile id="15" displayname="NormalMap Manual MipMap" legacyid="3849154331">
+		<description>
+			<image type="Texture" />
+			<color type="NormalMap" />
+			<alpha type="None" values="Binary" />
+			<colorspace type="Linear" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="12434877" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Normalmap" />
+		<mipmap type="Manual" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="22" displayname="NormalMap Manual MipMap LowPrecision" legacyid="4219919270">
+		<description>
+			<image type="Texture" />
+			<color type="NormalMap" />
+			<alpha type="None" values="Binary" />
+			<colorspace type="Linear" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="0" />
+			<lowprecision enabled="1" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Normalmap" />
+		<mipmap type="Manual" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="13" displayname="NormalMap Parallax" legacyid="583770668">
+		<description>
+			<image type="Texture" />
+			<color type="NormalMap" />
+			<alpha type="Height" values="Smooth" />
+			<colorspace type="Linear" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="0" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Normalmap" />
+		<mipmap type="Auto" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="34" displayname="NormalMap ReliefMap" legacyid="0">
+		<description>
+			<image type="Texture" />
+			<color type="NormalMap" />
+			<alpha type="Height_Relief" values="Smooth" />
+			<colorspace type="Linear" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="0" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Normalmap" />
+		<mipmap type="Auto" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="25" displayname="NormalMap Overlay" legacyid="3118232058">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="None" values="Smooth" />
+			<colorspace type="Linear" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="12434877" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Color" />
+		<mipmap type="Auto" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="10" displayname="MaskMap" legacyid="2317137680">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="None" values="Smooth" />
+			<colorspace type="Linear" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="12434877" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Mask" />
+		<mipmap type="Auto" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="35" displayname="MaskMap Manual MipMap" legacyid="3578941235">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="None" values="Smooth" />
+			<colorspace type="Linear" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="12434877" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Mask" />
+		<mipmap type="Manual" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="26" displayname="MaskMap AlphaBlend" legacyid="0">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="Blend" values="Smooth" />
+			<colorspace type="Linear" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="12434877" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Mask" />
+		<mipmap type="Auto" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="16" displayname="Cubemap" legacyid="4282074561">
+		<description>
+			<image type="Cubemap" />
+			<color type="ColorMap" />
+			<alpha type="None" values="Smooth" />
+			<colorspace type="sRGB" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="12434877" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Color" />
+		<mipmap type="Auto" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="17" displayname="Cubemap AlphaBlend" legacyid="1106021792">
+		<description>
+			<image type="Cubemap" />
+			<color type="ColorMap" />
+			<alpha type="Blend" values="Smooth" />
+			<colorspace type="sRGB" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="0" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Color" />
+		<mipmap type="Auto" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+    <profile id="61" displayname="Cubemap With Dynamic Sky" legacyid="0">
+        <description>
+            <image type="Cubemap" />
+            <color type="ColorMap" />
+            <alpha type="Blend" values="Smooth" />
+            <colorspace type="sRGB" />
+            <premultiplyalpha enabled="1" />
+            <renormalize enabled="0" />
+            <bordercolor enabled="0" color="0" />
+            <lowprecision enabled="0" />
+            <qualityressplittype type="Default" />
+        </description>
+        <compression enabled="1" weighting="Color" />
+        <mipmap type="Auto" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+            <fade mipstart="0" blending="0" />
+        </mipmap>
+    </profile>
+    <profile id="18" displayname="Grayscale" legacyid="469149679">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="None" values="Smooth" />
+			<colorspace type="sRGB" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="12434877" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Greyscale" />
+		<mipmap type="Auto" filtering="Kaiser" sharpening="SharpenMedium" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="19" displayname="Grayscale No MipMap" legacyid="3278507190">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="None" values="Smooth" />
+			<colorspace type="sRGB" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="12434877" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Greyscale" />
+		<mipmap type="None" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="20" displayname="Grayscale AlphaBlend" legacyid="3892526009">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="Blend" values="Smooth" />
+			<colorspace type="sRGB" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="0" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Greyscale" />
+		<mipmap type="Auto" filtering="Kaiser" sharpening="SharpenMedium" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="21" displayname="Grayscale AlphaBlend No MipMap" legacyid="3118232057">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="Blend" values="Smooth" />
+			<colorspace type="sRGB" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="0" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Greyscale" />
+		<mipmap type="None" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+    <profile id="27" displayname="UI Color">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="None" values="Smooth" />
+			<colorspace type="Linear" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="0" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Color" />
+		<mipmap type="None" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+    <profile id="28" displayname="UI Color AlphaBlend">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="Blend" values="Smooth" />
+			<colorspace type="Linear" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="0" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Color" />
+		<mipmap type="None" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+    <!-- Same as UI Color but used in the code to indicate to use green as the alpha value and white in RGB -->
+    <!-- id 39 IS IMPORTANT TO PRESERVE SINCE IT'S REFERENCED IN THE CODE FireUiRender.cpp (g_ProfileID_UIGreenAsAlpha) -->
+    <profile id="39" displayname="UI Color GreenAsAlpha">
+        <description>
+            <image type="Texture" />
+            <color type="ColorMap" />
+            <alpha type="None" values="Smooth" />
+            <colorspace type="Linear" />
+            <premultiplyalpha enabled="0" />
+            <renormalize enabled="0" />
+            <bordercolor enabled="0" color="0" />
+            <lowprecision enabled="0" />
+            <qualityressplittype type="Default" />
+        </description>
+        <compression enabled="1" weighting="Greyscale" />
+        <mipmap type="None" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+            <fade mipstart="0" blending="0" />
+        </mipmap>
+    </profile>
+    <profile id="29" displayname="UI Grayscale">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="None" values="Smooth" />
+			<colorspace type="Linear" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="0" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Greyscale" />
+		<mipmap type="None" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+    <profile id="38" displayname="UI Grayscale AlphaBlend">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="Blend" values="Smooth" />
+			<colorspace type="Linear" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="0" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Greyscale" />
+		<mipmap type="None" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="30" displayname="Facade Atlas MaskMap" legacyid="0">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="Blend" values="Smooth" />
+			<colorspace type="Linear" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="12434877" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="None" />
+		</description>
+		<compression enabled="1" weighting="Mask" />
+		<mipmap type="Auto" filtering="Kaiser" sharpening="SharpenMedium" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="31" displayname="Facade Atlas ColorMap" legacyid="2402709566">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="None" values="Smooth" />
+			<colorspace type="sRGB" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="12434877" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="None" />
+		</description>
+		<compression enabled="1" weighting="Color" />
+		<mipmap type="Auto" filtering="Kaiser" sharpening="SharpenMedium" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+    <profile id="54" displayname="Facade Atlas NormalMap" legacyid="562391268">
+        <description>
+            <image type="Texture" />
+            <color type="NormalMap" />
+            <alpha type="None" values="Smooth" />
+            <colorspace type="Linear" />
+            <premultiplyalpha enabled="0" />
+            <renormalize enabled="0" />
+            <bordercolor enabled="0" color="12434877" />
+            <lowprecision enabled="0" />
+            <qualityressplittype type="None" />
+        </description>
+        <compression enabled="1" weighting="Normalmap" />
+        <mipmap type="Auto" filtering="Kaiser" sharpening="SharpenSoft" count="4294967295" disableskipmips="0">
+            <fade mipstart="0" blending="0" />
+        </mipmap>
+    </profile>
+   <profile id="40" displayname="Facade Atlas ColorMap Alpha" legacyid="4294967295">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="Blend" values="Smooth" />
+			<colorspace type="sRGB" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="12434877" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="None" />
+		</description>
+		<compression enabled="1" weighting="Color" />
+		<mipmap type="Auto" filtering="Kaiser" sharpening="SharpenMedium" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="32" displayname="World Ambient ColorMap AlphaBlend" legacyid="0">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="Blend" values="Smooth" />
+			<colorspace type="sRGB" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="0" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Color" />
+		<mipmap type="None" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="33" displayname="World AO ColorMap No MipMap" legacyid="0">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="None" values="Smooth" />
+			<colorspace type="Linear" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="12434877" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="0" weighting="Color" />
+		<mipmap type="None" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="36" displayname="Global World Ambient ColorMap" legacyid="0">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="Blend" values="Smooth" />
+			<colorspace type="sRGB" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="0" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Color" />
+		<mipmap type="Auto" filtering="Kaiser" sharpening="SharpenMedium" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="37" displayname="Global World AO ColorMap" legacyid="0">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="None" values="Smooth" />
+			<colorspace type="Linear" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="12434877" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="1" weighting="Color" />
+		<mipmap type="Auto" filtering="Kaiser" sharpening="SharpenMedium" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="50" displayname="Droplet Normal Map" legacyid="0">
+		<description>
+			<image type="Texture" />
+			<color type="ColorMap" />
+			<alpha type="Blend" values="Smooth" />
+			<colorspace type="Linear" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="0" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="Default" />
+		</description>
+		<compression enabled="0" weighting="Color" />
+		<mipmap type="Auto" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="51" displayname="Volume ColorMap" legacyid="0">
+		<description>
+			<image type="Volume" />
+			<color type="ColorMap" />
+			<alpha type="None" values="Smooth" />
+			<colorspace type="sRGB" />
+			<premultiplyalpha enabled="0" />
+      <shadergamma20 enabled="1" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="1" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="None" />
+		</description>
+		<compression enabled="0" weighting="Color" />
+		<mipmap type="None" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="52" displayname="Volume MaskMap" legacyid="0">
+		<description>
+			<image type="Volume" />
+			<color type="ColorMap" />
+			<alpha type="None" values="Smooth" />
+			<colorspace type="Linear" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="1" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="None" />
+		</description>
+		<compression enabled="1" weighting="Mask" />
+		<mipmap type="None" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+	<profile id="53" displayname="Volume NormalMap Height" legacyid="0">
+		<description>
+			<image type="Volume" />
+			<color type="NormalMap" />
+			<alpha type="Height" values="Smooth" />
+			<colorspace type="Linear" />
+			<premultiplyalpha enabled="0" />
+			<renormalize enabled="0" />
+			<bordercolor enabled="0" color="1" />
+			<lowprecision enabled="0" />
+			<qualityressplittype type="None" />
+		</description>
+		<compression enabled="0" weighting="Color" />
+		<mipmap type="None" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+			<fade mipstart="0" blending="0" />
+		</mipmap>
+	</profile>
+    <profile id="55" displayname="Light Probes" legacyid="0">
+        <description>
+            <image type="Texture" />
+            <color type="ColorMap" />
+            <alpha type="None" values="Smooth" />
+            <colorspace type="Linear" /> <!-- Not sRGB because we have data in the alpha that requires the same curve... so we manage it manually in the shader. -->
+            <premultiplyalpha enabled="0" />
+            <renormalize enabled="0" />
+            <bordercolor enabled="0" color="12434877" />
+            <lowprecision enabled="0" />
+            <qualityressplittype type="Default" />
+        </description>
+        <compression enabled="0" weighting="Color" />
+        <mipmap type="None" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+            <fade mipstart="0" blending="0" />
+        </mipmap>
+    </profile>
+  <profile id="56" displayname="Light Probes Interior Volume" legacyid="0">
+    <description>
+      <image type="Volume" />
+      <color type="LightProbes" />
+      <alpha type="None" values="Smooth" />
+      <colorspace type="Linear" />
+      <premultiplyalpha enabled="0" />
+      <renormalize enabled="0" />
+      <bordercolor enabled="0" color="12434877" />
+      <lowprecision enabled="0" />
+      <qualityressplittype type="Default" />
+    </description>
+    <compression enabled="0" weighting="Color" />
+    <mipmap type="None" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+      <fade mipstart="0" blending="0" />
+    </mipmap>
+    </profile>  
+    <profile id="57" displayname="Droplet Normal Map CG" legacyid="0">
+        <description>
+            <image type="Texture" />
+            <color type="ColorMap" />
+            <alpha type="Blend" values="Smooth" />
+            <colorspace type="Linear" />
+            <premultiplyalpha enabled="0" />
+            <renormalize enabled="0" />
+            <bordercolor enabled="0" color="0" />
+            <lowprecision enabled="0" />
+            <qualityressplittype type="Default" />
+        </description>
+        <compression enabled="1" weighting="Color" />
+        <mipmap type="Auto" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+            <fade mipstart="0" blending="0" />
+        </mipmap>
+    </profile>
+  <profile id="58" displayname="Facade Atlas ColorMap Alpha CG" legacyid="4294967295">
+    <description>
+      <image type="Texture" />
+      <color type="ColorMap" />
+      <alpha type="None" values="Smooth" />
+      <colorspace type="sRGB" />
+      <premultiplyalpha enabled="0" />
+      <renormalize enabled="0" />
+      <bordercolor enabled="0" color="12434877" />
+      <lowprecision enabled="0" />
+      <qualityressplittype type="None" />
+    </description>
+    <compression enabled="1" weighting="Color" />
+    <mipmap type="Auto" filtering="Point" sharpening="None" count="4294967295" disableskipmips="0">
+      <fade mipstart="0" blending="0" />
+    </mipmap>
+  </profile>
+  <profile id="59" displayname="Facade Atlas MaskMap CG" legacyid="0">
+    <description>
+      <image type="Texture" />
+      <color type="ColorMap" />
+      <alpha type="AlphaTest" values="BinaryPremultiplied" />
+      <colorspace type="Linear" />
+      <premultiplyalpha enabled="0" />
+      <renormalize enabled="0" />
+      <bordercolor enabled="0" color="12434877" />
+      <lowprecision enabled="0" />
+      <qualityressplittype type="None" />
+    </description>
+    <compression enabled="1" weighting="Mask" />
+    <mipmap type="Auto" filtering="Point" sharpening="None" count="4294967295" disableskipmips="0">
+      <fade mipstart="0" blending="0" />
+    </mipmap>
+  </profile>
+  <profile id="60" displayname="Light Probes Compressed" legacyid="0">
+    <description>
+      <image type="Texture" />
+      <color type="ColorMap" />
+      <alpha type="Blend" values="Smooth" />
+      <colorspace type="Linear" /> <!-- Not sRGB because we have data in the alpha that requires the same curve... so we manage it manually in the shader. -->
+      <premultiplyalpha enabled="0" />
+      <renormalize enabled="0" />
+      <bordercolor enabled="0" color="12434877" />
+      <lowprecision enabled="0" />
+      <qualityressplittype type="Default" />
+    </description>
+    <compression enabled="0" weighting="Color" />
+    <mipmap type="None" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+      <fade mipstart="0" blending="0" />
+    </mipmap>
+  </profile>
+  <profile id="62" displayname="Light Effect ColorMap" legacyid="0">
+    <description>
+      <image type="Texture" />
+      <color type="ColorMap" />
+      <alpha type="None" values="Smooth" />
+      <colorspace type="sRGB" />
+      <premultiplyalpha enabled="0" />
+      <shadergamma20 enabled="1" />
+      <renormalize enabled="0" />
+      <bordercolor enabled="0" color="12434877" />
+      <lowprecision enabled="0" />
+      <qualityressplittype type="Default" />
+    </description>
+    <compression enabled="1" weighting="Color" />
+    <mipmap type="Auto" filtering="Kaiser" sharpening="None" count="4294967295" disableskipmips="0">
+      <fade mipstart="0" blending="0" />
+    </mipmap>
+  </profile>
+</config>

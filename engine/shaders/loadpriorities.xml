@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<priorities>
+    <!-- family name is parsed as: *name* to allow matching multiple families easily (ie: without regex!) -->
+    <!-- it's also case insensitive -->
+    <platform name="xenon;ps3" defaultPriority="5">
+        <injectAllVariations family="posteffect#!PICKING" />
+        <injectAllVariations family="framejobstate" />
+
+        <!-- WorldMap shaders -->
+        <injectAllVariations family="PDAGridLines" />
+        <injectAllVariations family="Mesh_DriverMinimap" />
+        <injectAllVariations family="TextureMaskHelper" />
+<!--
+        <injectAllVariations family="framejobstate" />
+        <injectAllVariations family="posteffect" />
+        <injectAllVariations family="watercameraplane" />
+
+        <family name="framejobstate" priority="0" />
+        <family name="primitive" priority="1" />
+        <family name="posteffect_simple" priority="1" />
+        <family name="posteffect" priority="2" />
+        <family name="clear" priority="3" />
+        <family name="burnterrain" priority="4" />
+-->
+    </platform>
+
+    <platform name="win32;win64;durango;orbis" defaultPriority="5">
+        <injectAllVariations family="posteffect#!PICKING" />
+        <injectAllVariations family="framejobstate" />
+
+        <!-- WorldMap shaders -->
+        <injectAllVariations family="PDAGridLines" />
+        <injectAllVariations family="Mesh_DriverMinimap" />
+        <injectAllVariations family="TextureMaskHelper" />
+
+        <family name="framejobstate" priority="0" />
+        <family name="posteffect" priority="3" />
+        <family name="primitive" priority="1" />
+
+        <!-- Deferred lighting -->
+        <injectAllVariations family="DeferredLighting#STENCILTAG" />
+        <injectAllVariations family="DeferredLighting#SPOT#!FADING_CLIP_PLANES_MAX_IDX#!ORTHO_CAMERA" />
+        <injectAllVariations family="DeferredLighting#OMNI#!FADING_CLIP_PLANES_MAX_IDX#!ORTHO_CAMERA" />
+
+        <!--
+        <injectAllVariations family="Mesh_DriverCarPaint#DAMAGE_LAST_SPHERE_INDEX#GBUFFER#!GBUFFER_VELOCITY#!ALPHA_TEST#!ALPHA_TO_COVERAGE" />
+        <injectAllVariations family="Mesh_DriverCarPaint#DAMAGE_LAST_PLANE_INDEX#GBUFFER#!GBUFFER_VELOCITY#!ALPHA_TEST#!ALPHA_TO_COVERAGE" />
+        <family name="framejobstate" priority="0" />
+        <family name="posteffect" priority="2" />
+        <family name="primitive" priority="1" />
+        <family name="clear" priority="3" />
+        <family name="burnterrain" priority="4" />
+-->        
+    </platform>
+
+</priorities>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="RegionMaskTextureArray" state="ColorClampNoAniso" />
+    <samplerstate sampler="NormalMapTextureArray" state="ColorClampNoAniso" />
+
+    <define name="WRINKLE_PATCH_MASK_LAST_INDEX" max_value="19"/>
+    <define name="WRINKLE_ENTRY_LAST_INDEX" max_value="99"/>
+
+    <domain>
+        <options>
+            <option>WRINKLE_PATCH_MASK_LAST_INDEX</option>
+        </options>
+
+        <options>
+            <option>WRINKLE_ENTRY_LAST_INDEX</option>
+        </options>
+    </domain>
+
+</metashader>

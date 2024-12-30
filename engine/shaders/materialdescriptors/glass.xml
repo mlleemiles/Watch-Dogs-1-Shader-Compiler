@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<materialdescriptor xmlns:xi="#" name="Glass" showinui="1" id="#(0x4c804785, 0x11247fb0)">
+    <geometryInputs normal="1" tangent="1" binormal="1" color="1" uvChannels="1" packedUVChannel="10" />
+
+    <parameter name="TwoSided" type="bool" />
+    <parameter name="Eyes" type="bool" />
+    <parameter name="TintedGlassE3hack" type="bool" />
+    <parameter name="BrokenGlassTest" type="bool" />
+    <parameter name="BlendingType" type="int" defaultvalue="4" />
+    <parameter name="SortingLayerBias" type="int" defaultvalue="0"/>
+
+    <parameter name="TintTexture" type="sampler2D" tilingName="TintTiling" UvName="TintUV" uvTilingName="TintUVTiling" />
+    <parameter name="TintTiling" type="float2" defaultvalue="1,1" />
+    <parameter name="TintUV" type="int" />
+    <parameter name="TintColor" type="color3" defaultvalue="0.05,0.05,0.05" />
+    <parameter name="TintOpacity" type="float" defaultvalue="0.5" />
+
+    <parameter name="NormalTexture1" type="sampler2D" tilingName="NormalTiling1" UvName="NormalUV1" uvTilingName="NormalUVTiling1" />
+    <parameter name="NormalTiling1" type="float2" defaultvalue="1,1" />
+    <parameter name="NormalUV1" type="int" />
+    <parameter name="NormalIntensity" type="float" defaultvalue="1" />
+
+    <parameter name="SpecularPower" type="float4" defaultvalue="16,0,1,0" op_z="x/8192" op_w="y/8192" />
+    <parameter name="Reflectance" type="float" defaultvalue="0.04" />
+
+    <parameter name="FresnelPower" type="float" defaultvalue="2" />
+    <parameter name="FresnelMinimum" type="float2" defaultvalue="0.06,0.94" op_y="1-x" />
+
+    <parameter name="TintUVTiling" type="float4" provideronly="1" />
+    <parameter name="NormalUVTiling1" type="float4" provideronly="1" />
+
+    <parameter name="ReflectionTextureSource" type="int" />
+    <parameter name="ReflectionTexture" type="samplerCUBE" />
+    <parameter name="ReflectionIntensity" type="float" defaultvalue="1" />
+    <parameter name="ReflectionAffectedByDaylight" type="bool" defaultvalue="1" />
+
+    <parameter name="CubemapMode" type="int" defaultvalue="0" />
+
+    <parameter name="DamageStateEnabled" type="bool" defaultvalue="0" />
+    <parameter name="DamageStateUVSlide" type="float3" defaultvalue="0,0,0" />
+
+    <parameter name="E3_2012_Hack" type="bool" defaultvalue="0" />
+
+    <!-- Any new Glass material created is marked as deprecated -->
+    <parameter name="Deprecated" type="bool" defaultvalue="1" />
+
+    <parameterprovider parametersfilename="Mesh_Glass.fx">
+        <parameter name="TintTexture" />
+        <parameter name="TintUVTiling" />
+        <parameter name="TintColor" />
+        <parameter name="TintOpacity" />
+        <parameter name="NormalTexture1" />
+        <parameter name="NormalUVTiling1" />
+        <parameter name="NormalIntensity" />
+        <parameter name="SpecularPower" />
+        <parameter name="Reflectance" />
+        <parameter name="FresnelPower" />
+        <parameter name="FresnelMinimum" />
+        <parameter name="ReflectionTexture" />
+        <parameter name="ReflectionIntensity" />
+        <parameter name="ReflectionAffectedByDaylight" />
+        <parameter name="Eyes" />
+        <parameter name="TintedGlassE3hack" />
+        <parameter name="BrokenGlassTest" />
+        <parameter name="CubemapMode" />
+        <parameter name="DamageStateEnabled" />
+        <parameter name="DamageStateUVSlide" />
+        <parameter name="E3_2012_Hack" />
+        <parameter name="Deprecated" />
+    </parameterprovider>
+
+    <ui defaultFilePath="graphics/_Textures/" >
+        <xi:include href="UI/DataClasses.xml" />
+        <group>
+            <label link="http://mdc-web-tomcat17.ubisoft.org/confluence/display/driver/Shader+-+Glass">Help</label>
+        </group>
+        <group label="Settings">
+            <checkbox label="E3 2012 Hack" dataBindings="E3_2012_Hack" />
+            <checkbox label="Two sided" dataBindings="TwoSided" />
+            <checkbox label="Eyes" dataBindings="Eyes" />
+            <checkbox label="Broken Glass Test" dataBindings="BrokenGlassTest" />
+            <group horizontal="1">
+                <label>Sorting Layer Bias</label>
+                <textbox dataBindings="SortingLayerBias" tooltip="Changes the draw order.  Materials with smaller values are drawn first.">
+                    <dataBindings increment="1" minvalue="-4" maxvalue="4" />
+                </textbox>
+                <label>   Cubemap mode (FPP test for eyes)</label>
+                <combobox dataBindings="CubemapMode">
+                    <comboboxitem value="0">classic</comboboxitem>
+                    <comboboxitem value="1">object space</comboboxitem>
+                    <comboboxitem value="2">camera space</comboboxitem>
+                </combobox>
+            </group>
+            <checkbox label="Tinted Glass (E3 hack)" dataBindings="TintedGlassE3hack" />
+        </group>
+        <label> </label>
+        
+        <group label="Tint">
+            <group horizontal="1">
+                <button dataBindings="TintColor" />
+                <button dataBindings="TintTexture" fill="1" />
+                <textbox dataBindings="TintUV">
+                    <dataBindings class="UVChannel" />
+                </textbox>
+                <group>
+                    <textbox dataBindings="TintTiling.x">
+                        <dataBindings class="Tiling" />
+                    </textbox>
+                    <textbox dataBindings="TintTiling.y">
+                        <dataBindings class="Tiling" />
+                    </textbox>
+                </group>
+            </group>
+            <group horizontal="1">
+                <label>Opacity</label>
+                <slider dataBindings="TintOpacity">
+                    <dataBindings increment="0.01" minvalue="0" maxvalue="1" />
+                </slider>
+            </group>
+            <group vertical="1">
+                <group horizontal="1">
+                    <label color="BB0000">          R:</label>
+                    <label>Reflection mask (EYES only)</label>
+                </group>      
+                <group horizontal="1">
+                    <label color="00BB00">          G:</label>
+                    <label>Scale opacity</label>
+                </group>
+                <group horizontal="1">
+                    <label color="0000AA">          B:</label>
+                    <label>TBD</label>
+                </group>
+            </group>
+        </group>
+        <label> </label>
+        
+        <group label="Specular">
+            <dataBindingsAlias name="@SpecularPowerAlias" dataBindings="SpecularPower" />
+            <xi:include href="UI/SpecularPowerGroup.xml" />
+        </group>
+        <label> </label>
+        
+        <group label="Fresnel" horizontal="0">
+            <group horizontal="1">
+                <label>Power</label>
+                <textbox databindings="FresnelPower" />
+            </group>
+            <group horizontal="1">
+                <label>Minimum</label>
+                <slider databindings="FresnelMinimum.x">
+                    <dataBindings increment="0.001" minvalue="0.001" maxvalue="1" />
+                </slider>
+            </group>               
+        </group>
+        <label> </label>
+
+        <group label="Normal">
+            <group horizontal="1">
+                <button dataBindings="NormalTexture1" fill="1" />
+                <textbox dataBindings="NormalUV1">
+                    <dataBindings class="UVChannel" />
+                </textbox>
+                <group>
+                    <textbox dataBindings="NormalTiling1.x">
+                        <dataBindings class="Tiling" />
+                    </textbox>
+                    <textbox dataBindings="NormalTiling1.y">
+                        <dataBindings class="Tiling" />
+                    </textbox>
+                </group>
+            </group>
+            <group horizontal="1">
+                <label>Intensity</label>
+                <slider dataBindings="NormalIntensity">
+                    <dataBindings increment="0.01" minvalue="0" maxvalue="1" />
+                </slider>
+            </group>
+        </group>
+        <label> </label>
+        
+        <group label="Reflection">
+		    <group horizontal="1" disable_if="ReflectionTexture">
+		        <label>Type</label>
+		        <combobox dataBindings="ReflectionTextureSource">
+		            <comboboxitem value="0">World static</comboboxitem>
+		            <comboboxitem value="1">World dynamic</comboboxitem>
+		        </combobox>
+			</group>
+	        <group>
+		        <label>Reflection Texture Override</label>
+            	<button dataBindings="ReflectionTexture" fill="1" />
+			</group>
+        	<group horizontal="1">
+                <label>Intensity</label>
+                <textbox dataBindings="ReflectionIntensity">
+        	        <dataBindings increment="0.01" minvalue="0.0" maxvalue="50.0" />
+                </textbox>
+         	</group>
+            <group enable_if="ReflectionTextureSource==0 || ReflectionTexture">
+                <checkbox label="Affected by daylight" dataBindings="ReflectionAffectedByDaylight" tooltip="Multiplies the reflection by the outdoor default ambient."/>
+            </group>
+         </group>
+
+        <label> </label>
+        <group label="Damage States" enable_if="TintTexture" >
+            <checkbox label="Enabled" dataBindings="DamageStateEnabled" />
+            <group horizontal="1" enable_if="DamageStateEnabled" >
+                <label>    U slide amount</label>
+                <textbox databindings="DamageStateUVSlide.x" tooltip="How much to slide the U texture coordinate to go from one state to the next." >
+                    <dataBindings increment="0.0001" minvalue="-1.0" maxvalue="1.0" />
+                </textbox>
+                 <label>    V slide amount</label>
+                <textbox databindings="DamageStateUVSlide.y" tooltip="How much to slide the V texture coordinate to go from one state to the next." >
+                    <dataBindings increment="0.0001" minvalue="-1.0" maxvalue="1.0" displayvaluemul="-1.0" />
+                </textbox>
+            </group>
+            <group horizontal="1" enable_if="DamageStateEnabled" >
+                <label>    Default state</label>
+                <textbox databindings="DamageStateUVSlide.z" tooltip="Index of the default state, normally zero. Can be used to test UV mappings." >
+                    <dataBindings type="int" minvalue="0" maxvalue="32" />
+                </textbox>
+                <group show_if="DamageStateUVSlide.z > 0" >
+                    <label color="BB0000">       For testing purposes only. Should be reset to zero before saving.</label>
+                </group>
+            </group>
+        </group>
+
+    </ui>
+</materialdescriptor>

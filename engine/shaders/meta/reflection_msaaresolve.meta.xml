@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+    
+<metashader xmlns:xi="#">
+        
+    <define name="MSAARESOLVE" />
+    <define name="COLORBLEND" />
+
+    <domain>
+        <options>
+            <option></option>
+            <option>MSAARESOLVE</option>
+            <option>COLORBLEND</option>
+        </options>
+    </domain>
+
+</metashader>
+ 

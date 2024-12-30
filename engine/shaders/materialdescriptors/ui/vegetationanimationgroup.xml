@@ -1,0 +1,32 @@
+<ui>
+    <checkbox label="Enabled" dataBindings="VegetationAnim" />
+    <group enable_if="VegetationAnim">
+        <group horizontal="1" >
+            <label>  Trunk main animation strength  </label>
+            <textbox dataBindings="VegetationTrunkAnimParams.x">
+                <dataBindings increment="0.01" minvalue="0.01" />
+            </textbox>
+        </group>
+        <group horizontal="1" >
+            <label>  Trunk wave animation strength </label>
+            <textbox dataBindings="VegetationTrunkAnimParams.y">
+                <dataBindings increment="0.01" minvalue="0.01" />
+            </textbox>
+            <label>     Frequency </label>
+            <textbox dataBindings="VegetationTrunkAnimParams.z">
+                <dataBindings increment="0.01" minvalue="0.01" />
+            </textbox>
+        </group>
+        <group horizontal="1" >
+            <label>  Animation type </label>
+            <combobox dataBindings="VegetationTrunkAnimParams.w">
+                <comboboxitem value="0">Rotate around pivot</comboboxitem>
+                <comboboxitem value="1">Horizontal skew</comboboxitem>
+            </combobox>
+        </group>
+        <group horizontal="1" >
+            <label>  Trunk anim noise texture (optional)</label>
+            <button dataBindings="VegetationTrunkNoiseTexture" fill="1" />
+        </group>
+    </group>
+</ui>

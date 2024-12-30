@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LEOverwrite>
+    <parameter type="sampler2D"/>
+    <parameter type="samplerState"/>
+
+    <!--
+    <parameter name="DiffuseTexture0State" type="samplerState" defaultvalue="ColorWrap" />
+    <parameter name="DiffuseTexture1State" type="samplerState" defaultvalue="ColorWrap" />
+    <parameter name="DiffuseTexture2State" type="samplerState" defaultvalue="ColorWrap" />
+    <parameter name="NoiseTextureState" type="samplerState" defaultvalue="ColorPointWrap" />
+    <parameter name="NormalTexture1State" type="samplerState" defaultvalue="ColorWrap" />
+    <parameter name="NormalTexture2State" type="samplerState" defaultvalue="ColorWrap" />
+    <parameter name="NormalDynamicWrinklesTexture1State" type="samplerState" defaultvalue="ColorWrap" />
+    <parameter name="NormalDynamicWrinklesTexture2State" type="samplerState" defaultvalue="ColorWrap" />
+    <parameter name="SpecularTextureState" type="samplerState" defaultvalue="ColorClamp" />
+    <parameter name="SpecularTexture1State" type="samplerState" defaultvalue="ColorClamp" />
+    
+    <parameter type="color3" defaultvalue="0,0,0" name="TintColor"/>
+    <parameter type="color4" defaultvalue="0,0,0,0" name="Dust"/>
+    <parameter type="float4" defaultvalue="0,0,0,0" name="SpecularPower"/>
+    <parameter type="float2" defaultvalue="0,0" name="Opacity"/>
+    <parameter type="float2" defaultvalue="0,0" name="Reflectance"/>
+    <parameter type="bool" defaultvalue="0" name="UseDiffuseAsAlpha"/>
+    -->
+
+    <parameter type="samplerCUBE"/>
+    <parameter type="float" defaultvalue="0"/>
+    <parameter type="float2"/>
+    <parameter type="float3"/>
+    <parameter type="float4"/>
+    <parameter type="color3"/>
+    <parameter type="color4"/>
+    <parameter type="int" defaultvalue="0"/>
+    <parameter type="bool"/>
+    <!--<parameter type="bink"/>-->
+    <parameter type="gradient"/>
+</LEOverwrite>

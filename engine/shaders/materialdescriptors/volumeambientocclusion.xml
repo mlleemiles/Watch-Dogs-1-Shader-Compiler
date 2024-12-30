@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<materialdescriptor xmlns:xi="#" name="VolumeAmbientOcclusion" displayname="VolumeAmbientOcclusion" showinui="1" id="#(0x81c0b9c7, 0x35fa71b0)">
+  <geometryInputs normal="0" tangent="0" binormal="0" color="0" uvChannels="0" />
+
+  <parameter name="BlendingType" type="int" defaultvalue="7"/>
+  <parameter name="Params" type="float4" defaultvalue="0.5,1.0,0.0,0.0" oldnames="Intensity" />
+  
+  <parameterprovider parametersfilename="Mesh_VolumeAmbientOcclusion.fx">
+    <parameter name="Params" />
+  </parameterprovider>
+
+  <ui>
+    <xi:include href="UI/DataClasses.xml" />
+    <group horizontal="1">
+    <label>Intensity</label>
+      <textbox label="Intensity" dataBindings="Params.x">
+        <dataBindings minvalue="0" />
+      </textbox>
+    </group>
+    <group horizontal="1">
+      <label>Power</label>
+      <textbox label="Power" dataBindings="Params.y">
+        <dataBindings minvalue="1" />
+      </textbox>
+    </group>
+    <group horizontal="1">
+      <label>ClampMinValue</label>
+      <textbox label="Clamp to min value" dataBindings="Params.z">
+        <dataBindings minvalue="0" />
+      </textbox>
+    </group>
+  </ui>
+</materialdescriptor>

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <samplerstate sampler="OpacityTexture1" state="" />
+    <samplerstate sampler="SpecularTexture1" state="ColorWrap" />
+    <samplerstate sampler="NormalTexture1" state="NormalWrap" />
+    <samplerstate sampler="RaindropSplashesTexture" state="RaindropSplashes" />
+
+    <define name="INSTANCING" />
+    <define name="INSTANCING_PROJECTED_DECAL" platform="PC,DURANGO,ORBIS"/>
+    <define name="IS_SPLINE_LOFT" />
+    <define name="IS_SPLINE_LOFT_COMPRESSED" />
+    <define name="SPECULARMAP" />
+    <define name="NORMALMAP" />
+    <define name="HAS_RAINDROP_RIPPLE" />
+    <define name="PRESERVE_NORMAL" />
+
+    <define name="GBUFFER" />
+    <define name="GBUFFER_BLENDED" />
+
+    <!-- GBufferBlended -->
+    <domain>
+        <options>
+            <option></option>
+            <option>IS_SPLINE_LOFT</option>
+            <option>IS_SPLINE_LOFT,IS_SPLINE_LOFT_COMPRESSED</option>
+            <option>INSTANCING</option>
+            <option>INSTANCING,INSTANCING_PROJECTED_DECAL</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SPECULARMAP</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>PRESERVE_NORMAL</option>
+            <option>NORMALMAP</option>
+            <option>HAS_RAINDROP_RIPPLE</option>
+            <option>NORMALMAP,HAS_RAINDROP_RIPPLE</option>
+        </options>
+
+        <options>
+            <option>GBUFFER,GBUFFER_BLENDED</option>
+        </options>
+    </domain>
+</metashader>

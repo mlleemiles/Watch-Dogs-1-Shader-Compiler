@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <define name="SPECIALPICKUP" />
+    <define name="SKINNING" />
+    <define name="VEHICLE" />
+    <define name="OUTLINE" />
+    <define name="DAMAGE_LAST_SPHERE_INDEX" max_value="0" />
+    <define name="DAMAGE_LAST_PLANE_INDEX" max_value="1" />
+
+    <domain>
+        <options>
+            <option></option>
+            <option>SPECIALPICKUP</option>
+            <option>OUTLINE</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SKINNING</option>
+            <option>VEHICLE,SKINNING</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>DAMAGE_LAST_SPHERE_INDEX</option>
+            <option>DAMAGE_LAST_PLANE_INDEX</option>
+            <option>DAMAGE_LAST_SPHERE_INDEX,DAMAGE_LAST_PLANE_INDEX</option>
+        </options>
+    </domain>
+</metashader>

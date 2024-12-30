@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <define name="CLEARALPHA" />
+    <define name="SKINNING" />
+    <define name="SKINNING_EXTRA" />
+    <define name="SKINRIGID" />
+    <define name="BLENDINDEX_COMPRESSED" />    
+    <define name="DAMAGE_LAST_SPHERE_INDEX" max_value="0" />
+    <define name="DAMAGE_LAST_PLANE_INDEX" max_value="1" />
+    <define name="DAMAGE_CHECK_TANGENT_ALPHA"/>
+
+    <define name="STENCILTAG"/>
+    <define name="STENCILTEST"/>
+
+    <!-- for damage on DriverCarPaint and DriverCarGeneric only -->
+    <domain>
+        <options>
+            <!-- DriverCarPaint only -->
+            <option></option>
+
+            <!-- DriverCarGeneric only -->
+            <option>DAMAGE_CHECK_TANGENT_ALPHA</option>
+        </options>
+
+        <options>
+            <option>SKINNING,SKINRIGID</option>
+        </options>
+
+		<options>
+            <option>DAMAGE_LAST_SPHERE_INDEX</option>
+            <option>DAMAGE_LAST_PLANE_INDEX</option>
+            <option>DAMAGE_LAST_SPHERE_INDEX,DAMAGE_LAST_PLANE_INDEX</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>BLENDINDEX_COMPRESSED</option>
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option></option>
+            <option>STENCILTAG</option>
+            <option>STENCILTEST</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SKINNING</option>
+            <option>SKINNING,SKINNING_EXTRA</option>
+            <option>SKINNING,SKINRIGID</option>
+        </options>
+        
+        <options>
+            <option></option>
+            <option>BLENDINDEX_COMPRESSED</option>
+        </options>        
+    </domain>
+
+    <domain>
+        <options>
+            <option>CLEARALPHA</option>
+        </options>
+    </domain>
+</metashader>

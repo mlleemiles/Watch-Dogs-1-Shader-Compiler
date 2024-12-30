@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <samplerstate sampler="OverlayTexture" state="ColorWrap" />
+    <samplerstate sampler="MaskTexture" state="ColorWrap" />
+    <samplerstate sampler="FlowTexture" state="ColorWrap" />
+    <samplerstate sampler="NormalTexture1" state="NormalWrap" />
+    <samplerstate sampler="ReflectionTexture" state="ColorWrap" />
+    <samplerstate sampler="ParaboloidReflectionTexture" state="ColorClamp" />
+    <samplerstate sampler="RaindropSplashesTexture" state="RaindropSplashes" />
+
+    <define name="SKINNING" />
+    <define name="INSTANCING" />
+    <define name="INSTANCING_POS_ROT_Z_TRANSFORM" />
+
+    <define name="REFLECTION_STATIC" />
+    <define name="REFLECTION_STATIC_TRANSITION" />
+    <define name="OVERLAY" />
+    <define name="MASK" />
+    <define name="DEPTH_OPACITY" />
+    <define name="DEPTH_MASK" />
+
+    <define name="VERTEX_DISPLACEMENT" />
+
+    <define name="DISTORTION" />
+
+    <define name="SAMPLE_SHADOW" />
+    <define name="RECEIVE_SINGLE_CASCADE" />
+
+    <xi:include href="Includes/LightingOptions.xml" />
+    <xi:include href="Includes/ShadowAndDepthDefines.xml" />
+
+    <options name="vertex">
+        <option></option>
+        <option>SKINNING</option>
+        <option>INSTANCING</option>
+        <option>INSTANCING,INSTANCING_POS_ROT_Z_TRANSFORM</option>
+    </options>
+
+    <domain>
+        <options>
+            <option></option>
+            <option>DEPTH_OPACITY</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>OVERLAY</option>
+            <option>OVERLAY,MASK</option>
+            <option>OVERLAY,MASK,DEPTH_MASK</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>REFLECTION_STATIC</option>
+            <option>REFLECTION_STATIC,REFLECTION_STATIC_TRANSITION</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>VERTEX_DISPLACEMENT</option>
+        </options>
+
+        <options ref="lighting" />
+
+        <xi:include href="Includes/ReceiveShadowsOptions.xml" />
+
+        <options ref="vertex" />
+
+        <!-- for PICKING only -->
+        <options>
+            <option></option>
+            <option platform="EDITOR">DEPTH</option>
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option></option>
+            <option>DEPTH_OPACITY</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>OVERLAY</option>
+            <option>OVERLAY,MASK</option>
+            <option>OVERLAY,MASK,DEPTH_MASK</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>REFLECTION_STATIC</option>
+            <option>REFLECTION_STATIC,REFLECTION_STATIC_TRANSITION</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>VERTEX_DISPLACEMENT</option>
+        </options>
+
+        <options>
+            <option>DISTORTION</option>
+        </options>
+
+        <options ref="vertex" />
+    </domain>
+
+    <xi:include href="Includes/ShadowExclusions.xml" />
+    <xi:include href="Includes/SingleCascadeExclusions.xml" />
+    <xi:include href="Includes/ForwardRenderingExclusions.xml" />
+
+</metashader>

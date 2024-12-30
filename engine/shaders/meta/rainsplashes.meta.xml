@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <samplerstate sampler="GBufferNormalTexture" state="ColorPointClamp" />
+    <samplerstate sampler="SplashTexture" state="ColorClamp" />
+    <samplerstate sampler="GPUBasedExposureTexture" state="ColorPointClamp"/>
+
+    <define name="RAIN_OCCLUDER"/>
+
+    <domain>
+        <options>
+            <option></option>
+            <option>RAIN_OCCLUDER</option>
+        </options>
+    </domain>
+
+
+</metashader>
+ 

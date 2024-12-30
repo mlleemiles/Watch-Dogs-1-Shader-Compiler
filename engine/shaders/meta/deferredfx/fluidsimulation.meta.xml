@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <packInterpolators value="0" />
+    
+    <samplerstate sampler="SourceSamplerBilinear"               state="ColorClamp" />
+    <samplerstate sampler="SourceSamplerBilinear3D"             state="ColorClamp" />
+    <samplerstate sampler="SourceSamplerBlackBorder"            state="ColorBlackTransparentBorder" />
+    <samplerstate sampler="SourceSamplerBlackBorder3D"          state="ColorBlackTransparentBorder" />
+    <samplerstate sampler="SourceSampler"                       state="ColorPointClamp" />
+    <samplerstate sampler="SourceSampler3D"                     state="ColorPointClamp" />
+
+    <samplerstate sampler="SourceIndirectSamplerBilinear"       state="ColorClamp" />
+    <samplerstate sampler="SourceIndirectSamplerBilinear3D"     state="ColorClamp" />
+    <samplerstate sampler="SourceIndirectSampler"               state="ColorPointClamp" />
+    <samplerstate sampler="SourceIndirectSampler3D"             state="ColorPointClamp" />
+
+    <samplerstate sampler="VelocitySamplerBilinear"             state="ColorClamp" />
+    <samplerstate sampler="VelocitySamplerBilinear3D"           state="ColorClamp" />
+    <samplerstate sampler="VelocitySampler"                     state="ColorPointClamp" />
+    <samplerstate sampler="VelocitySampler3D"                   state="ColorPointClamp" />
+
+    <samplerstate sampler="ObstaclesSamplerBilinear"            state="ColorClamp" />
+    <samplerstate sampler="ObstaclesSamplerBilinear3D"          state="ColorClamp" />
+    <samplerstate sampler="ObstaclesSampler"                    state="ColorPointClamp" />
+    <samplerstate sampler="ObstaclesSampler3D"                  state="ColorPointClamp" />
+
+    <samplerstate sampler="PressureSamplerBilinear"             state="ColorClamp" />
+    <samplerstate sampler="PressureSamplerBilinear3D"           state="ColorClamp" />
+    <samplerstate sampler="PressureSampler"                     state="ColorPointClamp" />
+    <samplerstate sampler="PressureSampler3D"                   state="ColorPointClamp" />
+
+    <samplerstate sampler="DivergenceSamplerBilinear"           state="ColorClamp" />
+    <samplerstate sampler="DivergenceSamplerBilinear3D"         state="ColorClamp" />
+    <samplerstate sampler="DivergenceSampler"                   state="ColorPointClamp" />
+    <samplerstate sampler="DivergenceSampler3D"                 state="ColorPointClamp" />
+
+    <samplerstate sampler="CurlSamplerBilinear"                 state="ColorClamp" />
+    <samplerstate sampler="CurlSamplerBilinear3D"               state="ColorClamp" />
+    <samplerstate sampler="CurlSampler"                         state="ColorPointClamp" />
+    <samplerstate sampler="CurlSampler3D"                       state="ColorPointClamp" />
+
+    <samplerstate sampler="GradientSamplerBilinear"             state="ColorClamp" />
+    <samplerstate sampler="GradientSamplerBilinear3D"           state="ColorClamp" />
+    <samplerstate sampler="GradientSampler"                     state="ColorPointClamp" />
+    <samplerstate sampler="GradientSampler3D"                   state="ColorPointClamp" />
+
+    <define name="ADVECTION" />
+    <define name="DIFFUSION" />
+    <define name="PROJECTION" />
+
+    <define name="VORTICITY_CONFINEMENT" />
+    <define name="COMPUTE_GRADIENT" />
+    <define name="COMPUTE_DIVERGENCE" />
+    <define name="COMPUTE_CURL" />
+    <define name="COMPUTE_AMPLITUDE" />
+
+    <define name="MOVE_TEXTURE" />
+    <define name="ADD_ENVIRONMENT_OBSTACLES" />
+    <define name="FIRST_PASS" />
+    <define name="SET_VALUE" />
+    <define name="ADD_VALUE" />
+    <define name="DRAW_RADIAL_VALUE" />
+    <define name="DRAW_CAPSULE_VALUE" />
+    <define name="LINEAR_MODE" />
+
+    <define name="USE_DENSITY" />
+    <define name="SUPPORT_OBSTACLES" />
+    <define name="SUPPORT_UV" />
+    <define name="USE_NORMALIZED_UV" />
+    <define name="USE_DOUBLE_TARGET" />
+    <define name="IDENTITY_PROJECTION" />
+    <define name="FULL_FRAME_VS" />
+    <define name="TRANSFORMED_VS" />
+    <define name="TOP_BOTTOM_GS" />
+    <define name="WORLD_WIND" />
+    <define name="SPREAD_OBSTACLE_VELOCITY" />
+    <define name="GENERATE_WIND_OUTPUT" />
+
+    <!-- A value higher than 7 doesn't compile on Orbis: error 9008 : declared maximum vertex count (xx) multiplied by vertex size (xx) exceeds 1024 limitation by xx dwords -->
+    <define name="NUM_4SLICES" max_value="7" />
+    
+    <domain deprecated="XENON,PS3">
+		<options>
+            <option>ADVECTION, FIRST_PASS, SUPPORT_OBSTACLES, FULL_FRAME_VS</option>
+            <option>ADVECTION, SUPPORT_OBSTACLES, FULL_FRAME_VS</option>
+
+            <option>ADVECTION, USE_DENSITY, FIRST_PASS, SUPPORT_OBSTACLES, FULL_FRAME_VS</option>
+            <option>ADVECTION, USE_DENSITY, SUPPORT_OBSTACLES, FULL_FRAME_VS</option>
+
+            <option>DIFFUSION, SUPPORT_OBSTACLES, FULL_FRAME_VS</option>
+            <option>DIFFUSION, SUPPORT_OBSTACLES, FIRST_PASS, FULL_FRAME_VS</option>
+            <option>COMPUTE_AMPLITUDE, FULL_FRAME_VS</option>
+            <option>VORTICITY_CONFINEMENT, SUPPORT_OBSTACLES, FULL_FRAME_VS</option>
+            <option>COMPUTE_GRADIENT, FULL_FRAME_VS</option>
+            <option>COMPUTE_DIVERGENCE, SUPPORT_OBSTACLES, FULL_FRAME_VS</option>
+            <option>COMPUTE_CURL, SUPPORT_OBSTACLES, FULL_FRAME_VS</option>
+            <option>PROJECTION, SUPPORT_OBSTACLES, FULL_FRAME_VS</option>
+
+            <option>MOVE_TEXTURE, FULL_FRAME_VS</option>
+            <option>MOVE_TEXTURE, FULL_FRAME_VS, WORLD_WIND</option>
+            <option>ADD_ENVIRONMENT_OBSTACLES, TRANSFORMED_VS, USE_NORMALIZED_UV, SUPPORT_UV</option>
+            <option>SET_VALUE, FULL_FRAME_VS</option>
+            <option>SET_VALUE, TRANSFORMED_VS</option>
+            <option>SET_VALUE, TRANSFORMED_VS, SPREAD_OBSTACLE_VELOCITY</option>
+            <option>SET_VALUE, IDENTITY_PROJECTION, TRANSFORMED_VS</option>
+            <option>SET_VALUE, IDENTITY_PROJECTION, TRANSFORMED_VS, WORLD_WIND</option>
+            <option>SET_VALUE, IDENTITY_PROJECTION, FULL_FRAME_VS, TOP_BOTTOM_GS</option>
+            <option>ADD_VALUE, FULL_FRAME_VS</option>
+            <option>ADD_VALUE, TRANSFORMED_VS</option>
+            <option>DRAW_RADIAL_VALUE, SUPPORT_UV, FULL_FRAME_VS</option>
+            <option>DRAW_RADIAL_VALUE, SUPPORT_UV, LINEAR_MODE, FULL_FRAME_VS</option>
+            <option>DRAW_RADIAL_VALUE, SUPPORT_UV, LINEAR_MODE, FULL_FRAME_VS, USE_DOUBLE_TARGET</option>
+            <option>DRAW_RADIAL_VALUE, SUPPORT_UV, TRANSFORMED_VS</option>
+            <option>DRAW_RADIAL_VALUE, SUPPORT_UV, LINEAR_MODE, TRANSFORMED_VS</option>
+            <option>DRAW_RADIAL_VALUE, SUPPORT_UV, LINEAR_MODE, TRANSFORMED_VS, IDENTITY_PROJECTION</option>
+            <option>DRAW_CAPSULE_VALUE, FULL_FRAME_VS, IDENTITY_PROJECTION</option>
+            <option>GENERATE_WIND_OUTPUT, FULL_FRAME_VS</option>
+        </options>
+        
+        <options>
+            <option>NUM_4SLICES</option>
+        </options>
+	</domain>
+	
+</metashader>
+

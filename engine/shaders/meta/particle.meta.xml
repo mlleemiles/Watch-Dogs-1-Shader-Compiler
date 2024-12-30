@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="DiffuseSampler0" state="" />
+    <samplerstate sampler="SceneColorSampler" state="ColorPointClamp" />
+    <samplerstate sampler="DistortionSampler" state="ColorWrap" />
+    <samplerstate sampler="NormalSampler" state="NormalClamp" />
+    <samplerstate sampler="EnvSampleTexture" state="ColorPointClamp" />
+    <samplerstate sampler="ParticleSpotTexture" state="" />
+    <samplerstate sampler="ParticleSpotVideo" state="Video" />
+    <samplerstate sampler="ParticleSpotShadowTexture" state="ShadowSampler" />
+
+    <!-- GI ambient lighting stuff -->
+    <samplerstate sampler="VolumeTextureR"   state="ColorClamp" />
+    <samplerstate sampler="VolumeTextureG"   state="ColorClamp" />
+    <samplerstate sampler="VolumeTextureB"   state="ColorClamp" />
+    <samplerstate sampler="FloorCeilingTexture"  state="ColorClamp2D" />
+
+    <define name="AMBIENT" platform="PS3,XENON" />
+    <define name="GI_AMBIENT" platform="ORBIS,PC,DURANGO" />
+    <define name="GI_AMBIENT_DEFAULT_PROBES" platform="ORBIS,PC,DURANGO" />
+    <define name="RAIN" />
+    <define name="DIRECTIONAL" />
+    <define name="PARTICLE_LIGHTING" />
+    <define name="PROJECTED_TEXTURE" />
+    <define name="PROJECTED_VIDEO" />
+    <define name="PROJECTED_SHADOW" />
+
+    <define name="TEXTURED" />
+    <define name="ADDITIVE_BLEND" />
+    <define name="ALPHA_BLEND" />
+    <define name="NEAR_FADE" />
+    <define name="FIREADD_BLEND" />
+    <define name="MULTIPLY_BLEND" />
+    <define name="SOFT" />
+    <define name="FAR_SOFT" />
+    <define name="SOFT_CLIPPLANE" />
+    <define name="DISTORTION" />
+    <define name="SHADOW_OCCLUSION" />
+    <define name="ALPHA_DISSOLVE" />
+    <define name="UNIFORM_FOG" />
+    <define name="WATERDISPLACEMENT" />
+    <define name="WATERHEIGHTMAP" />
+    <define name="LIGHTING_OPACITY_COMPENSATION" />
+    <define name="TESSELLATION" platform="ORBIS,PC,DURANGO" />
+    <define name="PIXEL_SHADOW_SAMPLING" platform="ORBIS,PC,DURANGO" />
+
+    <!--    
+    <define name="SECOND_DEPTHTEST" />
+-->
+    <define name="TEXANIM_LERP" />
+
+    <options name="fade">
+        <option></option>
+        <option>NEAR_FADE                    </option>
+        <option>SOFT                         </option>
+        <option>SOFT,NEAR_FADE               </option>
+        <option>SOFT,SOFT_CLIPPLANE          </option>
+        <option>SOFT,SOFT_CLIPPLANE,NEAR_FADE</option>
+        <option>SOFT,FAR_SOFT                </option>
+        <option>SOFT,FAR_SOFT,NEAR_FADE      </option>
+    </options>
+    
+    <domain>
+
+        <options>
+            <option></option>
+            <option>TESSELLATION</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>PIXEL_SHADOW_SAMPLING</option>
+        </options>
+        
+        <options>
+            <option></option>
+            <option>GI_AMBIENT</option>
+            <option>GI_AMBIENT,GI_AMBIENT_DEFAULT_PROBES</option>
+            <option>AMBIENT</option>
+            <option>DIRECTIONAL</option>
+            <option>GI_AMBIENT,DIRECTIONAL</option>
+            <option>GI_AMBIENT,GI_AMBIENT_DEFAULT_PROBES,DIRECTIONAL</option>
+            <option>AMBIENT,DIRECTIONAL</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>LIGHTING_OPACITY_COMPENSATION</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>PARTICLE_LIGHTING</option>
+            <option>PARTICLE_LIGHTING,PROJECTED_TEXTURE</option>
+            <option>PARTICLE_LIGHTING,PROJECTED_VIDEO</option>
+            <option>PARTICLE_LIGHTING,PROJECTED_SHADOW</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>ALPHA_DISSOLVE</option>
+		</options>
+        <options>
+            <option></option>
+            <option>RAIN</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SHADOW_OCCLUSION</option>
+		</options>
+
+        <options>
+            <option>TEXTURED               </option>
+            <option>TEXTURED,ALPHA_BLEND   </option>
+            <option>TEXTURED,ADDITIVE_BLEND</option>
+            <option>TEXTURED,FIREADD_BLEND </option>
+            <option>TEXTURED,MULTIPLY_BLEND </option>
+        </options>
+        
+        <options>
+            <option></option>
+            <option>TEXANIM_LERP</option>
+        </options>
+
+        <options ref="fade" />
+    </domain>
+
+    <domain>
+        <options>
+            <option>WATERDISPLACEMENT,TEXTURED</option>
+            <option>WATERDISPLACEMENT,TEXTURED,ALPHA_BLEND</option>
+            <option>WATERDISPLACEMENT,TEXTURED,ADDITIVE_BLEND</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>TEXANIM_LERP</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>WATERHEIGHTMAP</option>
+        </options>
+        
+    </domain>
+    
+    <domain>
+        <options>
+            <option>DISTORTION,TEXTURED,ALPHA_BLEND</option>
+        </options>
+
+        <!-- Look at SceneParticleEmitterRendererHelpers.h, uniform fog is disabled
+        <options>
+            <option>UNIFORM_FOG</option>
+        </options>
+        -->
+
+        <options ref="fade" />
+    </domain>
+
+    
+<!-- Exclusions -->
+    <exclusion>
+        <any>FIREADD_BLEND</any>
+        <any>AMBIENT,DIRECTIONAL</any>
+    </exclusion>
+    
+    <exclusion>
+        <any>TEXTURED,ALPHA_DISSOLVE</any>
+        <none>ALPHA_BLEND,ADDITIVE_BLEND,FIREADD_BLEND,MULTIPLY_BLEND</none>
+    </exclusion>
+
+    <exclusion>
+        <any>SHADOW_OCCLUSION</any>
+        <any>ALPHA_DISSOLVE,FIREADD_BLEND,MULTIPLY_BLEND</any>
+    </exclusion>
+
+    <exclusion>
+        <any>RAIN</any>
+        <any>AMBIENT,DIRECTIONAL</any>
+    </exclusion>
+
+    <exclusion>
+        <any>LIGHTING_OPACITY_COMPENSATION</any>
+        <none>GI_AMBIENT,AMBIENT,DIRECTIONAL,PARTICLE_LIGHTING</none>
+    </exclusion>
+
+    <exclusion>
+        <any>PIXEL_SHADOW_SAMPLING</any>
+        <none>DIRECTIONAL</none>
+    </exclusion>
+
+</metashader>

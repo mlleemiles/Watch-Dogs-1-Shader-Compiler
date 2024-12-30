@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report p1:schemaLocation="FcxPCShadersUsageForBuildsReport http://reporting-prodmtl/ReportServer?%2fFar+Cry+2%2fGameMetrics%2fFcxPCShadersUsageForBuildsReport&amp;rs%3aCommand=Render&amp;rs%3aFormat=XML&amp;rc%3aSchema=True" Name="FcxPCShadersUsageForBuildsReport" xmlns:p1="http://www.w3.org/2001/XMLSchema-instance" xmlns="FcxPCShadersUsageForBuildsReport">
+    <table1>
+        <Detail_Collection>
+        	<!-- example of how it was
+            <Detail PlatformName="win32_d3d9" ShaderName="primitive#TEXTURED#ALPHATEXTURED" ShaderLoad="0.91304347826087" ShaderTime="1.02858" />
+            -->
+        </Detail_Collection>
+    </table1>
+</Report>

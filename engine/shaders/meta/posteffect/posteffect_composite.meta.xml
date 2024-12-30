@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader deprecated="PC,DURANGO,ORBIS">>
+  <samplerstate sampler="SourceTextureSampler" state="ColorClamp" />
+  <samplerstate sampler="DownsampledSourceTextureSampler" state="ColorClamp" />
+
+  <samplerstate sampler="RadialBlurredSampler" state="ColorClamp" />
+
+  <samplerstate sampler="DOFBlurredTextureSampler" state="ColorClamp" />
+  <samplerstate sampler="DepthTextureSampler" state="DepthSampler" />
+
+  <samplerstate sampler="BloomSampler" state="ColorBlackTransparentBorder" />
+  <samplerstate sampler="PostFxMaskTexture" state="ColorClamp2D" />
+  <samplerstate sampler="ColorRemapTexture" state="ColorClamp" />
+
+  <samplerstate sampler="MotionBlurredTextureSampler" state="ColorClamp" />
+  <samplerstate sampler="VelocityTextureSampler" state="DepthSampler" />
+
+  <samplerstate sampler="NoiseSampler" state="ColorWrap" />
+
+  <samplerstate sampler="DistortionSampler" state="ColorClamp" />
+
+  <define name="ATMOSPHERIC_SCATTERING" />
+  
+  <define name="DISTORTION" />
+
+  <define name="DEPTH_OF_FIELD" />
+  <define name="MASK_SKY" />
+
+  <define name="BLOOM" />
+  <define name="TONEMAP" />
+  <define name="ARTIFACT" />
+  <define name="COLOR_REMAP" />
+
+  <define name="MOTION_BLUR" />
+  <define name="PRE_MULTIPLAY_MASK" />
+
+  <define name="COLOR_GRADING" />
+  <define name="MERGE_NOISE" />
+  <define name="DECODE_SCENECOLOR" platform="XENON" />
+
+	<domain>
+    <options>
+      <option></option>
+      <option>DECODE_SCENECOLOR</option>
+    </options>
+
+    <options>
+      <option></option>
+      <option>ATMOSPHERIC_SCATTERING</option>
+    </options>
+
+    <options>
+      <option></option>
+      <option>DISTORTION</option>
+    </options>
+
+    <options>
+			<option></option>
+			<option>DEPTH_OF_FIELD</option>
+			<option>DEPTH_OF_FIELD,MASK_SKY</option>
+		</options>
+
+		<options>
+			<option></option>
+			<option>BLOOM</option>
+			<option>BLOOM,ARTIFACT</option>
+			<option>BLOOM,TONEMAP</option>
+			<option>BLOOM,TONEMAP,COLOR_REMAP</option>
+			<option>BLOOM,ARTIFACT,TONEMAP</option>
+			<option>BLOOM,ARTIFACT,TONEMAP,COLOR_REMAP</option>
+		</options>
+
+		<options>
+			<option/>
+			<option>MOTION_BLUR</option>
+      <option>MOTION_BLUR,PRE_MULTIPLAY_MASK</option>
+    </options>
+
+		<options>
+			<option/>
+			<option>COLOR_GRADING</option>
+			<option>COLOR_GRADING,MERGE_NOISE</option>
+		</options>
+	</domain>
+</metashader>

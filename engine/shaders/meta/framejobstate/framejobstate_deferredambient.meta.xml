@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+  
+  <define name="INSIDE" />
+  <define name="INTERIOR" />
+  <define name="STENCILTAG" />
+
+  <domain deprecated="ORBIS,DURANGO">
+    <options>
+      <option></option>
+      <option>INTERIOR</option>
+      <option>INTERIOR,INSIDE</option>
+      <option>INTERIOR,STENCILTAG</option>
+    </options>
+  </domain>
+  
+</metashader>

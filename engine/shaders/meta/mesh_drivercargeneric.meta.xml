@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <samplerstate sampler="DiffuseTexture1" state="" />
+    <samplerstate sampler="DiffuseTexture2" state="" />
+    <samplerstate sampler="AlphaTexture1" state="ColorWrap" />
+    <samplerstate sampler="NormalTexture1" state="NormalWrap" />
+    <samplerstate sampler="SpecularTexture1" state="ColorWrap" />
+    <samplerstate sampler="ReflectionTexture" state="ColorWrap" />
+    <samplerstate sampler="EmissiveTexture" state="ColorWrap" />
+
+    <define name="SKINNING" />
+    <define name="INSTANCING_MISCDATA" />
+
+    <define name="ALPHA_TEST" />
+<!--       
+    <define name="ALPHA_TO_COVERAGE" />
+-->
+    <define name="NORMALMAP" />
+    <define name="SPECULARMAP" />
+
+    <define name="GBUFFER" />
+    <define name="GBUFFER_BLENDED" />
+    <define name="GBUFFER_VELOCITY" platform="NEXTGEN"/>
+    <define name="GBUFFER_WITH_POSTFXMASK" platform="XENON,PS3" />
+
+  <!--    
+    <define name="STATIC_REFLECTION" />
+    <define name="DYNAMIC_REFLECTION" />
+-->
+    <define name="SAMPLE_SHADOW" />
+    <define name="RECEIVE_SINGLE_CASCADE" />
+    <define name="DAMAGE_LAST_SPHERE_INDEX" max_value="0" />
+    <define name="DAMAGE_LAST_PLANE_INDEX" max_value="1" />
+
+    <define name="NORMALINTENSITY" />
+    <define name="ALPHAMAP" />
+
+    <define name="PARABOLOID_REFLECTION" />
+
+    <define name="DIFFUSETEXTURE2" />
+    <define name="USE_MASK_BLUE_CHANNEL_AS_REFLECTION_MASK" />
+
+    <define name="MATCAP" platform="PC,DURANGO,ORBIS" />
+
+    <define name="EMISSIVE_MESH_LIGHTS" />
+    <define name="TIRE_DEFORMATION" />
+    <define name="LICENSE_PLATE" />
+    <define name="AFFECTED_BY_EXPOSURE" />
+
+    <xi:include href="Includes/LightingOptions.xml" />
+    <xi:include href="Includes/ShadowAndDepthDefines.xml" />
+
+    <options name="vertex">
+        <option>SKINNING</option>
+    </options>
+
+    <!-- Shadow and depth -->
+    <domain>
+        <options>
+            <option></option>
+            <option>ALPHA_TEST</option>
+            <option>ALPHAMAP,ALPHA_TEST</option>
+            <!--
+            <option>ALPHA_TO_COVERAGE</option>
+            <option>ALPHAMAP,ALPHA_TO_COVERAGE</option>
+	-->
+        </options>
+
+        <options ref="shadowanddepth" />
+
+        <options>
+            <option></option>
+
+            <option>DAMAGE_LAST_SPHERE_INDEX</option>
+            <option>DAMAGE_LAST_PLANE_INDEX</option>
+            <option>DAMAGE_LAST_SPHERE_INDEX,DAMAGE_LAST_PLANE_INDEX</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>TIRE_DEFORMATION</option>
+        </options>
+
+        <options ref="vertex" />
+    </domain>
+
+    <!-- GBuffer -->
+    <domain>
+        <options>
+            <option></option>
+            <option>ALPHA_TEST</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>ALPHAMAP</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>MATCAP</option>
+        </options>
+
+        <options>
+            <option></option>
+            <!--<option>NORMALMAP</option>-->
+            <option>NORMALMAP,NORMALINTENSITY</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SPECULARMAP</option>
+            <option>SPECULARMAP,DIFFUSETEXTURE2</option>
+            <option>SPECULARMAP,USE_MASK_BLUE_CHANNEL_AS_REFLECTION_MASK</option>
+            <option>SPECULARMAP,DIFFUSETEXTURE2,USE_MASK_BLUE_CHANNEL_AS_REFLECTION_MASK</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>DAMAGE_LAST_SPHERE_INDEX</option>
+            <option>DAMAGE_LAST_PLANE_INDEX</option>
+            <option>DAMAGE_LAST_SPHERE_INDEX,DAMAGE_LAST_PLANE_INDEX</option>
+        </options>
+
+        <options>
+            <option>GBUFFER</option>
+            <option>GBUFFER,GBUFFER_BLENDED</option>
+            <option>GBUFFER,GBUFFER_WITH_POSTFXMASK</option>
+            <option>GBUFFER,GBUFFER_BLENDED,GBUFFER_WITH_POSTFXMASK</option>
+            <option>GBUFFER,GBUFFER_VELOCITY</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>TIRE_DEFORMATION</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>LICENSE_PLATE</option>
+        </options>
+
+        <!--            
+            <option>STATIC_REFLECTION</option>
+            <option>DYNAMIC_REFLECTION</option>
+        </options>
+-->
+
+        <options ref="vertex" />
+    </domain>
+
+    <!--
+    <exclusion>
+        <any>GBUFFER_BLENDED</any>
+        <any>CUSTOM_REFLECTION,STATIC_REFLECTION,DYNAMIC_REFLECTION</any>
+    </exclusion>
+-->
+
+    <!-- Paraboloid reflection -->
+    <domain>
+        <options>
+            <option></option>
+            <option>ALPHAMAP</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>ALPHA_TEST</option>
+            <!--
+            <option>ALPHA_TO_COVERAGE</option>
+-->
+        </options>
+
+        <options>
+            <option>PARABOLOID_REFLECTION</option>
+        </options>
+
+        <options ref="vertex" />
+    </domain>
+
+    <!-- Emissive Mesh Lights -->
+    <domain>
+        <options>
+            <option>EMISSIVE_MESH_LIGHTS</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>DAMAGE_LAST_SPHERE_INDEX</option>
+            <option>DAMAGE_LAST_PLANE_INDEX</option>
+            <option>DAMAGE_LAST_SPHERE_INDEX,DAMAGE_LAST_PLANE_INDEX</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>AFFECTED_BY_EXPOSURE</option>
+        </options>
+
+        <options ref="vertex" />
+    </domain>
+
+    <!-- Exclusions -->
+    <exclusion>
+        <any>GBUFFER_BLENDED</any>
+        <any>ALPHA_TEST,MATCAP</any>
+    </exclusion>
+
+    <exclusion>
+        <any>MATCAP</any>
+        <any>GBUFFER_BLENDED</any>
+    </exclusion>
+
+    <exclusion>
+        <any>MATCAP</any>
+        <none>DIFFUSETEXTURE2</none>
+    </exclusion>
+
+    <xi:include href="Includes/ShadowExclusions.xml" />
+    <xi:include href="Includes/SingleCascadeExclusions.xml" />
+</metashader>

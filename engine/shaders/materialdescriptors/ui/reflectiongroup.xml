@@ -1,0 +1,11 @@
+<ui>
+    <group horizontal="1">
+        <label>Type</label>
+        <group disable_if="ReflectionTexture">
+            <combobox dataBindings="ReflectionType">
+                <comboboxitem value="0">World Static</comboboxitem>
+                <comboboxitem value="1">World Dynamic</comboboxitem>
+            </combobox>
+        </group>
+    </group>
+</ui>

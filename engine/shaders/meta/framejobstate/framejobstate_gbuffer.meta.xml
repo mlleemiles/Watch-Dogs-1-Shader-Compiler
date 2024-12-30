@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <define name="WRITEZ" />
+    <domain>
+        <options>
+            <option></option>
+            <option>WRITEZ</option>
+        </options>
+    </domain>
+</metashader>

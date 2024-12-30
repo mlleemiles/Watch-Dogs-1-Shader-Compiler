@@ -1,0 +1,14 @@
+<ui>
+    <group horizontal="1">
+        <label>          Target part     </label>
+        <combobox dataBindings="ClothWrinkleTargetPartId" tooltip="Character part affected by the current material.">
+            <comboboxitem value="0">Disabled</comboboxitem>
+            <comboboxitem value="1">Shirt</comboboxitem>
+            <comboboxitem value="2">Coat</comboboxitem>
+            <comboboxitem value="3">Pants</comboboxitem>
+            <comboboxitem value="4">Shorts</comboboxitem>
+            <comboboxitem value="5">Dress</comboboxitem>
+            <comboboxitem value="6">Skirt</comboboxitem>
+        </combobox>
+    </group>
+</ui>

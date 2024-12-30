@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <define name="ALPHA_TEST" />
+    <define name="ALPHA_TO_COVERAGE" />
+    <define name="WRITEALPHA" />
+    
+    <domain>
+        <options>
+            <option>ALPHA_TEST</option>
+            <option>ALPHA_TO_COVERAGE</option>
+        </options>
+      
+        <options>
+            <option></option>
+            <option>WRITEALPHA</option>
+        </options>      
+    </domain>
+</metashader>

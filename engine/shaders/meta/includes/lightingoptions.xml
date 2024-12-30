@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <define name="AMBIENT" />
+    <define name="SUN" />
+    <define name="OMNI" />
+    <define name="DIRECTIONAL" />
+    <define name="SPOT" />
+    <define name="PROJECTED_TEXTURE" />
+
+    <options name="lighting">
+        <option>OMNI</option>
+        <option>DIRECTIONAL</option>
+        <option>SPOT</option>
+        <option>SPOT,PROJECTED_TEXTURE</option>
+        <option>AMBIENT</option>
+        <option>AMBIENT,OMNI</option>
+        <option>AMBIENT,SUN</option>
+        <option>AMBIENT,DIRECTIONAL</option>
+        <option>AMBIENT,SPOT</option>
+        <option>AMBIENT,SPOT,PROJECTED_TEXTURE</option>
+    </options>
+</metashader>

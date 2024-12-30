@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <samplerstate sampler="DiffuseTexture" state="" />
+    <samplerstate sampler="DepthIntersectionTexture" state="ColorClamp" />
+    <samplerstate sampler="ReflectionTexture" state="ColorWrap" />
+
+    <domain>
+        <options>
+            <option></option>
+        </options>
+    </domain>
+
+</metashader>

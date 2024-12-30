@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+  <samplerstate sampler="NoiseTextureSamplerPoint" state="ColorPointWrap" />
+
+  <samplerstate sampler="SrcSampler"          state="ColorPointClamp2D" />
+  <samplerstate sampler="SrcSamplerLinear"    state="ColorClamp2D" />
+  <samplerstate sampler="SrcSamplerWrap"      state="ColorPointWrap2D" />
+
+  <samplerstate sampler="PostFxMaskTexture"       state="ColorClamp2D" />
+  <samplerstate sampler="PostFxMaskTexturePoint"  state="ColorPointClamp2D" />
+
+  <samplerstate sampler="PostFxMaskDownsampleTexturePoint"  state="ColorPointWrap2D" />
+  <samplerstate sampler="PostFxMaskDownsampleTextureLinear" state="ColorWrap2D" />
+
+  <samplerstate sampler="GBufferNormalTexture"  state="ColorClamp" />
+
+  <samplerstate sampler="ColorRemapTexture"     state="ColorClamp" />
+  
+  <samplerstate sampler="HitOverlayTexture"     state="ColorClamp" />
+
+  <domain>
+    <options>
+      <option></option>
+    </options>
+  </domain>
+  
+</metashader>

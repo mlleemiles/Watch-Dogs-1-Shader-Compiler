@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<materialdescriptor name="Cloth" id="#(0x543bdc8d, 0x5358dfd2)">
+    <geometryInputs normal="1" tangent="1" binormal="1" color="1" uvChannels="2" bonecount="6"/>
+
+    <parameter name="AlphaTestEnabled" type="bool" />
+    <parameter name="TwoSided" type="bool" />
+    <parameter name="AmbientOcclusion" type="float" />
+    
+    <parameter name="FabricTexture" type="sampler2D" tilingName="FabricTiling" UvName="FabricUV" />
+    <parameter name="FabricTiling" type="float2" />
+    <parameter name="BaseColor1" type="float4" />
+    <parameter name="BaseColor2" type="float4" />
+    
+    <parameter name="PrintTexture" type="sampler2D" tilingName="PrintTiling" UvName="PrintUV" />
+    <parameter name="PrintTiling" type="float2" />
+    
+    <parameter name="BloodTexture" type="sampler2D" tilingName="BloodTiling1" UvName="BloodUV" />
+    <parameter name="BloodTiling" type="float2" />
+    
+    <parameter name="MaskTexture1" type="sampler2D" UvName="MaskUV1" />
+    
+    <parameter name="NormalTexture1" type="sampler2D" UvName="NormalUV1" />
+    
+    <parameter name="SpecularTexture1" type="sampler2D" tilingName="SpecularTiling1" UvName="SpecularUV1" />
+    <parameter name="SpecularTiling1" type="float2" />
+    <parameter name="SpecularColorBase" type="float4" />
+    <parameter name="SpecularColor1" type="float4" />
+    <parameter name="SpecularPower" type="float" />
+    
+    <parameter name="UVGroupMapChannel0" type="float" />
+    <parameter name="UVGroupMapChannel1" type="float" />
+    <parameter name="UVGroupMapChannel2" type="float" />
+    <parameter name="UVGroupMapChannel3" type="float" />
+    
+    <parameter name="RimLightTexture" type="sampler2D" UvName="RimLightUV" />
+    
+    <parameterprovider parametersfilename="Mesh_Cloth.fx">
+        <parameter name="AmbientOcclusion" />
+        <parameter name="FabricTexture" />
+        <parameter name="FabricTiling" />
+        <parameter name="BaseColor1" />
+        <parameter name="BaseColor2" />
+        <parameter name="PrintTexture" />
+        <parameter name="PrintTiling" />
+        <parameter name="BloodTexture" />
+        <parameter name="BloodTiling" />
+        <parameter name="MaskTexture1" />
+        <parameter name="NormalTexture1" />
+        <parameter name="SpecularTexture1" />
+        <parameter name="SpecularTiling1" />
+        <parameter name="SpecularColorBase" />
+        <parameter name="SpecularColor1" />
+        <parameter name="SpecularPower" />
+        <parameter name="UVGroupMapChannel0" />
+        <parameter name="UVGroupMapChannel1" />
+        <parameter name="UVGroupMapChannel2" />
+        <parameter name="UVGroupMapChannel3" />
+        <parameter name="RimLightTexture" />
+    </parameterprovider>
+    
+    <ui>
+        <group horizontal="1">
+            <checkbox label="Two sided" dataBindings="TwoSided" />
+            <checkbox label="Alpha test" dataBindings="AlphaTestEnabled" />
+            <label>Ambient occlusion</label>
+            <textbox dataBindings="AmbientOcclusion">
+                <dataBindings maxvalue="1" />
+            </textbox>
+        </group>
+
+        <group label="Fabric" horizontal="1">
+            <button dataBindings="FabricTexture" fill="1" />
+            <group>
+                <textbox dataBindings="FabricTiling.x">
+                    <dataBindings type="int" />
+                </textbox>
+                <textbox dataBindings="FabricTiling.y">
+                    <dataBindings type="int" />
+                </textbox>
+            </group>
+        </group>
+
+        <group label="Colors" horizontal="1">
+            <label>Base Color 1</label>
+            <button dataBindings="BaseColor1">
+                <dataBindings type="color" />
+            </button>
+            <label>Base Color 2</label>
+            <button dataBindings="BaseColor2">
+                <dataBindings type="color" />
+            </button>
+        </group>
+
+        <group label="Print" horizontal="1">
+            <button dataBindings="PrintTexture" fill="1" />
+            <group>
+                <textbox dataBindings="PrintTiling.x">
+                    <dataBindings type="int" />
+                </textbox>
+                <textbox dataBindings="PrintTiling.y">
+                    <dataBindings type="int" />
+                </textbox>
+            </group>
+        </group>
+
+        <group label="Blood" horizontal="1">
+            <button dataBindings="BloodTexture" fill="1" />
+            <group>
+                <textbox dataBindings="BloodTiling.x">
+                    <dataBindings type="int" />
+                </textbox>
+                <textbox dataBindings="BloodTiling.y">
+                    <dataBindings type="int" />
+                </textbox>
+            </group>
+        </group>
+
+        <group label="Mask texture">
+            <button dataBindings="MaskTexture1" fill="1" />
+        </group>
+
+        <group label="Normal texture">
+            <button dataBindings="NormalTexture1" fill="1" />
+        </group>
+
+        <group label="Specular">
+            <group horizontal="1">
+                <button dataBindings="SpecularColor1">
+                    <dataBindings type="color" />
+                </button>
+                <button dataBindings="SpecularTexture1" fill="1" />
+                <group>
+                    <textbox dataBindings="SpecularTiling1.x">
+                        <dataBindings type="int" />
+                    </textbox>
+                    <textbox dataBindings="SpecularTiling1.y">
+                        <dataBindings type="int" />
+                    </textbox>
+                </group>
+            </group>
+
+            <group horizontal="1">
+                <button dataBindings="SpecularColorBase" fill="1" >
+                    <dataBindings type="color" />
+                </button>
+                <dataBindingsAlias name="@ReflectanceAlias" dataBindings="Reflectance" />
+	        	<xi:include href="UI/ReflectanceGroup.xml" />
+
+                <dataBindingsAlias name="@SpecularPowerAlias" dataBindings="SpecularPower" />
+                <xi:include href="UI/SpecularPowerGroup.xml" />
+            </group>
+        </group>
+
+        <group label="Rim light texture">
+            <button dataBindings="RimLightTexture" fill="1" />
+        </group>
+    </ui>
+</materialdescriptor>

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="SourceTextureSampler" state="ColorBlackTransparentBorder" />
+    <samplerstate sampler="BlurredTextureSampler" state="ColorClamp" />
+    <samplerstate sampler="PostFXMaskTextureSampler" state="ColorBlackTransparentBorder" />  
+    <samplerstate sampler="DepthTextureSampler" state="DepthSampler" />
+	<samplerstate sampler="VelocityTextureSampler" state="ColorPointClamp" />
+    
+    <define name="DOWNSAMPLE" />
+    <define name="BLUR" />
+    <define name="LAST_POSTFX" />
+    <define name="DEPTH_OF_FIELD" platform="XENON,PS3" />
+	  <define name="VELOCITY_FROM_GBUFFER" platform="PC,ORBIS,DURANGO" />
+    <define name="PRE_MULTIPLAY_MASK" platform="XENON,PS3" />
+    <define name="HALF_SIZE_SCENE_TEXTURE" platform="XENON,PS3" />
+    <define name="DECODE_SCENECOLOR" platform="XENON" />
+    <define name="VECTORS_ONLY" />
+
+    <domain>
+        <options>
+            <option></option>
+            <option>PRE_MULTIPLAY_MASK</option>
+            <option>DOWNSAMPLE</option>
+            <option>DOWNSAMPLE,HALF_SIZE_SCENE_TEXTURE</option>
+            <option>DOWNSAMPLE,PRE_MULTIPLAY_MASK</option>
+            <option>DOWNSAMPLE,PRE_MULTIPLAY_MASK,HALF_SIZE_SCENE_TEXTURE</option>
+            <option>DOWNSAMPLE,DEPTH_OF_FIELD</option>
+            <option>DOWNSAMPLE,DEPTH_OF_FIELD,HALF_SIZE_SCENE_TEXTURE</option>
+            <option>DOWNSAMPLE,DEPTH_OF_FIELD,PRE_MULTIPLAY_MASK</option>
+            <option>DOWNSAMPLE,DEPTH_OF_FIELD,PRE_MULTIPLAY_MASK,HALF_SIZE_SCENE_TEXTURE</option>
+            <option>LAST_POSTFX</option>
+            <option>LAST_POSTFX,PRE_MULTIPLAY_MASK</option> 
+            </options>
+                        <options>
+            <option></option>
+            <option>DECODE_SCENECOLOR</option>
+        </options>
+
+        <options>
+          <option></option>
+          <option>VELOCITY_FROM_GBUFFER</option>
+        </options>
+    </domain>
+
+    <domain>
+      <options>
+        <option>VECTORS_ONLY</option>
+      </options>
+    </domain>
+</metashader>

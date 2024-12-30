@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <xi:include href="PostEffect_Generic.xml" />
+    
+    <exclusion>ALPHABLEND</exclusion>
+    <exclusion>ADDITIVE</exclusion>
+    <exclusion>MULTIPLY</exclusion>
+    <exclusion>MULTIPLY2X</exclusion>
+    <exclusion>SCREEN</exclusion>
+    <exclusion>SUBSTRACTIVE</exclusion>
+</metashader>

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+
+    <samplerstate sampler="DiffuseSampler" state="ColorClamp" />
+    <samplerstate sampler="VisibilityTestSampler" state="ColorPointClamp" />
+
+    <define name="GPGPU_VISIBILITY_TEST" />
+    <define name="PARABOLOID_REFLECTION" />
+    <define name="SOFT_DEPTH_TEST" />    
+    <define name="LENS_EFFECT" />
+    <define name="SHADER_GAMMA_20" platform="XENON" />  
+
+    <domain>
+        <options>
+            <option></option>
+            <option>GPGPU_VISIBILITY_TEST</option>
+        </options>
+        <options>
+            <option></option>
+            <option>PARABOLOID_REFLECTION</option>
+        </options>
+        
+        <options>
+            <option></option>
+            <option>SOFT_DEPTH_TEST</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>LENS_EFFECT</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SHADER_GAMMA_20</option>
+        </options>      
+    </domain>
+
+</metashader>

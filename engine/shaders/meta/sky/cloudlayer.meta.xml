@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="CloudsUpperLayerTexture1" state="ColorWrap" />
+    <samplerstate sampler="CloudsLowerLayerTexture1" state="ColorWrap" />
+    <samplerstate sampler="CloudsUpperLayerNormalTexture1" state="NormalWrap" />
+    <samplerstate sampler="CloudsLowerLayerNormalTexture1" state="NormalWrap" />
+	
+    <samplerstate sampler="CloudsUpperLayerTexture2" state="ColorWrap" />
+    <samplerstate sampler="CloudsLowerLayerTexture2" state="ColorWrap" />
+    <samplerstate sampler="CloudsUpperLayerNormalTexture2" state="NormalWrap" />
+    <samplerstate sampler="CloudsLowerLayerNormalTexture2" state="NormalWrap" />
+    
+	<samplerstate sampler="CloudsUpperLayerTexture3" state="ColorWrap" />
+    <samplerstate sampler="CloudsLowerLayerTexture3" state="ColorWrap" />
+    <samplerstate sampler="CloudsUpperLayerNormalTexture3" state="NormalWrap" />
+    <samplerstate sampler="CloudsLowerLayerNormalTexture3" state="NormalWrap" />
+    
+	
+    <define name="LAYER1" />
+    <define name="LAYER2" />
+	<define name="LAYER3" />
+    <define name="MASK_DESTCOLOR" />
+    <define name="PARABOLOID_REFLECTION" />
+    <define name="NORMALMAP" />
+	<define name="UPPER_LAYER" />
+
+    <domain>
+        <options>
+            <option>LAYER1</option>
+            <option>LAYER1,LAYER2</option>
+			<option>LAYER1,LAYER2,LAYER3</option>
+            <option>LAYER1,UPPER_LAYER</option>
+            <option>LAYER1,LAYER2,UPPER_LAYER</option>
+			<option>LAYER1,LAYER2,LAYER3,UPPER_LAYER</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>MASK_DESTCOLOR</option>
+        </options>
+        
+        <options>
+            <option></option>
+            <option>NORMALMAP</option>
+            <option>PARABOLOID_REFLECTION</option>
+        </options>
+    </domain>
+</metashader>

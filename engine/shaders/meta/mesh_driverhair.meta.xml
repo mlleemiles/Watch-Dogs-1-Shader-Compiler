@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <samplerstate sampler="DiffuseTexture1" state="" />
+    <samplerstate sampler="NormalTexture1" state="NormalWrap" />
+    <samplerstate sampler="SpecularTexture1" state="" />
+    <samplerstate sampler="AlphaTexture1" state="" />
+    <samplerstate sampler="SpecularShiftTexture" state="ColorWrap" />
+    <samplerstate sampler="LightProjectedTexture" state="" />
+    <samplerstate sampler="LightProjectedVideo" state="Video" />
+    <samplerstate sampler="ProbeLightingTexture" state="ColorPointClamp2D" />
+
+    <define name="SKINNING" />
+
+    <define name="ALPHA_TEST" />
+
+    <define name="DIFFUSECOLOR_OVERLAY" />
+    <define name="SPECULARMAP" />
+    <define name="NORMALMAP" />
+    <define name="ALPHAMAP" />
+
+    <define name="GBUFFER" />
+    <define name="GBUFFER_VELOCITY" platform="NEXTGEN"/>
+    <define name="GBUFFER_WITH_POSTFXMASK" platform="XENON,PS3" />
+    <define name="DEFERRED_FX_MASK" />
+    <define name="COLORMASK" />
+
+    <define name="FORWARD_LIGHTING" />
+    <define name="SECONDARY_SPECULAR" />
+    <define name="SAMPLE_SHADOW" />
+    <define name="SAMPLE_SHADOW_HIRESFILTERING" />
+    <define name="PROJECTED_CLOUDS" platform="PC,DURANGO,ORBIS" />
+    <define name="PROJECTED_VIDEO" />
+
+    <define name="ALTERNATE_HAIR_FILTERING_METHOD" />
+
+    <define name="SUN_SHADOW_MASK" />
+
+    <define name="FADING_CLIP_PLANES_MAX_IDX" max_value="7" />
+
+    <xi:include href="Includes/LightingOptions.xml" />
+    <xi:include href="Includes/ShadowAndDepthDefines.xml" />
+
+    <options name="vertex">
+        <option></option>
+        <option>SKINNING</option>
+    </options>
+
+    <!-- GBuffer -->
+    <domain>
+        <options ref="vertex" />
+
+        <options>
+    		<option></option>
+            <option>SPECULARMAP</option>
+            <option>ALPHAMAP</option>
+            <option>ALPHAMAP,SPECULARMAP</option>
+            <option>ALPHA_TEST,SPECULARMAP</option>
+            <option>ALPHA_TEST,ALPHAMAP</option>
+            <option>ALPHA_TEST,ALPHAMAP,SPECULARMAP</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>NORMALMAP</option>
+        </options>
+
+        <options>
+            <option>GBUFFER</option>
+            <option>GBUFFER,GBUFFER_WITH_POSTFXMASK</option>
+            <option>GBUFFER,GBUFFER_VELOCITY</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>DIFFUSECOLOR_OVERLAY</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>COLORMASK</option>
+        </options>
+    </domain>
+
+    <!-- Shadow and depth -->
+    <domain>
+        <options ref="vertex" />
+        <options ref="shadowanddepth" />
+
+        <options>
+            <option></option>
+            <option>SPECULARMAP</option>
+            <option>ALPHAMAP</option>
+            <option>ALPHA_TEST,SPECULARMAP</option>
+            <option>ALPHA_TEST,ALPHAMAP</option>
+            <option>ALPHA_TEST,ALPHAMAP,SPECULARMAP</option>
+        </options>
+
+    </domain>
+
+    <!-- Hair DeferredFx mask generation -->
+    <domain>
+        <options ref="vertex" />
+
+        <options>
+            <option>DEFERRED_FX_MASK</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SPECULARMAP</option>
+            <option>ALPHAMAP</option>
+            <option>ALPHA_TEST,SPECULARMAP</option>
+            <option>ALPHA_TEST,ALPHAMAP</option>
+            <option>ALPHA_TEST,ALPHAMAP,SPECULARMAP</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>ALTERNATE_HAIR_FILTERING_METHOD</option>
+        </options>
+    </domain>
+
+    <!-- Hair Forward Specular -->
+    <domain>
+        <options ref="vertex" />
+
+        <options>
+            <option>FORWARD_LIGHTING</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>NORMALMAP</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SECONDARY_SPECULAR</option>
+        </options>
+
+        <options>
+            <option>SUN</option>
+            <option>SUN,SAMPLE_SHADOW</option>
+            <option>SUN,SAMPLE_SHADOW,SHADOW_NOFSM</option>
+            <option>SUN,SAMPLE_SHADOW,SUN_SHADOW_MASK</option>
+            <option>SUN,SAMPLE_SHADOW,SHADOW_NOFSM,SUN_SHADOW_MASK</option>
+            <option>OMNI</option>
+            <option>OMNI,SAMPLE_SHADOW</option>
+            <option>OMNI,SAMPLE_SHADOW,SAMPLE_SHADOW_HIRESFILTERING</option>
+            <option>SPOT</option>
+            <option>SPOT,SAMPLE_SHADOW</option>
+            <option>SPOT,SAMPLE_SHADOW,SAMPLE_SHADOW_HIRESFILTERING</option>
+            <option>SPOT,PROJECTED_TEXTURE</option>
+            <option>SPOT,PROJECTED_VIDEO</option>
+            <option>SPOT,SAMPLE_SHADOW,PROJECTED_TEXTURE</option>
+            <option>SPOT,SAMPLE_SHADOW,PROJECTED_VIDEO</option>
+            <option>SPOT,SAMPLE_SHADOW,SAMPLE_SHADOW_HIRESFILTERING,PROJECTED_TEXTURE</option>
+            <option>SPOT,SAMPLE_SHADOW,SAMPLE_SHADOW_HIRESFILTERING,PROJECTED_VIDEO</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>PROJECTED_CLOUDS</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SPECULARMAP</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>FADING_CLIP_PLANES_MAX_IDX</option>
+        </options>
+    </domain>
+
+    <exclusion>
+        <none>SUN</none>
+        <any>PROJECTED_CLOUDS</any>
+    </exclusion>
+
+    <exclusion>
+        <any>SUN</any>
+        <any>FADING_CLIP_PLANES_MAX_IDX</any>
+    </exclusion>
+
+</metashader>

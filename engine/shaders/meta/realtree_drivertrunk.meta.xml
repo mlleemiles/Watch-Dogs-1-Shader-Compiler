@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <samplerstate sampler="DiffuseTexture1" state="ColorWrap" />
+    <samplerstate sampler="DiffuseTexture2" state="ColorWrap" />
+    <samplerstate sampler="NormalTexture1" state="NormalWrap" />
+    <samplerstate sampler="SpecularTexture1" state="ColorWrap" />
+    <samplerstate sampler="VegetationTrunkNoiseTexture" state="ColorWrap" />
+
+    <define name="INSTANCING" />
+    <define name="TBUFFER_INSTANCING" />
+
+    <define name="NORMALMAP" />
+    <define name="SPECULARMAP" />
+    <define name="CAPS" />
+    <define name="DIFFUSEMAP2" />
+
+    <define name="GBUFFER" />
+
+    <define name="SAMPLE_SHADOW" />
+    <define name="RECEIVE_SINGLE_CASCADE" />
+    <define name="PARABOLOID_REFLECTION" />
+
+    <define name="VEGETATION_ANIM" />
+    <define name="VEGETATION_ANIM_TRUNK_TEXTURE" />
+
+    <xi:include href="Includes/LightingOptions.xml" />
+    <xi:include href="Includes/ShadowAndDepthDefines.xml" />
+
+    <options name="vertex">
+        <option></option>
+        <option>INSTANCING</option>
+    </options>
+
+    <domain>
+        <options ref="shadowanddepth" />
+
+        <options>
+            <option></option>
+            <option>VEGETATION_ANIM</option>
+            <option>VEGETATION_ANIM,VEGETATION_ANIM_TRUNK_TEXTURE</option>
+        </options>
+
+        <options ref="vertex" />
+    </domain>
+
+    <domain>
+        <options>
+            <option></option>
+            <option>NORMALMAP</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SPECULARMAP</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>DIFFUSEMAP2</option>
+        </options>
+
+        <options>
+            <option>GBUFFER</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>VEGETATION_ANIM</option>
+            <option>VEGETATION_ANIM,VEGETATION_ANIM_TRUNK_TEXTURE</option>
+        </options>
+
+        <options ref="vertex" />
+    </domain>
+
+    <domain>
+        <options>
+            <option>PARABOLOID_REFLECTION</option>
+        </options>
+        
+        <options>
+            <option></option>
+            <option>DIFFUSEMAP2</option>
+        </options>      
+        
+        <options ref="vertex" />
+    </domain>
+
+    <xi:include href="Includes/ShadowExclusions.xml" />
+    <xi:include href="Includes/SingleCascadeExclusions.xml" />
+</metashader>

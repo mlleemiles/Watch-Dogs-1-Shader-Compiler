@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<materialdescriptor name="Skin" id="#(0x414c4b93, 0x943a6f2)">
+    <geometryInputs normal="1" tangent="1" binormal="1" color="1" uvChannels="2" />
+
+    <parameter name="TwoSided" type="bool" />
+    <parameter name="BlendingType" type="int" />
+    <parameter name="AmbientOcclusion" type="float" />
+
+    <parameter name="TattooTexture" type="sampler2D" tilingName="TattooTiling" uvGroup="0" UvName="TattooUV" uvTilingName="TattooUVTiling" />
+    <parameter name="TattooTiling" type="float2" defaultvalue="1,1" />
+    <parameter name="TattooUV" type="int" />
+
+    <parameter name="BloodTexture" type="sampler2D" tilingName="BloodTiling" uvGroup="0" UvName="BloodUV" uvTilingName="BloodUVTiling" />
+    <parameter name="BloodTiling" type="float2" defaultvalue="1,1" />
+    <parameter name="BloodUV" type="int" />
+
+    <parameter name="SkinTexture" type="sampler2D" uvGroup="0" UvName="SkinUV" uvTilingName="SkinUVTiling" />
+    <parameter name="SkinUV" type="int" />
+    <parameter name="SkinColor" type="float4" />
+    <parameter name="PalmColor" type="float4" />
+
+    <parameter name="MaskTexture1" type="sampler2D" uvGroup="0" UvName="MaskUV1" uvTilingName="MaskUVTiling1" />
+    <parameter name="MaskUV1" type="int" />
+
+    <parameter name="NormalTexture1" type="sampler2D" tilingName="NormalTiling1" uvGroup="0" UvName="NormalUV1" uvTilingName="NormalUVTiling1" />
+    <parameter name="NormalTexture2" type="sampler2D" tilingName="NormalTiling2" uvGroup="1" UvName="NormalUV2" uvTilingName="NormalUVTiling2" />
+    <parameter name="NormalTiling1" type="float2" defaultvalue="1,1" />
+    <parameter name="NormalTiling2" type="float2" defaultvalue="1,1" />
+    <parameter name="NormalBlendFactor" type="float" />
+    <parameter name="NormalUV1" type="int" />
+    <parameter name="NormalUV2" type="int" />
+
+    <parameter name="SpecularTexture1" type="sampler2D" tilingName="SpecularTiling1" uvGroup="2" UvName="SpecularUV1" uvTilingName="SpecularUVTiling1" />
+    <parameter name="SpecularTiling1" type="float2" defaultvalue="1,1" />
+    <parameter name="SpecularColorBase" type="float4" />
+    <parameter name="SpecularColor1" type="float4" />
+    <parameter name="SpecularPower" type="float" defaultvalue="10" />
+    <parameter name="PeekSpecularPower" type="float" defaultvalue="100" />
+    <parameter name="SpecularUV1" type="int" />
+
+    <parameter name="SubsurfaceColor" type="float4" />
+    <parameter name="SubsurfaceRolloff" type="float" />
+
+    <parameter name="RimLightTexture" type="sampler2D" />
+
+    <parameter name="TattooUVTiling" type="float4" provideronly="1" />
+    <parameter name="BloodUVTiling" type="float4" provideronly="1" />
+    <parameter name="SkinUVTiling" type="float4" provideronly="1" />
+    <parameter name="MaskUVTiling1" type="float4" provideronly="1" />
+    <parameter name="SpecularUVTiling1" type="float4" provideronly="1" />
+    <parameter name="NormalUVTiling1" type="float4" provideronly="1" />
+    <parameter name="NormalUVTiling2" type="float4" provideronly="1" />
+
+    <parameterprovider parametersfilename="Mesh_Skin.fx">
+        <parameter name="AmbientOcclusion" />
+        <parameter name="TattooTexture" />
+        <parameter name="TattooTiling" />
+        <parameter name="BloodTexture" />
+        <parameter name="BloodTiling" />
+        <parameter name="SkinTexture" />
+        <parameter name="SkinColor" />
+        <parameter name="PalmColor" />
+        <parameter name="MaskTexture1" />
+        <parameter name="NormalTexture1" />
+        <parameter name="NormalTexture2" />
+        <parameter name="NormalTiling1" />
+        <parameter name="NormalTiling2" />
+        <parameter name="NormalBlendFactor" />
+        <parameter name="SpecularTexture1" />
+        <parameter name="SpecularTiling1" />
+        <parameter name="SpecularColorBase" />
+        <parameter name="SpecularColor1" />
+        <parameter name="SpecularPower" />
+        <parameter name="PeekSpecularPower" />
+        <parameter name="SubsurfaceColor" />
+        <parameter name="SubsurfaceRolloff" />
+        <parameter name="RimLightTexture" />
+        <parameter name="TattooUVTiling" />
+        <parameter name="BloodUVTiling" />
+        <parameter name="SkinUVTiling" />
+        <parameter name="MaskUVTiling1" />
+        <parameter name="SpecularUVTiling1" />
+        <parameter name="NormalUVTiling1" />
+        <parameter name="NormalUVTiling2" />
+    </parameterprovider>
+    
+    <ui>
+        <group label="Settings">
+            <group horizontal="1">
+                <group>
+                    <checkbox label="Two sided" dataBindings="TwoSided" />
+                </group>
+                <group>
+                    <label>Blending type</label>
+                    <combobox dataBindings="BlendingType">
+                        <comboboxitem value="0">Opaque</comboboxitem>
+                        <comboboxitem value="1">Alpha</comboboxitem>
+                    </combobox>
+                </group>
+            </group>
+            <group horizontal="1">
+                <label>Ambient occlusion</label>
+                <textbox dataBindings="AmbientOcclusion">
+                    <dataBindings maxvalue="1" />
+                </textbox>
+            </group>
+        </group>
+
+        <group label="Skin">
+            <label>Tattoo</label>
+            <group horizontal="1">
+                <button dataBindings="TattooTexture" fill="1" />
+                <textbox dataBindings="TattooUV">
+                    <dataBindings maxvalue="1" />
+                </textbox>
+                <group>
+                    <textbox dataBindings="TattooTiling.x">
+                        <dataBindings type="int" />
+                    </textbox>
+                    <textbox dataBindings="TattooTiling.y">
+                        <dataBindings type="int" />
+                    </textbox>
+                </group>
+            </group>
+
+            <label>Blood</label>
+            <group horizontal="1">
+                <button dataBindings="BloodTexture" fill="1" />
+                <textbox dataBindings="BloodUV">
+                    <dataBindings maxvalue="1" />
+                </textbox>
+                <group>
+                    <textbox dataBindings="BloodTiling.x">
+                        <dataBindings type="int" />
+                    </textbox>
+                    <textbox dataBindings="BloodTiling.y">
+                        <dataBindings type="int" />
+                    </textbox>
+                </group>
+            </group>
+
+            <label>Skin texture</label>
+            <group horizontal="1">
+                <button dataBindings="SkinTexture" fill="1" />
+                <textbox dataBindings="SkinUV">
+                    <dataBindings maxvalue="1" />
+                </textbox>
+            </group>
+
+            <group horizontal="1">
+                <label>Skin color</label>
+                <button dataBindings="SkinColor">
+                    <dataBindings type="color" />
+                </button>
+                <label>Palm color</label>
+                <button dataBindings="PalmColor">
+                    <dataBindings type="color" />
+                </button>
+            </group>
+        </group>
+
+        <group horizontal="1" label="Mask">
+            <button dataBindings="MaskTexture1" fill="1" />
+            <textbox dataBindings="MaskUV1">
+                <dataBindings maxvalue="1" />
+            </textbox>
+        </group>
+
+        <group label="Specular">
+            <group horizontal="1">
+                <button dataBindings="SpecularColor1">
+                    <dataBindings type="color" />
+                </button>
+                <button dataBindings="SpecularTexture1" fill="1" />
+                <textbox dataBindings="SpecularUV1">
+                    <dataBindings maxvalue="1" />
+                </textbox>
+                <group>
+                    <textbox dataBindings="SpecularTiling1.x">
+                        <dataBindings type="int" />
+                    </textbox>
+                    <textbox dataBindings="SpecularTiling1.y">
+                        <dataBindings type="int" />
+                    </textbox>
+                </group>
+            </group>
+
+            <group horizontal="1">
+                <button dataBindings="SpecularColorBase" fill="1" >
+                    <dataBindings type="color" />
+                </button>
+                <dataBindingsAlias name="@SpecularPowerAlias" dataBindings="SpecularPower" />
+                <xi:include href="UI/SpecularPowerGroup.xml" />
+                <label>Peek Power</label>
+                <textbox databindings="PeekSpecularPower" />
+            </group>
+        </group>
+
+        <group label="Normal">
+            <label>Texture 1</label>
+            <group horizontal="1">
+                <button dataBindings="NormalTexture1" fill="1" />
+                <textbox dataBindings="NormalUV1">
+                    <dataBindings maxvalue="1" />
+                </textbox>
+                <group>
+                    <textbox dataBindings="NormalTiling1.x">
+                        <dataBindings type="int" />
+                    </textbox>
+                    <textbox dataBindings="NormalTiling1.y">
+                        <dataBindings type="int" />
+                    </textbox>
+                </group>
+            </group>
+            <label>Texture 2</label>
+            <group horizontal="1">
+                <button dataBindings="NormalTexture2" fill="1" />
+                <textbox dataBindings="NormalUV2">
+                    <dataBindings maxvalue="1" />
+                </textbox>
+                <group>
+                    <textbox dataBindings="NormalTiling2.x">
+                        <dataBindings type="int" />
+                    </textbox>
+                    <textbox dataBindings="NormalTiling2.y">
+                        <dataBindings type="int" />
+                    </textbox>
+                </group>
+            </group>
+            <group horizontal="1">
+                <label>Blend Factor</label>
+                <textbox dataBindings="NormalBlendFactor">
+                    <dataBindings maxvalue="1" />
+                </textbox>
+            </group>
+        </group>
+
+        <group label="Subsurface" horizontal="1">
+            <label>Color</label>
+            <button dataBindings="SubsurfaceColor" fill="1" >
+                <dataBindings type="color" />
+            </button>
+            <label>Rolloff</label>
+            <textbox dataBindings="SubsurfaceRolloff" />
+        </group>
+
+        <group label="Rim light texture">
+            <button dataBindings="RimLightTexture" fill="1" />
+        </group>
+    </ui>
+
+</materialdescriptor>

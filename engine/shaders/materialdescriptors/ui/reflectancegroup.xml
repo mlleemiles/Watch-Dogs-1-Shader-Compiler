@@ -1,0 +1,29 @@
+<ui>
+    <group horizontal="1">
+        <label>                             Reflectance    </label>
+        <combobox dataBindings="@ReflectanceAlias.x">
+            <comboboxitem value="0.02">(0.02) Skin</comboboxitem>
+            <comboboxitem value="0.021">(0.02) Water</comboboxitem>
+            <comboboxitem value="0.03">(0.03) Plastic / Glass (Low)</comboboxitem>
+            <comboboxitem value="0.04">(0.04) Default - Average dielectric</comboboxitem>
+            <comboboxitem value="0.05">(0.05) Plastic High</comboboxitem>
+            <comboboxitem value="0.08">(0.08) Glass (High) / Ruby</comboboxitem>
+            <comboboxitem value="0.10">(0.10)</comboboxitem>
+            <comboboxitem value="0.11">(0.11) Crystal</comboboxitem>
+            <comboboxitem value="0.17">(0.17) Diamond</comboboxitem>
+            <comboboxitem value="0.20">(0.20)</comboboxitem>
+            <comboboxitem value="0.30">(0.30)</comboboxitem>
+            <comboboxitem value="0.40">(0.40)</comboboxitem>
+            <comboboxitem value="0.46">(0.46) Quartz</comboboxitem>
+            <comboboxitem value="0.50">(0.50)</comboboxitem>
+            <comboboxitem value="0.57">(0.57) Iron</comboboxitem>
+            <comboboxitem value="0.60">(0.60)</comboboxitem>
+            <comboboxitem value="0.65">(0.65) Cobalt</comboboxitem>
+            <comboboxitem value="0.70">(0.70)</comboboxitem>
+            <comboboxitem value="0.80">(0.80)</comboboxitem>
+            <comboboxitem value="0.90">(0.90)</comboboxitem>
+            <comboboxitem value="0.92">(0.92) Aluminum</comboboxitem>
+            <comboboxitem value="0.921">(0.92) Silver</comboboxitem>
+        </combobox>
+    </group>
+</ui>

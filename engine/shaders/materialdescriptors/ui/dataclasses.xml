@@ -1,0 +1,6 @@
+<ui>
+    <dataclass name="Tiling" increment="0.01" minvalue="0.01" />
+    <dataclass name="UVChannel" type="int" minvalue="0" maxvalue="1" displayvalueadd="1" />
+    <dataclass name="SpecularPower" minvalue="1.0" maxvalue="8192" displayvaluelog2="1" displayvaluediv="13" />
+    <dataclass name="GlossRange" minvalue="1.0" maxvalue="8192" displayvaluediv="8192" />
+</ui>

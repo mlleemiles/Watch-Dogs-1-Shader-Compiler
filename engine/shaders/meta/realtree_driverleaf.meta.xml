@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <samplerstate sampler="DiffuseTexture1" state="ColorWrap" />
+    <samplerstate sampler="MaskTexture" state="ColorPointWrap" />
+    <samplerstate sampler="VegetationTrunkNoiseTexture" state="ColorWrap" />
+    <samplerstate sampler="VegetationLeafNoiseTexture"  state="ColorWrap" />
+
+    <define name="INSTANCING" />
+    <define name="TBUFFER_INSTANCING" />
+
+    <define name="ALPHA_TEST" platform="PC,DURANGO,ORBIS" />
+
+    <define name="GBUFFER" />
+
+    <define name="SAMPLE_SHADOW" />
+    <define name="RECEIVE_SINGLE_CASCADE" />
+    <define name="PARABOLOID_REFLECTION" />
+    <define name="MASK_TEXTURE" />
+    <define name="PER_LEAF_DIVERSITY" />
+    <define name="RANDOM_LEAF_ALBEDO" />
+
+    <define name="VEGETATION_ANIM" />
+    <define name="VEGETATION_ANIM_LEAF" />
+    <define name="VEGETATION_ANIM_TRUNK_TEXTURE" />
+
+    <xi:include href="Includes/LightingOptions.xml" />
+    <xi:include href="Includes/ShadowAndDepthDefines.xml" />
+
+    <options name="vertex">
+        <option></option>
+        <option>INSTANCING</option>
+    </options>
+
+    <!-- Shadow and Depth -->
+    <domain>
+        <options>
+            <option></option>
+            <option>ALPHA_TEST</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>MASK_TEXTURE</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>RANDOM_LEAF_ALBEDO</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>VEGETATION_ANIM</option>
+            <option>VEGETATION_ANIM,VEGETATION_ANIM_LEAF</option>
+            <option>VEGETATION_ANIM,VEGETATION_ANIM_TRUNK_TEXTURE</option>
+            <option>VEGETATION_ANIM,VEGETATION_ANIM_LEAF,VEGETATION_ANIM_TRUNK_TEXTURE</option>
+        </options>
+
+        <options ref="shadowanddepth" />
+
+        <options ref="vertex" />
+    </domain>
+
+    <!-- GBuffer -->
+    <domain>
+        <options>
+            <option></option>
+            <option>ALPHA_TEST</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>MASK_TEXTURE</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>PER_LEAF_DIVERSITY</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>RANDOM_LEAF_ALBEDO</option>
+        </options>
+
+        <options>
+            <option>GBUFFER</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>VEGETATION_ANIM</option>
+            <option>VEGETATION_ANIM,VEGETATION_ANIM_LEAF</option>
+            <option>VEGETATION_ANIM,VEGETATION_ANIM_TRUNK_TEXTURE</option>
+            <option>VEGETATION_ANIM,VEGETATION_ANIM_LEAF,VEGETATION_ANIM_TRUNK_TEXTURE</option>
+        </options>
+
+        <options ref="vertex" />
+    </domain>
+
+    <!-- Paraboloid Reflection -->
+    <domain>
+        <options>
+            <option>PARABOLOID_REFLECTION</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>RANDOM_LEAF_ALBEDO</option>
+        </options>
+
+        <options ref="vertex" />
+    </domain>
+
+    <xi:include href="Includes/ShadowExclusions.xml" />
+    <xi:include href="Includes/SingleCascadeExclusions.xml" />
+</metashader>

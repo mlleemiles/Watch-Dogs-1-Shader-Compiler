@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="RadialBlurredSampler" state="ColorClamp" />
+    <samplerstate sampler="SceneSampler" state="ColorPointClamp" />
+
+    <define name="COLORED" />
+	  <define name="BLIT" />
+    <define name="LAST_POSTFX" />
+    <define name="DECODE_SCENECOLOR" platform="XENON" />
+
+    <domain>
+        <options>
+            <option></option>
+            <option>COLORED</option>
+            <option>BLIT</option>
+        </options>
+        <options>
+            <option></option>
+            <option>LAST_POSTFX</option>
+        </options>
+        <options>
+          <option></option>
+          <option>DECODE_SCENECOLOR</option>
+        </options>
+    </domain>
+    
+    <exclusion>
+    	<any>LAST_POSTFX</any>
+    	<none>BLIT</none>
+    </exclusion>
+    	
+</metashader>

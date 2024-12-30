@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <!-- Only sun/directional is supported on forward rendered objects -->
+    <exclusion>OMNI</exclusion>
+    <exclusion>SPOT</exclusion>
+</metashader>

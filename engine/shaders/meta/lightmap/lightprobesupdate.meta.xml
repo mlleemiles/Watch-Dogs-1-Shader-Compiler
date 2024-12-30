@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+
+    <define name="ELECTRIC_POWER" />    <!-- Electric power disruption taken into account -->
+    <define name="SUNSHADOW"/>          <!-- Sun shadow is sampled to help remove upward bounces in shaded areas -->
+    <define name="INTERIOR" />          <!-- Interior GI box -->
+    
+    <!-- Variations are only enabled on NG because it uses CS -->
+    <!-- IF YOU ADD NEW VARIATIONS HERE, PLEASE PRE-FETCH THEM IN THE CLightProbeRenderer CONSTRUCTOR. -->
+    <domain deprecated="XENON,PS3">
+        <options>
+            <option></option>
+            <option>ELECTRIC_POWER</option>
+            <option>SUNSHADOW</option>
+            <option>INTERIOR</option>
+            <option>ELECTRIC_POWER, SUNSHADOW</option>
+            <option>ELECTRIC_POWER, INTERIOR</option>
+            <!-- IF YOU ADD NEW VARIATIONS HERE, PLEASE PRE-FETCH THEM IN THE CLightProbeRenderer CONSTRUCTOR. -->
+        </options>
+    </domain>
+</metashader>

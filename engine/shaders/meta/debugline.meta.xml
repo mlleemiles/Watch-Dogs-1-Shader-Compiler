@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <define name="PROJECT" />
+
+    <domain>
+        <options>
+            <option></option>
+            <option>PROJECT</option>
+        </options>
+    </domain>
+</metashader>

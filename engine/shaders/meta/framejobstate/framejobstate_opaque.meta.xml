@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <define name="WRITEZ" />
+    <define name="WRITEALPHA" />
+
+    <domain>
+        <options>
+            <option></option>
+            <option>WRITEZ</option>
+        </options>
+        <options>
+            <option></option>
+            <option>WRITEALPHA</option>
+        </options>       
+    </domain>
+</metashader>

@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+	<samplerstate sampler="DiffuseTexture1" state="" />
+	<samplerstate sampler="MaskTexture1" state="ColorPointWrap" />
+
+    <define name="MASK_TEXTURE" />
+    <define name="TEXTURE_ERROR" />
+
+    <define name="BLACKFOG" />
+
+    <define name="SKINNING" />
+    <define name="INSTANCING" />
+    <define name="INSTANCING_MISCDATA" />
+    <define name="PARABOLOID_REFLECTION" />
+
+    <define name="ELECTRIC_MATERIAL" />
+    <define name="ELECTRIC_MESH" />
+    <define name="AFFECTED_BY_TIMEOFDAY" />
+
+    <!-- To implement in code -->
+
+    <!--    <define name="SECOND_DEPTHTEST" /> -->
+    
+    <define name="MASK_FROM_ALPHA_CHANNEL" />
+    
+    <define name="BACK_AND_FORTH" />
+    <define name="FADE" />
+    <define name="SCROLLING" />
+    <define name="FLASHING" />
+    <define name="ALTERNATING" />
+    <define name="ALTERNATING_THEN_FULL" />
+
+
+    <options name="vertex">
+        <option></option>
+        <option>SKINNING</option>
+        <option>INSTANCING</option>
+        <option>INSTANCING,INSTANCING_MISCDATA</option>
+    </options>
+
+    <options name="animTypes">
+    	<option>SCROLLING</option>
+    	<option>SCROLLING, BACK_AND_FORTH</option>
+    	<option>SCROLLING, FADE</option>
+    	<option>SCROLLING, FADE, BACK_AND_FORTH</option>
+
+    	<option>FLASHING</option>
+    	<option>FLASHING, FADE</option>
+
+    	<option>ALTERNATING</option>
+    	<option>ALTERNATING, BACK_AND_FORTH</option>
+    	<option>ALTERNATING_THEN_FULL</option>
+    </options>
+
+    <!-- Normal Rendering -->
+    <domain>
+        <options ref="vertex" />
+        <options ref="animTypes" />
+
+        <options>
+            <option></option>
+            <option>MASK_TEXTURE</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>BLACKFOG</option>
+        </options>
+        
+        <options>
+            <option></option>
+        <!--    <option>SECOND_DEPTHTEST</option> -->
+        </options>
+
+        <options>
+            <option></option>
+            <option>ELECTRIC_MATERIAL</option>
+            <option>ELECTRIC_MATERIAL,ELECTRIC_MESH</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>AFFECTED_BY_TIMEOFDAY</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>MASK_FROM_ALPHA_CHANNEL</option>
+        </options>
+    </domain>
+
+    <!-- Texture Error -->
+    <domain>
+        <options ref="vertex" />
+
+        <options>
+            <option>TEXTURE_ERROR</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>PARABOLOID_REFLECTION</option>
+        </options>
+    </domain>
+
+    <!-- Reflection Rendering -->
+    <domain>
+        <options ref="animTypes" />
+        <options ref="vertex" />
+
+        <options>
+            <option></option>
+            <option>MASK_TEXTURE</option>
+        </options>
+
+        <options>
+            <option>PARABOLOID_REFLECTION</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>ELECTRIC_MATERIAL</option>
+            <option>ELECTRIC_MATERIAL,ELECTRIC_MESH</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>AFFECTED_BY_TIMEOFDAY</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>MASK_FROM_ALPHA_CHANNEL</option>
+        </options>
+    </domain>
+
+    <!-- Exclusions -->
+    <exclusion>
+        <any>SKINNING</any>
+        <any>AFFECTED_BY_TIMEOFDAY,MASK_FROM_ALPHA_CHANNEL,PARABOLOID_REFLECTION</any>
+    </exclusion>
+</metashader>

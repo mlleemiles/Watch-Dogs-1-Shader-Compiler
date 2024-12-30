@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <define name="AMBIENT" />
+    <define name="SUN" />
+    <define name="OMNI" />
+    <define name="DIRECTIONAL" />
+    <define name="SPOT" />
+    <define name="SAMPLE_SHADOW" />
+    <define name="PROJECTED_TEXTURE" />
+
+    <define name="SKINNING" />
+    <define name="INSTANCING" />
+    <define name="REALTREE_TRUNK" />
+    <define name="REALTREE_LEAF" />
+    <define name="REALTREE_HYBRID_LEAF" />
+
+    <xi:include href="Includes/ShadowAndDepthDefines.xml" />
+
+    <options name="vertex">
+        <option></option>
+        <option>SKINNING</option>
+        <option>INSTANCING</option>
+        <option>REALTREE_TRUNK</option>
+        <option>INSTANCING,REALTREE_TRUNK</option>
+        <option>REALTREE_LEAF</option>
+        <option>INSTANCING,REALTREE_LEAF</option>
+        <option>REALTREE_HYBRID_LEAF</option>
+        <option>INSTANCING,REALTREE_HYBRID_LEAF</option>
+    </options>
+
+    <domain>
+        <options>
+            <option>AMBIENT</option>
+            <option>        OMNI</option>
+            <option>AMBIENT,OMNI</option>
+            <option>AMBIENT,SUN,SAMPLE_SHADOW</option>
+            <option>AMBIENT,SUN,SAMPLE_SHADOW,SHADOW_NOFSM</option>
+            <option>        DIRECTIONAL</option>
+            <option>AMBIENT,DIRECTIONAL</option>
+            <option>        DIRECTIONAL,SAMPLE_SHADOW</option>
+            <option>AMBIENT,DIRECTIONAL,SAMPLE_SHADOW</option>
+            <option>        SPOT</option>
+            <option>        SPOT,PROJECTED_TEXTURE</option>
+            <option>AMBIENT,SPOT</option>
+            <option>AMBIENT,SPOT,PROJECTED_TEXTURE</option>
+            <option>        SPOT,SAMPLE_SHADOW</option>
+            <option>        SPOT,SAMPLE_SHADOW,PROJECTED_TEXTURE</option>
+            <option>AMBIENT,SPOT,SAMPLE_SHADOW</option>
+            <option>AMBIENT,SPOT,SAMPLE_SHADOW,PROJECTED_TEXTURE</option>
+        </options>
+
+        <xi:include href="Includes/ShadowOptions.xml" />
+
+        <options ref="vertex" />
+    </domain>
+
+    <domain>
+        <options ref="shadowanddepth" />
+
+        <options ref="vertex" />
+    </domain>
+
+    <xi:include href="Includes/ShadowExclusions.xml" />
+
+</metashader>

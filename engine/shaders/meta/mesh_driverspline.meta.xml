@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#" deprecated="XENON,PS3,PC,DURANGO,ORBIS">
+    <samplerstate sampler="DiffuseTexture1" state="ColorWrap" />
+    <samplerstate sampler="NormalTexture1" state="NormalWrap" />
+    <samplerstate sampler="SpecularTexture1" state="ColorWrap" />
+    <samplerstate sampler="HeightTexture1" state="ColorWrap" />
+    <samplerstate sampler="AlphaTexture1" state="ColorWrap" />
+
+    <define name="SKINNING" />
+    <define name="INSTANCING" />
+
+    <define name="ALPHA_TEST" />
+    <define name="ALPHA_TO_COVERAGE" />
+
+    <define name="NORMALMAP" />
+    <define name="SPECULARMAP" />
+    <define name="PARALLAX" />
+    <define name="SPLINE" />
+    <define name="ALPHAMAP" />
+
+    <define name="GBUFFER" />
+    <define name="GBUFFER_BLENDED" />
+    
+    <define name="SAMPLE_SHADOW" />
+    <define name="RECEIVE_SINGLE_CASCADE" />
+
+    <xi:include href="Includes/LightingOptions.xml" />
+    <xi:include href="Includes/ShadowAndDepthDefines.xml" />
+
+    <options name="vertex">
+        <option></option>
+        <option>SKINNING</option>
+        <option>INSTANCING</option>
+    </options>
+
+    <domain>
+        <options>
+            <option></option>
+            <option>ALPHA_TEST</option>
+            <option>ALPHA_TO_COVERAGE</option>
+            <option>ALPHAMAP,ALPHA_TEST</option>
+            <option>ALPHAMAP,ALPHA_TO_COVERAGE</option>
+        </options>
+
+        <options ref="shadowanddepth" />
+
+        <options>
+            <option></option>
+            <option>SPLINE</option>
+        </options>
+
+        <options ref="vertex" />
+    </domain>
+
+    <domain>
+        <options>
+            <option></option>
+            <option>ALPHA_TEST</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>NORMALMAP</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SPECULARMAP</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>PARALLAX</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>SPLINE</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>ALPHAMAP</option>
+        </options>
+
+        <options>
+            <option>GBUFFER</option>
+            <option>GBUFFER,GBUFFER_BLENDED</option>
+        </options>
+
+        <options ref="vertex" />
+    </domain>
+
+    <exclusion>
+        <any>GBUFFER_BLENDED</any>
+        <any>ALPHA_TEST</any>
+    </exclusion>
+
+    <xi:include href="Includes/ShadowExclusions.xml" />
+    <xi:include href="Includes/SingleCascadeExclusions.xml" />
+</metashader>

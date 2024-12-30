@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="SourceTexture" state="ColorPointClamp2D" />
+    <samplerstate sampler="SourceTextureLinear" state="ColorClamp2D" />
+    <samplerstate sampler="DepthTexture" state="DepthSampler" />
+    <samplerstate sampler="MaskTexture" state="ColorPointClamp2D" />
+    <samplerstate sampler="MaskTextureLinear" state="ColorClamp2D" />
+    <samplerstate sampler="NoiseTexture" state="ColorPointWrap2D" />
+
+    <define name="FILTER_KERNEL_SIZE" max_value="21" />
+    <define name="FOLLOW_SURFACE" />
+    <define name="USE_NOISE" />
+
+    <domain>
+        <options>
+            <option>FILTER_KERNEL_SIZE</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>FOLLOW_SURFACE</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>USE_NOISE</option>
+        </options>
+    </domain>
+</metashader>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    <define name="STENCILTAG"/>
+    <define name="INSIDE"/>
+    <define name="CLEAR_AMBIENT"/>
+
+    <domain>
+        <options>
+            <option></option>
+            <option>INSIDE</option>
+            <option>STENCILTAG</option>
+          
+            <option>CLEAR_AMBIENT</option>
+            <option>INSIDE,CLEAR_AMBIENT</option>          
+        </options>
+    </domain>
+</metashader>

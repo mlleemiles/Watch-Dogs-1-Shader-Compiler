@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="DiffuseSampler" state="ColorClamp2D" />
+    <samplerstate sampler="AltDiffuseSampler" state="ColorClamp2D" />
+    <samplerstate sampler="TextureSampler" state="ColorClamp" />
+
+    <define name="COLORIZE" />
+    <define name="BILATERAL" />
+    <define name="FASTBLURH" platform="PS3" />
+    <define name="FASTBLURV" platform="PS3" />
+
+    <domain>
+        <options>
+            <option></option>
+            <option>COLORIZE</option>
+            <option>BILATERAL</option>
+            <option>FASTBLURH</option>
+            <option>FASTBLURV</option>
+        </options>
+    </domain>
+</metashader>

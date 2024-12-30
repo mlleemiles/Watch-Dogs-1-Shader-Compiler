@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+    
+    <samplerstate sampler="SunShadowSampler" state="ShadowSampler" />
+    <samplerstate sampler="AmbientTexture" state="ColorClamp" />
+    <samplerstate sampler="WorldAmbientColorTexture" state="ColorWrap" />
+    <samplerstate sampler="EnvSampleTexture" state="ColorPointClamp" />
+
+    <define name="SAMPLE_SHADOW" />
+    <define name="ELECTRIC_POWER" />
+    <define name="WORLDAMBIENTOCCLUSION" />
+    <define name="WORLDAMBIENTCOLOR" />
+
+    <xi:include href="Includes/ShadowAndDepthDefines.xml" />
+    <xi:include href="Includes/LightingOptions.xml" />
+
+    <domain>
+        <options>
+            <option></option>
+            <option>SUN</option>
+        </options>
+
+        <xi:include href="Includes/ReceiveShadowsOptions.xml" />
+
+        <options>
+          <option></option>
+          <option>AMBIENT</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>WORLDAMBIENTCOLOR</option>
+        </options>
+        
+        <options>
+            <option></option>
+            <option>WORLDAMBIENTOCCLUSION</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>ELECTRIC_POWER</option>
+        </options>
+    </domain>
+
+    <xi:include href="Includes/ShadowExclusionsGeneric.xml" />
+</metashader>
+ 

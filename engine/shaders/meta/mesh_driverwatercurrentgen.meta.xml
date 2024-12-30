@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#" deprecated="DURANGO,ORBIS">
+    <samplerstate sampler="NormalTexture1" state="TerrainColorWrap" />
+    <samplerstate sampler="SpecularTexture1" state="ColorWrap" />
+    <samplerstate sampler="ParaboloidReflectionTexture" state="ColorClamp" />
+    <samplerstate sampler="AmbientTexture" state="ColorClamp" />
+    <samplerstate sampler="RaindropSplashesTexture" state="RaindropSplashes" />
+
+    <define name="IS_SPLINE_LOFT" />
+    <define name="IS_SPLINE_LOFT_COMPRESSED" />
+
+    <define name="AMBIENT" />
+    <define name="SUN" />
+    <define name="SAMPLE_SHADOW" />
+    
+    <define name="GBUFFER" />
+
+    <define name="HAS_RAINDROP_RIPPLE" />
+    <define name="SAMPLE_PARABOLOID_REFLECTION_BOTTOM"/>
+
+    <define name="WATERMESH" />
+  
+    <xi:include href="Includes/ShadowAndDepthDefines.xml" />
+
+    <options name="vertex">
+        <option></option>
+        <option>IS_SPLINE_LOFT</option>
+        <option>IS_SPLINE_LOFT,IS_SPLINE_LOFT_COMPRESSED</option>
+    </options>
+
+ 	 <domain>
+        <options >
+            <option></option>
+            <option>AMBIENT</option>
+            <option>SUN,AMBIENT</option>
+            <option>SUN,AMBIENT,SAMPLE_SHADOW</option>
+            <option>SUN,AMBIENT,SAMPLE_SHADOW,SHADOW_NOFSM</option>
+        </options>
+
+        <options>
+            <option></option>
+            <option>WATERMESH</option>
+            </options>
+
+     <options>
+             <option></option>
+             <option>HAS_RAINDROP_RIPPLE</option>
+         </options>
+
+         <options>
+             <option></option>
+             <option>SAMPLE_PARABOLOID_REFLECTION_BOTTOM</option>
+         </options>
+
+         <xi:include href="Includes/ShadowOptions.xml" />
+
+        <options ref="vertex" />
+    </domain>
+
+    <domain>
+        <options ref="vertex" />
+        <options >
+            <option>GBUFFER</option>
+        </options>
+    </domain>
+</metashader>

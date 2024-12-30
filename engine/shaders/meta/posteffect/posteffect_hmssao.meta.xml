@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+
+    <samplerstate sampler="DiffuseSampler"              state="ColorPointClamp" />
+    <samplerstate sampler="DepthTexture"                state="ColorPointClamp" />
+    <samplerstate sampler="PositionTexture"             state="ColorPointClamp" />
+    <samplerstate sampler="NormalTexture"               state="ColorPointClamp" />
+    <samplerstate sampler="PrevPositionTexture"         state="ColorPointClamp" />
+    <samplerstate sampler="PrevNormalTexture"           state="ColorPointClamp" />
+    <samplerstate sampler="PrevAOTexture"               state="ColorPointClamp" />
+    <samplerstate sampler="PrevFrameAOTexture"          state="ColorPointClamp" />
+    <samplerstate sampler="PrevFramePositionTexture"    state="ColorPointClamp" />
+
+    <samplerstate sampler="MSSAORandomTexture"          state="ColorPointWrap" />
+    <samplerstate sampler="HBAORandomTexture"           state="ColorPointWrap" />
+
+    <samplerstate sampler="GBufferNormalTexture"        state="ColorPointClamp" />
+
+    <define name="FOG_ONLY"         platform="PC"/>
+    <define name="NOREFLECTION"     platform="PC"/>
+    <define name="COPY"             platform="PC,DURANGO,ORBIS"/>
+    <define name="DOWNSCALE"        platform="PC,DURANGO,ORBIS"/>
+    <define name="DOWNSCALEHBAO"    platform="PC,DURANGO,ORBIS"/>
+    <define name="HIGHRESAO"        platform="PC,DURANGO,ORBIS"/>
+    <define name="HALFRESAO"        platform="PC,DURANGO,ORBIS"/>
+    <define name="QUARTERRESAO"     platform="PC,DURANGO,ORBIS"/>
+    <define name="BLUR3X3"          platform="PC,DURANGO,ORBIS"/>
+    <define name="QUARTERBLUR"      platform="PC,DURANGO,ORBIS"/>
+    <define name="DEBUG"            platform="PC,DURANGO,ORBIS"/>
+    <define name="SEPARABLEBLURX"   platform="PC,DURANGO,ORBIS"/>
+    <define name="SEPARABLEBLURY"   platform="PC,DURANGO,ORBIS"/>
+    <define name="HALFRESHBAO"                  platform="PC,DURANGO,ORBIS"/>
+    <define name="HALFRESAO_SEPARATED_HBAO"     platform="PC,DURANGO,ORBIS"/>
+    <define name="FINAL"            platform="PC,DURANGO,ORBIS"/>
+    <define name="LONG_RANGE_SSAO"            platform="PC,DURANGO,ORBIS"/>
+    <define name="HALFSEPARABLEBLURX"            platform="PC,DURANGO,ORBIS"/>
+    <define name="HALFSEPARABLEBLURY"            platform="PC,DURANGO,ORBIS"/>
+    <define name="RECOMPUTE_POSITION"            platform="PC,DURANGO,ORBIS"/>
+    
+    <domain>
+        <options>
+            <option>COPY</option>
+            <option>DOWNSCALE</option>
+            <option>DOWNSCALEHBAO</option>
+            <option>HIGHRESAO</option>
+            <option>HIGHRESAO,FOG_ONLY</option>
+            <option>HIGHRESAO,NOREFLECTION</option>
+            <option>HIGHRESAO,FOG_ONLY,NOREFLECTION</option>
+            <option>HIGHRESAO,LONG_RANGE_SSAO</option>
+            <option>HIGHRESAO,LONG_RANGE_SSAO,FOG_ONLY</option>
+            <option>HIGHRESAO,LONG_RANGE_SSAO,NOREFLECTION</option>
+            <option>HIGHRESAO,LONG_RANGE_SSAO,FOG_ONLY,NOREFLECTION</option>
+            <option>HALFRESAO</option>
+            <option>QUARTERRESAO</option>
+            <option>BLUR3X3</option>
+            <option>QUARTERBLUR</option>
+            <option>DEBUG</option>
+            <option>SEPARABLEBLURX</option>
+            <option>SEPARABLEBLURY</option>
+            <option>HALFRESAO_SEPARATED_HBAO</option>
+            <option>HALFRESAO_SEPARATED_HBAO,LONG_RANGE_SSAO</option>
+            <option>HALFRESHBAO</option>
+            <option>FINAL</option>
+            <option>HALFSEPARABLEBLURX</option>
+            <option>HALFSEPARABLEBLURY</option>
+        </options>
+        <options>
+            <option></option>
+            <option>RECOMPUTE_POSITION</option>
+        </options>
+        
+    </domain>
+</metashader>

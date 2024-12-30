@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader>
+    <samplerstate sampler="TextureSampler" state="ColorPointWrap" />
+    <samplerstate sampler="FilteredTextureSampler" state="ColorClamp2D" />
+    <samplerstate sampler="SrcSampler" state="ColorPointClamp2D" />
+    <samplerstate sampler="DepthSampler" state="DepthVPSampler" />
+    <compiler platform="ps3" type="fragment">-po OutColorPrec=fp16</compiler >
+
+    <define name="COLORED" />
+    <define name="TEXTURED" />
+    <define name="HISTENCIL_REFRESH" platform="XENON,PS3" />
+    <define name="DEPTH" platform="XENON,PC" />
+    <define name="FILTERED" platform="XENON,PC"/>
+    <define name="RESOLVE" platform="PC" />
+    <define name="IGNORETEXTUREALPHA" />
+    <define name="GAMMA"/><!-- Apply gamma, brightness and contrast adjustments -->
+
+    <domain>
+        <options>
+            <option>COLORED          </option>
+            <option>         TEXTURED</option>
+            <option>COLORED, TEXTURED</option>
+            <option>         TEXTURED,IGNORETEXTUREALPHA</option>
+            <option>COLORED, TEXTURED,IGNORETEXTUREALPHA</option>
+        </options>
+    </domain>
+
+    <domain>
+        <options>
+            <option>FILTERED,TEXTURED</option>
+            <option>FILTERED,TEXTURED,RESOLVE</option>
+            <option>TEXTURED, GAMMA</option>
+            <option>TEXTURED, FILTERED, GAMMA</option>
+        </options>
+    </domain>
+ 
+    <domain>
+        <options>
+            <option>HISTENCIL_REFRESH</option>
+            <option>TEXTURED,DEPTH</option>
+            <option>DEPTH</option>
+            <option>COLORED, DEPTH</option>
+        </options>
+    </domain>
+</metashader>

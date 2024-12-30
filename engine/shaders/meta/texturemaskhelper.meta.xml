@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metashader xmlns:xi="#">
+
+    <samplerstate sampler="colorSampler"        state="ColorPointClamp" />
+    <samplerstate sampler="colorSamplerDirect"  state="ColorPointClamp" />
+    <samplerstate sampler="randSampler"         state="ColorPointWrap" />
+
+    <define name="BLURX"/>
+    <define name="BLURY"/>
+        
+    <domain>
+        <options>
+            <option></option>
+            <option>BLURX</option>
+            <option>BLURY</option>
+        </options>
+    </domain>
+
+</metashader>
