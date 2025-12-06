@@ -7,7 +7,7 @@ uniform float ps3RegisterCount = 8;
 
 #if defined(FASTBLURH)
 
-float4 MainPS( in SVertexToPixel Input )
+float4 MainPS( in SVertexToPixel Input ) : SV_Target0
 {
     float4 tap0 = tex2D( AltDiffuseSampler, Input.TexCoord.xy + UVOffsets[ 0 ].xy );
     float4 tap1 = tex2D( AltDiffuseSampler, Input.TexCoord.xy + UVOffsets[ 1 ].xy );
@@ -51,7 +51,7 @@ float4 MainPS( in SVertexToPixel Input )
 
 #else
 
-float4 MainPS( in SVertexToPixel Input )
+float4 MainPS( in SVertexToPixel Input ) : SV_Target0
 {
 #ifdef BILATERAL
 	float4 refTap = tex2D( DiffuseSampler, Input.TexCoord.xy );

@@ -20,7 +20,7 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float2 oCoord : POSITION;
+    float2 oCoord : SV_Position;
     float2 tex    : TEX0;
 };
 
@@ -47,8 +47,9 @@ SVertexToPixel MainVS(in SMeshVertex input)
     return v2f;
 }
 
-SF2FOutput MainPS(in SVertexToPixel input, in float2 vpos : VPOS)
+SF2FOutput MainPS(in SVertexToPixel input/*, in float2 vpos : VPOS*/)
 {
+	float2 vpos = input.oCoord.xy;
 	SF2FOutput f2f;
 #ifdef RESOLVE_COLOR
 	#ifdef MSAA_4X_OPTIMIZED
@@ -122,7 +123,7 @@ SF2FOutput MainPS(in SVertexToPixel input, in float2 vpos : VPOS)
     
     struct SVertexToPixel
     {
-        float4 pos : POSITION;
+        float4 pos : SV_Target0;
     };
     
     SVertexToPixel MainVS(in SMeshVertex input)
@@ -131,7 +132,7 @@ SF2FOutput MainPS(in SVertexToPixel input, in float2 vpos : VPOS)
         output.pos = input.pos;
         return output;
     }
-    float4 MainPS(in SVertexToPixel input)
+    float4 MainPS(in SVertexToPixel input) : SV_Target0
     {
         return 0;
     }

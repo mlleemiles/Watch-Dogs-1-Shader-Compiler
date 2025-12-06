@@ -1,3 +1,4 @@
+#define FAMILY_MESH_CHARACTER
 #include "../Profile.inc.fx"
 #include "../Debug2.inc.fx"
 #include "../PerformanceDebug.inc.fx"
@@ -68,35 +69,35 @@ struct SVertexToPixel
 {
     // Generic
     // ----------------------------------------------------
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 
     // Alpha
     // ----------------------------------------------------
 #if defined( ALPHA_TEST ) || defined( ALPHA_TO_COVERAGE )
     #if defined( ALPHAMAP )
-        float2 alphaUV;
+        float2 SEMANTIC_VAR(alphaUV);
     #elif defined( SPECULARMAP ) && !defined( GBUFFER ) && !defined( FORWARD_LIGHTING )
-        float2 specularUV;
+        float2 SEMANTIC_VAR(specularUV);
     #endif
 #endif
 
     // GBuffer
     // ----------------------------------------------------
 #ifdef GBUFFER
-    float2 albedoUV;
+    float2 SEMANTIC_VAR(albedoUV);
 
-    float4 vertexColor;     // R=ColorMask, G=HairFilterMask, B=<unused>, A=AmbientOcclusion
+    float4 SEMANTIC_VAR(vertexColor);     // R=ColorMask, G=HairFilterMask, B=<unused>, A=AmbientOcclusion
 
-    float3 normal;
+    float3 SEMANTIC_VAR(normal);
 
     #ifdef NORMALMAP
-        float2 normalUV;
-        float3 binormal;
-        float3 tangent;
+        float2 SEMANTIC_VAR(normalUV);
+        float3 SEMANTIC_VAR(binormal);
+        float3 SEMANTIC_VAR(tangent);
     #endif
        
     #ifdef SPECULARMAP
-        float2 specularUV;
+        float2 SEMANTIC_VAR(specularUV);
     #endif
 
     GBufferVertexToPixel gbufferVertexToPixel;
@@ -110,47 +111,47 @@ struct SVertexToPixel
     // ----------------------------------------------------
 #if defined( DEFERRED_FX_MASK )
     #if defined( ALTERNATE_HAIR_FILTERING_METHOD )
-        float3  hairBlurPos1;
-        float3  hairBlurPos2;
+        float3  SEMANTIC_VAR(hairBlurPos1);
+        float3  SEMANTIC_VAR(hairBlurPos2);
     #else
-        float   hairBlurCoord;
+        float   SEMANTIC_VAR(hairBlurCoord);
     #endif
-    float   hairFilteringAttenuation;
+    float   SEMANTIC_VAR(hairFilteringAttenuation);
 #endif
 
     // Forward specular
     // ----------------------------------------------------
 #if defined( FORWARD_LIGHTING )
-    float2 specularShiftUV;
-    float2 specularNoiseUV;
+    float2 SEMANTIC_VAR(specularShiftUV);
+    float2 SEMANTIC_VAR(specularNoiseUV);
 
-    float3 normal;
-    float3 hairStrandTangent;
+    float3 SEMANTIC_VAR(normal);
+    float3 SEMANTIC_VAR(hairStrandTangent);
 
     #ifdef NORMALMAP
-        float2 normalUV;
-        float3 binormal;
-        float3 tangent;
+        float2 SEMANTIC_VAR(normalUV);
+        float3 SEMANTIC_VAR(binormal);
+        float3 SEMANTIC_VAR(tangent);
     #endif
 
-    float4 positionWS4;
+    float4 SEMANTIC_VAR(positionWS4);
 
     #ifdef SPECULARMAP
-        float2 specularUV;
+        float2 SEMANTIC_VAR(specularUV);
     #endif
 
     SFogVertexToPixel   fogVertexToPixel;
 
     #if defined(SUN) && defined(SUN_SHADOW_MASK)
-        float3 screenPosition;
+        float3 SEMANTIC_VAR(screenPosition);
     #endif
 #endif
 
     // Debug output
     // ----------------------------------------------------
 #if defined( DEBUGOUTPUT_NAME ) && ( defined( GBUFFER ) || defined( FORWARD_LIGHTING ) )
-    float4  debugVertexColor;
-    float4  debugUVs;
+    float4  SEMANTIC_VAR(debugVertexColor);
+    float4  SEMANTIC_VAR(debugUVs);
 #endif
 
 	SMipDensityDebug	mipDensityDebug;
@@ -328,10 +329,11 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
 #if defined( DEPTH ) || defined( SHADOW )
 float4 MainPS( in SVertexToPixel input
                #ifdef USE_COLOR_RT_FOR_SHADOW
-                , in float4 position : VPOS
+                //, in float4 position : VPOS
                #endif
-             )
+             ) : SV_Target0
 {
+	float4 position = input.projectedPosition;
     float4 color;
 
     ProcessDepthAndShadowVertexToPixel( input.depthShadow );
@@ -363,7 +365,7 @@ float4 MainPS( in SVertexToPixel input
 // Pixel Shader - DeferredFX mask
 // ----------------------------------------------------------------------------
 #if defined( DEFERRED_FX_MASK )
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
 #if defined( ALPHA_TEST ) || defined( ALPHA_TO_COVERAGE )
     #if defined( ALPHAMAP )
@@ -514,8 +516,9 @@ float3 ShiftTangent( float3 tangent, float3 normal, float shift )
     return normalize( shiftedTangent );
 }
 
-float4 MainPS( in SVertexToPixel input, in float2 vpos : VPOS, in bool isFrontFace : ISFRONTFACE )
+float4 MainPS( in SVertexToPixel input,/* in float2 vpos : VPOS,*/ in bool isFrontFace : SV_IsFrontFace ) : SV_Target0
 {
+	float2 vpos = input.projectedPosition.xy;
     float3 normal = input.normal;
 
 #if defined( NORMALMAP )

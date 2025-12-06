@@ -5,8 +5,8 @@
 // Velocity data passed from the vertex shader to the pixel shader
 struct SVelocityBufferVertexToPixel
 {
-    float3 currentUV_W;		// Viewport UV on this timestep, W for homogenous divide
-    float3 previousUV_W;	// Viewport UV on previous timestep, W for homogenous divide
+    float3 SEMANTIC_VAR(currentUV_W);		// Viewport UV on this timestep, W for homogenous divide
+    float3 SEMANTIC_VAR(previousUV_W);	// Viewport UV on previous timestep, W for homogenous divide
 };
 
 

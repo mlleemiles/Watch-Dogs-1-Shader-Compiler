@@ -88,20 +88,20 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 
-    float2  uv_color;
+    float2  SEMANTIC_VAR(uv_color);
 
-    float2  uv_depth;
+    float2  SEMANTIC_VAR(uv_depth);
 
 #if defined( MERGE_NOISE )
-    float2 uvNoise;
+    float2 SEMANTIC_VAR(uvNoise);
 #endif
 
 #if defined(BLOOM)
-    float2 uvBloom;
+    float2 SEMANTIC_VAR(uvBloom);
     #ifdef ARTIFACT
-        float2 uvArtifact;
+        float2 SEMANTIC_VAR(uvArtifact);
     #endif
 #endif
 };
@@ -129,7 +129,7 @@ SVertexToPixel MainVS( in SMeshVertex input )
 	return output;
 }
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
 	float4 output;
 

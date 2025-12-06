@@ -9,10 +9,10 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 
 #if defined( GENERATE_BLUR_FROM_SAT )
-    float2 uv;
+    float2 SEMANTIC_VAR(uv);
 #endif
 };
 
@@ -41,7 +41,7 @@ SVertexToPixel MainVS( in SMeshVertex input )
     #define SAT_LINE_LENGTH ( 1 << SAT_LINE_LENGTH_POW2_CS )
     #define SAT_STEPS_COUNT ( log2(SAT_LINE_LENGTH) + 1 )
 
-    RWTexture2D<float4> RWTextureSAT;
+    RWTexture2D<float4> RWTextureSAT : register(u0);
     groupshared float4 SAT_LineMemory[SAT_LINE_LENGTH * 2];
 
 
@@ -155,7 +155,7 @@ float4 GenBlurFromSAT(const float2 center, const float4 radii)
     return blur / (PixelCountSAT * area);
 }
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     const float2 uv = input.uv;
 

@@ -27,40 +27,40 @@
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
  
 #if defined( DIFFUSE_ATLAS )
-    float2 albedoUV;
-    float occlusion;
+    float2 SEMANTIC_VAR(albedoUV);
+    float SEMANTIC_VAR(occlusion);
 
     #if defined( DIFFUSETEXTURE2 ) 
-       float2 albedoUV2;
+       float2 SEMANTIC_VAR(albedoUV2);
     #endif
 #endif
 
 #if defined( MASK_ATLAS ) 
-    float2 normalAtlasUV;   
+    float2 SEMANTIC_VAR(normalAtlasUV);   
     #if defined( WINDOW_LIGHT )
-        float2 windowUV;
+        float2 SEMANTIC_VAR(windowUV);
     #elif !defined(USE_MASK_BLUE_CHANNEL_AS_REFLECTION_MASK)
-        float2 albedoUV;
+        float2 SEMANTIC_VAR(albedoUV);
     #endif
 #endif
     
 #if defined( SPECULARMAP )
-    float2 specularUV;
+    float2 SEMANTIC_VAR(specularUV);
 #endif
 
 #if defined( HEIGHT_ATLAS )
-    float3 tangent;
-    float3 binormal;
-    float3 normal;
-    float2 normalUV;
-    float  depth; 
+    float3 SEMANTIC_VAR(tangent);
+    float3 SEMANTIC_VAR(binormal);
+    float3 SEMANTIC_VAR(normal);
+    float2 SEMANTIC_VAR(normalUV);
+    float SEMANTIC_VAR( depth); 
 #endif
    
 #if defined( NORMAL_ATLAS )
-    float2 heightAtlasUV;
+    float2 SEMANTIC_VAR(heightAtlasUV);
 #endif
 };
 
@@ -240,7 +240,7 @@ float ComputeDiffuseAlpha(float4 diffuseTexture, float4 mask)
     return alpha;
 }
 
-float4 MainPS( in SVertexToPixel input ) 
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     float4 mask = 1;
 #if defined( SPECULARMAP )

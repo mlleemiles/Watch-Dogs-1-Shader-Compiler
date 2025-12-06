@@ -2,6 +2,10 @@
 #include "../Debug2.inc.fx"
 #include "../PerformanceDebug.inc.fx"
 
+#ifndef FAMILY_MESH_NEONSIGN
+	#define FAMILY_MESH_NEONSIGN
+#endif
+
 #define VERTEX_DECL_POSITIONCOMPRESSED
 #define VERTEX_DECL_UV0
 
@@ -34,27 +38,27 @@
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 
     SParaboloidProjectionVertexToPixel paraboloidProjection;
 
 #ifndef TEXTURE_ERROR   
     #ifdef BLACKFOG
-        float fogFactor;
+        float SEMANTIC_VAR(fogFactor);
     #else
         SFogVertexToPixel fog;
     #endif
-    float2 uv;
-	float localTime;
+    float2 SEMANTIC_VAR(uv);
+	float SEMANTIC_VAR(localTime);
 
 	#ifdef ENABLE_TRESHOLD
-		float threshold;
+		float SEMANTIC_VAR(threshold);
 	#endif	
 	
-	float hdrMulFaded;
+	float SEMANTIC_VAR(hdrMulFaded);
 
 	#if (defined(ELECTRIC_MATERIAL) && defined(ELECTRIC_MESH)) || defined(AFFECTED_BY_TIMEOFDAY)
-	    float electricPowerIntensity;
+	    float SEMANTIC_VAR(electricPowerIntensity);
 	#endif
 #endif // !TEXTURE_ERROR
 };
@@ -139,7 +143,7 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
 //////////////////////////////////////////////////////////////////////////
 // Lighting Pixel Shader
 //
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
 #ifdef TEXTURE_ERROR
 	float4 output = float4(1, 0, 1, 1)* frac( Time );

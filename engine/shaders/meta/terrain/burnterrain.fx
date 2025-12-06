@@ -1,3 +1,4 @@
+#define FAMILY_DRIVERTERRAIN
 #include "../../Profile.inc.fx"
 #include "../../parameters/Burn.fx"
 
@@ -12,7 +13,7 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 Position      : POSITION0;
+    float4 Position      : SV_Position;
     float2 TexCoord      : TEXCOORD0;
 };
 
@@ -36,7 +37,7 @@ SVertexToPixel MainVS( in SMeshVertex Input )
     return Output;
 }
 
-float4 MainPS( SVertexToPixel Input )
+float4 MainPS( SVertexToPixel Input ) : SV_Target0
 {
 #if defined(BLIT)
     return tex2D( OriginalTarget, Input.TexCoord.xy );

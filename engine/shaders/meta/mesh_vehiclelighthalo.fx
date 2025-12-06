@@ -33,27 +33,27 @@ DECLARE_DEBUGOPTION( VehicleHaloDebug )
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 
 #ifdef USE_UVS    
-    float2 uv;
+    float2 SEMANTIC_VAR(uv);
 #endif    
 
-    float3 color;
+    float3 SEMANTIC_VAR(color);
     
 #ifndef NOFOG
-    float3  fogColor : FOG;
+    float3  SEMANTIC_VAR(fogColor);
 #endif
-    float fogFactor : FOG;
+    float SEMANTIC_VAR(fogFactor);
 
-    float normalAttn;
+    float SEMANTIC_VAR(normalAttn);
 
 #ifdef DAMAGE
-	float damage;
+	float SEMANTIC_VAR(damage);
 #endif
 
 #if defined(ELECTRIC_MATERIAL) && defined(ELECTRIC_MESH)
-    float electricPowerIntensity;
+    float SEMANTIC_VAR(electricPowerIntensity);
 #endif
 };
 
@@ -166,7 +166,7 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
     return output;
 }
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     float4 finalColor = 1;
     #ifdef USE_UVS

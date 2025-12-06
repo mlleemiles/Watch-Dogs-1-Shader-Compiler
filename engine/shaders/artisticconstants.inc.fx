@@ -26,17 +26,17 @@ float3 FetchRaindropSplashes(Texture_2D samp, float2 uv)
 
 struct SRainOcclusionVertexToPixel
 {
-    float dummyForPS3 : IGNORE;
+    //float dummyForPS3 : IGNORE;
 
 #if RAIN_OCCLUDER_SMOOTH
-    float2 occlusionDitherCoords;
-    float  filterKernelScale;
+    float2 SEMANTIC_VAR(occlusionDitherCoords);
+    float  SEMANTIC_VAR(filterKernelScale);
 #endif
 };
 
 void ComputeRainOcclusionVertexToPixel( out SRainOcclusionVertexToPixel rainVertexToPixel, in float3 positionWS, in float3 normalWS )
 {
-    rainVertexToPixel.dummyForPS3 = 0.0f;
+    //rainVertexToPixel.dummyForPS3 = 0.0f;
 
 #if RAIN_OCCLUDER_SMOOTH
     float3 normalAbs = abs( normalWS );

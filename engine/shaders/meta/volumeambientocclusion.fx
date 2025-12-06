@@ -13,17 +13,17 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
     
-    float3 positionCSProj; 
-    float fadeOutDistance;
-    float4 uvProj;
+    float3 SEMANTIC_VAR(positionCSProj); 
+    float SEMANTIC_VAR(fadeOutDistance);
+    float4 SEMANTIC_VAR(uvProj);
 
-    float4 X;
-    float4 Y;
-    float4 Z;
-    float4 mask;
-    float  avoid_self_ao;
+    float4 SEMANTIC_VAR(X);
+    float4 SEMANTIC_VAR(Y);
+    float4 SEMANTIC_VAR(Z);
+    float4 SEMANTIC_VAR(mask);
+    float  SEMANTIC_VAR(avoid_self_ao);
 };
 
 #define VOLUME_COUNT 16

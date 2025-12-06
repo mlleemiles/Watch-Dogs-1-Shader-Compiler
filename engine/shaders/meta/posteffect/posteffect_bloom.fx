@@ -71,44 +71,44 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 
 #if defined( APPLY_THRESHOLD )
     #ifdef APPLY_THRESHOLD_SINGLESAMPLE
-        float2 uv;
+        float2 SEMANTIC_VAR(uv);
     #else
-        float4 uvs;
+        float4 SEMANTIC_VAR(uvs);
     #endif
 
 #elif defined( DILATE )
-    float2 uv;
+    float2 SEMANTIC_VAR(uv);
 
 #elif defined( BLUR )
-    float4 uvs[ BLUR_PAIRED_RADIUS ];
+    float4 uvs[ BLUR_PAIRED_RADIUS ] : uvs;
 
 #elif defined( BOOST )
-    float2 uvs[4];
+    float2 uvs[4] : uvs;
 
 #elif defined( BLIT )
-    float2 uv;
-    float2 uvBloom;
+    float2 SEMANTIC_VAR(uv);
+    float2 SEMANTIC_VAR(uvBloom);
     #ifdef ARTIFACT
-        float2 uvArtifact;
+        float2 SEMANTIC_VAR(uvArtifact);
     #endif
 
 #elif defined( CHROMATIC_ABERRATION )
-    float2 uvR;
-    float2 uvG;
-    float2 uvB;
+    float2 SEMANTIC_VAR(uvR);
+    float2 SEMANTIC_VAR(uvG);
+    float2 SEMANTIC_VAR(uvB);
 
 #elif defined( HISTOGRAM_TEST )
-    float2 uv;
+    float2 SEMANTIC_VAR(uv);
 
 #elif defined( COMPUTE_AVERAGE_LUMINANCE_INIT ) 
-    float2 uv;
+    float2 SEMANTIC_VAR(uv);
 
 #elif defined( COMPUTE_AVERAGE_LUMINANCE_STEP ) 
-    float2 uv;
+    float2 SEMANTIC_VAR(uv);
 
 #endif
 };
@@ -179,7 +179,7 @@ SVertexToPixel MainVS( in SMeshVertex input )
 }
 
 #ifdef APPLY_THRESHOLD
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     float4 output;
 
@@ -246,7 +246,7 @@ float4 MainPS( in SVertexToPixel input )
 #endif
 
 #ifdef HISTOGRAM_TEST
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     float4 tex = tex2D( HistogramSourceTexture, input.uv );
     float luminance = tex.a;
@@ -261,7 +261,7 @@ float4 MainPS( in SVertexToPixel input )
 #endif
 
 #if defined( DILATE )
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     const float DILATE_RADIUS = 2.0;
 
@@ -283,7 +283,7 @@ float4 MainPS( in SVertexToPixel input )
 #endif
 
 #if defined( BLUR )
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     float4 result = 0.0;
     
@@ -305,7 +305,7 @@ float4 MainPS( in SVertexToPixel input )
 #endif // BLUR
 
 #if defined( BOOST )
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     float4 bloom = 0;
     bloom += tex2D(BlurSampler, input.uvs[0]);
@@ -321,7 +321,7 @@ float4 MainPS( in SVertexToPixel input )
 #endif // BOOST
 
 #ifdef CHROMATIC_ABERRATION
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     float4 output = tex2D( FilteredClampSampler, input.uvG );
     output.r = tex2D( FilteredClampSampler, input.uvR ).r;
@@ -331,7 +331,7 @@ float4 MainPS( in SVertexToPixel input )
 #endif
 
 #ifdef BLIT
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
 	float4 sharp = SampleSceneColor(SourceTextureSampler, input.uv);
 
@@ -350,7 +350,7 @@ float4 MainPS( in SVertexToPixel input )
 #endif
 
 #ifdef COMPUTE_AVERAGE_LUMINANCE_INIT
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     const float4 sourceColor = max(SampleSceneColor( AvgLumTexture, input.uv ), 0);
     return log( 0.00001f+dot(sourceColor.rgb, LuminanceWeights) );
@@ -358,28 +358,28 @@ float4 MainPS( in SVertexToPixel input )
 #endif
 
 #ifdef COMPUTE_AVERAGE_LUMINANCE_STEP
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     return tex2D( AvgLumTexture, input.uv ); // Each step is a two fold reduction in both dimension so the 2x2 average is automatically done by bilinear filtering.
 }
 #endif
 
 #ifdef COMPUTE_AVERAGE_LUMINANCE_LAST
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     return exp( tex2D( AvgLumTexture, float2(0.5f, 0.5f) ) ); // Center of a 1x1 texture. 
 }
 #endif
 
 #ifdef FORCE_AUTO_EXPOSURE_SCALE
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     return AutoExpScaleForcedValue;
 }
 #endif
 
 #ifdef COMPUTE_AUTO_EXPOSURE_SCALE
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     const float keyLuminance = AutoExpScaleKeyLuminance;
     const float currentLuminance = tex2D( CurrentLuminanceTexture, float2(0.5f, 0.5f) ).r;

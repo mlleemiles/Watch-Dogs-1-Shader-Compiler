@@ -29,8 +29,8 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4  position : POSITION;
-    float2   intensity;
+    float4  position : SV_Position;
+    float2   SEMANTIC_VAR(intensity);
 };
 
 SVertexToPixel MainVS( in SMeshVertex input )
@@ -38,11 +38,11 @@ SVertexToPixel MainVS( in SMeshVertex input )
 	SVertexToPixel output;
     output.position = float4( input.position.xy * 2 - 1, 1.0f, 1.0f );
     output.intensity.xy       = input.position.zw;
-    
+
     return output;
 }
 
-float4 MainPS(in SVertexToPixel input)
+float4 MainPS(in SVertexToPixel input) : SV_Target0
 {
 #ifdef PS3_TARGET
     return float4(0, input.intensity.x*0.5, input.intensity.y*0.5, 0) + 0.5; // Bias the result
@@ -61,8 +61,8 @@ float4 MainPS(in SVertexToPixel input)
 
 struct SVertexToPixel
 {
-    float4  position : POSITION;
-    float2  uv;
+    float4  position : SV_Position;
+    float2  SEMANTIC_VAR(uv);
 };
 
 SVertexToPixel MainVS( in SMeshVertex input )
@@ -82,7 +82,7 @@ float4 FetchBiased(Texture_2D samp, float2 uv)
 #endif
 }
 
-float4 MainPS(in SVertexToPixel input)
+float4 MainPS(in SVertexToPixel input) : SV_Target0
 {
     float speed = CONVOLUTION_SPEED;
     float2 invTextureSize = TextureSize.zw * speed;
@@ -94,7 +94,7 @@ float4 MainPS(in SVertexToPixel input)
 	float4 h1 = FetchBiased(SourceTextureBilinear, uv + float2(0,-invTextureSize.y));
 	float4 h2 = FetchBiased(SourceTextureBilinear, uv + float2(+invTextureSize.x,0));
 	float4 h3 = FetchBiased(SourceTextureBilinear, uv + float2(0,+invTextureSize.y));
-    
+
     float4 k0 = FetchBiased(SourceTextureBilinear, uv + float2(-invTextureSize.x,-invTextureSize.y));
 	float4 k1 = FetchBiased(SourceTextureBilinear, uv + float2(+invTextureSize.x,+invTextureSize.y));
 	float4 k2 = FetchBiased(SourceTextureBilinear, uv + float2(+invTextureSize.x,-invTextureSize.y));
@@ -119,15 +119,15 @@ float4 MainPS(in SVertexToPixel input)
 #endif
 
 // --------------------------------------------------------------------------
-// Normal map 
+// Normal map
 // --------------------------------------------------------------------------
 
 #if defined(NORMALMAP)
 
 struct SVertexToPixel
 {
-    float4  position : POSITION;
-    float2  uv;
+    float4  position : SV_Position;
+    float2  SEMANTIC_VAR(uv);
 };
 
 SVertexToPixel MainVS( in SMeshVertex input )
@@ -195,15 +195,15 @@ SPixelOutput MainPS(in SVertexToPixel input)
 
 
 // --------------------------------------------------------------------------
-// Double Normal map 
+// Double Normal map
 // --------------------------------------------------------------------------
 
 #if defined(COMBOMAPS)
 
 struct SVertexToPixel
 {
-    float4  position : POSITION;
-    float2  uv;
+    float4  position : SV_Position;
+    float2  SEMANTIC_VAR(uv);
 };
 
 SVertexToPixel MainVS( in SMeshVertex input )
@@ -215,7 +215,7 @@ SVertexToPixel MainVS( in SMeshVertex input )
 }
 
 
-float4 MainPS(in SVertexToPixel input)
+float4 MainPS(in SVertexToPixel input) : SV_Target0
 {
     float2 uv = input.uv;
 
@@ -279,8 +279,8 @@ float4 MainPS(in SVertexToPixel input)
 
 struct SVertexToPixel
 {
-    float4  position : POSITION;
-    float2  uv;
+    float4  position : SV_Position;
+    float2  SEMANTIC_VAR(uv);
 };
 
 SVertexToPixel MainVS( in SMeshVertex input )
@@ -292,7 +292,7 @@ SVertexToPixel MainVS( in SMeshVertex input )
 }
 
 
-float4 MainPS(in SVertexToPixel input)
+float4 MainPS(in SVertexToPixel input) : SV_Target0
 {
     return tex2D(SourceTexturePoint, input.uv);
 }

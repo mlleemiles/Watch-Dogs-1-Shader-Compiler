@@ -53,21 +53,21 @@
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 
     SDepthShadowVertexToPixel depthShadow;
 
 #ifdef LIGHTING
     #ifdef AMBIENT
-        float3 ambient;
+        float3 SEMANTIC_VAR(ambient);
     #endif
 
     #if defined( DIRECTIONAL ) || defined( OMNI ) || defined( SPOT )
-        float3 diffuse;
-        float3 specular;
+        float3 SEMANTIC_VAR(diffuse);
+        float3 SEMANTIC_VAR(specular);
     #endif
     
-    float4 fog;
+    float4 SEMANTIC_VAR(fog);
 #endif // LIGHTING
 };
 
@@ -202,10 +202,11 @@ float4 LightingPS( in SVertexToPixel input )
 #if defined( DEPTH ) || defined( SHADOW )
 float4 MainPS( in SVertexToPixel input
                       #ifdef USE_COLOR_RT_FOR_SHADOW
-                          , in float4 position : VPOS
+                          //, in float4 position : VPOS
                       #endif
-             )
+             ) : SV_Target0
 {
+	float4 position = input.projectedPosition;
     float4 color = 0;
     
     ProcessDepthAndShadowVertexToPixel( input.depthShadow );
@@ -217,7 +218,7 @@ float4 MainPS( in SVertexToPixel input
     return color;
 }
 #else
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     return LightingPS( input );
 }

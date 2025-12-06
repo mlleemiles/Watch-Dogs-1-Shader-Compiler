@@ -11,8 +11,8 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4  position : POSITION;
-    float2  texcoord;
+    float4  position : SV_Position;
+    float2  texcoord : TEXCOORD0;
 };
 
 
@@ -34,7 +34,7 @@ SVertexToPixel MainVS( in SMeshVertex input )
 // COPY PASS
 // --------------------------------------------------------------------------
 #if defined(IMAGE_COPY)
-float4 MainPS(in SVertexToPixel input)
+float4 MainPS(in SVertexToPixel input) : SV_Target0
 {
     return tex2D(SourceTexture, input.texcoord);
 }
@@ -44,7 +44,7 @@ float4 MainPS(in SVertexToPixel input)
 // HAIR PASS
 // --------------------------------------------------------------------------
 #if !defined(IMAGE_COPY)
-float4 MainPS(in SVertexToPixel input)
+float4 MainPS(in SVertexToPixel input) : SV_Target0
 {
     // Fetch color, mask and depth of current pixel:
     float4 colorM = tex2D(SourceTexture, input.texcoord);

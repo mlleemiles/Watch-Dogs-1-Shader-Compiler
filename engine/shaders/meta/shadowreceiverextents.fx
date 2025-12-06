@@ -10,11 +10,11 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4  projectedPosition   : POSITION0;
-    float2  uv;
+    float4  projectedPosition   : SV_Position;
+    float2  SEMANTIC_VAR(uv);
 
 #ifdef FIRST_PASS
-    float3  positionCSProj;
+    float3  SEMANTIC_VAR(positionCSProj);
 #endif
 };
 
@@ -33,7 +33,7 @@ SVertexToPixel MainVS( in SMeshVertex Input )
 	return output;
 }
 
-float4 MainPS(in SVertexToPixel input)
+float4 MainPS(in SVertexToPixel input) : SV_Target0
 {
 #ifdef FIRST_PASS
     // First pass samples the depth g-buffer

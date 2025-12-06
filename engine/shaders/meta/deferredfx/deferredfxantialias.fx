@@ -104,7 +104,7 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-	float4 Position    : POSITION0;
+	float4 Position    : SV_Position;
 	float2 Texcoord    : TEXCOORD0;
 };
 
@@ -361,7 +361,7 @@ SPixelOutput MainPS( in SVertexToPixel input )
 #ifdef RESOLVE
 
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {	
     float4 accumulationColour = tex2D(CurrFrameBufferTexture, input.Texcoord);
 

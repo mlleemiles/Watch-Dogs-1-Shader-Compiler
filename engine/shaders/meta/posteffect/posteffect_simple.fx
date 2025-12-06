@@ -23,12 +23,12 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4  projectedPosition   : POSITION0;
+    float4  projectedPosition   : SV_Position;
     #if defined( TEXTURED ) || defined( DEPTH )
-        float2  uv_tiled;
+        float2  SEMANTIC_VAR(uv_tiled);
     #endif
     #ifdef LAST_POSTFX
-        float2  uv;
+        float2  SEMANTIC_VAR(uv);
     #endif
 };
 
@@ -70,8 +70,9 @@ struct SOutput
 #endif
 };
  
-SOutput MainPS(in SVertexToPixel input , in float2 vpos : VPOS)
+SOutput MainPS(in SVertexToPixel input /*, in float2 vpos : VPOS*/)
 {
+	float2 vpos = input.projectedPosition.xy;
     SOutput output;
     int2 xy = int2(vpos.x,vpos.y);
 

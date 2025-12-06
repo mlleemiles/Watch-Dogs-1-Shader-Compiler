@@ -24,7 +24,7 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-	float4 Position : POSITION0;
+	float4 Position : SV_Position;
 	float2 UV       : TEXCOORD0;
 };
 
@@ -63,8 +63,9 @@ void EvaluateSample(int3 xySample,float ooCenterZ,float3 centerNormal,inout floa
 
 #if (USE_CODE_SELECTION_INDEX == 0)
 
-float4 MainPS( in SVertexToPixel input , in float2 vpos : VPOS , in uint sampleIndex : SV_SampleIndex )
+float4 MainPS( in SVertexToPixel input /*, in float2 vpos : VPOS */, in uint sampleIndex : SV_SampleIndex ) : SV_Target0
 {	
+	float2 vpos = input.Position.xy;
     int3 xy = int3( vpos.xy , 0);
     
     float depthRawValue = LPDepthTextureMS.Load(xy.xy,sampleIndex).r;
@@ -108,8 +109,9 @@ void SampleValue(int3 xySample,out float   sampleZ,out float3  sampleNormal,out 
     sample          = LPLightTextureMS.Load(xySample,0);
 }
 
-float4 MainPS( in SVertexToPixel input , in float2 vpos : VPOS , in uint sampleIndex : SV_SampleIndex )
+float4 MainPS( in SVertexToPixel input /*, in float2 vpos : VPOS */, in uint sampleIndex : SV_SampleIndex ) : SV_Target0
 {	
+	float2 vpos = input.Position.xy;
     int3 xy = int3( vpos.xy , 0);
     
     float depthRawValue = LPDepthTextureMS.Load(xy.xy,sampleIndex).r;
@@ -185,11 +187,11 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 projectedPosition   : POSITION0;
+    float4 projectedPosition   : SV_Position;
 
-    float3 viewportProj;
+    float3 SEMANTIC_VAR(viewportProj);
 
-    float3 vsRay;
+    float3 SEMANTIC_VAR(vsRay);
 };
 
 
@@ -293,11 +295,12 @@ float4 SampleNormal(float2 uv,int2 xy,int MSAASampleIndex)
 }
 
 #ifndef SUPERSAMPLE_MSAA
-SOutputPixel MainPS( in SVertexToPixel input, in float2 vpos : VPOS )
+SOutputPixel MainPS( in SVertexToPixel input/*, in float2 vpos : VPOS*/ )
 #else
-SOutputPixel MainPS( in SVertexToPixel input, in float2 vpos : VPOS ,  in uint sampleIndex : SV_SampleIndex )
+SOutputPixel MainPS( in SVertexToPixel input/*, in float2 vpos : VPOS */,  in uint sampleIndex : SV_SampleIndex )
 #endif
 {
+	float2 vpos = input.projectedPosition.xy;
     SOutputPixel output;
 
     float alpha = 1.f;

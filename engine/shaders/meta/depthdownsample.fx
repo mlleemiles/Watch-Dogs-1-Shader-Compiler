@@ -10,8 +10,8 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 proj     : POSITION0;
-    float2 uv;
+    float4 proj     : SV_Position;
+    float2 SEMANTIC_VAR(uv);
 };
 
 struct SPixelOutput

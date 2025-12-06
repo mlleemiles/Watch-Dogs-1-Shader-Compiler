@@ -14,9 +14,9 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 Position		: POSITION0;
-    float3 positionCSProj;
-    float2 UV;
+    float4 Position		: SV_Position;
+    float3 SEMANTIC_VAR(positionCSProj);
+    float2 SEMANTIC_VAR(UV);
 };
 
 struct VectorMapOutput

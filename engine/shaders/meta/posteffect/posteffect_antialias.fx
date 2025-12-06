@@ -56,7 +56,7 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-	float4 Position    : POSITION0;
+	float4 Position    : SV_Position;
     float2 uv          : TEXCOORD0;
 };
 
@@ -68,8 +68,9 @@ SVertexToPixel MainVS( in SMeshVertex input )
     return Output;
 }
  
-float4 MainPS( in SVertexToPixel input , in float2 vpos : VPOS)
-{	
+float4 MainPS( in SVertexToPixel input/*, in float2 vpos : VPOS*/ ) : SV_Target0
+{
+	float2 vpos = input.Position.xy;
     int2 xy = vpos.xy;
 
     int subSampleIndex = MSAASampleIndex;
@@ -98,7 +99,7 @@ float4 MainPS( in SVertexToPixel input , in float2 vpos : VPOS)
 
 struct SVertexToPixel
 {
-	float4 Position    : POSITION0;
+	float4 Position    : SV_Position;
 	float2 UV          : TEXCOORD0;
     float4 Offsets[3]  : TEXCOORD1;
 };
@@ -114,7 +115,7 @@ SVertexToPixel MainVS( in SMeshVertex input )
     return Output;
 }
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {	
    float2 uv = input.UV;
 #if (COLOR_DETECTION)
@@ -155,7 +156,7 @@ float4 MainPS( in SVertexToPixel input )
 
 struct SVertexToPixel   
 {
-	float4 Position    : POSITION0;
+	float4 Position    : SV_Position;
 	float2 UV          : TEXCOORD0;
     float2 Pixcoord    : TEXCOORD1;
     float4 Offsets[3]  : TEXCOORD2;
@@ -171,7 +172,7 @@ SVertexToPixel MainVS( in SMeshVertex input )
     return Output;
 }
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {	
     float2 uv = input.UV;
     int4 subsampleIndices = 0; // This is only required for temporal modes (SMAA T2x) // 0 if not required 
@@ -217,7 +218,7 @@ float4 MainPS( in SVertexToPixel input )
 
 struct SVertexToPixel
 {
-	float4 Position    : POSITION0;
+	float4 Position    : SV_Position;
 	float2 UV          : TEXCOORD0;
     float4 Offsets[2]  : TEXCOORD1;
 };
@@ -231,7 +232,7 @@ SVertexToPixel MainVS( in SMeshVertex input )
     return Output;
 }
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {	
     float2 uv = input.UV;
     int4 subsampleIndices = 0; // This is only required for temporal modes (SMAA T2x) // 0 if not required 
@@ -275,7 +276,7 @@ float3 DepthBufferToEyePos(float2 uv)
 
 struct SVertexToPixel
 {
-	float4 Position    : POSITION0;
+	float4 Position    : SV_Position;
 	float2 Texcoord    : TEXCOORD0;
 };
 
@@ -289,7 +290,7 @@ SVertexToPixel MainVS( in SMeshVertex input )
 
 
 // This writes the 'velocityTex' used in SMAAResolvePS
-float4 MainPS(SVertexToPixel input )
+float4 MainPS(SVertexToPixel input ) : SV_Target0
 {
     float2 velocity  = 0;
 
@@ -319,7 +320,7 @@ float4 MainPS(SVertexToPixel input )
 
 struct SVertexToPixel
 {
-	float4 Position    : POSITION0;
+	float4 Position    : SV_Position;
 	float2 Texcoord    : TEXCOORD0;
 };
 
@@ -331,7 +332,7 @@ SVertexToPixel MainVS( in SMeshVertex input )
     return Output;
 }
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {	
     float4 color = SMAAResolvePS(input.Texcoord,CurrFrameBufferTexture.tex,PrevFrameBufferTexture.tex
 							#if SMAA_REPROJECTION == 1 
@@ -354,7 +355,7 @@ float4 MainPS( in SVertexToPixel input )
 
 struct SVertexToPixel
 {
-	float4 Position    : POSITION0;
+	float4 Position    : SV_Position;
 };
 
 SVertexToPixel MainVS( in SMeshVertex input )
@@ -364,8 +365,9 @@ SVertexToPixel MainVS( in SMeshVertex input )
     return Output;
 }
 
-float4 MainPS( in SVertexToPixel input , in float2 vpos : VPOS)
-{	
+float4 MainPS( in SVertexToPixel input/*, in float2 vpos : VPOS*/ ) : SV_Target0
+{
+	float2 vpos = input.Position.xy;
     int2 xy = vpos.xy;
     xy.y -= MergeBlackBorderSize;
 

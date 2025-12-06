@@ -96,8 +96,8 @@ float GetCOC(float inv_distance)
 
 struct SVertexToPixel  
 {  
-    float4 position : POSITION0;  
-    float2 uv;  
+    float4 position : SV_Position;  
+    float2 SEMANTIC_VAR(uv);  
 }; 
 
 SVertexToPixel MainVS( in SMeshVertex Input )  
@@ -108,7 +108,7 @@ SVertexToPixel MainVS( in SMeshVertex Input )
     return pixel;  
 }  
 
-float4 MainPS( in SVertexToPixel Input )
+float4 MainPS( in SVertexToPixel Input ) : SV_Target0
 {      
     float inv_depth = GetInvDepth(Input.uv);
     float4 color    =  tex2D( colorSamplerBilinear, Input.uv);
@@ -133,7 +133,7 @@ float4 MainPS( in SVertexToPixel Input )
 
 struct SVertexToPixel  
 {  
-    float4 position : POSITION0;  
+    float4 position : SV_Position;  
 }; 
 
 SVertexToPixel MainVS( in SMeshVertex Input )  
@@ -239,8 +239,9 @@ struct SDOFOutput
 #endif
 };
 
-SDOFOutput MainPS( in SVertexToPixel Input, in float2 vpos : VPOS)
+SDOFOutput MainPS( in SVertexToPixel Input/*, in float2 vpos : VPOS*/)
 {	
+	float2 vpos = Input.position;
     SDOFOutput result;
 
     // Hexagonal blur ( could create a bokeh effect if the light is powerfull)
@@ -525,7 +526,7 @@ void MainCS(uint3 DTid : SV_DispatchThreadID , uint3 groupID : SV_GroupID,uint3 
 
 struct SVertexToPixel  
 {  
-    float4 position : POSITION0;  
+    float4 position : SV_Position;  
 }; 
 
 SVertexToPixel MainVS( in SMeshVertex Input )  
@@ -547,8 +548,9 @@ SVertexToPixel MainVS( in SMeshVertex Input )
 #endif
 
 
-float4 MainPS( in SVertexToPixel Input , in float2 vpos : VPOS)
+float4 MainPS( in SVertexToPixel Input/*, in float2 vpos : VPOS*/ ) : SV_Target0
 {
+	float2 vpos = Input.position.xy;
     float4 color = 0;
     
     int3 xyzCenter = int3(vpos.xy,0);
@@ -623,8 +625,8 @@ float4 MainPS( in SVertexToPixel Input , in float2 vpos : VPOS)
 
 struct SVertexToPixel  
 {  
-    float4 position : POSITION0;  
-    float2 uv;  
+    float4 position : SV_Position;  
+    float2 SEMANTIC_VAR(uv);  
 }; 
 
 SVertexToPixel MainVS( in SMeshVertex Input )  
@@ -635,7 +637,7 @@ SVertexToPixel MainVS( in SMeshVertex Input )
     return pixel;  
 }  
 
-float4 MainPS( in SVertexToPixel Input )
+float4 MainPS( in SVertexToPixel Input ) : SV_Target0
 {          
     float inv_depth = GetInvDepth(Input.uv);
     float  coc      = GetCOC(inv_depth);

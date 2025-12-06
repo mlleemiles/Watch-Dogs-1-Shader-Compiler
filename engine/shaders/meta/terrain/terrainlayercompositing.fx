@@ -1,3 +1,5 @@
+#define FAMILY_TERRAINLAYERCOMPOSITING
+#define FAMILY_DRIVERTERRAIN
 #include "../../Profile.inc.fx"
 #include "../../CustomSemantics.inc.fx"
 #include "../../MeshVertexTools.inc.fx"
@@ -10,7 +12,7 @@
 
 struct SVertexToPixel
 {
-    float4 Position         : POSITION0;
+    float4 Position         : SV_Position;
     float4 TexCoords        : TEXCOORD0; // (x,y): Diffuse Coords, (z,w): Mask/Color Coords
 };
 
@@ -54,7 +56,7 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
 //--------------------------------
 // MainPS
 //--------------------------------
-float4 MainPS( in SVertexToPixel Input ) 
+float4 MainPS( in SVertexToPixel Input ) : SV_Target0
 {   
     float4 color = 2.0f * tex2D( ColorSampler, Input.TexCoords.wz );
     float4 diffuse = tex2D( DiffuseSampler, Input.TexCoords.xy );

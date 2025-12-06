@@ -1,3 +1,5 @@
+#define FAMILY_CELESTIALBODY
+
 #include "../../Profile.inc.fx"
 #include "../../Depth.inc.fx"
 #include "../../SkyFog.inc.fx"
@@ -17,16 +19,16 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 #ifndef VISIBILITY_TEST
-    float2 TexCoord;
+    float2 SEMANTIC_VAR(TexCoord);
     #ifndef ADDITIVE
-        float4 Fog;
+        float4 SEMANTIC_VAR(Fog);
     #endif
 #endif
 
 #if defined(TEXKILL) && (defined(XBOX360_TARGET) || defined(PS3_TARGET))
-    float3 viewportProj;
+    float3 SEMANTIC_VAR(viewportProj);
 #endif    
 
     SParaboloidProjectionVertexToPixel paraboloidProjection;
@@ -95,7 +97,7 @@ SVertexToPixel MainVS( in SMeshVertex Input )
 	return output;
 }
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     float4 result;
 #ifdef VISIBILITY_TEST

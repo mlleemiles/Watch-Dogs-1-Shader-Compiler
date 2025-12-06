@@ -34,9 +34,9 @@
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
    
-    float3 highlight;
+    float3 SEMANTIC_VAR(highlight);
 
     SFogVertexToPixel fog;
 };
@@ -146,7 +146,7 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
 	return output;
 }
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     float4 finalColor;
 

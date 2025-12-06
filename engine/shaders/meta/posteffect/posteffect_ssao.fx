@@ -86,17 +86,17 @@ struct SMeshVertex
 struct SVertexToPixel
 {
 	#ifdef BLIT_PASS
-		float4 ProjectedPosition : POSITION0;
-		float2 TexCoord;
+		float4 projectedPosition : SV_Position;
+		float2 SEMANTIC_VAR(TexCoord);
 
         #ifdef BLIT_PASS_FOG
-            float2 positionCS;
+            float2 SEMANTIC_VAR(positionCS);
         #endif
 	#endif
 
 	#ifdef ACCESSIBILITY_PASS
-		float4 ProjectedPosition : POSITION0;
-		float4 TexCoord;
+		float4 projectedPosition : SV_Position;
+		float4 SEMANTIC_VAR(TexCoord);
 	#endif
 };
 
@@ -104,11 +104,11 @@ SVertexToPixel MainVS( in SMeshVertex Input )
 {
 	SVertexToPixel Output = (SVertexToPixel)0;
 
-	Output.ProjectedPosition = PostQuadCompute( Input.Position.xy, QuadParams );
+	Output.projectedPosition = PostQuadCompute( Input.Position.xy, QuadParams );
 
 #ifdef BLIT_PASS
     // we want Z to be 1.0 because we might do Z-test to reject Sky pixels
-    Output.ProjectedPosition.z = 1.0f;
+    Output.projectedPosition.z = 1.0f;
 #endif
 
 	Output.TexCoord.xy = Input.Position.xy*UV0Params.xy + UV0Params.zw;
@@ -123,7 +123,7 @@ SVertexToPixel MainVS( in SMeshVertex Input )
 	#endif
 
     #ifdef BLIT_PASS_FOG
-        Output.positionCS = Output.ProjectedPosition.xy * CameraNearPlaneSize.xy * 0.5f;
+        Output.positionCS = Output.projectedPosition.xy * CameraNearPlaneSize.xy * 0.5f;
         #if !defined( ORTHO_CAMERA )
             Output.positionCS /= -CameraNearDistance;
         #endif
@@ -887,8 +887,9 @@ float4 ToyStoryAO(float4 _ps_Input_f2_TexCoord)
 ////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-float4 MainPS( in SVertexToPixel Input, in float2 vpos : VPOS )
+float4 MainPS( in SVertexToPixel Input/*, in float2 vpos : VPOS*/ ) : SV_Target0
 {
+	float2 vpos = Input.projectedPosition.xy;
 	#ifdef BLIT_PASS
         #ifdef BLIT_PASS_APPLY_OCCLUSION
 		    float4 accessibility = tex2D(AccessibilitySampler, Input.TexCoord);

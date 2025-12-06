@@ -19,6 +19,10 @@ DECLARE_DEBUGOPTION( Disable_NormalMap )
 	#undef NORMALMAP
 #endif
 
+#ifndef FAMILY_MESH_DRIVERCLOTH
+	#define FAMILY_MESH_DRIVERCLOTH
+#endif
+
 // needed by WorldTransform.inc.fx
 #define USE_POSITION_FRACTIONS
 
@@ -61,42 +65,42 @@ DECLARE_DEBUGOPTION( Disable_NormalMap )
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
    
 #if defined( ALPHA_TEST ) || defined( ALPHA_TO_COVERAGE ) || defined( GBUFFER )
-    float2 albedoUV;
-    float2 albedoUV2;
+    float2 SEMANTIC_VAR(albedoUV);
+    float2 SEMANTIC_VAR(albedoUV2);
 #endif
 
 #ifdef GBUFFER
-    float3 normal;
-    float ambientOcclusion;
+    float3 SEMANTIC_VAR(normal);
+    float SEMANTIC_VAR(ambientOcclusion);
 
     #ifdef NORMALMAP
-        float2 normalUV;
-        float3 binormal;
-        float3 tangent;
+        float2 SEMANTIC_VAR(normalUV);
+        float3 SEMANTIC_VAR(binormal);
+        float3 SEMANTIC_VAR(tangent);
 		#ifdef NORMALMAP2
-			float2 normalUV2;
+			float2 SEMANTIC_VAR(normalUV2);
 		#endif
         #if defined( CLOTH_DYNAMIC_WRINKLES )
-            float2 wrinkleMapUV;
+            float2 SEMANTIC_VAR(wrinkleMapUV);
         #endif
     #endif
        
-	float4 color;
+	float4 SEMANTIC_VAR(color);
 
-    float2 specularUV;
+    float2 SEMANTIC_VAR(specularUV);
 
 
 	#ifdef ENCODED_GBUFFER_NORMAL
-		float3 vertexToCameraCS;
+		float3 SEMANTIC_VAR(vertexToCameraCS);
 	#else
-		float3 vertexToCameraWS;
+		float3 SEMANTIC_VAR(vertexToCameraWS);
 	#endif
 
     #if defined(DEBUGOUTPUT_NAME)
-        float2 debugExtraUV;
+        float2 SEMANTIC_VAR(debugExtraUV);
     #endif
 
     GBufferVertexToPixel gbufferVertexToPixel;
@@ -242,10 +246,11 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
 #if defined( DEPTH ) || defined( SHADOW )
 float4 MainPS( in SVertexToPixel input
                #ifdef USE_COLOR_RT_FOR_SHADOW
-                   , in float4 position : VPOS
+                   //, in float4 position : VPOS
                #endif
-             )
+             ) : SV_Target0
 {
+	float4 position = input.projectedPosition;
     float4 color;
 
     ProcessDepthAndShadowVertexToPixel( input.depthShadow );
@@ -269,7 +274,7 @@ float4 MainPS( in SVertexToPixel input
 #endif // DEPTH || SHADOW
 
 #ifdef GBUFFER
-GBufferRaw MainPS( in SVertexToPixel input, in bool isFrontFace : ISFRONTFACE )
+GBufferRaw MainPS( in SVertexToPixel input, in bool isFrontFace : SV_IsFrontFace )
 {
     DEBUGOUTPUT( Mesh_UV, float3(input.albedoUV, 0.f) );
     DEBUGOUTPUT( VertexColor, input.color.rgb );

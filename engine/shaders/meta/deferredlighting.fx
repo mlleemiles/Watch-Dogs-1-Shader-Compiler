@@ -143,24 +143,24 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 
 #if ( defined( STENCILTAG ) && defined( DEBUGOPTION_VOLUMEDEBUG )) || defined( DEBUG_GEOMETRY ) 
-        float4 color;
+        float4 SEMANTIC_VAR(color);
 #endif
 
 #if !defined( STENCILTAG ) && !defined( DEBUG_GEOMETRY ) && !defined( USE_VPOS_FOR_UV )
 #if defined( PROJECT_IN_PIXEL )
-    float2 uvProj;
+    float2 SEMANTIC_VAR(uvProj);
 
     // Z contains oPos.w so once projected that it can get multiplied by the depth and save an instruction
-    float3 positionCSProj;
+    float3 SEMANTIC_VAR(positionCSProj);
 #else
-    float2 uv;
+    float2 SEMANTIC_VAR(uv);
 
 #ifdef NEED_POSITIONCS
     // Z contains 1.0 so that it can get multiplied by the depth and save an instruction
-    float3 positionCS;
+    float3 SEMANTIC_VAR(positionCS);
 #endif
 #endif
 #endif
@@ -269,7 +269,7 @@ SVertexToPixel MainVS( in SMeshVertex input )
         #define NULL_PIXEL_SHADER
     #endif
     
-    float4 MainPS( in SVertexToPixel input )
+    float4 MainPS( in SVertexToPixel input ) : SV_Target0
     {
         #if defined( DEBUGOPTION_VOLUMEDEBUG ) || defined( DEBUG_GEOMETRY )
             return input.color;
@@ -995,8 +995,9 @@ float4 ComputePixel( in SVertexToPixel input, in int2 xyi,in float2 vpos , int m
     return output.color;
 }
 
-SDeferredOutput MainPS( in SVertexToPixel input, in float2 vpos : VPOS, in uint sampleIndex : SV_SampleIndex)
+SDeferredOutput MainPS( in SVertexToPixel input/*, in float2 vpos : VPOS*/, in uint sampleIndex : SV_SampleIndex)
 {
+	float2 vpos = input.projectedPosition.xy;
     SDeferredOutput output;
     float2 xy = vpos.xy;
 

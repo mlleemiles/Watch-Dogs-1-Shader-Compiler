@@ -9,7 +9,7 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 };
 
 SVertexToPixel MainVS( in SMeshVertex inputRaw )
@@ -19,7 +19,7 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
     return output;
 }
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     return float4(0, 0, 0, 0);
 }
@@ -66,7 +66,7 @@ technique t0
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 };
 
 SVertexToPixel MainVS( in SMeshVertex inputRaw )
@@ -105,7 +105,7 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
 	return output;
 }
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     return PostFxMask;  
 }

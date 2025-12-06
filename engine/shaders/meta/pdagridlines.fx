@@ -10,7 +10,7 @@ struct SMeshVertex
   
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;  
+    float4 projectedPosition : SV_Position;  
     float4 UV                : TEXCOORD0;
 };
 
@@ -33,7 +33,7 @@ SVertexToPixel MainVS( in SMeshVertex input )
 
 // Texture used 128x32
 
-float4 MainPS( in SVertexToPixel input ) 
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     float2 uv = float2(input.UV.x, ((input.UV.y + 0.5f)/32.f)   );
     float4 color = 0.01;

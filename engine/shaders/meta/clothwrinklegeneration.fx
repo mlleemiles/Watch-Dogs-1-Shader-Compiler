@@ -10,7 +10,7 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 position   : POSITION;
+    float4 position   : SV_Position;
     float2 texCoords  : TEXCOORD0;
 };
 
@@ -32,7 +32,7 @@ SVertexToPixel MainVS( in SMeshVertex input )
 // ----------------------------------------------------------------------------
 // Pixel shader
 // ----------------------------------------------------------------------------
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 { 
     float4 totalWrinkleMap = 0;    
     for( int i = 0; i <= WRINKLE_ENTRY_LAST_INDEX; i++ )

@@ -7,6 +7,10 @@ static float DualAlbedoPower = 1.0f;
 static float3 DualAlbedoColor = float3( 0.9f, 0.9f, 0.9f );
 static float DamageIntensity = 0.3f;
 
+#ifndef FAMILY_MESH_DRIVERCARPAINT
+	#define FAMILY_MESH_DRIVERCARPAINT
+#endif
+
 // needed by WorldTransform.inc.fx
 #define USE_POSITION_FRACTIONS
 
@@ -80,46 +84,46 @@ DECLARE_DEBUGOPTION( DualAlbedo )
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
    
 #ifdef USE_DAMAGE_UV
-    float2 damageUV;
+    float2 SEMANTIC_VAR(damageUV);
 #endif
 
 #ifdef GBUFFER_DAMAGE
-	float damage;
+	float SEMANTIC_VAR(damage);
 #endif
 
 #ifdef GBUFFER
-    float3 normal;
+    float3 SEMANTIC_VAR(normal);
 
     #if defined( USE_BUMP_MAP )
-        float3 positionWS;
+        float3 SEMANTIC_VAR(positionWS);
     #endif
 
     #if defined(SPECULARMAP)
-        float2 specularUV;
+        float2 SEMANTIC_VAR(specularUV);
     #endif
     
     #ifdef DECALMAP
-        float2 delcaUV;
+        float2 SEMANTIC_VAR(delcaUV);
     #endif
 
-    float ambientOcclusion;
+    float SEMANTIC_VAR(ambientOcclusion);
 
-	float3 vertexToCameraWS;
+	float3 SEMANTIC_VAR(vertexToCameraWS);
 
-    float darkeningFactor;
+    float SEMANTIC_VAR(darkeningFactor);
 
     GBufferVertexToPixel gbufferVertexToPixel;
 
 	#if defined( HAS_RAINDROP_RIPPLE )
-        float2 raindropRippleUV;
+        float2 SEMANTIC_VAR(raindropRippleUV);
 	#if defined(USE_RAIN_OCCLUDER)
         SRainOcclusionVertexToPixel rainOcclusionVertexToPixel;
-        float3 positionLPS;// position in the UV space of the rain occlusion depth map
+        float3 SEMANTIC_VAR(positionLPS);// position in the UV space of the rain occlusion depth map
 	#endif
-		float normalZ;
+		float SEMANTIC_VAR(normalZ);
 	#endif
 
 #endif
@@ -262,10 +266,11 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
 #if defined( DEPTH ) || defined( SHADOW )
 float4 MainPS( in SVertexToPixel input
                #ifdef USE_COLOR_RT_FOR_SHADOW
-                   , in float4 position : VPOS
+                   //, in float4 position : VPOS
                #endif
-             )
+             ) : SV_Target0
 {
+	float4 position = input.projectedPosition;
     float4 color;
 
     ProcessDepthAndShadowVertexToPixel( input.depthShadow );
@@ -289,7 +294,7 @@ float4 MainPS( in SVertexToPixel input
 #endif // DEPTH || SHADOW
 
 #ifdef GBUFFER
-GBufferRaw MainPS( in SVertexToPixel input, in bool isFrontFace : ISFRONTFACE )
+GBufferRaw MainPS( in SVertexToPixel input, in bool isFrontFace : SV_IsFrontFace )
 {
     float3 vertexNormal = normalize( input.normal.xyz );
     

@@ -1,3 +1,5 @@
+#define FAMILY_CLOUDLAYER
+
 #include "../../Profile.inc.fx"
 #include "../../CustomSemantics.inc.fx"
 #include "../../Camera.inc.fx"
@@ -38,23 +40,23 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 
 #ifdef LAYER1
-    float4 uvs;
+    float4 SEMANTIC_VAR(uvs);
 #endif
 
 #ifdef LAYER2
-    float4 uvs2;
+    float4 SEMANTIC_VAR(uvs2);
 #endif
 
 #ifdef LAYER3
-    float4 uvs3;
+    float4 SEMANTIC_VAR(uvs3);
 #endif
 
 #ifndef MASK_DESTCOLOR
-    float3 localPosition;
-	float4 fog;
+    float3 SEMANTIC_VAR(localPosition);
+	float4 SEMANTIC_VAR(fog);
 #endif
 
     SParaboloidProjectionVertexToPixel paraboloidProjection;
@@ -106,7 +108,7 @@ SVertexToPixel MainVS( in SMeshVertex input )
 	#define UNCOMPRESS_UPPER_LAYER_NORMAL(sampler,uv)   float3( 0, 0, 0)
 #endif
 
-float4 MainPS( SVertexToPixel input )
+float4 MainPS( SVertexToPixel input ) : SV_Target0
 {
 	float4 cloudColor = float4(0, 0, 0, 0);
 

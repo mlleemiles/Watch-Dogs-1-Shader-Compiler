@@ -9,7 +9,7 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-	float4 ProjectedPosition : POSITION0;
+	float4 projectedPosition : SV_Position;
 	float4 TexCoord01 : TEXCOORD0;
 	float4 TexCoord2 : TEXCOORD1;
 };
@@ -18,7 +18,7 @@ SVertexToPixel MainVS( in SMeshVertex Input )
 {
 	SVertexToPixel Output;
 	
-	Output.ProjectedPosition = PostQuadCompute( Input.Position.xy, QuadParams );
+	Output.projectedPosition = PostQuadCompute( Input.Position.xy, QuadParams );
 
 	Output.TexCoord01.xy = Input.Position.xy * UV0Params.xy + UV0Params.zw;
 	Output.TexCoord01.zw = Input.Position.xy * UV1Params.xy + UV1Params.zw;
@@ -34,7 +34,7 @@ SVertexToPixel MainVS( in SMeshVertex Input )
 	return Output;
 }
 
-float4 MainPS( in SVertexToPixel Input )
+float4 MainPS( in SVertexToPixel Input ) : SV_Target0
 {
 	float4 TextureR = tex2D( DiffuseSampler, Input.TexCoord01.xy );
 	float4 TextureG = tex2D( DiffuseSampler, Input.TexCoord01.zw );

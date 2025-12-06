@@ -1,3 +1,5 @@
+#define FAMILY_REALTREE_TRUNK
+
 #include "../Profile.inc.fx"
 #include "../parameters/RealTreeWorldMatrix.fx"
 #include "../parameters/RealTree_DriverTrunk.fx"
@@ -45,35 +47,35 @@ DECLARE_DEBUGOUTPUT( Trunk_SecondAnimPhaseShift ); //Secondary animation phase s
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 
 #if defined( GBUFFER ) || defined( PARABOLOID_REFLECTION )
-    float2 albedoUV;
+    float2 SEMANTIC_VAR(albedoUV);
 #endif    
 
 #if defined( GBUFFER )
-    float diffuseOcclusion;
+    float SEMANTIC_VAR(diffuseOcclusion);
 
     #ifdef DIFFUSEMAP2
-        float2 albedoUV2;
-        float diffuseBlendFactor;
+        float2 SEMANTIC_VAR(albedoUV2);
+        float SEMANTIC_VAR(diffuseBlendFactor);
     #endif
 #endif
 
 #ifdef GBUFFER
-    float3 normal;
+    float3 SEMANTIC_VAR(normal);
 
     #ifdef NORMALMAP
-        float2 normalUV;
-        float3 binormal;
-        float3 tangent;
+        float2 SEMANTIC_VAR(normalUV);
+        float3 SEMANTIC_VAR(binormal);
+        float3 SEMANTIC_VAR(tangent);
     #endif
        
     #ifdef SPECULARMAP
-        float2 specularUV;
+        float2 SEMANTIC_VAR(specularUV);
     #endif
 
-    float ambientOcclusion;
+    float SEMANTIC_VAR(ambientOcclusion);
 
     GBufferVertexToPixel gbufferVertexToPixel;
 #endif
@@ -85,9 +87,9 @@ struct SVertexToPixel
 	SMipDensityDebug	mipDensityDebug;
 
 #if defined(DEBUGOUTPUT_NAME)
-    float mainAnimWeight;
-    float secondAnimWeight;
-    float secondAnimPhaseShift;
+    float SEMANTIC_VAR(mainAnimWeight);
+    float SEMANTIC_VAR(secondAnimWeight);
+    float SEMANTIC_VAR(secondAnimPhaseShift);
 #endif
 };
 
@@ -253,10 +255,11 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
 #if defined( DEPTH ) || defined( SHADOW )
 float4 MainPS( in SVertexToPixel input
                #ifdef USE_COLOR_RT_FOR_SHADOW
-                   , in float4 position : VPOS
+                   //, in float4 position : VPOS
                #endif
-             )
+             ) : SV_Target0
 {
+	float4 position = input.projectedPosition;
     float4 color = 0.0f;
     
     ProcessDepthAndShadowVertexToPixel( input.depthShadow );
@@ -274,7 +277,7 @@ float4 MainPS( in SVertexToPixel input
 #endif // DEPTH || SHADOW
 
 #if defined(PARABOLOID_REFLECTION)
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     float4 diffuseTexture = tex2D( DiffuseTexture1, input.albedoUV );
     diffuseTexture.rgb *= DiffuseColor1.rgb;
@@ -364,7 +367,7 @@ GBufferRaw MainPS( in SVertexToPixel input )
 #endif // GBUFFER
 
 #if defined( DEFAULT ) 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     return float4(1,0,1,1);
 }

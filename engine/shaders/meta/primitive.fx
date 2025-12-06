@@ -415,8 +415,9 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
 	return output;
 }
 
-float4 MainPS( in SVertexToPixel input, in float2 vpos : VPOS ) SEMANTIC_OUTPUT(SV_Target0)
+float4 MainPS( in SVertexToPixel input/*, in float2 vpos : VPOS*/ ) SEMANTIC_OUTPUT(SV_Target0)
 { 
+	float2 vpos = input.projectedPosition.xy;
 #ifdef POSTFXMASK_CLIP
 	// Ideally the clipping mask would be provided
     float2 offset = (ViewportSize.xy - PostFxMaskViewportSize.xy) / 2.0f;

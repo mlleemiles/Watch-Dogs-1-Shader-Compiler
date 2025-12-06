@@ -12,8 +12,8 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4  projectedPosition   : POSITION0;
-    float2  uv;
+    float4  projectedPosition   : SV_Position;
+    float2  SEMANTIC_VAR(uv);
 };
 
 
@@ -29,7 +29,7 @@ SVertexToPixel MainVS( in SMeshVertex Input )
 }
 
 
-float4 MainPS(in SVertexToPixel input)
+float4 MainPS(in SVertexToPixel input) : SV_Target0
 {
 	float2 distortion_uv = ApplyDistortion(DistortionSampler, input.uv);
 

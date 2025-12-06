@@ -16,10 +16,10 @@ DECLARE_DEBUGOUTPUT( Mask_MipDensity );
 struct SMipDensityDebug
 {
 #ifdef MIPDENSITY_DEBUG_ENABLED
-	float4 mipUV;
-	float4 originalUV;
+	float4 SEMANTIC_VAR(mipUV);
+	float4 SEMANTIC_VAR(originalUV);
 #endif	
-    float dummyForPS3 : IGNORE;
+    //float dummyForPS3 : IGNORE;
 };
 
 void InitMipDensityValues(inout SMipDensityDebug input)
@@ -28,7 +28,7 @@ void InitMipDensityValues(inout SMipDensityDebug input)
 	input.mipUV = 0;
 	input.originalUV = 0;
 #endif	
-	input.dummyForPS3 = 0;
+	//input.dummyForPS3 = 0;
 }
 
 void ComputeMipDensityDebugVertexToPixelDiffuse(inout SMipDensityDebug input, float2 uv1, float2 textureSize1)

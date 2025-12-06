@@ -1,3 +1,4 @@
+#define FAMILY_MESH_CHARACTER
 #define PRELERPFOG 0
 
 #include "../Profile.inc.fx"
@@ -29,38 +30,38 @@
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
     
 #ifndef DEPTH
-    float2 maskUV;
+    float2 SEMANTIC_VAR(maskUV);
 
-    float3 positionWS;
-    float3 vertexToCameraWS;
+    float3 SEMANTIC_VAR(positionWS);
+    float3 SEMANTIC_VAR(vertexToCameraWS);
 
-    float3 normalWS;
+    float3 SEMANTIC_VAR(normalWS);
 
 #ifdef NORMALMAP
-	float2 normalUV;
-	float3 binormalWS;
-	float3 tangentWS;
+	float2 SEMANTIC_VAR(normalUV);
+	float3 SEMANTIC_VAR(binormalWS);
+	float3 SEMANTIC_VAR(tangentWS);
 #endif
 
-	float fogFactor;
+	float SEMANTIC_VAR(fogFactor);
 
 #if defined( MATCAP ) || defined( MATCAP_OVERRIDE )
-    float4 reflectionUvScaleBias;
+    float4 SEMANTIC_VAR(reflectionUvScaleBias);
 #elif !defined( REFLECTION_STATIC )
   #ifdef VERTICAL_STRETCH
-    float2 lowerStretchScaleBias;
+    float2 SEMANTIC_VAR(lowerStretchScaleBias);
   #endif
 #endif
 
 #ifdef LOWER_VERTICAL_FADE
-    float2 lowerFadeScaleBias;
+    float2 SEMANTIC_VAR(lowerFadeScaleBias);
 #endif
 
 #ifdef UPPER_VERTICAL_FADE
-    float2 upperFadeScaleBias;
+    float2 SEMANTIC_VAR(upperFadeScaleBias);
 #endif
 #endif // DEPTH
 };
@@ -157,7 +158,7 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
 // Depth
 // ----------------------------------------------------------------------------
 #ifdef DEPTH
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     return 0.0f;
 }
@@ -177,8 +178,9 @@ struct PSOutput
 #endif
 };
 
-PSOutput MainPS( in SVertexToPixel input, in float2 vpos : VPOS )
+PSOutput MainPS( in SVertexToPixel input/*, in float2 vpos : VPOS*/ )
 {
+	float2 vpos = input.projectedPosition.xy;
     float3 vertexNormalWS = normalize( input.normalWS );
 
 #ifdef NORMALMAP

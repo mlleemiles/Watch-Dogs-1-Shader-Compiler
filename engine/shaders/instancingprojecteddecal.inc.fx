@@ -4,11 +4,11 @@
 struct SInstancingProjectedDecalVertexToPixel
 {
 #if defined( INSTANCING_PROJECTED_DECAL )
-    float4 decalTexVariation;
-    float4 decalViewProj0;
-    float4 decalViewProj1;
+    float4 SEMANTIC_VAR(decalTexVariation);
+    float4 SEMANTIC_VAR(decalViewProj0);
+    float4 SEMANTIC_VAR(decalViewProj1);
 #else
-    float dummyForPS3 : IGNORE;
+    //float dummyForPS3 : IGNORE;
 #endif
 };
 

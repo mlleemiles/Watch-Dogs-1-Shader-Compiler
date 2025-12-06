@@ -22,14 +22,14 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
     
 #ifdef BLIT
-    float2 sourceUV;
-    float2 histogramUV;
-    float average;
-    float median;
-    float maxValueRcp;
+    float2 SEMANTIC_VAR(sourceUV);
+    float2 SEMANTIC_VAR(histogramUV);
+    float SEMANTIC_VAR(average);
+    float SEMANTIC_VAR(median);
+    float SEMANTIC_VAR(maxValueRcp);
 #endif
 };
 
@@ -103,7 +103,7 @@ SVertexToPixel MainVS( in SMeshVertex input )
 	return output;
 }
 
-float4 MainPS(in SVertexToPixel input)
+float4 MainPS(in SVertexToPixel input) : SV_Target0
 {
 #ifdef BLIT
     float4 color = tex2D( SourceTexture, input.sourceUV );

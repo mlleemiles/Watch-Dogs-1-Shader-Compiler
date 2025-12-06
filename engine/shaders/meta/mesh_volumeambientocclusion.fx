@@ -20,14 +20,14 @@
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
     
-    float3 positionCSProj; 
-    float3 uvProj;
+    float3 SEMANTIC_VAR(positionCSProj); 
+    float3 SEMANTIC_VAR(uvProj);
 
-    float4 X;
-    float4 Y;
-    float4 Z;
+    float4 SEMANTIC_VAR(X);
+    float4 SEMANTIC_VAR(Y);
+    float4 SEMANTIC_VAR(Z);
 };
 
 SVertexToPixel MainVS( in SMeshVertex inputRaw )

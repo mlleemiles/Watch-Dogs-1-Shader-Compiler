@@ -15,15 +15,15 @@
 struct SParticleLightingVertexToPixel
 {
 #ifdef PARTICLE_LIGHTING
-    float4 lightIntensities;
+    float4 SEMANTIC_VAR(lightIntensities);
 
     #ifdef HAS_PROJECTION
-        float4 vertexPosLPS;
-        float3 vertexPosLPSNoTiling;
+        float4 SEMANTIC_VAR(vertexPosLPS);
+        float3 SEMANTIC_VAR(vertexPosLPSNoTiling);
     #endif
 #endif
 
-    float dummyForPS3 : IGNORE;
+    //float dummyForPS3 : IGNORE;
 };
 
 
@@ -98,7 +98,7 @@ void ComputeParticleLightingVertexToPixel( out SParticleLightingVertexToPixel ou
     output.vertexPosLPS.xy *= ParticleSpotParams[0].zw;
 #endif
 
-    output.dummyForPS3 = 0.0f;
+    //output.dummyForPS3 = 0.0f;
 }
 
 float3 GetParticleLightingColor( in SParticleLightingVertexToPixel input, in const bool enableProjection )

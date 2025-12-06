@@ -15,9 +15,9 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 proj     : POSITION0;
+    float4 proj     : SV_Position;
 #if defined(NOMAD_PLATFORM_PS3)
-    float2 uv;
+    float2 SEMANTIC_VAR(uv);
 #endif
 };
 
@@ -33,7 +33,7 @@ SVertexToPixel MainVS(in SMeshVertex input)
     return output;
 }
 
-float4 MainPS(in SVertexToPixel input)
+float4 MainPS(in SVertexToPixel input) : SV_Target0
 {
     float4 depth = 1.0f;
 

@@ -25,18 +25,18 @@
 
 struct SLightingVertexToPixel
 {
-    float dummyForPS3 : IGNORE;
+    //float dummyForPS3 : IGNORE;
 
 #if defined( SAMPLE_SHADOW ) && defined( SUN )
-    CSMTYPE CSMShadowCoords;
+    CSMTYPE SEMANTIC_VAR(CSMShadowCoords);
 #endif
 
 #if ( defined( SPOT ) && !defined( SAMPLE_SHADOW ) && defined( PROJECTED_TEXTURE ) ) || ( defined( SAMPLE_SHADOW ) && !defined( SUN ) && !defined( DIRECTIONAL ) )
-    float4 positionLPS;
+    float4 SEMANTIC_VAR(positionLPS);
 #endif
 
 #if defined( SAMPLE_SHADOW ) && defined( DIRECTIONAL ) && !defined( SUN )
-    float3 positionLPS;
+    float3 SEMANTIC_VAR(positionLPS);
 #endif
 };
 
@@ -278,7 +278,7 @@ float3 ComputeLighting( in SLightingInput input, in SLightingVertexToPixel light
 
 void ComputeLightingVertexToPixel( out SLightingVertexToPixel output, in float3 positionWS )
 {
-    output.dummyForPS3 = 0.0f;
+    //output.dummyForPS3 = 0.0f;
 
 #if defined( SAMPLE_SHADOW ) && defined( SUN )
     output.CSMShadowCoords = ComputeCSMShadowCoords( positionWS );

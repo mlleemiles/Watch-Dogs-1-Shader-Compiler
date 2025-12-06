@@ -45,25 +45,25 @@
 // ----------------------------------------------------------------------------
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 
 #ifdef FORWARD_LIGHTING
-    float	ambientOcclusion;
+    float	SEMANTIC_VAR(ambientOcclusion);
     
 	#if defined( SPECULARMAP )
-        float2 specularUV;
+        float2 SEMANTIC_VAR(specularUV);
     #endif
 #endif
 
 #ifdef ARCOLLISION
-	float4 positionHS4;
+	float4 SEMANTIC_VAR(positionHS4);
 #endif
 
 #if defined( FORWARD_LIGHTING ) || defined( ARCOLLISION )
-	float4 positionWS4;
-	float3 normal;
+	float4 SEMANTIC_VAR(positionWS4);
+	float3 SEMANTIC_VAR(normal);
     #if !defined(DEBUGLIGHTING) || defined(ARCOLLISION_PERTURBNOISE_PS)
-	    float2 albedoUV;
+	    float2 SEMANTIC_VAR(albedoUV);
     #endif
 #endif
 
@@ -285,8 +285,9 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
 // Pixel Shader - Forward Diffuse/Specular
 // ----------------------------------------------------------------------------
 #ifdef FORWARD_LIGHTING
-float4 MainPS( in SVertexToPixel input, in float2 vpos : VPOS )
+float4 MainPS( in SVertexToPixel input/*, in float2 vpos : VPOS*/ ) : SV_Target0
 {
+	float2 vpos = input.projectedPosition.xy;
 	ApplyARCollisionFX_PS( input );
 
     float3 normal = input.normal;
@@ -410,7 +411,7 @@ float4 MainPS( in SVertexToPixel input, in float2 vpos : VPOS )
 #endif // FORWARD_LIGHTING
 
 #if defined( DEPTH )
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
 	ApplyARCollisionFX_PS( input );
 

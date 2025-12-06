@@ -49,23 +49,23 @@
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
-    float4 positionVS;
+    float4 projectedPosition : SV_Position;
+    float4 SEMANTIC_VAR(positionVS);
 
-    float3 positionWS;
+    float3 SEMANTIC_VAR(positionWS);
 
-    float3 normalWS;
-    float2 normalUV;
-    float3 binormalWS;
-    float3 tangentWS;
+    float3 SEMANTIC_VAR(normalWS);
+    float2 SEMANTIC_VAR(normalUV);
+    float3 SEMANTIC_VAR(binormalWS);
+    float3 SEMANTIC_VAR(tangentWS);
 
-    float2 overlayUV;
+    float2 SEMANTIC_VAR(overlayUV);
 
-    float2  flowUV;
-    float4  flowOffset;
-    float2  flowLerp;
-	float2	scrollUV;
-	float4	color;
+    float2  SEMANTIC_VAR(flowUV);
+    float4  SEMANTIC_VAR(flowOffset);
+    float2  SEMANTIC_VAR(flowLerp);
+	float2	SEMANTIC_VAR(scrollUV);
+	float4	SEMANTIC_VAR(color);
 
     SLightingVertexToPixel lighting;
 
@@ -139,8 +139,9 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
     return output;
 }
 
-float4 MainPS( in SVertexToPixel input, in float2 vpos : VPOS )
+float4 MainPS( in SVertexToPixel input/*, in float2 vpos : VPOS*/ ) : SV_Target0
 {
+	float2 vpos = input.projectedPosition.xy;
     float4 output;
     float waterDepthOpacity = WaterColor.a;
 

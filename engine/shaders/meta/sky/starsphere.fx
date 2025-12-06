@@ -40,11 +40,11 @@ static float2 UVDecompressionRange = UVDecompression.zw;
 
 struct SVertexToPixel
 {
-	float4  projectedPosition : POSITION0;
-	float2	diffuseUV;
-	float4	color;
+	float4  projectedPosition : SV_Position;
+	float2	SEMANTIC_VAR(diffuseUV);
+	float4	SEMANTIC_VAR(color);
 #ifdef HAS_FOG
-    float4  fog;
+    float4  SEMANTIC_VAR(fog);
 #endif
 };
 
@@ -77,7 +77,7 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
 	return output;
 }
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
  	float4 diffuse = tex2D( DiffuseTexture1, input.diffuseUV );
     

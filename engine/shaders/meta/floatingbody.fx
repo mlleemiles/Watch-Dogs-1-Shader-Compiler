@@ -276,9 +276,9 @@ struct SMeshVertex
  
 struct SVertexToPixel
 {
-    float4 homogenousCoords 	: POSITION0;
-    float3 pos;
-    float3 normal;
+    float4 homogenousCoords 	: SV_Position;
+    float3 SEMANTIC_VAR(pos);
+    float3 SEMANTIC_VAR(normal);
 };
 
 struct HeightMapOutput
@@ -325,10 +325,10 @@ struct SMeshVertex
  
 struct SVertexToPixel
 {
-    float4 homogenousCoords 	: POSITION0;
-    float3 pos;
-    float3 normal;
-    float2 uv;
+    float4 homogenousCoords 	: SV_Position;
+    float3 SEMANTIC_VAR(pos);
+    float3 SEMANTIC_VAR(normal);
+    float2 SEMANTIC_VAR(uv);
 };
 
 struct VectorMapOutput

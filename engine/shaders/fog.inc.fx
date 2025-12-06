@@ -200,7 +200,7 @@ void ApplyFog( inout FPREC3 color, in FPREC4 fog )
 struct SFogVertexToPixel
 {
 #ifdef INTERPOLATOR_PACKING
-    float dummyForPS3 : IGNORE;
+    //float dummyForPS3 : IGNORE;
 #endif
 
 #if defined( OMNI ) || defined( DIRECTIONAL ) || defined( SPOT ) || defined( SUN ) || defined( AMBIENT )
@@ -223,7 +223,7 @@ struct SFogVertexToPixel
 void ComputeFogVertexToPixel( out SFogVertexToPixel output, in FPREC3 positionWS )
 {
 #ifdef INTERPOLATOR_PACKING
-    output.dummyForPS3 = 0.0f;
+    //output.dummyForPS3 = 0.0f;
 #endif
 
 #if defined( OMNI ) || defined( DIRECTIONAL ) || defined( SPOT ) || defined( SUN ) || defined( AMBIENT )

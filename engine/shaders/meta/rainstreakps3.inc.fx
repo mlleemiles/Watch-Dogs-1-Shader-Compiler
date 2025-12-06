@@ -15,10 +15,10 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    half4 position : POSITION0;
+    half4 position : SV_Position;
 
-    half2 uv;
-    half3 light;
+    half2 SEMANTIC_VAR(uv);
+    half3 SEMANTIC_VAR(light);
 };
 
 SVertexToPixel MainVS( in SMeshVertex Input )
@@ -56,7 +56,7 @@ SVertexToPixel MainVS( in SMeshVertex Input )
     return Output;
 }
 
-half4 MainPS( in SVertexToPixel Input )
+half4 MainPS( in SVertexToPixel Input ) : SV_Target0
 {
     half3 color = Input.light;
 

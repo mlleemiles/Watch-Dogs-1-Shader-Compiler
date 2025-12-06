@@ -1,3 +1,5 @@
+#define FAMILY_SKYDISK
+
 #include "../../Profile.inc.fx"
 #include "../../CustomSemantics.inc.fx"
 #include "../../Depth.inc.fx"
@@ -16,12 +18,12 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 Position     : POSITION0;
-    float  TexCoord;
-    float  hdrMul;
+    float4 Position     : SV_Position;
+    float  SEMANTIC_VAR(TexCoord);
+    float  SEMANTIC_VAR(hdrMul);
     
 #if defined(TEXKILL) && (defined(XBOX360_TARGET) || defined(PS3_TARGET))
-    float3 viewportProj;
+    float3 SEMANTIC_VAR(viewportProj);
 #endif    
 
     SParaboloidProjectionVertexToPixel paraboloidProjection;
@@ -59,7 +61,7 @@ SVertexToPixel MainVS( in SMeshVertex Input )
 	return Output;
 }
 
-float4 MainPS( SVertexToPixel Input )
+float4 MainPS( SVertexToPixel Input ) : SV_Target0
 {
     #if defined(TEXKILL) 
 		#if defined(XBOX360_TARGET)

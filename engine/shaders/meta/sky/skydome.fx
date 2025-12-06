@@ -1,3 +1,5 @@
+#define FAMILY_SKYDOME
+
 #include "../../Profile.inc.fx"
 #include "../../CustomSemantics.inc.fx"
 #include "../../SkyFog.inc.fx"
@@ -16,10 +18,10 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 Position      : POSITION0;
-    float3 Fog;
-    float3 TexCoord;
-    float  Elevation;
+    float4 Position      : SV_Position;
+    float3 SEMANTIC_VAR(Fog);
+    float3 SEMANTIC_VAR(TexCoord);
+    float  SEMANTIC_VAR(Elevation);
 
     SParaboloidProjectionVertexToPixel paraboloidProjection;
 };
@@ -65,7 +67,7 @@ SVertexToPixel MainVS( in SMeshVertex Input )
 	return Output;
 }
 
-float4 MainPS( SVertexToPixel Input )
+float4 MainPS( SVertexToPixel Input ) : SV_Target0
 {  
     float timeOfDayCoord     = Params.x;
     float opacity            = Params.y;

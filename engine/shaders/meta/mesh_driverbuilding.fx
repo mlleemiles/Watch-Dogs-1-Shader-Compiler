@@ -115,108 +115,108 @@ DECLARE_DEBUGOPTION( Disable_NormalMap )
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
            
 #if defined( DEBUGOPTION_HIDEFACADESPROGRESSIVE ) && defined( INSTANCING_BUILDINGFACADEANGLES )
-    float debugHideFacadesProgressive;
+    float SEMANTIC_VAR(debugHideFacadesProgressive);
 #endif
 
 #ifdef NEEDS_ALPHA_UV
-    float2 alphaUV;
+    float2 SEMANTIC_VAR(alphaUV);
 #endif
 
 #ifdef USE_RELIEF_MAP
-    float3 viewVectorWS;
+    float3 SEMANTIC_VAR(viewVectorWS);
 #endif
 
 #ifdef NEEDS_ALBEDO_UV
-  	float2 albedoUV;
+  	float2 SEMANTIC_VAR(albedoUV);
     #if defined( DIFFUSETEXTURE2 ) && !defined( MATCAP )
-        float2 albedoUV2;
+        float2 SEMANTIC_VAR(albedoUV2);
     #endif 
 #endif
     
 #if defined(APPLY_GRUNGE_TEXTURE)
-    float2 grungeUV;
+    float2 SEMANTIC_VAR(grungeUV);
     #if defined(IS_BUILDING)
-        float grungeOpacity;
+        float SEMANTIC_VAR(grungeOpacity);
     #endif
 #endif 
 
 #ifdef GBUFFER
 
 #if defined( IS_LOW_RES_BUILDING )
-    float3 diffuseColor1;
+    float3 SEMANTIC_VAR(diffuseColor1);
     #if defined( COLORIZE_WITH_ALPHA_FROM_DIFFUSETEXTURE1 ) || ( defined( COLORIZE_WITH_MASK_GREEN_CHANNEL ) && defined( SPECULARMAP ) )
-        float3 diffuseColor2;
+        float3 SEMANTIC_VAR(diffuseColor2);
     #endif
-    float2 finalSpecularPower;
-    float3 finalReflectance;
-    float finalDiffuseMultiplier;
-    float maskRedChannelMode;
+    float2 SEMANTIC_VAR(finalSpecularPower);
+    float3 SEMANTIC_VAR(finalReflectance);
+    float SEMANTIC_VAR(finalDiffuseMultiplier);
+    float SEMANTIC_VAR(maskRedChannelMode);
 #endif
 
 #if defined( LOW_RES_ROOF )
-    float3 diffuseColor1;
+    float3 SEMANTIC_VAR(diffuseColor1);
 #endif
 
     #ifdef GBUFFER_BLENDED
-        float blendFactor;
+        float SEMANTIC_VAR(blendFactor);
     #endif
 
     #if defined( GBUFFER_BLENDED )
         #ifdef NORMALMAP
-            float3 normal;
+            float3 SEMANTIC_VAR(normal);
         #endif
     #else
-        float3 normal;
+        float3 SEMANTIC_VAR(normal);
 		#if defined( ROUNDED_CORNERS ) && defined(INSTANCING) && defined(INSTANCING_BUILDINGFACADEANGLES)
-			float3 normalRounded;
-			float normalRoundedLerpCoef;
+			float3 SEMANTIC_VAR(normalRounded);
+			float SEMANTIC_VAR(normalRoundedLerpCoef);
 		#endif
         #if !defined( IS_LOW_RES_BUILDING ) && !defined( LOW_RES_ROOF )
-            float ambientOcclusion;
+            float SEMANTIC_VAR(ambientOcclusion);
         #endif
     #endif
 
     GBufferVertexToPixel gbufferVertexToPixel;
 
 	#if defined( MATCAP ) && defined( DIFFUSETEXTURE2 )
-        float3 cameraToVertexWS;
+        float3 SEMANTIC_VAR(cameraToVertexWS);
 	#endif
 
 
 	#if defined( HAS_RAINDROP_RIPPLE ) && defined(NORMALMAP)
-        float2 raindropRippleUV;
-		float normalZ;
+        float2 SEMANTIC_VAR(raindropRippleUV);
+		float SEMANTIC_VAR(normalZ);
 	#endif
 
 	#if defined(NORMALMAP) && !defined( IS_LOW_RES_BUILDING )
-        float2 normalUV;
+        float2 SEMANTIC_VAR(normalUV);
 	#endif
 	        
     #if defined(NORMALMAP)
-        float3 binormal;
-        float3 tangent;
+        float3 SEMANTIC_VAR(binormal);
+        float3 SEMANTIC_VAR(tangent);
     #endif
        
     #if defined(SPECULARMAP) && !defined( IS_LOW_RES_BUILDING )
-        float2 specularUV;
+        float2 SEMANTIC_VAR(specularUV);
     #endif
  
     #if (defined( DEBUGOPTION_FACADES ) && defined(INSTANCING) && defined(INSTANCING_BUILDINGFACADEANGLES)) || defined(DEBUGOPTION_DECALGEOMETRY)
-        float3 debugColor;
+        float3 SEMANTIC_VAR(debugColor);
     #endif
 #endif
 
 #if (defined(GBUFFER) && defined( CUSTOM_REFLECTION)) || defined(GRIDSHADING)
-    float3 positionWS;
+    float3 SEMANTIC_VAR(positionWS);
 #endif
 
     SDepthShadowVertexToPixel depthShadow;
 
 #if defined(DEBUGOUTPUT_NAME) && defined(VERTEX_DECL_COLOR)
-    float3 debugVertexColor;
+    float3 SEMANTIC_VAR(debugVertexColor);
 #endif
 
     SParaboloidProjectionVertexToPixel paraboloidProjection;
@@ -224,9 +224,9 @@ struct SVertexToPixel
 	SMipDensityDebug	mipDensityDebug;
 
 #if defined(EMISSIVE_MESH_LIGHTS)
-    float fogFactor;
-    float2 emissiveUV;
-    float3 emissiveColor;
+    float SEMANTIC_VAR(fogFactor);
+    float2 SEMANTIC_VAR(emissiveUV);
+    float3 SEMANTIC_VAR(emissiveColor);
 #endif
 };
 
@@ -602,8 +602,9 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
 }
 
 #if defined(PARABOLOID_REFLECTION)
-float4 MainPS( in SVertexToPixel input, in float2 vpos : VPOS )
+float4 MainPS( in SVertexToPixel input/*, in float2 vpos : VPOS*/ ) : SV_Target0
 {
+	float2 vpos = input.projectedPosition.xy;
     float4 diffuse = 1;
 #if !defined( LOW_RES_ROOF )
     diffuse = tex2D( DiffuseTexture1, input.albedoUV );
@@ -623,8 +624,9 @@ float4 MainPS( in SVertexToPixel input, in float2 vpos : VPOS )
 #endif // PARABOLOID_REFLECTION
 
 #ifdef GRIDSHADING
-float4 MainPS( in SVertexToPixel input, in float2 vpos : VPOS )
+float4 MainPS( in SVertexToPixel input/*, in float2 vpos : VPOS*/ ) : SV_Target0
 {
+	float2 vpos = input.projectedPosition.xy;
     float4 output = saturate( input.positionWS.z * GridShadingParameters.x + GridShadingParameters.y);
     
     RETURNWITHALPHA2COVERAGE( output );
@@ -634,10 +636,11 @@ float4 MainPS( in SVertexToPixel input, in float2 vpos : VPOS )
 #if defined( DEPTH ) || defined( SHADOW )
 float4 MainPS( in SVertexToPixel input
                #ifdef USE_COLOR_RT_FOR_SHADOW
-                   , in float4 position : VPOS
+                   //, in float4 position : VPOS
                #endif
-             )
+             ) : SV_Target0
 {
+	float4 position = input.projectedPosition;
     float4 color;
 
     ProcessDepthAndShadowVertexToPixel( input.depthShadow );
@@ -678,7 +681,7 @@ float4 MainPS( in SVertexToPixel input
 #endif // DEPTH || SHADOW
 
 #ifdef GBUFFER
-GBufferRaw MainPS( in SVertexToPixel input, in bool isFrontFace : ISFRONTFACE )
+GBufferRaw MainPS( in SVertexToPixel input, in bool isFrontFace : SV_IsFrontFace )
 {
 #ifdef VERTEX_DECL_COLOR
     DEBUGOUTPUT( Mesh_Color, input.debugVertexColor );
@@ -1117,7 +1120,7 @@ GBufferRaw MainPS( in SVertexToPixel input, in bool isFrontFace : ISFRONTFACE )
 #endif // GBUFFER
 
 #if defined(EMISSIVE_MESH_LIGHTS)
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     float emissiveMask = tex2D( EmissiveTexture, input.emissiveUV ).g;
 

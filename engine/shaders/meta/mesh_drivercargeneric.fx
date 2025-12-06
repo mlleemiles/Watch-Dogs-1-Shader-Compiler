@@ -15,6 +15,10 @@ DECLARE_DEBUGOPTION( Disable_NormalMap )
 	#undef NORMALMAP
 #endif
 
+#ifndef FAMILY_MESH_DRIVERCARGENERIC
+	#define FAMILY_MESH_DRIVERCARGENERIC
+#endif
+
 // needed by WorldTransform.inc.fx
 #define USE_POSITION_FRACTIONS
 
@@ -123,47 +127,47 @@ DECLARE_DEBUGOPTION( Disable_NormalMap )
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
    
 #ifdef NEEDS_ALPHA_UV
-    float2 alphaUV;
+    float2 SEMANTIC_VAR(alphaUV);
 #endif
 
 #ifdef NEEDS_ALBEDO_UV
-  	float2 albedoUV;
+  	float2 SEMANTIC_VAR(albedoUV);
     #if defined( DIFFUSETEXTURE2 ) && !defined( MATCAP )
-        float2 albedoUV2;
+        float2 SEMANTIC_VAR(albedoUV2);
     #endif 
 #endif
 
 #ifdef GBUFFER
     #ifdef GBUFFER_BLENDED
-        float blendFactor;
+        float SEMANTIC_VAR(blendFactor);
     #endif
 
     #if defined( GBUFFER_BLENDED )
         #ifdef NORMALMAP
-            float3 normal;
+            float3 SEMANTIC_VAR(normal);
         #endif
     #else
-        float3 normal;
-        float ambientOcclusion;
+        float3 SEMANTIC_VAR(normal);
+        float SEMANTIC_VAR(ambientOcclusion);
     #endif
 
     GBufferVertexToPixel gbufferVertexToPixel;
 
 	#if defined( MATCAP )
-        float3 cameraToVertexWS;
+        float3 SEMANTIC_VAR(cameraToVertexWS);
 	#endif
 
     #ifdef NORMALMAP
-        float2 normalUV;
-        float3 binormal;
-        float3 tangent;
+        float2 SEMANTIC_VAR(normalUV);
+        float3 SEMANTIC_VAR(binormal);
+        float3 SEMANTIC_VAR(tangent);
     #endif
        
     #if defined( NEEDS_SPECULAR_UV )
-        float2 specularUV;
+        float2 SEMANTIC_VAR(specularUV);
     #endif
 
 #endif
@@ -173,13 +177,13 @@ struct SVertexToPixel
     SParaboloidProjectionVertexToPixel paraboloidProjection;
 
 #if defined(DEBUGOUTPUT_NAME)
-    float3 vertexColor;
+    float3 SEMANTIC_VAR(vertexColor);
 #endif
 
 #if defined(EMISSIVE_MESH_LIGHTS)
-	float fogFactor;
-    float2 emissiveUV;
-    float3 emissiveColor;
+	float SEMANTIC_VAR(fogFactor);
+    float2 SEMANTIC_VAR(emissiveUV);
+    float3 SEMANTIC_VAR(emissiveColor);
 #endif
 
 	SMipDensityDebug	mipDensityDebug;
@@ -355,7 +359,7 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
 }
 
 #if defined(PARABOLOID_REFLECTION)
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     float4 diffuse = tex2D( DiffuseTexture1, input.albedoUV );
     diffuse.rgb *= GetDiffuseColor1();
@@ -375,10 +379,11 @@ float4 MainPS( in SVertexToPixel input )
 #if defined( DEPTH ) || defined( SHADOW )
 float4 MainPS( in SVertexToPixel input
                #ifdef USE_COLOR_RT_FOR_SHADOW
-                   , in float4 position : VPOS
+                   //, in float4 position : VPOS
                #endif
-             )
+             ) : SV_Target0
 {
+	float4 position = input.projectedPosition;
     float4 color;
 
     ProcessDepthAndShadowVertexToPixel( input.depthShadow );
@@ -406,7 +411,7 @@ float4 MainPS( in SVertexToPixel input
 #endif // DEPTH || SHADOW
 
 #ifdef GBUFFER
-GBufferRaw MainPS( in SVertexToPixel input, in bool isFrontFace : ISFRONTFACE )
+GBufferRaw MainPS( in SVertexToPixel input, in bool isFrontFace : SV_IsFrontFace )
 {
     DEBUGOUTPUT( Mesh_Color, input.vertexColor );
 
@@ -582,7 +587,7 @@ GBufferRaw MainPS( in SVertexToPixel input, in bool isFrontFace : ISFRONTFACE )
 #endif // GBUFFER
 
 #if defined(EMISSIVE_MESH_LIGHTS)
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     float emissiveMask = tex2D( EmissiveTexture, input.emissiveUV ).g;
 

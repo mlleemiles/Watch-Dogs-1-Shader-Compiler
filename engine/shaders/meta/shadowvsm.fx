@@ -19,7 +19,7 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4  projectedPosition   : POSITION0;
+    float4  projectedPosition   : SV_Position;
     float2  uv                  : TEXCOORD0;
 };
 
@@ -36,7 +36,7 @@ SVertexToPixel MainVS( in SMeshVertex Input )
 }
 
 
-float4 MainPS(in SVertexToPixel input)
+float4 MainPS(in SVertexToPixel input) : SV_Target0
 {
     float shadowDepth;
     float precisionBias = 1.0;

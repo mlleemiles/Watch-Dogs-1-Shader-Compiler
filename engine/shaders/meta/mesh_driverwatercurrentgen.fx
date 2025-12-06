@@ -73,36 +73,36 @@ DECLARE_DEBUGOPTION( Disable_NormalMap )
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 
 #if defined(GBUFFER)
-    float3  positionCS;
+    float3  SEMANTIC_VAR(positionCS);
 #else
-    float4  positionWS4;
+    float4  SEMANTIC_VAR(positionWS4);
 
 	#if !defined(WATERMESH)
-		float3  normalWS;
+		float3  SEMANTIC_VAR(normalWS);
 	#endif
 
-    float   vertexDepth; 
-    float3  viewportProj;
+    float   SEMANTIC_VAR(vertexDepth); 
+    float3  SEMANTIC_VAR(viewportProj);
 
 	#if defined(AMBIENT)
-		float  ambientOcclusion;
+		float  SEMANTIC_VAR(ambientOcclusion);
 	#endif // AMBIENT
 
     #if defined(LIGHTING)
 		#if !defined(WATERMESH)
-			half3 binormal;
-			half3 tangent;
+			half3 SEMANTIC_VAR(binormal);
+			half3 SEMANTIC_VAR(tangent);
 		#endif // !WATERMESH
 
-		float2 normalUV;
-        half2 raindropRippleUV;
+		float2 SEMANTIC_VAR(normalUV);
+        half2 SEMANTIC_VAR(raindropRippleUV);
     #endif // LIGHTING
 
     #if defined(DEBUGOUTPUT_NAME)
-        float3 vertexColor;
+        float3 SEMANTIC_VAR(vertexColor);
     #endif
 
 #endif // GBUFFER
@@ -249,11 +249,12 @@ float3 SampleNormal(float2 uv)
 }
 
 #ifdef NEEDS_DUAL_EXPOSURE
-SDualExposureOutput MainPS( in SVertexToPixel input, in float2 vpos : VPOS ) 
+SDualExposureOutput MainPS( in SVertexToPixel input/*, in float2 vpos : VPOS*/ ) 
 #else
-float4 MainPS( in SVertexToPixel input, in float2 vpos : VPOS ) 
+float4 MainPS( in SVertexToPixel input/*, in float2 vpos : VPOS*/ ) : SV_Target0
 #endif
 {
+	float2 vpos = input.projectedPosition.xy;
     DEBUGOUTPUT( Mesh_Color, input.vertexColor );
  	
 	#if !defined(WATERMESH)

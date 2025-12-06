@@ -3,6 +3,8 @@
 #include "../../parameters/FXAAPostFX.fx"
 #include "Post.inc.fx"
 
+#define D3D11_TARGET
+
 // FXAA 3.11
 #define FXAA_PS3	defined(PS3_TARGET)
 #define FXAA_360	defined(XBOX360_TARGET)
@@ -29,10 +31,10 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4  projectedPosition   : POSITION0;
-    float2  uv_color;
+    float4  projectedPosition   : SV_Position;
+    float2  SEMANTIC_VAR(uv_color);
 #if FXAA_PS3
-    float4  pixelPosPos;
+    float4  SEMANTIC_VAR(pixelPosPos);
 #endif
 };
 
@@ -61,7 +63,7 @@ SVertexToPixel MainVS( in SMeshVertex Input )
 #endif	
 
 
-half4 MainPS(in SVertexToPixel input)
+half4 MainPS(in SVertexToPixel input) : SV_Target0
 {
 	FxaaFloat4 fxaaResult = FxaaPixelShader(
 								input.uv_color,

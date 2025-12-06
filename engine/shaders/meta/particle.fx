@@ -218,68 +218,68 @@ float LightingOpacityCompensation(float opacity, float3 lighting)
 
 struct SVertexToPixel
 {
-	float4 projectedPosition : POSITION0;
+	float4 projectedPosition : SV_Position;
 
 #ifdef TEXTURED
-	float2 uv;
+	float2 SEMANTIC_VAR(uv);
 #endif
 
 #if defined( TEXTURED ) && defined( TEXANIM_LERP ) 
-	float2 uvPrev;
-	float  uvBlend : COLOR0;
+	float2 SEMANTIC_VAR(uvPrev);
+	float  SEMANTIC_VAR(uvBlend);
 #endif
 
 #if defined(NEAR_FADE) && ( defined( ADDITIVE_BLEND ) || defined( ALPHA_BLEND ) || defined(FIREADD_BLEND) || defined(MULTIPLY_BLEND) )
-    float distance;
+    float SEMANTIC_VAR(distance);
 #endif
     
-    float4 color;
+    float4 SEMANTIC_VAR(color);
 
 #if !defined(WATERDISPLACEMENT) && !defined(UNIFORM_FOG) && !defined(DISTORTION)
-    float4 fog;
+    float4 SEMANTIC_VAR(fog);
 #endif
 
 #if defined( SOFT ) || defined( DISTORTION ) || defined( SECOND_DEPTHTEST )
-	float3 viewportProj;
-    float vertexDepth;
+	float3 SEMANTIC_VAR(viewportProj);
+    float SEMANTIC_VAR(vertexDepth);
 #endif
 
 #if defined(SOFT) || defined(DISTORTION)
     #ifdef SOFT_CLIPPLANE
-        float3 cameraToVertex;
+        float3 SEMANTIC_VAR(cameraToVertex);
     #endif
 #endif	
 
 #if defined(PIXEL_SHADOW_SAMPLING) || (defined(PARTICLE_LIGHTING) && (defined(DIRECTIONAL) || defined(AMBIENT) || defined (GI_AMBIENT)))
-    float3 vertexLighting;
+    float3 SEMANTIC_VAR(vertexLighting);
 #endif
 
 #if defined(PIXEL_SHADOW_SAMPLING)
-    float3 vertexAmbientLighting;
-    CSMTYPE shadowCoords;
+    float3 SEMANTIC_VAR(vertexAmbientLighting);
+    CSMTYPE SEMANTIC_VAR(shadowCoords);
 #endif
 
 #ifdef SHADOW_OCCLUSION 
-    float4 positionLPS;
+    float4 SEMANTIC_VAR(positionLPS);
 #endif
 
     SParticleLightingVertexToPixel  particleLighting;
 
 #ifdef NORMALMAP_VECTORS_TO_PIXEL
-    float3 tangent;
-    float3 bitangent;
+    float3 SEMANTIC_VAR(tangent);
+    float3 SEMANTIC_VAR(bitangent);
 #endif
 
 #ifdef WATERDISPLACEMENT
-    float particleSize;
+    float SEMANTIC_VAR(particleSize);
 #endif
 
 #if defined(DEBUGOUTPUT_NAME) && !defined(PARTICLE_LIGHTING)
-    float vertexLightingIntensity;
+    float SEMANTIC_VAR(vertexLightingIntensity);
 #endif
 
 #if defined(DEBUGOUTPUT_NAME) && !defined(PIXEL_SHADOW_SAMPLING)
-    float shadowSample;
+    float SEMANTIC_VAR(shadowSample);
 #endif
 };
 

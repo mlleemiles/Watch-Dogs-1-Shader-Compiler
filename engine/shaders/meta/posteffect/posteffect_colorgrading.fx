@@ -20,12 +20,12 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 
-    float2 uv;
+    float2 SEMANTIC_VAR(uv);
 
 #if defined( MERGE_NOISE )
-    float2 uvNoise;
+    float2 SEMANTIC_VAR(uvNoise);
 #endif
 };
 
@@ -45,7 +45,7 @@ SVertexToPixel MainVS( in SMeshVertex input )
 	return output;
 }
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
 	float4 sharp = SampleSceneColor(SourceTextureSampler, input.uv);
 

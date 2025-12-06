@@ -2,6 +2,10 @@
 #include "../Debug2.inc.fx"
 #include "../PerformanceDebug.inc.fx"
 
+#ifndef FAMILY_MESH_DRIVERWATERDECAL
+	#define FAMILY_MESH_DRIVERWATERDECAL
+#endif
+
 #ifdef INSTANCING_PROJECTED_DECAL
 #define IS_PROJECTED_DECAL
 #endif
@@ -79,49 +83,49 @@ struct SVertexToPixel
 {
     // Generic
     // ----------------------------------------------------
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 
     // GBuffer
     // ----------------------------------------------------
 #ifdef GBUFFER
    
-    float3 normal;
+    float3 SEMANTIC_VAR(normal);
 
-    float3 positionWS;
+    float3 SEMANTIC_VAR(positionWS);
    
     SInstancingProjectedDecalVertexToPixel instancingProjDecal;
     
 #if defined( IS_PROJECTED_DECAL )
-    float3 decalDepthProj;
-    float3 decalPositionCSProj;
+    float3 SEMANTIC_VAR(decalDepthProj);
+    float3 SEMANTIC_VAR(decalPositionCSProj);
 #else
-    float2 opacityUV;
+    float2 SEMANTIC_VAR(opacityUV);
 
     #ifdef SPECULARMAP
-        float2 specularUV;
+        float2 SEMANTIC_VAR(specularUV);
     #endif
 
     #ifdef USE_NORMALMAP_TEXTURE
-        float2 normalUV;
+        float2 SEMANTIC_VAR(normalUV);
     #endif
 #endif
 
     #if defined( NEEDS_TANGENTSPACE )
-        float3 binormal;
-        float3 tangent;
+        float3 SEMANTIC_VAR(binormal);
+        float3 SEMANTIC_VAR(tangent);
     #endif
 
     #ifdef HAS_RAINDROP_RIPPLE
         #ifndef IS_PROJECTED_DECAL
-            float2 raindropRippleUV;
+            float2 SEMANTIC_VAR(raindropRippleUV);
         #endif
-	    float raindropNormalFactor;
+	    float SEMANTIC_VAR(raindropNormalFactor);
     #endif
 
     #if defined(USE_RAIN_OCCLUDER)
         SRainOcclusionVertexToPixel rainOcclusionVertexToPixel;
         #if !defined( IS_PROJECTED_DECAL )
-	        float3 positionLPS;// position in the UV space of the rain occlusion depth map
+	        float3 SEMANTIC_VAR(positionLPS);// position in the UV space of the rain occlusion depth map
         #endif
 	#endif
 

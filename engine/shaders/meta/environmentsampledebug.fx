@@ -15,8 +15,8 @@ float3      LightDirectionWS;
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
-    float4 color;
+    float4 projectedPosition : SV_Position;
+    float4 SEMANTIC_VAR(color);
 }; 
 
 SVertexToPixel MainVS( in SMeshVertex input )
@@ -40,7 +40,7 @@ SVertexToPixel MainVS( in SMeshVertex input )
     return output;
 } 
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     return input.color;
 }

@@ -34,15 +34,15 @@
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
     
 #if defined( LIGHTING )
-    float2 uv;
+    float2 SEMANTIC_VAR(uv);
 
-    float3 positionWS;
- 	float3 normalWS;
+    float3 SEMANTIC_VAR(positionWS);
+ 	float3 SEMANTIC_VAR(normalWS);
 
-    float opacity;
+    float SEMANTIC_VAR(opacity);
 #endif
 
     SDepthShadowVertexToPixel depthShadow;
@@ -126,8 +126,9 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
 }
 
 #ifdef LIGHTING
-float4 MainPS( in SVertexToPixel input, in float2 vpos : VPOS )
+float4 MainPS( in SVertexToPixel input/*, in float2 vpos : VPOS*/ ) : SV_Target0
 {
+	float2 vpos = input.projectedPosition.xy;
 	const float4 diffuseTexture = tex2D(DiffuseTexture1, input.uv);
 
 	float3 albedo = diffuseTexture.rgb * DiffuseColor1;
@@ -200,10 +201,11 @@ float4 MainPS( in SVertexToPixel input, in float2 vpos : VPOS )
 #if defined( DEPTH ) || defined( SHADOW )
 float4 MainPS( in SVertexToPixel input
                #ifdef USE_COLOR_RT_FOR_SHADOW
-                , in float4 position : VPOS
+                //, in float4 position : VPOS
                #endif
-             )
+             ) : SV_Target0
 {
+	float4 position = input.projectedPosition;
     ProcessDepthAndShadowVertexToPixel( input.depthShadow );
 
     float4 color = float4( 0.0f, 0.0f, 0.0f, 1.0f );

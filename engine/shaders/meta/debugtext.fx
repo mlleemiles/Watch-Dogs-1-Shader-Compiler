@@ -26,7 +26,7 @@ void DecompressMeshVertex( in SMeshVertex vertex, out SMeshVertexF vertexF )
 
 struct SVertexToPixel
 {
-	float4 projectedPosition : POSITION0;
+	float4 projectedPosition : SV_Position;
 	float4 color : TEXCOORD0;
 	float2 diffuseUV : TEXCOORD1;
 };
@@ -50,7 +50,7 @@ SVertexToPixel MainVS( in SMeshVertex rawInput )
 	return output;
 }
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
 	return tex2D( DiffuseSampler0, input.diffuseUV ) * input.color;
 }

@@ -27,18 +27,18 @@
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
-    float2 uv;
+    float4 projectedPosition : SV_Position;
+    float2 SEMANTIC_VAR(uv);
 
 
    // float3 normalWS;
-    float3 positionWS;
+    float3 SEMANTIC_VAR(positionWS);
 
-    float4 viewportProj;
-    float vertexDepth;
+    float4 SEMANTIC_VAR(viewportProj);
+    float SEMANTIC_VAR(vertexDepth);
 
 #ifdef RAIN_OCCLUDER
-    float4 positionLPS              : POSITION2;
+    float4 SEMANTIC_VAR(positionLPS);
 #endif //RAIN_OCCLUDER
 };
 

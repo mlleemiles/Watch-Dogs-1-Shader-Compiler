@@ -17,6 +17,10 @@ DECLARE_DEBUGOPTION( Disable_NormalMap )
 	#undef NORMALMAP
 #endif
 
+#ifndef FAMILY_MESH_CHARACTER
+	#define FAMILY_MESH_CHARACTER
+#endif
+
 // needed by WorldTransform.inc.fx
 #define USE_POSITION_FRACTIONS
 
@@ -69,65 +73,65 @@ DECLARE_DEBUGOPTION( Disable_NormalMap )
 // ----------------------------------------------------------------------------
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
    
 #if defined( ALPHA_TEST ) || defined( ALPHA_TO_COVERAGE ) || defined( GBUFFER )
-    float2 albedoUV;
+    float2 SEMANTIC_VAR(albedoUV);
 	#ifdef DIFFUSE2
-		float2 albedoUV2;
+		float2 SEMANTIC_VAR(albedoUV2);
 	#endif
 #endif
 
 #ifdef FORWARD_LIGHTING
-    float3 normal;
-    float ambientOcclusion;
+    float3 SEMANTIC_VAR(normal);
+    float SEMANTIC_VAR(ambientOcclusion);
 
-    float4 positionWS4;
+    float4 SEMANTIC_VAR(positionWS4);
 
     #ifdef NORMALMAP
-        float2 normalUV;
-        float3 binormal;
-        float3 tangent;
+        float2 SEMANTIC_VAR(normalUV);
+        float3 SEMANTIC_VAR(binormal);
+        float3 SEMANTIC_VAR(tangent);
 		#ifdef NORMALMAP2
-			float2 normalUV2;
-            float  colorB;
+			float2 SEMANTIC_VAR(normalUV2);
+            float  SEMANTIC_VAR(colorB);
 		#endif
     #endif
        
     #if defined( SPECULARMAP )
-        float2 specularUV;
+        float2 SEMANTIC_VAR(specularUV);
     #endif
 
     SFogVertexToPixel       fogVertexToPixel;
 
     #if defined(SUN) && defined(SUN_SHADOW_MASK)
-        float3 screenPosition;
+        float3 SEMANTIC_VAR(screenPosition);
     #endif
 #endif
 
 #ifdef GBUFFER
-    float3 normal;
-    float ambientOcclusion;
+    float3 SEMANTIC_VAR(normal);
+    float SEMANTIC_VAR(ambientOcclusion);
 
     #ifdef NORMALMAP
-        float2 normalUV;
-        float3 binormal;
-        float3 tangent;
+        float2 SEMANTIC_VAR(normalUV);
+        float3 SEMANTIC_VAR(binormal);
+        float3 SEMANTIC_VAR(tangent);
 		#ifdef NORMALMAP2
-			float2 normalUV2;
+			float2 SEMANTIC_VAR(normalUV2);
 		#endif
     #endif
        
-	float4 color;
+	float4 SEMANTIC_VAR(color);
 
     #ifdef SPECULARMAP
-        float2 specularUV;
+        float2 SEMANTIC_VAR(specularUV);
     #endif
 
 	#ifdef ENCODED_GBUFFER_NORMAL
-		float3 vertexToCameraCS;
+		float3 SEMANTIC_VAR(vertexToCameraCS);
 	#else
-		float3 vertexToCameraWS;
+		float3 SEMANTIC_VAR(vertexToCameraWS);
 	#endif
 
     GBufferVertexToPixel gbufferVertexToPixel;
@@ -135,9 +139,9 @@ struct SVertexToPixel
 
 #if defined( DEFERRED_FX_MASK )
     #if defined( SPECULARMAP )
-        float2 specularUV;
+        float2 SEMANTIC_VAR(specularUV);
     #endif
-    float linearDepth;
+    float SEMANTIC_VAR(linearDepth);
 #endif
 
     SDepthShadowVertexToPixel depthShadow;
@@ -145,7 +149,7 @@ struct SVertexToPixel
     // Debug output
     // ----------------------------------------------------
 #if defined( DEBUGOUTPUT_NAME ) && defined( GBUFFER )
-    float4  debugVertexColor;
+    float4  SEMANTIC_VAR(debugVertexColor);
 #endif
 
 	SMipDensityDebug	mipDensityDebug;
@@ -300,8 +304,9 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
 // Pixel Shader - Forward Specular
 // ----------------------------------------------------------------------------
 #ifdef FORWARD_LIGHTING
-float4 MainPS( in SVertexToPixel input, in float2 vpos : VPOS, in bool isFrontFace : ISFRONTFACE )
+float4 MainPS( in SVertexToPixel input,/* in float2 vpos : VPOS,*/ in bool isFrontFace : SV_IsFrontFace ) : SV_Target0
 {
+	float2 vpos = input.projectedPosition.xy;
     const float wetnessValue = GetWetnessEnable();
     const float4 finalSpecularPower = lerp(SpecularPower, WetSpecularPower, wetnessValue);
     const float finalReflectance = lerp(Reflectance, WetReflectance, wetnessValue);
@@ -417,9 +422,9 @@ float4 MainPS( in SVertexToPixel input, in float2 vpos : VPOS, in bool isFrontFa
 #if defined( DEPTH ) || defined( SHADOW )
 float4 MainPS( in SVertexToPixel input
                #ifdef USE_COLOR_RT_FOR_SHADOW
-                   , in float4 position : VPOS
+                   , in float4 position : SV_Position
                #endif
-             )
+             ) : SV_Target0
 {
     float4 color;
 
@@ -448,7 +453,7 @@ float4 MainPS( in SVertexToPixel input
 // Pixel Shader - DeferredFX mask
 // ----------------------------------------------------------------------------
 #if defined( DEFERRED_FX_MASK )
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
 #if defined( ALPHA_TEST )
     float alphaValue = tex2D( DiffuseTexture1, input.albedoUV ).a;
@@ -470,7 +475,7 @@ float4 MainPS( in SVertexToPixel input )
 // Pixel Shader - GBuffer
 // ----------------------------------------------------------------------------
 #ifdef GBUFFER
-GBufferRaw MainPS( in SVertexToPixel input, in bool isFrontFace : ISFRONTFACE )
+GBufferRaw MainPS( in SVertexToPixel input, in bool isFrontFace : SV_IsFrontFace )
 {
     DEBUGOUTPUT( Mesh_UV, float3(input.albedoUV, 0.f) );
     DEBUGOUTPUT( Mesh_VertexColorR, float3(input.debugVertexColor.rgb) + float3(1,0,0) );

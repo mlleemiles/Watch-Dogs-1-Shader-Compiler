@@ -42,36 +42,36 @@ static const float DistanceBiasMaxOffset = 3.0f;
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
    
 #if defined( ALPHA_TEST ) || defined( ALPHA_TO_COVERAGE ) || defined( GBUFFER )
-    float2 albedoUV;
+    float2 SEMANTIC_VAR(albedoUV);
 #endif
 
 #if defined( PARALLAX ) && defined( GBUFFER )
-    float3 viewVectorNormTS;
+    float3 SEMANTIC_VAR(viewVectorNormTS);
 #endif
 
 #ifdef GBUFFER
     #ifdef GBUFFER_BLENDED
-        float blendFactor;
+        float SEMANTIC_VAR(blendFactor);
     #else
-        float3 normal;
+        float3 SEMANTIC_VAR(normal);
     #endif
 
     GBufferVertexToPixel gbufferVertexToPixel;
 
     #if defined( NORMALMAP ) || defined( PARALLAX )
-        float2 normalUV;
+        float2 SEMANTIC_VAR(normalUV);
     #endif
 
     #ifdef NORMALMAP
-        float3 binormal;
-        float3 tangent;
+        float3 SEMANTIC_VAR(binormal);
+        float3 SEMANTIC_VAR(tangent);
     #endif
 
     #ifdef SPECULARMAP
-        float2 specularUV;
+        float2 SEMANTIC_VAR(specularUV);
     #endif
 #endif
 
@@ -182,10 +182,11 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
 #if defined( DEPTH ) || defined( SHADOW )
 float4 MainPS( in SVertexToPixel input
                #ifdef USE_COLOR_RT_FOR_SHADOW
-                , in float4 position : VPOS
+                //, in float4 position : VPOS
                #endif
-             )
+             ) : SV_Target0
 {
+	float4 position = input.projectedPosition;
     float4 color;
 
     ProcessDepthAndShadowVertexToPixel( input.depthShadow );

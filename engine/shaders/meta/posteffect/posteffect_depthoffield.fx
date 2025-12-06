@@ -34,20 +34,20 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    half4  projectedPosition   : POSITION0;
+    half4  projectedPosition   : SV_Position;
     
 #if defined(BLUR)
-	float4  uvs[ BlurInterpolatorCount ];
+	float4  uvs[ BlurInterpolatorCount ] : uvs;
 #elif defined(DOWNSAMPLE)
-    float2  uv_color0;
-    float2  uv_color1;
-    float2  uv_depth0;
-    float2  uv_depth1;
+    float2  SEMANTIC_VAR(uv_color0);
+    float2  SEMANTIC_VAR(uv_color1);
+    float2  SEMANTIC_VAR(uv_depth0);
+    float2  SEMANTIC_VAR(uv_depth1);
 #elif defined(HEXBLUR1) || defined(HEXBLUR2)
-	float2  uv_color;
+	float2  SEMANTIC_VAR(uv_color);
 #else
-    float2  uv_color;
-    float2  uv_depth;
+    float2  SEMANTIC_VAR(uv_color);
+    float2  SEMANTIC_VAR(uv_depth);
 #endif    
 };
 
@@ -75,7 +75,7 @@ struct SVertexToPixel
         return output;
     }
     
-    half4 MainPS(in SVertexToPixel input)
+    half4 MainPS(in SVertexToPixel input) : SV_Target0
     {
 #if defined(XBOX360_TARGET) || defined(PS3_TARGET)
         half3 color = (half3)SampleSceneColor(SourceTextureSampler, input.uv_color0);
@@ -119,7 +119,7 @@ struct SVertexToPixel
     	return output;
     }
 
-    float4 MainPS(in SVertexToPixel input)
+    float4 MainPS(in SVertexToPixel input) : SV_Target0
     {
         float4 outColor = 0;
         const int count = BlurInterpolatorCount - 1;
@@ -254,7 +254,7 @@ struct SVertexToPixel
         return output;
     }
 
-    half4 MainPS(in SVertexToPixel input)
+    half4 MainPS(in SVertexToPixel input) : SV_Target0
     {
         float4 sharp = SampleSceneColor(SourceTextureSampler, input.uv_color);
 

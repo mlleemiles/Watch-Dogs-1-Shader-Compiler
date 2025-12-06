@@ -22,8 +22,8 @@
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;  
-    float  intensity;
+    float4 projectedPosition : SV_Position;  
+    float  SEMANTIC_VAR(intensity);
 };
 
 
@@ -87,7 +87,7 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
     return output;
 }
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     return float4(input.intensity.xxx,1);
 }

@@ -15,8 +15,8 @@ struct SMeshVertex
 // ----------------------------------------------------------------------------
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
-    float2 texCoords;
+    float4 projectedPosition : SV_Position;
+    float2 SEMANTIC_VAR(texCoords);
 };
 
 
@@ -36,7 +36,7 @@ SVertexToPixel MainVS( in SMeshVertex input )
 // ----------------------------------------------------------------------------
 // Pixel shader
 // ----------------------------------------------------------------------------
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
 	float2 refTap = tex2D( ShadowMaskTexture, input.texCoords.xy ).xy;
 

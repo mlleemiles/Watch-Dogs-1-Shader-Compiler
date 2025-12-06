@@ -39,8 +39,8 @@ static const float GaussianKernel[9] =
 
     struct SVertexToPixel
     {
-        float4 Position		: POSITION0;
-        float2 UV;
+        float4 Position		: SV_Position;
+        float2 SEMANTIC_VAR(UV);
     };
 
 
@@ -53,7 +53,7 @@ static const float GaussianKernel[9] =
         return Output;
     }
 
-    float4 MainPS( in SVertexToPixel input ) 
+    float4 MainPS( in SVertexToPixel input ) : SV_Target0
     {
         float2 offset = float2(BlurOffset.x,0);
 
@@ -83,8 +83,8 @@ static const float GaussianKernel[9] =
 
     struct SVertexToPixel
     {
-        float4 Position		: POSITION0;
-        float2 UV;
+        float4 Position		: SV_Position;
+        float2 SEMANTIC_VAR(UV);
     };
 
 
@@ -97,7 +97,7 @@ static const float GaussianKernel[9] =
         return Output;
     }
 
-    float4 MainPS( in SVertexToPixel input ) 
+    float4 MainPS( in SVertexToPixel input ) : SV_Target0
     {
         float2 offset = float2(0,BlurOffset.y);
         float4 color = 0;
@@ -122,8 +122,8 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
-    float4 color;
+    float4 projectedPosition : SV_Position;
+    float4 SEMANTIC_VAR(color);
 };
 
 SVertexToPixel MainVS( in SMeshVertex input )
@@ -135,7 +135,7 @@ SVertexToPixel MainVS( in SMeshVertex input )
     return output;
 }
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     return input.color;
 }

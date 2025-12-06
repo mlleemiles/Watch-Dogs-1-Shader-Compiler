@@ -19,24 +19,24 @@
 
 struct SDepthShadowVertexToPixel
 {
-    float dummyForPS3 : IGNORE;
+    //float dummyForPS3 : IGNORE;
 
 #if defined( SHADOW_PARABOLOID )
     #ifdef EMULATE_CLIPDISTANCE
-	    float clipDistance;
+	    float SEMANTIC_VAR(clipDistance);
     #else
-	    float clipDistance : CLIPDISTANCE;
+	    float clipDistance : SV_ClipDistance;
     #endif
 #elif !defined(SHADOW_NOFSM) && defined(SHADOW)
     #ifdef EMULATE_CLIPDISTANCE
-	    float2 clipDistances;
+	    float2 SEMANTIC_VAR(clipDistances);
     #else
-	    float2 clipDistances : CLIPDISTANCE;
+	    float2 clipDistances : SV_ClipDistance;
     #endif
 #endif
 
 #ifdef DITHERING
-    float3 ditheringTexCoord;
+    float3 SEMANTIC_VAR(ditheringTexCoord);
 #endif
 };
 
@@ -64,7 +64,7 @@ void ComputeDepthShadowVertexToPixel( out SDepthShadowVertexToPixel depthShadow,
     depthShadow.ditheringTexCoord.xy *= ViewportSize.xy / NoiseSize;
 #endif
     
-    depthShadow.dummyForPS3 = 0.0f;
+    //depthShadow.dummyForPS3 = 0.0f;
 }
 
 void ProcessDepthAndShadowVertexToPixel( in SDepthShadowVertexToPixel depthShadow )

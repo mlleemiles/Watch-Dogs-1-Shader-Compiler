@@ -51,21 +51,21 @@ DECLARE_DEBUGOPTION( CollapseToStem )
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 
 #ifdef DIFFUSE_MAP_BASE
-    float2 albedoUV;
+    float2 SEMANTIC_VAR(albedoUV);
 #endif  
    
 #ifdef GBUFFER
-    float3 diffuseColor;
-    float3 normal;
+    float3 SEMANTIC_VAR(diffuseColor);
+    float3 SEMANTIC_VAR(normal);
     GBufferVertexToPixel gbufferVertexToPixel;
 
     #ifdef NORMALMAP
-        float2 normalUV;
-        float3 binormal;
-        float3 tangent;
+        float2 SEMANTIC_VAR(normalUV);
+        float3 SEMANTIC_VAR(binormal);
+        float3 SEMANTIC_VAR(tangent);
     #endif
 #endif
 
@@ -78,17 +78,17 @@ struct SVertexToPixel
     // Debug output
     // ----------------------------------------------------
 #if defined( DEBUGOUTPUT_NAME )
-    float4 debugVertexColor;
-    float2 debugVertexToStemVector;
+    float4 SEMANTIC_VAR(debugVertexColor);
+    float2 SEMANTIC_VAR(debugVertexToStemVector);
     #ifdef LAST_DISPLACEMENT_SPHERE_INDEX
-        float3 debugCollisionSpheres;
+        float3 SEMANTIC_VAR(debugCollisionSpheres);
     #endif
     #ifdef VEGETATION_ANIM
-        float debugHasWind;
+        float SEMANTIC_VAR(debugHasWind);
     #endif
     #ifdef USE_DISPLACEMENT_TEXTURE
-        float3 debugCellColor;
-        float debugHasDisplacementTexture;
+        float3 SEMANTIC_VAR(debugCellColor);
+        float SEMANTIC_VAR(debugHasDisplacementTexture);
     #endif
 #endif
 };
@@ -373,7 +373,7 @@ GBufferRaw MainPS( in SVertexToPixel input )
 #endif
 
 #if defined( PARABOLOID_REFLECTION )
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     float4 diffuseTexture = 1;
 
@@ -394,10 +394,11 @@ float4 MainPS( in SVertexToPixel input )
 #if defined( DEPTH ) || defined( SHADOW )
 float4 MainPS( in SVertexToPixel input
                #ifdef USE_COLOR_RT_FOR_SHADOW
-                , in float4 position : VPOS
+               // , in float4 position : VPOS
                #endif
-             )
+             ) : SV_Target0
 {
+	float4 position = input.projectedPosition;
     float alpha = 1;
 
     ProcessDepthAndShadowVertexToPixel( input.depthShadow );

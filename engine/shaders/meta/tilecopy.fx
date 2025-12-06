@@ -8,8 +8,8 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4  projectedPosition   : POSITION0;
-    float2  uv;
+    float4  projectedPosition   : SV_Position;
+    float2  SEMANTIC_VAR(uv);
 };
 
 SVertexToPixel MainVS( in SMeshVertex Input )
@@ -26,7 +26,7 @@ SVertexToPixel MainVS( in SMeshVertex Input )
 	return output;
 }
 
-float4 MainPS(in SVertexToPixel input)
+float4 MainPS(in SVertexToPixel input) : SV_Target0
 {
     return  tex2D(TileSampler,input.uv - float2(0,1.f/1000.f)); // fix a minor error in sampling ( y sampled to far)
 }

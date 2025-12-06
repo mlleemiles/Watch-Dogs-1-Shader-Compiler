@@ -1,3 +1,5 @@
+#define FAMILY_REALTREE_LEAF
+
 //#if SHADERMODEL == 30
     #define ALPHA_TEST
 //#endif
@@ -48,32 +50,32 @@ DECLARE_DEBUGOUTPUT( Leaf_AnimPhaseShift );
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 
 #ifdef ALBEDO_UV
-    float2 albedoUV;
+    float2 SEMANTIC_VAR(albedoUV);
 #endif
 
 #ifdef PARABOLOID_REFLECTION
-    float3 leafColor;
+    float3 SEMANTIC_VAR(leafColor);
 
     #ifdef PER_LEAF_DIVERSITY
-        float2 perLeafDiversityFactor;
+        float2 SEMANTIC_VAR(perLeafDiversityFactor);
     #endif
 #endif
 
 #ifdef GBUFFER
-    float3 normal;
+    float3 SEMANTIC_VAR(normal);
 
     #ifdef PER_LEAF_DIVERSITY
-        float2 perLeafDiversityFactor;
+        float2 SEMANTIC_VAR(perLeafDiversityFactor);
     #endif
 
-    float ambientOcclusion;
+    float SEMANTIC_VAR(ambientOcclusion);
 
     GBufferVertexToPixel gbufferVertexToPixel;
 
-    float3 leafColor;
+    float3 SEMANTIC_VAR(leafColor);
 #endif
 
     SDepthShadowVertexToPixel depthShadow;
@@ -83,11 +85,11 @@ struct SVertexToPixel
 	SMipDensityDebug	mipDensityDebug;
 
 #if defined(DEBUGOUTPUT_NAME)
-    float mainAnimWeight;
-    float secondAnimWeight;
-    float secondAnimPhaseShift;
-    float animCornerWeight;
-    float animPhaseShift;
+    float SEMANTIC_VAR(mainAnimWeight);
+    float SEMANTIC_VAR(secondAnimWeight);
+    float SEMANTIC_VAR(secondAnimPhaseShift);
+    float SEMANTIC_VAR(animCornerWeight);
+    float SEMANTIC_VAR(animPhaseShift);
 #endif
 };
 
@@ -286,10 +288,11 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
 #if defined( DEPTH ) || defined( SHADOW )
 float4 MainPS( in SVertexToPixel input
                #ifdef USE_COLOR_RT_FOR_SHADOW
-                   , in float4 position : VPOS
+                   //, in float4 position : VPOS
                #endif
-             )
+             ) : SV_Target0
 {
+	float4 position = input.projectedPosition;
     float4 color;
     
     ProcessDepthAndShadowVertexToPixel( input.depthShadow );
@@ -319,7 +322,7 @@ float4 MainPS( in SVertexToPixel input
 
 
 #if defined(PARABOLOID_REFLECTION)
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
 #ifdef ALBEDO_UV
     float4 output = tex2D( DiffuseTexture1, input.albedoUV );

@@ -34,7 +34,7 @@ DECLARE_DEBUGOPTION( Disable_ReflectionFresnel )
 
 struct SEmptyLight
 {
-    float dummyForPS3 : IGNORE;
+    //float dummyForPS3 : IGNORE;
 };
 
 static const int Specular_Fresnel_None			 				= 0;

@@ -101,7 +101,7 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-	float4 Position : POSITION0;
+	float4 Position : SV_Position;
 	float2 UV       : TEXCOORD0;
 };
 
@@ -1211,8 +1211,9 @@ SVertexToPixel MainVS( in SMeshVertex input )
     return CommonVertexShader( input );
 }
 
-PS_OUTPUT_POS_NOR MainPS( in SVertexToPixel input , in float2 xy : VPOS)
+PS_OUTPUT_POS_NOR MainPS( in SVertexToPixel input /*, in float2 xy : VPOS*/)
 {	
+	float2 xy = input.Position;
     return DownScale(int2(xy));
 }
 
@@ -1225,8 +1226,9 @@ SVertexToPixel MainVS( in SMeshVertex input )
     return CommonVertexShader( input );
 }
 
-PS_OUTPUT_POS_NOR MainPS( in SVertexToPixel input , in float2 xy : VPOS)
+PS_OUTPUT_POS_NOR MainPS( in SVertexToPixel input /*, in float2 xy : VPOS*/)
 {	
+	float2 xy = input.Position;
     return DownScale(int2(xy));
 }
 #endif
@@ -1306,8 +1308,9 @@ SVertexToPixel MainVS( in SMeshVertex input )
     return CommonVertexShader( input );
 }
 
-float4 MainPS( in SVertexToPixel input , in float2 xy : VPOS)
+float4 MainPS( in SVertexToPixel input /*, in float2 xy : VPOS*/) : SV_Target0
 {	
+	float2 xy = input.Position;
 #ifdef FOG_ONLY
     float2 uv = XYtoUV(input);
 	float3 eyePosition = DepthBufferToEyePos( uv );
@@ -1386,8 +1389,9 @@ SVertexToPixel MainVS( in SMeshVertex input )
     return CommonVertexShader( input );
 }
 
-float4 MainPS( in SVertexToPixel input , in float2 xy : VPOS)
+float4 MainPS( in SVertexToPixel input /*, in float2 xy : VPOS*/) : SV_Target0
 {	
+	float2 xy = input.Position;
     return 0;
 }
 #endif
@@ -1399,8 +1403,9 @@ SVertexToPixel MainVS( in SMeshVertex input )
     return CommonVertexShader( input );
 }
 
-float4 MainPS( in SVertexToPixel input , in float2 xy : VPOS)
+float4 MainPS( in SVertexToPixel input /*, in float2 xy : VPOS*/) : SV_Target0
 {	
+	float2 xy = input.Position;
     float2 uv = input.UV;
 
     float3 eyePosition = DecompressPosition(PositionTexture.Load( int3(xy,0)),int2(xy),g_xyToEyePosHalf).xyz;	
@@ -1428,8 +1433,9 @@ SVertexToPixel MainVS( in SMeshVertex input )
     return CommonVertexShader( input );
 }
 
-float4 MainPS( in SVertexToPixel input , in float2 xy : VPOS)
+float4 MainPS( in SVertexToPixel input /*, in float2 xy : VPOS*/) : SV_Target0
 {	
+	float2 xy = input.Position;
     float3 aoCombined=0;
     int3 xyi =  int3(xy,0);
     
@@ -1526,8 +1532,9 @@ SVertexToPixel MainVS( in SMeshVertex input )
     return CommonVertexShader( input );
 }
 
-float4 MainPS( in SVertexToPixel input , in float2 xy : VPOS)
+float4 MainPS( in SVertexToPixel input /*, in float2 xy : VPOS*/) : SV_Target0
 {	
+	float2 xy = input.Position;
   return 0;
 }
 #endif
@@ -1544,8 +1551,9 @@ SVertexToPixel MainVS( in SMeshVertex input )
     return CommonVertexShader( input );
 }
 
-float4 MainPS( in SVertexToPixel input , in float2 xy : VPOS)
+float4 MainPS( in SVertexToPixel input /*, in float2 xy : VPOS*/) : SV_Target0
 {	
+	float2 xy = input.Position;
     float2 uv = input.UV;
 
 	return 0;///MSSAO_BlurPass3x3( uv ,1);  
@@ -1559,8 +1567,9 @@ SVertexToPixel MainVS( in SMeshVertex input )
     return CommonVertexShader( input );
 }
 
-float4 MainPS( in SVertexToPixel input , in float2 xy : VPOS)
+float4 MainPS( in SVertexToPixel input /*, in float2 xy : VPOS*/) : SV_Target0
 {	
+	float2 xy = input.Position;
     float2 uv = input.UV;
 	return 0;//MSSAO_BlurPass3x3( uv ,1);  
 }
@@ -1574,8 +1583,9 @@ SVertexToPixel MainVS( in SMeshVertex input )
     return CommonVertexShader( input );
 }
 
-float4 MainPS( in SVertexToPixel input , in float2 xy : VPOS)
+float4 MainPS( in SVertexToPixel input /*, in float2 xy : VPOS*/) : SV_Target0
 {	
+	float2 xy = input.Position;
     float2 uv = input.UV;
 
 	 return SeparableBilateralBlur2(int2(xy),HBAO_SEPARABLE_BLUR_RADIUS,int2(1,0),SEPARABLE_BLUR_THRESHOLD);
@@ -1589,8 +1599,9 @@ SVertexToPixel MainVS( in SMeshVertex input )
     return CommonVertexShader( input );
 }
 
-float4 MainPS( in SVertexToPixel input , in float2 xy : VPOS)
+float4 MainPS( in SVertexToPixel input /*, in float2 xy : VPOS*/) : SV_Target0
 {	
+	float2 xy = input.Position;	
     float2 uv = input.UV;
 
 	float4 result = SeparableBilateralBlur2(int2(xy),HBAO_SEPARABLE_BLUR_RADIUS,int2(0,1),SEPARABLE_BLUR_THRESHOLD);
@@ -1687,8 +1698,9 @@ SVertexToPixel MainVS( in SMeshVertex input )
     return CommonVertexShader( input );
 }
 
-float4 MainPS( in SVertexToPixel input , in float2 xy : VPOS)
+float4 MainPS( in SVertexToPixel input /*, in float2 xy : VPOS*/) : SV_Target0
 {	
+	float2 xy = input.Position;
     float2 uv = input.UV;
 	return SeparableBilateralBlur1(int2(xy),HBAO_SEPARABLE_BLUR_RADIUS,int2(1,0),SEPARABLE_BLUR_THRESHOLD);
 }
@@ -1700,8 +1712,9 @@ SVertexToPixel MainVS( in SMeshVertex input )
     return CommonVertexShader( input );
 }
 
-float4 MainPS( in SVertexToPixel input , in float2 xy : VPOS)
+float4 MainPS( in SVertexToPixel input /*, in float2 xy : VPOS*/) : SV_Target0
 {	
+	float2 xy = input.Position;
     float2 uv = input.UV;
 	return SeparableBilateralBlur1(int2(xy),HBAO_SEPARABLE_BLUR_RADIUS,int2(0,1),SEPARABLE_BLUR_THRESHOLD);
 }
@@ -1720,8 +1733,9 @@ SVertexToPixel MainVS( in SMeshVertex input )
     return CommonVertexShader( input );
 }
 
-float4 MainPS( in SVertexToPixel input , in float2 xy : VPOS)
+float4 MainPS( in SVertexToPixel input /*, in float2 xy : VPOS*/) : SV_Target0
 {	
+	float2 xy = input.Position;
     float2 uv = input.UV;
 
     float4 eyeNormal = NormalTexture.tex.Load( int3(xy/1,0));
@@ -1763,7 +1777,7 @@ SVertexToPixel MainVS( in SMeshVertex input )
     return CommonVertexShader( input );
 }
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {	
     float2 uv = input.UV;
 

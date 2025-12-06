@@ -26,9 +26,9 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 
-    float2 uv;
+    float2 SEMANTIC_VAR(uv);
 };
 
 SVertexToPixel MainVS( in SMeshVertex input )
@@ -67,7 +67,7 @@ float SampleShadow(float2 uv)
     return shadow;
 }
  
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {   
     float2 uv = input.uv;
 
@@ -110,9 +110,9 @@ technique t0
 
 struct SVertexToPixel
 {
-    float4  projectedPosition : POSITION0;
+    float4  projectedPosition : SV_Position;
 
-    float2  uv;
+    float2  SEMANTIC_VAR(uv);
 };
 
 SVertexToPixel MainVS( in SMeshVertex input )
@@ -129,7 +129,7 @@ SVertexToPixel MainVS( in SMeshVertex input )
 	return output;
 }
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     float2 uv = input.uv;
 
@@ -198,11 +198,11 @@ technique t0
 
 struct SVertexToPixel
 {
-    float4  projectedPosition : POSITION0;
+    float4  projectedPosition : SV_Position;
 
-    float2  uv;
+    float2  SEMANTIC_VAR(uv);
 
-    float3  position;
+    float3  SEMANTIC_VAR(position);
 };
 
 SVertexToPixel MainVS( in SMeshVertex input )
@@ -275,7 +275,7 @@ float SampleGodRay(float2 uv)
     return dot(values , mask);
 }
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     float2 screenUV = input.uv * 0.5 + 0.5;
     screenUV.y = 1-screenUV.y;

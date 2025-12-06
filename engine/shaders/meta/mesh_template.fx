@@ -30,7 +30,7 @@
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
    
     SDepthShadowVertexToPixel depthShadow;
 
@@ -39,7 +39,7 @@ struct SVertexToPixel
     SParaboloidProjectionVertexToPixel paraboloidProjection;
 
 #if !defined( DEPTH ) && !defined( SHADOW )
-    float2 uv;
+    float2 SEMANTIC_VAR(uv);
 #endif
 };
 
@@ -79,7 +79,7 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
 }
 
 #if !defined( PARABOLOID_REFLECTION ) && !defined( DEPTH ) && !defined( SHADOW )
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     float3 color = float3( frac( input.uv ), 0.0f );
 
@@ -91,7 +91,7 @@ float4 MainPS( in SVertexToPixel input )
 #endif
 
 #if defined( PARABOLOID_REFLECTION )
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     float3 color = float3( frac( input.uv ), 0.0f );
 
@@ -106,10 +106,11 @@ float4 MainPS( in SVertexToPixel input )
 #if defined( DEPTH ) || defined( SHADOW )
 float4 MainPS( in SVertexToPixel input
                #ifdef USE_COLOR_RT_FOR_SHADOW
-                   , in float4 position : VPOS
+                   //, in float4 position : VPOS
                #endif
-             )
+             ) : SV_Target0
 {
+	float4 position = input.projectedPosition;
     ProcessDepthAndShadowVertexToPixel( input.depthShadow );
 
     float4 color = 0.0f;

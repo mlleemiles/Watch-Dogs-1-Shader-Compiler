@@ -1,4 +1,5 @@
 #define FAMILY_TERRAIN
+#define FAMILY_DRIVERTERRAIN
 #include "../../Profile.inc.fx"
 #include "../../Terrain.inc.fx"
 #include "Detail.inc.fx"
@@ -49,7 +50,7 @@ static float wetnessValue = 0;
 //-------------------------------------
 struct SVertexToPixel
 {   
-    float4 projectedPosition : POSITION0_ISOLATE;
+    float4 projectedPosition : SV_Position;
 
     SFogVertexToPixel fog;
     SDepthShadowVertexToPixel depthShadow;
@@ -57,43 +58,43 @@ struct SVertexToPixel
     SParaboloidProjectionVertexToPixel paraboloidProjection;
 
 #if defined( GBUFFER ) || defined( PARABOLOID_REFLECTION )
-     float4 lowResDiffuseUV; // diffuse xy, others zw
+     float4 SEMANTIC_VAR(lowResDiffuseUV); // diffuse xy, others zw
 #endif
 
 #ifdef GBUFFER
   
-    float3 vertexNormal;
+    float3 SEMANTIC_VAR(vertexNormal);
 
     #if defined( HAS_PROJ_X ) || defined( HAS_PROJ_Y ) || defined( HAS_PROJ_Z )
-        float3 positionWS;
+        float3 SEMANTIC_VAR(positionWS);
     #endif
 
     GBufferVertexToPixel gbufferVertexToPixel;
 #ifdef USE_RAIN_OCCLUDER
-    float rainOcclusion;
+    float SEMANTIC_VAR(rainOcclusion);
 #endif    
 
 #if defined( BATCH )
-    float3 sectorColorMin;
-    float3 sectorColorRange;
+    float3 SEMANTIC_VAR(sectorColorMin);
+    float3 SEMANTIC_VAR(sectorColorRange);
 #endif
 
     #if defined( HAS_DETAIL )
-        float distanceToCamera;
+        float SEMANTIC_VAR(distanceToCamera);
         #if defined( PER_PIXEL )
             #if defined( HAS_PROJ_X )
-                float3 tangentProjX;
-                float3 binormalProjX;
+                float3 SEMANTIC_VAR(tangentProjX);
+                float3 SEMANTIC_VAR(binormalProjX);
             #endif
             
             #if defined( HAS_PROJ_Y )
-                float3 tangentProjY;
-                float3 binormalProjY;
+                float3 SEMANTIC_VAR(tangentProjY);
+                float3 SEMANTIC_VAR(binormalProjY);
             #endif
             
             #if defined( HAS_PROJ_Z )
-                float3 tangentProjZ;
-                float3 binormalProjZ;
+                float3 SEMANTIC_VAR(tangentProjZ);
+                float3 SEMANTIC_VAR(binormalProjZ);
             #endif
         #endif
     #endif
@@ -700,8 +701,9 @@ float3 SamplePaintedColor( in SVertexToPixel input )
     return 2.0f * ( sectorColorMin + value * sectorColorRange );
 }
 
-GBufferRaw MainPS( in SVertexToPixel input, in float2 vpos : VPOS )
+GBufferRaw MainPS( in SVertexToPixel input/*, in float2 vpos : VPOS*/ )
 {
+	float2 vpos = input.projectedPosition.xy;
     float4 lowResDiffuse = tex2D( DiffuseSampler, input.lowResDiffuseUV.xy );
 
     float rainOcclusionMultiplier = 1;
@@ -929,10 +931,11 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
 
 float4 MainPS( in SVertexToPixel input
                #ifdef USE_COLOR_RT_FOR_SHADOW
-                   , in float4 position : VPOS
+                   //, in float4 position : VPOS
                #endif
-             )
+             ) : SV_Target0
 {
+	float4 position = input.projectedPosition;
     float4 color = 1;
 
     ProcessDepthAndShadowVertexToPixel( input.depthShadow );

@@ -73,8 +73,8 @@ struct SMeshVertex
 
 struct SVertexToPixel 
 {
-	float4 ProjectedPosition : POSITION0;
-	float2 TexCoord;
+	float4 projectedPosition : SV_Position;
+	float2 SEMANTIC_VAR(TexCoord);
     float4 Offsets[3]  : TEXCOORD1;		// edges detection
 };
 
@@ -182,12 +182,12 @@ SVertexToPixel MainVS( in SMeshVertex Input )
 {
 	SVertexToPixel Output;
 	
-	Output.ProjectedPosition = PostQuadCompute( Input.Position.xy, QuadParams );
+	Output.projectedPosition = PostQuadCompute( Input.Position.xy, QuadParams );
 
 	Output.TexCoord.xy = Input.Position.xy*UV0Params.xy + UV0Params.zw;
 
     // edges detection
-	SMAAEdgeDetectionVS(Output.ProjectedPosition, Output.ProjectedPosition, Output.TexCoord, Output.Offsets);
+	SMAAEdgeDetectionVS(Output.projectedPosition, Output.projectedPosition, Output.TexCoord, Output.Offsets);
 
 	return Output;
 }
@@ -197,7 +197,7 @@ static const float StrokeIntensityScale = 1.8;
 static const float RimPowerExponent = 3.0;
 static const float RimIntensityScale = 0.6;
 
-float4 MainPS( in SVertexToPixel Input )
+float4 MainPS( in SVertexToPixel Input ) : SV_Target0
 {
 	float4 postFxMask = tex2D( PostFxMaskTexture, Input.TexCoord );
 	float4 texCol = tex2D( DiffuseSampler, Input.TexCoord );

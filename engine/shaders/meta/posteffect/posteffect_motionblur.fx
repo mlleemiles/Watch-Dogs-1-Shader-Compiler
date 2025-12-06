@@ -39,15 +39,15 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4  projectedPosition   : POSITION0;
+    float4  projectedPosition   : SV_Position;
     
 #if defined(DOWNSAMPLE)
-    float2  uv_color;
-    float3  positionCS;
-    float3  projPos;
+    float2  SEMANTIC_VAR(uv_color);
+    float3  SEMANTIC_VAR(positionCS);
+    float3  SEMANTIC_VAR(projPos);
 #else
-    float2  uv_color;
-    float2  uv_depth;
+    float2  SEMANTIC_VAR(uv_color);
+    float2  SEMANTIC_VAR(uv_depth);
 #endif    
 };
 
@@ -97,7 +97,7 @@ static const int upperBound = 5;
         return output;
     }
     
-    float4 MainPS(in SVertexToPixel input)
+    float4 MainPS(in SVertexToPixel input) : SV_Target0
     {
         float4 output; 
         float2 velocityVector = 0;
@@ -261,7 +261,7 @@ static const int upperBound = 5;
         return output;
     }
     
-    float4 MainPS(in SVertexToPixel input)
+    float4 MainPS(in SVertexToPixel input) : SV_Target0
     {
     	float4 sharp = SampleSceneColor(SourceTextureSampler, input.uv_color);
     	

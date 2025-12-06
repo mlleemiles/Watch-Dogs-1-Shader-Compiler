@@ -23,11 +23,11 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 
 #ifdef RAIN_SPOTLIGHT
-    float3 viewportProj;
-    float3 ws_position; 
+    float3 SEMANTIC_VAR(viewportProj);
+    float3 SEMANTIC_VAR(ws_position); 
 #endif
 
 };
@@ -265,8 +265,9 @@ float atan2_texturebased(float y, float x)
 	return  tex2D( Atan2Texture,float2(x,y) * 0.5 + 0.5).w;
 }
 
-RainOutput MainPS( in SVertexToPixel input , in float2 vpos : VPOS)
+RainOutput MainPS( in SVertexToPixel input /*, in float2 vpos : VPOS*/)
 {
+	float2 vpos = input.projectedPosition.xy;
     RainOutput output;
 
     // Compute the cylinder projection from screen space coordinates

@@ -41,8 +41,8 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 Position		: SV_Position0;
-    float2 UV : TEXCOORD0;
+    float4 Position		: SV_Position;
+    float2 SEMANTIC_VAR(UV);
 }; 
 
 SVertexToPixel MainVS( in SMeshVertex input)
@@ -88,14 +88,15 @@ float3 GetFluidWind(float3 world_position)
     return fluid_velocity;
 }
 
-IntegratorOutput MainPS( in SVertexToPixel Input , in float2 vpos : VPOS )
+IntegratorOutput MainPS( in SVertexToPixel Input /*, in float2 vpos : VPOS*/ )
 {
+	float2 vpos = Input.Position.xy;
     IntegratorOutput output = (IntegratorOutput)0;
 
     float dt = RAIN_DT;
 
 
-    int3 screen = int3(Input.Position.xy,0);
+    int3 screen = int3(vpos,0);
     float4 initial_position = InitialPositionTexture.tex.Load(screen);
     float4 position         = PrevPositionTexture.tex.Load(screen);  
     float4 velocity         = PrevVelocityTexture.tex.Load(screen);
@@ -238,7 +239,7 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 Position  : SV_Position0;
+    float4 Position  : SV_Position;
 };
 
 SVertexToPixel MainVS( in SMeshVertex input)

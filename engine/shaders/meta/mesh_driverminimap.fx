@@ -30,23 +30,23 @@
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
-    float3 normalWS;
-    float  fogOfWar;
+    float4 projectedPosition : SV_Position;
+    float3 SEMANTIC_VAR(normalWS);
+    float  SEMANTIC_VAR(fogOfWar);
 #ifdef USE_FOGOFWARGLITCH
-    float  GlitchTextureAttenuation;
+    float  SEMANTIC_VAR(GlitchTextureAttenuation);
 #endif
 #ifdef USE_DIFFUSETEXTURE0
-	float2 UVs;
+	float2 SEMANTIC_VAR(UVs);
 #endif
 #ifdef USE_VERTEX_BASED
-	float4 color;
-    float  opacity;
-    float  fadeOut;
+	float4 SEMANTIC_VAR(color);
+    float  SEMANTIC_VAR(opacity);
+    float  SEMANTIC_VAR(fadeOut);
 #else
-    float3 worldMapColor;
-    float3 dotShadingColor;
-    float3 position;
+    float3 SEMANTIC_VAR(worldMapColor);
+    float3 SEMANTIC_VAR(dotShadingColor);
+    float3 SEMANTIC_VAR(position);
 #endif
 };
 
@@ -147,8 +147,9 @@ float4 GetGlitch(float2 screenPos)
 }
 #endif
 
-float4 MainPS( in SVertexToPixel input , in float2 screenPos : VPOS)
+float4 MainPS( in SVertexToPixel input/* , in float2 screenPos : VPOS*/ ) : SV_Target0
 {
+	float2 screenPos = input.projectedPosition.xy;
     // kill if opacity is less than 0.5/255
     clip(Opacity - 0.002);
 

@@ -44,34 +44,34 @@ DECLARE_DEBUGOUTPUT( Ceilings );
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 
     SParaboloidProjectionVertexToPixel paraboloidProjection;
 
 #ifndef TEXTURE_ERROR    
-    float2 uv;
+    float2 SEMANTIC_VAR(uv);
 
     #ifdef MASK_TEXTURE 
-        float2 maskUV;
+        float2 SEMANTIC_VAR(maskUV);
     #endif
     
-    float fogFactor;
+    float SEMANTIC_VAR(fogFactor);
 
     #if defined(ELECTRIC_MATERIAL) && defined(ELECTRIC_MESH)
-	    float floorIndex;
-        float electricPowerIntensity;
+	    float SEMANTIC_VAR(floorIndex);
+        float SEMANTIC_VAR(electricPowerIntensity);
     #endif
 	
     #if defined(IS_LOW_RES_BUILDING)
-        float4 diffuseColor1;
+        float4 SEMANTIC_VAR(diffuseColor1);
     #endif
 	
     #ifdef ATTENUATION    
-        float normalAttn;
+        float SEMANTIC_VAR(normalAttn);
     #endif    
 
 	#if defined(VERTEX_COLOR) && !defined(IS_BUILDING)
-    	float3 color;
+    	float3 SEMANTIC_VAR(color);
 	#endif
     
     #if defined(IS_BUILDING) && !defined(IS_LOW_RES_BUILDING) && !defined(MASK_TEXTURE)
@@ -80,18 +80,18 @@ struct SVertexToPixel
 
     #if defined(CEILINGS) && !defined(PARABOLOID_REFLECTION)
         // Fake ceilings
-        float3  positionWS;
-        float   ceilingHeightCS;
-        float3  cameraPosWS;
-        float   ceilingFade;
-        float3  ceilingFadePlane;
+        float3  SEMANTIC_VAR(positionWS);
+        float   SEMANTIC_VAR(ceilingHeightCS);
+        float3  SEMANTIC_VAR(cameraPosWS);
+        float   SEMANTIC_VAR(ceilingFade);
+        float3  SEMANTIC_VAR(ceilingFadePlane);
     #endif
 
     #if defined(DEBUGOUTPUT_NAME)
         #if defined(VERTEX_DECL_COLOR)
-            float4 debugColor;
+            float4 SEMANTIC_VAR(debugColor);
         #endif
-        float2 debugCeilings;   // X=VertexHeightMS, Y=MeshHeightWS
+        float2 SEMANTIC_VAR(debugCeilings);   // X=VertexHeightMS, Y=MeshHeightWS
     #endif
 
 #endif // !TEXTURE_ERROR
@@ -323,7 +323,7 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
     return output;
 }
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
 #ifdef TEXTURE_ERROR
 	float4 finalColor = float4(1, 0, 1, 1 ) * frac( Time );

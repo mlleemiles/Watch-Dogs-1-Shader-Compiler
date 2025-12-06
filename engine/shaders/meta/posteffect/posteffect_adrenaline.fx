@@ -8,8 +8,8 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-	float4 projectedPosition : POSITION0;
-	float2 uv;
+	float4 projectedPosition : SV_Position;
+	float2 SEMANTIC_VAR(uv);
 };
 
 SVertexToPixel MainVS( in SMeshVertex input )
@@ -35,7 +35,7 @@ float3 SaturateColor(in float3 color)
 }
 
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
 	float4 source = tex2D(DiffuseSampler, input.uv);
 

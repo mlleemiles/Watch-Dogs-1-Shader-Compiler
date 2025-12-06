@@ -36,8 +36,8 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 Position		: SV_Position0;
-    float2 UV : TEXCOORD0;
+    float4 Position		: SV_Position;
+    float2 SEMANTIC_VAR(UV);
 };
 
 struct VectorMapOutput
@@ -109,8 +109,8 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 Position		: SV_Position0;
-    float2 UV : TEXCOORD0;
+    float4 Position		: SV_Position;
+    float2 SEMANTIC_VAR(UV);
 }; 
 
 SVertexToPixel MainVS( in SMeshVertex input)
@@ -212,10 +212,10 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 Position			: SV_Position0;
-    float3 Morph			: TEXCOORD0;
-    float2 WorldPosition	: TEXCOORD1;
-    float3 UV				: TEXCOORD2;
+    float4 Position			: SV_Position;
+    float3 SEMANTIC_VAR(Morph);
+    float2 SEMANTIC_VAR(WorldPosition);
+    float3 SEMANTIC_VAR(UV);
 
 };
 
@@ -490,21 +490,21 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 Position		: SV_Position0;
-    float4 ProjectedPosition : TEXCOORD0;
+    float4 Position		: SV_Position;
+    float4 SEMANTIC_VAR(ProjectedPosition);
 
-    float2 uv : TEXCOORD2;
+    float2 SEMANTIC_VAR(uv);
 
-    float3 wPointBeforeMorph : TEXCOORD3;
-    float4 wPoint : TEXCOORD4;
+    float3 SEMANTIC_VAR(wPointBeforeMorph);
+    float4 SEMANTIC_VAR(wPoint);
 
     SFogVertexToPixel fog;
 
 #ifdef FOURLIGHTS
-    float4 lightIndex03 : TEXCOORD5;
+    float4 SEMANTIC_VAR(lightIndex03);
 #endif
 #ifdef EIGHTLIGHTS
-    float4 lightIndex47 : TEXCOORD6;
+    float4 SEMANTIC_VAR(lightIndex47);
 #endif
 
 }; 
@@ -1050,7 +1050,7 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 Position		: SV_Position0;
+    float4 Position		: SV_Position;
 }; 
 
 SVertexToPixel MainVS( in SMeshVertex input)

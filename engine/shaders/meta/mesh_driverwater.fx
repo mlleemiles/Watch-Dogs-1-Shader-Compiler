@@ -63,33 +63,33 @@ DECLARE_DEBUGOPTION( Disable_NormalMap )
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 
 #ifdef GBUFFER
-    float3  positionCS;
+    float3  SEMANTIC_VAR(positionCS);
 #else
-    float4  positionWS4;
-    float3  normalWS;
-    float   ambientOcclusion;
-    float   surfaceVariation;
-    float   distanceCameraToVertex;
-    float   distanceCameraToVertexMaskLevel;
-    float   vertexDepth; 
-    float3  viewportProj;
+    float4  SEMANTIC_VAR(positionWS4);
+    float3  SEMANTIC_VAR(normalWS);
+    float   SEMANTIC_VAR(ambientOcclusion);
+    float   SEMANTIC_VAR(surfaceVariation);
+    float   SEMANTIC_VAR(distanceCameraToVertex);
+    float   SEMANTIC_VAR(distanceCameraToVertexMaskLevel);
+    float   SEMANTIC_VAR(vertexDepth); 
+    float3  SEMANTIC_VAR(viewportProj);
 
     #ifdef LIGHTING
-        float2 normalUV;
-        float3 binormal;
-        float3 tangent;
-        float2 specularUV;
+        float2 SEMANTIC_VAR(normalUV);
+        float3 SEMANTIC_VAR(binormal);
+        float3 SEMANTIC_VAR(tangent);
+        float2 SEMANTIC_VAR(specularUV);
 
 	    #if defined( HAS_RAINDROP_RIPPLE )
-            float2 raindropRippleUV;
+            float2 SEMANTIC_VAR(raindropRippleUV);
 	    #endif
     #endif
 
     #if defined(DEBUGOUTPUT_NAME)
-        float3 vertexColor;
+        float3 SEMANTIC_VAR(vertexColor);
     #endif
     SFogVertexToPixel fog;
 #endif
@@ -189,8 +189,9 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
 }
 
 #ifdef LIGHTING
-float4 MainPS( in SVertexToPixel input, in float2 vpos : VPOS ) 
+float4 MainPS( in SVertexToPixel input/*, in float2 vpos : VPOS*/ ) : SV_Target0
 {
+	float2 vpos = input.projectedPosition.xy;
     DEBUGOUTPUT( Mesh_Color, input.vertexColor );
   
     float surfaceVariation = saturate( input.surfaceVariation );

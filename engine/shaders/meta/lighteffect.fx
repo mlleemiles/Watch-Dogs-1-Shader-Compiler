@@ -39,11 +39,11 @@ void DecompressMeshVertex( in SMeshVertex vertex, out SMeshVertexF vertexF )
 
 struct SVertexToPixel
 {
-	float4 projectedPosition : POSITION;
-    float4 color;
-	float2 uv;
+	float4 projectedPosition : SV_Position;
+    float4 SEMANTIC_VAR(color);
+	float2 SEMANTIC_VAR(uv);
 #if defined(SOFT_DEPTH_TEST) && !defined(PARABOLOID_REFLECTION)
-    float3 uvScreen;
+    float3 SEMANTIC_VAR(uvScreen);
 #endif
 };
 
@@ -92,7 +92,7 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
 
 #define DEPTHSMOOTH_CROSS_FADE_LENGTH 0.25f
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     float3 diffuseColor = tex2D( DiffuseSampler, input.uv.xy ).xyz;
 #if defined(SHADER_GAMMA_20)

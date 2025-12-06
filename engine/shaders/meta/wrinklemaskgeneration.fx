@@ -11,7 +11,7 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 position   : POSITION;
+    float4 position   : SV_Position;
     float2 texCoords  : TEXCOORD0;
 };
 
@@ -42,7 +42,7 @@ void ApplyMask( inout float4 accum, in float4 weights, in Texture_2D mask, in fl
 
 // ----------------------------------------------------------------------------
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 { 
     float4 finalMask = 0;
     

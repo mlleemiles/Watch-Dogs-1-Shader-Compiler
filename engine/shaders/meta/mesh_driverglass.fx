@@ -7,6 +7,10 @@
 
 DECLARE_DEBUGOPTION( DamageStates );
 
+#ifndef FAMILY_MESH_DRIVERGLASS
+	#define FAMILY_MESH_DRIVERGLASS
+#endif
+
 // needed by WorldTransform.inc.fx
 #define USE_POSITION_FRACTIONS
 
@@ -75,35 +79,35 @@ void AddFog( inout float4 outputColor, in SFogVertexToPixel input )
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
     
 #ifdef DIFFUSETEXTURE
-    float2 diffuseUV;
+    float2 SEMANTIC_VAR(diffuseUV);
 #endif
 
 #ifdef SPECULARMAP
-    float2 maskUV;
+    float2 SEMANTIC_VAR(maskUV);
 #endif
 
 #if defined( LIGHTING )
-    float4 positionWS4;
+    float4 SEMANTIC_VAR(positionWS4);
 
 	#ifdef VERTEX_DECL_COLOR
-		float opacity;
+		float SEMANTIC_VAR(opacity);
 	#endif	
 
 	#ifdef NEEDS_TANGENT_SPACE
-    	float3 normalWS;
+    	float3 SEMANTIC_VAR(normalWS);
 	    #ifdef NORMALMAP
-	        float2 normalUV;
-	        float3 binormalWS;
-	        float3 tangentWS;
+	        float2 SEMANTIC_VAR(normalUV);
+	        float3 SEMANTIC_VAR(binormalWS);
+	        float3 SEMANTIC_VAR(tangentWS);
 	    #endif
 	#endif
 #endif
 
 #if defined(DEBUGOPTION_DAMAGESTATES) && defined(DAMAGE_STATES)
-    float3 stateDebugColor;
+    float3 SEMANTIC_VAR(stateDebugColor);
 #endif
 
     SFogVertexToPixel fog;
@@ -196,8 +200,9 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
 
 
 #ifdef LIGHTING
-float4 MainPS( in SVertexToPixel input, in float2 vpos : VPOS, in bool isFrontFace : ISFRONTFACE )
+float4 MainPS( in SVertexToPixel input,/* in float2 vpos : VPOS,*/ in bool isFrontFace : SV_IsFrontFace ) : SV_Target0
 {
+	float2 vpos = input.projectedPosition.xy;
 #if defined( NORMALMAP )
     float3x3 tangentToCameraMatrix;
     tangentToCameraMatrix[ 0 ] = input.tangentWS;

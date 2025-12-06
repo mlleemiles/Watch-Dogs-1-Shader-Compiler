@@ -12,8 +12,8 @@
 
     struct SVertexToPixel
     {
-        float4  projectedPosition   : POSITION0;
-    	float4  uvs[ 2 ];
+        float4  projectedPosition   : SV_Position;
+    	float4  uvs[ 2 ] : uvs;
     };
     
    
@@ -34,7 +34,7 @@
     	return output;
     }
     
-    float4 MainPS(in SVertexToPixel input)
+    float4 MainPS(in SVertexToPixel input) : SV_Target0
     {
         float2 uvs[ 4 ];
         uvs[ 0 ] = input.uvs[ 0 ].xy;
@@ -71,8 +71,8 @@
 
     struct SVertexToPixel
     {
-        float4  projectedPosition   : POSITION0;
-    	float2  uv;
+        float4  projectedPosition   : SV_Position;
+    	float2  SEMANTIC_VAR(uv);
     };
     
     SVertexToPixel MainVS( in SMeshVertex Input )
@@ -85,7 +85,7 @@
     	return output;
     }
     
-    float4 MainPS(in SVertexToPixel input)
+    float4 MainPS(in SVertexToPixel input) : SV_Target0
     {
         // Sample blurred texture
         float4 finalColor = tex2D( DiffuseSampler, input.uv );
@@ -112,7 +112,7 @@
 
     static const float weights[9] = { 1.0f/14.6f, 1.3f/14.6f, 1.8f/14.6f, 2.1f/14.6f, 2.2f/14.6f, 2.1f/14.6f, 1.8f/14.6f, 1.3f/14.6f, 1.0f/14.6f };
     
-    float4 MainPS( in SVertexToPixel Input )
+    float4 MainPS( in SVertexToPixel Input ) : SV_Target0
     {
         float2 uv = Input.TexCoord.xy;
 

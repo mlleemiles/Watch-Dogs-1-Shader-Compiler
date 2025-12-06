@@ -11,15 +11,15 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4  projectedPosition   : POSITION0;
+    float4  projectedPosition   : SV_Position;
 
-    float2  uv_tiled;
+    float2  SEMANTIC_VAR(uv_tiled);
  
     #ifdef LAST_POSTFX
-        float2  uv;
+        float2  SEMANTIC_VAR(uv);
     #endif
 
-   float3 position;
+   float3 SEMANTIC_VAR(position);
 };
 
 SVertexToPixel MainVS( in SMeshVertex Input )
@@ -45,7 +45,7 @@ SVertexToPixel MainVS( in SMeshVertex Input )
 	return output;
 }
 
-float4 MainPS(in SVertexToPixel input)
+float4 MainPS(in SVertexToPixel input) : SV_Target0
 {
     float depth = tex2D(  DepthTextureSampler, input.uv_tiled ).r;
 

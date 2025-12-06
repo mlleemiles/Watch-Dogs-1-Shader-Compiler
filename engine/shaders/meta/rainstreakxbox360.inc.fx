@@ -8,10 +8,10 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 Position		: POSITION0;
-    float2 UV;
+    float4 Position		: SV_Position;
+    float2 SEMANTIC_VAR(UV);
 
-    float3 Light;
+    float3 SEMANTIC_VAR(Light);
 };
 
 SVertexToPixel MainVS( in SMeshVertex input)
@@ -61,7 +61,7 @@ SVertexToPixel MainVS( in SMeshVertex input)
     return Output;
 }
 
-float4 MainPS( in SVertexToPixel Input )
+float4 MainPS( in SVertexToPixel Input ) : SV_Target0
 {
     float2 uv = Input.UV;
 

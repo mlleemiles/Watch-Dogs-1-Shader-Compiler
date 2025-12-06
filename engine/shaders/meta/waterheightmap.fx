@@ -19,8 +19,8 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 Position		: SV_Position0;
-    float2 UV			: TEXCOORD0;
+    float4 Position		: SV_Position;
+    float2 SEMANTIC_VAR(UV);
 };
 
 struct VectorMapOutput
@@ -37,19 +37,20 @@ SVertexToPixel MainVS( in SMeshVertex input)
     return Output;
 }
 
-VectorMapOutput MainPS( in SVertexToPixel input , in float2 vpos : VPOS) 
+VectorMapOutput MainPS( in SVertexToPixel input /*, in float2 vpos : VPOS*/) 
 {
+	float2 vpos = input.Position.xy;
     VectorMapOutput output = (VectorMapOutput)0;
 
     float2 uv = input.UV.xy;    
     float4 worldPos = mul(float4(uv,0.f,1.f),UVsToWorldMatrix);
     
     float2 params[5];
-    params[0] = WaterSplinesParametersMap.tex.Load(int3(input.Position.xy,0)).xy;
-    params[1] = WaterSplinesParametersMap.tex.Load(int3(input.Position.xy + int2(-1,0),0)).xy;
-    params[2] = WaterSplinesParametersMap.tex.Load(int3(input.Position.xy + int2(1,0),0)).xy;
-    params[3] = WaterSplinesParametersMap.tex.Load(int3(input.Position.xy + int2(0,1),0)).xy;
-    params[4] = WaterSplinesParametersMap.tex.Load(int3(input.Position.xy + int2(0,-1),0)).xy;
+    params[0] = WaterSplinesParametersMap.tex.Load(int3(vpos,0)).xy;
+    params[1] = WaterSplinesParametersMap.tex.Load(int3(vpos + int2(-1,0),0)).xy;
+    params[2] = WaterSplinesParametersMap.tex.Load(int3(vpos + int2(1,0),0)).xy;
+    params[3] = WaterSplinesParametersMap.tex.Load(int3(vpos + int2(0,1),0)).xy;
+    params[4] = WaterSplinesParametersMap.tex.Load(int3(vpos + int2(0,-1),0)).xy;
 
     // Is no spline is here set the water level to invalid 
     float2 res = float2( -256, params[0].y );

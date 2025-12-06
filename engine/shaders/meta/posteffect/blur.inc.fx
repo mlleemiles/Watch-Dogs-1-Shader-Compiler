@@ -7,7 +7,7 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-	float4 ProjectedPosition : POSITION0;
+	float4 projectedPosition : SV_Position;
 	float2 TexCoord : TEXCOORD0;
 };
 
@@ -15,7 +15,7 @@ SVertexToPixel MainVS( in SMeshVertex Input )
 {
 	SVertexToPixel Output;
 	
-	Output.ProjectedPosition = PostQuadCompute( Input.Position.xy, QuadParams );
+	Output.projectedPosition = PostQuadCompute( Input.Position.xy, QuadParams );
 	
 	Output.TexCoord = Input.Position.xy * float2( 0.5f, -0.5f ) + 0.5f;
 	

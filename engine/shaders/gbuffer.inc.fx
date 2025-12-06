@@ -39,7 +39,7 @@ DECLARE_DEBUGOPTION( Disable_Translucency )
 
 struct GBufferVertexToPixel
 {
-    float dummyForPS3 : IGNORE;
+    //float dummyForPS3 : IGNORE;
 
 #ifdef GBUFFER_VELOCITY
     SVelocityBufferVertexToPixel    velocityBufferVertexToPixel;
@@ -50,7 +50,7 @@ struct GBufferVertexToPixel
 // param: currentClipSpacePosition      - clip-space position of the vertex on this frame
 void ComputeGBufferVertexToPixel( out GBufferVertexToPixel output, in float3 previousObjectSpacePosition, in float4 currentClipSpacePosition )
 {
-    output.dummyForPS3 = 0.0f;
+    //output.dummyForPS3 = 0.0f;
 
 #ifdef GBUFFER_VELOCITY
     ComputeVelocityBufferVertexToPixel(output.velocityBufferVertexToPixel, previousObjectSpacePosition, currentClipSpacePosition);
@@ -146,7 +146,7 @@ void InitGBufferValues( inout GBuffer gbuffer )
 #endif
 
 #if SHADERMODEL >= 40
-    gbuffer.vertexToPixel.dummyForPS3 = 0;
+    //gbuffer.vertexToPixel.dummyForPS3 = 0;
 #endif
 
 #ifdef GBUFFER_VELOCITY

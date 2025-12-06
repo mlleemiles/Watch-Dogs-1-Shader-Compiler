@@ -15,17 +15,17 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4  projectedPosition : POSITION0;
+    float4  projectedPosition : SV_Position;
 
 #if defined( WORLDAMBIENTOCCLUSION ) || defined( WORLDAMBIENTCOLOR )
-    float3  positionWS;
+    float3  SEMANTIC_VAR(positionWS);
 #endif
 
-    float3  normalWS;
-    float2  previousCoord;
+    float3  SEMANTIC_VAR(normalWS);
+    float2  SEMANTIC_VAR(previousCoord);
 
 #ifdef SAMPLE_SHADOW
-    CSMTYPE CSMShadowCoords;
+    CSMTYPE SEMANTIC_VAR(CSMShadowCoords);
 #endif
 }; 
 
@@ -53,7 +53,7 @@ SVertexToPixel MainVS( in SMeshVertex input )
     return output;
 } 
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     float3 normalWS = normalize( input.normalWS );
 

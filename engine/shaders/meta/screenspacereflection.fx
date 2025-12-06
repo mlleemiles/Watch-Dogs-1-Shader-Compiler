@@ -10,8 +10,8 @@
 
 #include "..\parameters\ScreenSpaceReflection.fx"
 
-RWTexture2D<float4>  OutputTexture;
-RWTexture2D<uint>  SSRDepthTexture;
+RWTexture2D<float4>  OutputTexture : register(u0);
+RWTexture2D<uint>  SSRDepthTexture : register(u1);
 
 //----------------------------------------------------------------------------------
 float3 UVToEye(float2 uv, float eye_z)

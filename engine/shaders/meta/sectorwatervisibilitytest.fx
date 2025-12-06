@@ -11,7 +11,7 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 };
 
 SVertexToPixel MainVS( in SMeshVertex input )
@@ -28,7 +28,7 @@ SVertexToPixel MainVS( in SMeshVertex input )
     return output;
 }
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     return 1.0f;
 }

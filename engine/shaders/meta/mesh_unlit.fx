@@ -3,6 +3,10 @@
 #include "../PerformanceDebug.inc.fx"
 #include "../MipDensityDebug.inc.fx"
 
+#ifndef FAMILY_MESH_UNLIT
+	#define FAMILY_MESH_UNLIT
+#endif
+
 #define VERTEX_DECL_POSITIONCOMPRESSED
 #define VERTEX_DECL_UV0
 #define VERTEX_DECL_UV1
@@ -58,22 +62,22 @@
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 
 #ifdef USE_UVS    
-    float2 uv;
+    float2 SEMANTIC_VAR(uv);
 #endif    
     
 #ifdef REFLECTION
-    float3 normalWS;
-    float3 positionWS;
+    float3 SEMANTIC_VAR(normalWS);
+    float3 SEMANTIC_VAR(positionWS);
 #endif
 
 #if !defined( DEPTH ) && !defined( SHADOW )
-    float4 color;
-	float4 fog;
+    float4 SEMANTIC_VAR(color);
+	float4 SEMANTIC_VAR(fog);
     #if !defined(AFFECTED_BY_EXPOSURE) && !defined(NOMAD_PLATFORM_CURRENTGEN) && !defined(PARABOLOID_REFLECTION)
-        float antiExposureFactor;
+        float SEMANTIC_VAR(antiExposureFactor);
     #endif
 #endif
 
@@ -82,17 +86,17 @@ struct SVertexToPixel
     SParaboloidProjectionVertexToPixel paraboloidProjection;
 
 #if (defined(ELECTRIC_MATERIAL) && defined(ELECTRIC_MESH)) || defined(AFFECTED_BY_TIMEOFDAY)
-    float totalElectricPower;
+    float SEMANTIC_VAR(totalElectricPower);
 #endif
 
 #ifdef DEPTH_INTERSECTION
-    float3 depthProj;
-    float3 positionCSProj;
-    float distanceToCameraPlane;
-    float3 worldPosition;
-    float radius;
-    float sidesFactor;
-    float2 rcpScales;
+    float3 SEMANTIC_VAR(depthProj);
+    float3 SEMANTIC_VAR(positionCSProj);
+    float SEMANTIC_VAR(distanceToCameraPlane);
+    float3 SEMANTIC_VAR(worldPosition);
+    float SEMANTIC_VAR(radius);
+    float SEMANTIC_VAR(sidesFactor);
+    float2 SEMANTIC_VAR(rcpScales);
 #endif
 
 	SMipDensityDebug	mipDensityDebug;
@@ -463,10 +467,11 @@ SPixelShaderOutput MainPS( in SVertexToPixel input )
 #if defined( DEPTH ) || defined( SHADOW )
 float4 MainPS( in SVertexToPixel input
                #ifdef USE_COLOR_RT_FOR_SHADOW
-                   , in float4 position : VPOS
+                   //, in float4 position : VPOS
                #endif
-             )
+             ) : SV_Target0
 {
+	float4 position = input.projectedPosition;
     float4 color;
 
     ProcessDepthAndShadowVertexToPixel( input.depthShadow );

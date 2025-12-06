@@ -8,17 +8,17 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 Position		: SV_Position0;
-    float3 SquareDistanceToCam : TEXCOORD0;
-    float2 UV : TEXCOORD1;
+    float4 Position		: SV_Position;
+    float3 SEMANTIC_VAR(SquareDistanceToCam);
+    float2 SEMANTIC_VAR(UV);
 #ifdef RAINSTREAK_SHEETSOFRAIN
-    float3 DepthProj : TEXCOORD2;
-    float3 WorldPosition : TEXCOORD3;
-    float  FadeOut : TEXCOORD4;
+    float3 SEMANTIC_VAR(DepthProj);
+    float3 SEMANTIC_VAR(WorldPosition);
+    float  SEMANTIC_VAR(FadeOut);
 #else    
-    float3 Light : TEXCOORD2;
+    float3 SEMANTIC_VAR(Light);
 	#ifdef RAINSTREAK_OCCLUDER    
-	    float3 WorldPosition : TEXCOORD3;
+	    float3 SEMANTIC_VAR(WorldPosition);
 	#endif	    
 #endif    
 }; 

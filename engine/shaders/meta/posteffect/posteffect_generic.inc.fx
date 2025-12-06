@@ -47,12 +47,12 @@ struct SPostFxInput
 #ifndef DOWNSAMPLE
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 #if defined(POSTFX_UVTILED)
-    float2 uv_tiled;
+    float2 SEMANTIC_VAR(uv_tiled);
 #endif    
 #if defined(POSTFX_UV) || defined(LAST_POSTFX_BLENDING)
-    float2 uv;
+    float2 SEMANTIC_VAR(uv);
 #endif    
 };
 
@@ -102,7 +102,7 @@ SVertexToPixel MainVS( in SMeshVertex input )
 
 float4 PostFxGeneric( in SPostFxInput input );
 
-float4 MainPS(in SVertexToPixel input)
+float4 MainPS(in SVertexToPixel input) : SV_Target0
 {
 	SPostFxInput	postFxInput;
 	
@@ -166,8 +166,8 @@ float4 MainPS(in SVertexToPixel input)
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
-    float2 uv;
+    float4 projectedPosition : SV_Position;
+    float2 SEMANTIC_VAR(uv);
 };
 
 SVertexToPixel MainVS( in SMeshVertex input )
@@ -179,7 +179,7 @@ SVertexToPixel MainVS( in SMeshVertex input )
 	return output;
 }
 
-float4 MainPS(in SVertexToPixel input)
+float4 MainPS(in SVertexToPixel input) : SV_Target0
 {
 	return tex2D(SrcSamplerLinear, input.uv);
 }

@@ -8,11 +8,11 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4  projectedPosition : POSITION0;
-    float2  uv;
+    float4  projectedPosition : SV_Position;
+    float2  SEMANTIC_VAR(uv);
 #ifndef BLIT    
-    float2  direction;
-    float4  color;
+    float2  SEMANTIC_VAR(direction);
+    float4  SEMANTIC_VAR(color);
 #endif    
 };
 
@@ -38,7 +38,7 @@ SVertexToPixel MainVS( in SMeshVertex input )
 }
 
 static const int numSamples = 8;
-float4 MainPS(in SVertexToPixel input)
+float4 MainPS(in SVertexToPixel input) : SV_Target0
 {
     float4 outColor = 0;
     

@@ -24,8 +24,8 @@ struct SPixelOutput
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
-    float4 params;
+    float4 projectedPosition : SV_Position;
+    float4 SEMANTIC_VAR(params);
 };
 
 void    SetHeight       ( inout float4 params, float height )       { params.x = height; }
@@ -97,8 +97,8 @@ struct SPixelOutput
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
-    float2 uv;
+    float4 projectedPosition : SV_Position;
+    float2 SEMANTIC_VAR(uv);
 };
 
 SVertexToPixel MainVS( in SMeshVertex input )

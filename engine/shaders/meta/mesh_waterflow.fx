@@ -49,33 +49,33 @@
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 #if defined(DEPTH_OPACITY) || defined(DEPTH_MASK) || defined(DISTORTION)
-    float4 positionVS;
+    float4 SEMANTIC_VAR(positionVS);
 #endif
 
 #if defined(LIGHTING) || defined(DISTORTION)
-    float3 positionWS;
+    float3 SEMANTIC_VAR(positionWS);
     #ifndef DISTORTION
-        float3 normalWS;
-        float3 binormalWS;
-        float3 tangentWS;
+        float3 SEMANTIC_VAR(normalWS);
+        float3 SEMANTIC_VAR(binormalWS);
+        float3 SEMANTIC_VAR(tangentWS);
     #endif
-    float2 normalUV;
+    float2 SEMANTIC_VAR(normalUV);
 #endif
 
 #ifdef OVERLAY
-    float2 overlayUV;
+    float2 SEMANTIC_VAR(overlayUV);
     #ifdef MASK
-        float2 maskUV;
+        float2 SEMANTIC_VAR(maskUV);
     #endif
 #endif
 
-    float2  flowUV;
-    float4  flowOffset;
-    float2  flowLerp;
+    float2  SEMANTIC_VAR(flowUV);
+    float4  SEMANTIC_VAR(flowOffset);
+    float2  SEMANTIC_VAR(flowLerp);
 
-    float raindropNormalFactor;
+    float SEMANTIC_VAR(raindropNormalFactor);
 
 #ifndef DISTORTION
     SLightingVertexToPixel lighting;
@@ -158,8 +158,9 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
 }
 
 #if defined(LIGHTING) || defined(DISTORTION)
-float4 MainPS( in SVertexToPixel input, in float2 vpos : VPOS )
+float4 MainPS( in SVertexToPixel input/*, in float2 vpos : VPOS*/ ) : SV_Target0
 {
+	float2 vpos = input.projectedPosition.xy;
     float waterDepthOpacity = WaterColor.a;
 
 #if defined(DEPTH_OPACITY) || defined(DEPTH_MASK) || defined(DISTORTION)

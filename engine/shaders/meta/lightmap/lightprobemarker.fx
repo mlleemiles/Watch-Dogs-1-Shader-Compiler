@@ -13,10 +13,10 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 projectedPosition   : POSITION0;
-    float3 direction;
+    float4 projectedPosition   : SV_Position;
+    float3 SEMANTIC_VAR(direction);
 
-    float3 worldSpaceProbeCentrePos;
+    float3 SEMANTIC_VAR(worldSpaceProbeCentrePos);
 };
 
 SVertexToPixel MainVS( in SMeshVertex Input )
@@ -34,7 +34,7 @@ SVertexToPixel MainVS( in SMeshVertex Input )
     return output;
 }
 
-float4 MainPS( in SVertexToPixel input)
+float4 MainPS( in SVertexToPixel input) : SV_Target0
 {
     float4 outputColor;
     

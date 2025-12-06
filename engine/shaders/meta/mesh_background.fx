@@ -40,17 +40,17 @@
 
 struct SVertexToPixel
 {
-    float4	projectedPosition : POSITION0;
-    float2	diffuseUV;
-    float4  color;
+    float4	projectedPosition : SV_Position;
+    float2	SEMANTIC_VAR(diffuseUV);
+    float4  SEMANTIC_VAR(color);
 
 #ifndef PARABOLOID_REFLECTION
     #ifdef LIGHTING
-        float3  normalWS;
+        float3  SEMANTIC_VAR(normalWS);
         #ifdef NORMALMAP
-            float3  tangentWS;
-            float3  binormalWS;
-            float2	normalUV;
+            float3  SEMANTIC_VAR(tangentWS);
+            float3  SEMANTIC_VAR(binormalWS);
+            float2	SEMANTIC_VAR(normalUV);
         #endif
     #endif
     SFogVertexToPixel fog;
@@ -113,7 +113,7 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
     return output;
 }
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
     float4 diffuse = tex2D( DiffuseTexture1, input.diffuseUV );
     diffuse *= input.color;

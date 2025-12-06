@@ -34,26 +34,26 @@ struct SParaboloidProjectionVertexToPixel
 #ifdef PARABOLOID_REFLECTION
 	#if !defined(PARABOLOID_REFLECTION_NOCLIP) && !defined(PARABOLOID_REFLECTION_NOCLIP_FORCED)
         #ifdef EMULATE_CLIPDISTANCE
-	        float clipDistance;
+	        float SEMANTIC_VAR(clipDistance);
         #else
-	        float clipDistance : CLIPDISTANCE;
+	        float clipDistance : SV_ClipDistance;
         #endif
 	#endif    	
     
     #if defined( PARABOLOID_REFLECTION_UNLIT )
         #if defined( PARABOLOID_REFLECTION_UNLIT_FADE )
-            float fade;
+            float SEMANTIC_VAR(fade);
         #endif
     #elif !defined( PARABOLOID_REFLECTION_AMBIENT_ONLY )
-        float3 lighting;
+        float3 SEMANTIC_VAR(lighting);
         #ifdef PARABOLOID_SAMPLE_LONGRANGESHADOW
-            float3 ambient;
-            float3 longRangeShadowCoords;
+            float3 SEMANTIC_VAR(ambient);
+            float3 SEMANTIC_VAR(longRangeShadowCoords);
         #endif
     #endif
 #endif
 
-    float3 dummy : IGNORE;
+    //float3 dummy : IGNORE;
 };
 
 void ComputeParaboloidProjectionVertexToPixel
@@ -104,7 +104,7 @@ void ComputeParaboloidProjectionVertexToPixel
         #endif
     #endif
 #endif
-    context.dummy = 0.0f;
+    //context.dummy = 0.0f;
 }
 
 float3 ParaboloidReflectionLighting( in SParaboloidProjectionVertexToPixel context, in float3 albedo, in float3 emissive )

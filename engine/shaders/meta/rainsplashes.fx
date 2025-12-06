@@ -14,14 +14,14 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 projectedPosition        : POSITION0;
-    float4 projectedCenterPosition;
+    float4 projectedPosition        : SV_Position;
+    float4 SEMANTIC_VAR(projectedCenterPosition);
 
 #ifdef RAIN_OCCLUDER
-    float4 positionLPS;
+    float4 SEMANTIC_VAR(positionLPS);
 #endif //RAIN_OCCLUDER
 
-    float2 UVs;
+    float2 SEMANTIC_VAR(UVs);
 };
 
 SVertexToPixel MainVS( in SMeshVertex input )

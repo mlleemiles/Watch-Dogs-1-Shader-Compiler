@@ -17,11 +17,11 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
-    float3 color;
-    float2 uv;
+    float4 projectedPosition : SV_Position;
+    float3 SEMANTIC_VAR(color);
+    float2 SEMANTIC_VAR(uv);
 
-    float fog;
+    float SEMANTIC_VAR(fog);
 };
 
 SVertexToPixel MainVS(in SMeshVertex input)

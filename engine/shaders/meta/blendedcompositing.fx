@@ -59,39 +59,39 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 
 #ifdef DEPTH
     #ifdef PS3_TARGET
-        float4 offsetUVs;
+        float4 SEMANTIC_VAR(offsetUVs);
     #else
-        float2 depthUV;
+        float2 SEMANTIC_VAR(depthUV);
     #endif
 #endif
 
 #ifdef MERGE
-    float2 colorUV;
+    float2 SEMANTIC_VAR(colorUV);
 #endif
 
 #if defined( FILL_POINTS ) && !defined( FILL_POINTS_DEFAULT )
-    float2 colorUV;
-    float2 fullUV;
+    float2 SEMANTIC_VAR(colorUV);
+    float2 SEMANTIC_VAR(fullUV);
 #endif
 
 #ifdef TWEAK
-    float2 colorUV;
+    float2 SEMANTIC_VAR(colorUV);
 #endif
 
 #ifdef USE_POINTS
     #ifndef PS3_TARGET
-        float2 colorUV;
+        float2 SEMANTIC_VAR(colorUV);
         #ifdef FULL_COMPOSITING
-            float2 depthUV;
+            float2 SEMANTIC_VAR(depthUV);
         #endif
     #endif
 #elif defined( FULL_COMPOSITING )
-    float2 colorUV;
-    float2 depthUV;
+    float2 SEMANTIC_VAR(colorUV);
+    float2 SEMANTIC_VAR(depthUV);
 #endif
 };
 
@@ -338,8 +338,9 @@ SOutput MainPS( in SVertexToPixel input )
 #ifdef MERGE
 uniform float ps3RegisterCount = 4;
 
-float4 MainPS( in SVertexToPixel input, in float2 vpos : VPOS )
+float4 MainPS( in SVertexToPixel input/*, in float2 vpos : VPOS*/ ) : SV_Target0
 {
+	float2 vpos = input.projectedPosition.xy;
     float4 output;
 
     output.r = 0.0f;
@@ -392,7 +393,7 @@ float4 MainPS( in SVertexToPixel input, in float2 vpos : VPOS )
 #endif // MERGE
 
 #ifdef TWEAK
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
 #ifdef TWEAK_MIN
     #define samp MinColorTexturePoint
@@ -612,7 +613,7 @@ uniform float ps3RegisterCount = 39;
 uniform float ps3RegisterCount = 15;
 #endif
 
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
 #ifdef FILL_POINTS_DEFAULT
     return 0.0f;
@@ -660,13 +661,14 @@ float4 MainPS( in SVertexToPixel input )
 #if defined( USE_POINTS ) || defined( FULL_COMPOSITING )
 float4 MainPS
     (
-    in SVertexToPixel input,
-    in float2 vpos : VPOS
+    in SVertexToPixel input
+    /*in float2 vpos : VPOS*/
 #if defined( USE_POINTS ) && defined( XBOX360_TARGET )
     , in float2 spriteTexCoordXbox : SPRITETEXCOORD
 #endif
-    )
+    ) : SV_Target0
 {
+	float2 vpos = input.projectedPosition;
     float2 colorUV;
     float2 depthUV;
 #ifdef USE_POINTS

@@ -118,39 +118,39 @@ static const float uvDecompressionOffset = (uvMax + uvMin) / 2;
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 
 #ifndef STATIC_ON_TERRAIN
-    float4 animColor;
+    float4 SEMANTIC_VAR(animColor);
 #endif
 
 #if defined (CLIP)
-    float viewDist;
+    float SEMANTIC_VAR(viewDist);
 #endif
 
 #if defined( PROJECTED ) || defined(CLIP)
-    float3 depthProj;
+    float3 SEMANTIC_VAR(depthProj);
 #endif
 
 #if defined (PROJECTED)
-    float3 positionCSProj;
+    float3 SEMANTIC_VAR(positionCSProj);
 #else 
-    float2 uv0;
+    float2 SEMANTIC_VAR(uv0);
     #ifndef STATIC_ON_TERRAIN
-        float2 uMinMax;
+        float2 SEMANTIC_VAR(uMinMax);
     #endif
 #endif
 
 #ifdef PARALLAX
-	float3 eyeVectorTS;
+	float3 SEMANTIC_VAR(eyeVectorTS);
 #endif
 
 #ifdef GBUFFER
     GBufferVertexToPixel gbufferVertexToPixel;
     #ifdef NORMALMAP
-        float3 normal;
-        float3 binormal;
-        float3 tangent;
+        float3 SEMANTIC_VAR(normal);
+        float3 SEMANTIC_VAR(binormal);
+        float3 SEMANTIC_VAR(tangent);
     #endif
 #endif
 };
@@ -300,8 +300,13 @@ float4 SampleNormalMap( float2 uv )
 #define PixelOutput float4
 #endif
 
-PixelOutput MainPS( in SVertexToPixel input, in float2 vpos : VPOS )
+#ifdef GBUFFER
+PixelOutput MainPS( in SVertexToPixel input/*, in float2 vpos : VPOS*/ )
+#else
+PixelOutput MainPS( in SVertexToPixel input/*, in float2 vpos : VPOS*/ ) : SV_Target0
+#endif
 {
+	float2 vpos = input.projectedPosition.xy;
 #if defined( PROJECTED ) || defined(CLIP)
     float depthBehind = GetDepthFromDepthProjWS( input.depthProj );
 #endif
@@ -477,7 +482,7 @@ PixelOutput MainPS( in SVertexToPixel input, in float2 vpos : VPOS )
 
 
 #if defined(DEPTH)
-float4 MainPS( in SVertexToPixel input )
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 { 
     float4 o = 1;
 

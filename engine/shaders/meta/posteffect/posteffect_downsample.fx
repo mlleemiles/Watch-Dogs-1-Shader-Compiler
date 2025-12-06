@@ -13,9 +13,9 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4  projectedPosition   : POSITION0;
-	float2	uv_center;
-	float4  uvs[ 2 ];
+    float4  projectedPosition   : SV_Position;
+	float2	SEMANTIC_VAR(uv_center);
+	float4  uvs[ 2 ] : uvs;
 };
 
 SVertexToPixel MainVS( in SMeshVertex Input )
@@ -47,7 +47,7 @@ static float BilateralMinWeight = BilateralTresholds.z;
 	#define WEIGHT_BLEND
 #endif
 
-float4 MainPS(in SVertexToPixel input)
+float4 MainPS(in SVertexToPixel input) : SV_Target0
 {
     float2 uvs[ 4 ];
     uvs[ 0 ] = input.uvs[ 0 ].xy;

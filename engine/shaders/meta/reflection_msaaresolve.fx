@@ -11,7 +11,7 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 Position		: POSITION0;
+    float4 Position		: SV_Position;
 };
 
 
@@ -26,8 +26,9 @@ SVertexToPixel MainVS( in SMeshVertex input)
     return Output;
 }
 
-float4 MainPS( in SVertexToPixel input ,in float2 vpos : VPOS) : SV_Target0
-{   
+float4 MainPS( in SVertexToPixel Input/*, in float2 vpos : VPOS*/ ) : SV_Target0
+{
+	float2 vpos = Input.Position.xy;
     int2 samplingPosition = (int2)( vpos.xy - SamplingOffset.xy );
 #ifdef MSAARESOLVE
     return (

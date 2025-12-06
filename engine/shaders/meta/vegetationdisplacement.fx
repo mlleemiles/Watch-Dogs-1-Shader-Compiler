@@ -21,10 +21,10 @@ struct SMeshVertex
 // Vertex shader output
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 #ifndef FIRST_FRAME
-    float2 positionHS;
-    float2 uv;
+    float2 SEMANTIC_VAR(positionHS);
+    float2 SEMANTIC_VAR(uv);
 #endif
 };
 
@@ -48,7 +48,7 @@ SVertexToPixel MainVS( in SMeshVertex input)
 // ------------------------------------
 // Pixel shader
 // ------------------------------------
-float4 MainPS( in SVertexToPixel input ) 
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
 #ifdef FIRST_FRAME
     return 0;
@@ -99,13 +99,13 @@ struct SMeshVertex
 // Vertex shader output
 struct SVertexToPixel
 {
-    float4 projectedPosition    : POSITION0;
+    float4 projectedPosition    : SV_Position;
 #ifndef FIRST_FRAME
-    float2 uv;
+    float2 SEMANTIC_VAR(uv);
 #endif
-    float2 velocity;
-    float  crushDelta;
-    float  height;
+    float2 SEMANTIC_VAR(velocity);
+    float  SEMANTIC_VAR(crushDelta);
+    float  SEMANTIC_VAR(height);
 };
 
 // ------------------------------------
@@ -144,7 +144,7 @@ SVertexToPixel MainVS( in SMeshVertex input)
 // ------------------------------------
 // Pixel shader
 // ------------------------------------
-float4 MainPS( in SVertexToPixel input ) 
+float4 MainPS( in SVertexToPixel input ) : SV_Target0
 {
 #ifdef FIRST_FRAME
     float4 lastValue = float4( 0, 0, 0, 0 );

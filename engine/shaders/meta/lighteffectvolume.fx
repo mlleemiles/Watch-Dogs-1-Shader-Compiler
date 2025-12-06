@@ -60,14 +60,14 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 
     #ifdef LIGHTEFFECTVOLUME_PS_NEED_VERTEXDEPTH
-    float vertexDepth;
+    float SEMANTIC_VAR(vertexDepth);
     #endif// LIGHTEFFECTVOLUME_PS_NEED_VERTEXDEPTH
 
     #ifdef LIGHTEFFECTVOLUME_PS_NEED_VSRAY
-    float3 vsRay;
+    float3 SEMANTIC_VAR(vsRay);
     #endif// def LIGHTEFFECTVOLUME_PS_NEED_VSRAY
 };
 
@@ -106,7 +106,7 @@ SVertexToPixel MainVS( in SMeshVertex input )
 
 #ifdef LIGHTEFFECTVOLUMEPASS_DEPTHS
 
-float4 MainPS(in SVertexToPixel input, in bool isFrontFace : ISFRONTFACE)
+float4 MainPS(in SVertexToPixel input, in bool isFrontFace : SV_IsFrontFace) : SV_Target0
 {
     float floatIsFrontFace  = isFrontFace ? 1.0f : 0.0f;
     float floatIsBackFace = isFrontFace ? 0.0f : 1.0f;
@@ -147,8 +147,9 @@ float2 RotateDirections(float2 Dir, float2 CosSin)
     return float2(Dir.x*CosSin.x - Dir.y*CosSin.y, Dir.x*CosSin.y + Dir.y*CosSin.x);
 }
 
-float4 MainPS(in SVertexToPixel input, in float2 vpos : VPOS)
+float4 MainPS(in SVertexToPixel input/*, in float2 vpos : VPOS*/) : SV_Target0
 {
+	float2 vpos = input.projectedPosition.xy;
     float2 viewportUV = vpos * OneOverBeamTextureSize;
 
     float4 volumeDepths = tex2D(BeamDepthsTexturePoint, viewportUV);
@@ -417,8 +418,9 @@ float4 GatherBeamSample(const in Texture_2D beamTexture, const in float2 uv)
     return beamSample;
 }
 
-float4 MainPS(in SVertexToPixel input, in float2 vpos : VPOS)
+float4 MainPS(in SVertexToPixel input/*, in float2 vpos : VPOS*/) : SV_Target0
 {
+	float2 vpos = input.projectedPosition.xy;
     float2 viewportUV = vpos * OneOverBeamTextureSize;
 
     // Fetch 4 groups of 2x2 texels centered on the current pixel to apply a blur 4x4
@@ -508,8 +510,9 @@ float4 CalculateNormalFromBeamTexture(in const float2 texCoord)
 
 #ifdef LIGHTEFFECTVOLUMEPASS_LIGHTING
 
-float4 MainPS(in SVertexToPixel input, in float2 vpos : VPOS)
+float4 MainPS(in SVertexToPixel input/*, in float2 vpos : VPOS*/) : SV_Target0
 {
+	float2 vpos = input.projectedPosition.xy;
     float2 viewportUV = vpos * OneOverBeamTextureSize;      
     float4 beamSample = tex2D(BeamTexture, viewportUV);
 
@@ -558,8 +561,9 @@ technique t0
 
 #ifdef USE_FLUID_BOX
 
-float4 MainPS(in SVertexToPixel input, in float2 vpos : VPOS)
+float4 MainPS(in SVertexToPixel input/*, in float2 vpos : VPOS*/) : SV_Target0
 {
+	float2 vpos = input.projectedPosition.xy;
     float2 viewportUV = vpos * ViewportSize.zw;
 
     float sceneDepth = GetDepthFromDepthProjWS(viewportUV);
@@ -590,8 +594,9 @@ float4 MainPS(in SVertexToPixel input, in float2 vpos : VPOS)
 
 #else// ifndef USE_FLUID_BOX
 
-float4 MainPS(in SVertexToPixel input, in float2 vpos : VPOS)
+float4 MainPS(in SVertexToPixel input/*, in float2 vpos : VPOS*/) : SV_Target0
 {
+	float2 vpos = input.projectedPosition.xy;
     float2 viewportUV = vpos * ViewportSize.zw;
 
     float sceneDepth = GetDepthFromDepthProjWS(viewportUV);

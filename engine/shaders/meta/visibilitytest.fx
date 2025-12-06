@@ -11,12 +11,12 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
-    float2 uv;
-    float2 RxRy;
-    float resultScale;
-    float alphaValue;
-    float z;
+    float4 projectedPosition : SV_Position;
+    float2 SEMANTIC_VAR(uv);
+    float2 SEMANTIC_VAR(RxRy);
+    float SEMANTIC_VAR(resultScale);
+    float SEMANTIC_VAR(alphaValue);
+    float SEMANTIC_VAR(z);
 }; 
  
 SVertexToPixel MainVS( in SMeshVertex input )

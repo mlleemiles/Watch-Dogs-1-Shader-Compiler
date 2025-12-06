@@ -59,11 +59,11 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
-	float3 uv;
-    float4 debug;
-    float4 skirtsMask;
-    float4 cornersMask;
+    float4 projectedPosition : SV_Position;
+	float3 SEMANTIC_VAR(uv);
+    float4 SEMANTIC_VAR(debug);
+    float4 SEMANTIC_VAR(skirtsMask);
+    float4 SEMANTIC_VAR(cornersMask);
 };
 
 struct RelightingOutput
@@ -354,10 +354,11 @@ SVertexToPixel MainVS( in SMeshVertex Input )
 
 RelightingOutput MainPS( in SVertexToPixel input
 #if defined(RESTORE_EDRAM_SINGLE) || defined(RESTORE_EDRAM_FULL)
-    , float2 vpos : VPOS
+    //, float2 vpos : VPOS
 #endif    
     )
 {
+	float2 vpos = input.projectedPosition.xy;
     RelightingOutput output;
 
 #if defined(DEFAULT_COLOR)

@@ -13,22 +13,22 @@ struct SMeshVertex
 
 struct SVertexToPixel 
 {
-	float4 ProjectedPosition : POSITION0;
-	float2 TexCoord;
+	float4 projectedPosition : SV_Position;
+	float2 SEMANTIC_VAR(TexCoord);
 };
 
 SVertexToPixel MainVS( in SMeshVertex Input )
 {
 	SVertexToPixel Output;
 	
-	Output.ProjectedPosition = PostQuadCompute( Input.Position.xy, QuadParams );
+	Output.projectedPosition = PostQuadCompute( Input.Position.xy, QuadParams );
 
 	Output.TexCoord.xy = Input.Position.xy*UV0Params.xy + UV0Params.zw;
 
 	return Output;
 }
 
-float4 MainPS( in SVertexToPixel Input )
+float4 MainPS( in SVertexToPixel Input ) : SV_Target0
 {
 	float2 dudv;
 

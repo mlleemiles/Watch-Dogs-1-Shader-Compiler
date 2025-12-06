@@ -51,15 +51,15 @@ struct SMeshVertex
 
 struct SVertexToPixel
 {
-    float4 projectedPosition : POSITION0;
+    float4 projectedPosition : SV_Position;
 #ifndef STENCILTAG
-    float3 viewportProj;
+    float3 SEMANTIC_VAR(viewportProj);
     #if defined(INTERIOR) && defined(PROBEAMBIENTLIGHT)
         #if defined(NOMAD_PLATFORM_PS3)
-            float3 volumeUVW;
+            float3 SEMANTIC_VAR(volumeUVW);
         #else
-            float3 upperColor;
-            float3 lowerColor;
+            float3 SEMANTIC_VAR(upperColor);
+            float3 SEMANTIC_VAR(lowerColor);
         #endif
     #endif
 #endif
@@ -155,7 +155,7 @@ float2 LightProbeUVWToUV(const float3 volumeUVW)
 }
 
 #if ( defined(INTERIOR) || defined(FIXUPREGION) ) && defined(STENCILTAG)
-half4 MainPS( in SVertexToPixel input) 
+half4 MainPS( in SVertexToPixel input) : SV_Target0
 {
     return half4(0,0,0,0);
 }
