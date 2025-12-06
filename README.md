@@ -6,7 +6,8 @@ This repo includes everything you need to recompile the shader database for WATC
 2. [Python](https://www.python.org/downloads/)
 
 ## Compliation
-- Download the entire repo.
+- Download the entire repo
+- Add Windows SDK x64 path to you `PATH` environment variable (e.g. `F:\Windows Kits\10\bin\10.0.26100.0\x64\`)
 - Run `CompileShaders.py`
 - Enter a shader family you wish to compile (e.g. `Mesh_DriverGeneric`, family names can be found in `engine\shaders\meta\filelist.meta.xml.txt`)
 - Or if you need to compile all shaders, type in `.fx` should compile everything
