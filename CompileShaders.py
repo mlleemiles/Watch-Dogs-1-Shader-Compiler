@@ -5,11 +5,13 @@ import shutil
 import shlex
 import concurrent.futures
 
-FXC = r"F:\Windows Kits\10\bin\10.0.26100.0\x64\fxc.exe"
+FXC = "fxc.exe"
 
-SHADER_COMMAND = r"C:\Users\mllee\Desktop\Projects WD1\New_FIXED\Shader_Compile_Command_Sorted.txt"
-SOURCE_FOLDER = "D:\\Watch-Dogs-1-Shader-Compiler\\"
-COMPILE_FOLDER = "D:\\Watch-Dogs-1-Shader-Compiler\\COMPILED\\"
+script_folder = os.path.dirname(os.path.abspath(__file__))
+
+SHADER_COMMAND = os.path.join(script_folder, "Shader_Compile_Command_Sorted.txt")
+SOURCE_FOLDER = script_folder + "\\"
+COMPILE_FOLDER = os.path.join(script_folder, "COMPILED\\")
 
 
 # ------------------------------------------------------------
