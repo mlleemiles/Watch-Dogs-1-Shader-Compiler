@@ -6,6 +6,7 @@ This repo includes everything you need to recompile the shader database for WATC
 2. [Python](https://www.python.org/downloads/)
 
 ## Compilation
+WARNING: You must recompile all shaders once before compiling a specific shader family
 - Download the entire repo
 - Add Windows SDK x64 path to you `PATH` environment variable (e.g. `F:\Windows Kits\10\bin\10.0.26100.0\x64\`)
 - Run `CompileShaders.py`
