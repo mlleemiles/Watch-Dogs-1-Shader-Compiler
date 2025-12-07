@@ -70,7 +70,7 @@ for line in command_lines:
         source = SOURCE_FOLDER + get_shader_source(line)
         compile_arg = (
                 get_shader_compile_arg(line)
-                + f' /D NOMAD_PLATFORM_WINDOWS /Fo "{target}" "{source}"'
+                + f' /D NOMAD_PLATFORM_WINDOWS /Gfa /Fo "{target}" "{source}"'
         )
         jobs.append({
             "target": target,
