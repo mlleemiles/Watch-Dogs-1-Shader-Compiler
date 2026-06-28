@@ -284,9 +284,19 @@ float SampleDepthWS_MS(int2 xy,int MSAASampleIndex)
 
 float3 UVToView(float2 uv, float rawDepthValue)
 {   
+    /*
 	float eye_z = -MakeDepthLinearWS( rawDepthValue );
     float2 uv2 = ProbeUVToViewSpace.xy * uv + ProbeUVToViewSpace.zw;
     return float3(uv2 * eye_z, eye_z);
+    */
+    
+    float2 ndcXY = uv * 2.0 - 1.0;
+    ndcXY.y = -ndcXY.y;
+    
+    float4 clipPos = float4(ndcXY, rawDepthValue, 1.0);
+    float4 viewPos = mul(clipPos, InvProjectionMatrix);
+    
+    return viewPos.xyz / viewPos.w;
 }
 
 float4 SampleNormal(float2 uv,int2 xy,int MSAASampleIndex)
