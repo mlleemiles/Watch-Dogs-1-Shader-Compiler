@@ -487,10 +487,19 @@ float SampleDepthWS_MS(int2 xy,int MSAASampleIndex, out float rawValue)
     return MakeDepthLinearWS( rawValue );
 }
 
-float3 UVToView(float2 uv, float eye_z)
+float3 UVToView(float2 uv, float rawDepthValue)
 {
+    /*
     float2 uv2 = UVToViewSpace.xy * uv + UVToViewSpace.zw;
     return float3(uv2 * eye_z, eye_z);
+    */
+    float2 ndcXY = uv * 2.0 - 1.0;
+    ndcXY.y = -ndcXY.y;
+    
+    float4 clipPos = float4(ndcXY, rawDepthValue, 1.0);
+    float4 viewPos = mul(clipPos, InvProjectionMatrix);
+    
+    return viewPos.xyz / viewPos.w;
 }
 
 
@@ -568,7 +577,7 @@ float4 ComputePixel( in SVertexToPixel input, in int2 xyi,in float2 vpos , int m
     positionCS4.w = 1.0f;
 #else
     //float4 positionCS4 = float4( flatPositionCS * worldDepth, 1.0f );
-    float4 positionCS4 = float4( UVToView(uv,worldDepth) , 1.f);
+    float4 positionCS4 = float4( UVToView(uv,rawDepthValue) , 1.f);
 #endif
 
     float3 albedo = albedoRaw.xyz;
