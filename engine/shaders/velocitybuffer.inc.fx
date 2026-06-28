@@ -43,6 +43,10 @@ void ComputeVelocityBufferVertexToPixel( out SVelocityBufferVertexToPixel output
     // reference: ComputeVertexVelocity
     output.currentUV_W = currentClipSpacePosition.xyw;
     float3 prevPositionWS = mul(float4(previousObjectSpacePosition,1), PreviousWorldMatrix);
+	
+	prevPositionWS -= PreviousCameraPosition;
+	
+	// PreviousViewProjectionMatrix now only contains Previous View Rot Projection
     output.previousUV_W = mul(float4(prevPositionWS,1), PreviousViewProjectionMatrix).xyw;
 
     // Convert from clip space to UV space

@@ -19,7 +19,7 @@ static float ExposedWhitePointOverExposureScale = FogColorVector_ExposedWhitePoi
 static float3 CullingCameraPosition = CullingCameraPosition_OneOverAutoExposureScale.xyz;
 static float OneOverAutoExposureScale = CullingCameraPosition_OneOverAutoExposureScale.w;
 
-static float3 UncompressDepthWeights  = UncompressDepthWeights_ShadowProjDepthMinValue.xyz;
+static float3 PreviousCameraPosition  = UncompressDepthWeights_ShadowProjDepthMinValue.xyz;
 static float ShadowProjDepthMinValue = UncompressDepthWeights_ShadowProjDepthMinValue.w;
 
 static float3 UncompressDepthWeightsWS  = UncompressDepthWeightsWS_ReflectionFadeTarget.xyz;
