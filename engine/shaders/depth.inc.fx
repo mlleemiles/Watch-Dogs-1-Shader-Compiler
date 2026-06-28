@@ -65,7 +65,11 @@ float GetDepthFromDepthProj( in float3 depthProj )
 
 float3 ComputePositionCSProj( float4 projectedPosition )
 {
+/*
     float3 positionCS = float3( projectedPosition.xy * CameraNearPlaneSize.xy * 0.5f, -CameraNearDistance );
     return float3( positionCS.xy / positionCS.z, projectedPosition.w );
+*/
+    float4 viewPos = mul(projectedPosition, InvProjectionMatrix);
+    return float3(-viewPos.xy, projectedPosition.w);
 }
 #endif // _SHADERS_DEPTH_INC_FX_
