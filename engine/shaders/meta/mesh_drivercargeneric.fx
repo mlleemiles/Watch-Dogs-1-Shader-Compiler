@@ -142,7 +142,7 @@ struct SVertexToPixel
 
 #ifdef GBUFFER
     #ifdef GBUFFER_BLENDED
-        float SEMANTIC_VAR(blendFactor);
+        float SEMANTIC_VAR(blendFactorOrAO);
     #endif
 
     #if defined( GBUFFER_BLENDED )
@@ -150,8 +150,8 @@ struct SVertexToPixel
             float3 SEMANTIC_VAR(normal);
         #endif
     #else
+        float SEMANTIC_VAR(blendFactorOrAO);
         float3 SEMANTIC_VAR(normal);
-        float SEMANTIC_VAR(ambientOcclusion);
     #endif
 
     GBufferVertexToPixel gbufferVertexToPixel;
@@ -295,9 +295,9 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
     #endif
 
     #ifdef GBUFFER_BLENDED
-        output.blendFactor = 1;
+        output.blendFactorOrAO = 1;
         #ifdef VERTEX_DECL_COLOR
-            output.blendFactor = input.color.a;
+            output.blendFactorOrAO = input.color.a;
         #endif
     #endif
 
@@ -307,7 +307,7 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
         #endif
     #else
         output.normal = normalDS;
-        output.ambientOcclusion = input.occlusion;
+        output.blendFactorOrAO = input.occlusion;
     #endif
 
     ComputeGBufferVertexToPixel( output.gbufferVertexToPixel, prevPositionOS.xyz, output.projectedPosition );
@@ -544,7 +544,7 @@ GBufferRaw MainPS( in SVertexToPixel input, in bool isFrontFace : SV_IsFrontFace
 #endif
 
 #ifdef GBUFFER_BLENDED
-    gbuffer.blendFactor = diffuseTexture.a * input.blendFactor;
+    gbuffer.blendFactor = diffuseTexture.a * input.blendFactorOrAO;
 #endif
 
 #if defined( GBUFFER_BLENDED )
@@ -552,7 +552,7 @@ GBufferRaw MainPS( in SVertexToPixel input, in bool isFrontFace : SV_IsFrontFace
         gbuffer.normal = normal;
     #endif
 #else
-    gbuffer.ambientOcclusion = input.ambientOcclusion;
+    gbuffer.ambientOcclusion = input.blendFactorOrAO;
     gbuffer.normal = normal;
     gbuffer.vertexNormalXZ = vertexNormal.xz;
     gbuffer.specularMask = specularMask * GetHighFrequencyNormalMask(input.normal.xyz);

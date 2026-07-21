@@ -160,10 +160,6 @@ struct SVertexToPixel
     float3 SEMANTIC_VAR(diffuseColor1);
 #endif
 
-    #ifdef GBUFFER_BLENDED
-        float SEMANTIC_VAR(blendFactor);
-    #endif
-
     #if defined( GBUFFER_BLENDED )
         #ifdef NORMALMAP
             float3 SEMANTIC_VAR(normal);
@@ -175,8 +171,12 @@ struct SVertexToPixel
 			float SEMANTIC_VAR(normalRoundedLerpCoef);
 		#endif
         #if !defined( IS_LOW_RES_BUILDING ) && !defined( LOW_RES_ROOF )
-            float SEMANTIC_VAR(ambientOcclusion);
+            float SEMANTIC_VAR(blendFactorOrAO);
         #endif
+    #endif
+    
+    #ifdef GBUFFER_BLENDED
+        float SEMANTIC_VAR(blendFactorOrAO);
     #endif
 
     GBufferVertexToPixel gbufferVertexToPixel;
@@ -502,9 +502,9 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
     #endif
 
     #ifdef GBUFFER_BLENDED
-        output.blendFactor = 1;
+        output.blendFactorOrAO = 1;
         #ifdef VERTEX_DECL_COLOR
-            output.blendFactor = input.color.a;
+            output.blendFactorOrAO = input.color.a;
         #endif
     #endif
 
@@ -533,7 +533,7 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
             output.normalRoundedLerpCoef = normalRoundedLerpCoef;
         #endif
         #if !defined( IS_LOW_RES_BUILDING ) && !defined( LOW_RES_ROOF )
-			output.ambientOcclusion = input.occlusion;
+			output.blendFactorOrAO = input.occlusion;
             smoothingGroupID = input.smoothingGroupID;
         #endif
     #endif
@@ -1046,7 +1046,7 @@ GBufferRaw MainPS( in SVertexToPixel input, in bool isFrontFace : SV_IsFrontFace
 #endif
 
 #ifdef GBUFFER_BLENDED
-    gbuffer.blendFactor = diffuseTexture.a * input.blendFactor;
+    gbuffer.blendFactor = diffuseTexture.a * input.blendFactorOrAO;
 
 	#if defined(DEBUGOPTION_DECALOVERDRAW) || defined(DEBUGOPTION_DECALGEOMETRY)
 		#if defined(DEBUGOPTION_DECALOVERDRAW)
@@ -1075,7 +1075,7 @@ GBufferRaw MainPS( in SVertexToPixel input, in bool isFrontFace : SV_IsFrontFace
 
     gbuffer.ambientOcclusion = 1;
 #if !defined( IS_LOW_RES_BUILDING ) && !defined( LOW_RES_ROOF )
-    gbuffer.ambientOcclusion = input.ambientOcclusion;
+    gbuffer.ambientOcclusion = input.blendFactorOrAO;
 #endif
 
     gbuffer.normal = normal;

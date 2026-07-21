@@ -211,7 +211,7 @@ struct SVertexToPixel
 
 #ifdef GBUFFER
     #ifdef GBUFFER_BLENDED
-        float SEMANTIC_VAR(blendFactor);
+        float SEMANTIC_VAR(blendFactorOrAO);
     #endif
 
     #if defined( GBUFFER_BLENDED )
@@ -219,8 +219,8 @@ struct SVertexToPixel
             float3 SEMANTIC_VAR(normal);
         #endif
     #else
+        float SEMANTIC_VAR(blendFactorOrAO);
         float3 SEMANTIC_VAR(normal);
-        float SEMANTIC_VAR(ambientOcclusion);
     #endif
 
     GBufferVertexToPixel gbufferVertexToPixel;
@@ -673,9 +673,9 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
     #endif
 
     #ifdef GBUFFER_BLENDED
-        output.blendFactor = 1;
+        output.blendFactorOrAO = 1;
         #ifdef VERTEX_DECL_COLOR
-            output.blendFactor = input.color.a;
+            output.blendFactorOrAO = input.color.a;
         #endif
     #endif
 
@@ -695,9 +695,9 @@ SVertexToPixel MainVS( in SMeshVertex inputRaw )
 		#endif
         output.normal = normalDS;
 		#if (!defined(IS_SPLINE_LOFT) || defined(VERTEX_DECL_BINORMALCOMPRESSED)) && !defined(IS_PROJECTED_DECAL)		// currently, both color and binormal are excluded in LowResBuilding
-			output.ambientOcclusion = input.occlusion;
+			output.blendFactorOrAO = input.occlusion;
 		#else
-			output.ambientOcclusion = 1;
+			output.blendFactorOrAO = 1;
 		#endif
         #if !defined(IS_PROJECTED_DECAL)
             smoothingGroupID = input.smoothingGroupID;
@@ -1307,7 +1307,7 @@ GBufferRaw MainPS( in SVertexToPixel input, in bool isFrontFace : SV_IsFrontFace
 #endif
 
 #ifdef GBUFFER_BLENDED
-    gbuffer.blendFactor = diffuseTexture.a * input.blendFactor;
+    gbuffer.blendFactor = diffuseTexture.a * input.blendFactorOrAO;
 
 	#if defined(DEBUGOPTION_DECALOVERDRAW) || defined(DEBUGOPTION_DECALGEOMETRY)
 		#if defined(DEBUGOPTION_DECALOVERDRAW)
@@ -1346,7 +1346,7 @@ GBufferRaw MainPS( in SVertexToPixel input, in bool isFrontFace : SV_IsFrontFace
 #else
 
     gbuffer.ambientOcclusion = 1;
-    gbuffer.ambientOcclusion = input.ambientOcclusion;
+    gbuffer.ambientOcclusion = input.blendFactorOrAO;
 
     gbuffer.normal = normal;
     gbuffer.vertexNormalXZ = vertexNormal.xz;
